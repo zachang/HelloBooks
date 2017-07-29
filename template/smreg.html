@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>HelloBooks</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="./smreg.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="./hellobooks.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body style="overflow-y: hidden;">
+<div class="row main-row main-div">
+    <div class="navbar-fixed">
+          <nav class="mainNav transparent" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="index.html" class="brand-logo mainLogo">HelloBooks</a>
+              <ul class="right hide-on-small-and-down">
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Login</a></li>
+                <li><a href="./smreg.html" class="btn-large waves-effect waves-light orange join-us">Join us</a></li>
+              </ul>
+
+              <ul id="nav-mobile" class="side-nav">
+                  <li><a href="">Contact us</a></li>
+                  <li><a href="#">About us</a></li>
+                  <li><a href="#">Help</a></li>
+                  <li><a href="./smlogin.html">Login</a></li>
+                  <li><a href="./smreg.html" id="join" class="btn-large waves-effect waves-light orange" style="margin:0px; padding:0px;">Join us</a></li>
+              </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons hide-on-med-only">menu</i></a>
+            </div>
+          </nav>
+      </div> <!--End Nav-->
+
+      <div class="section no-pad-bot" id="index-banner">
+        <div class="container textContent">
+          <div class="row">
+
+              <div class="col s6 offset-s3 regContent">
+                    <br><br>
+                    <form class="col s12">
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="phone" type="number" class="validate">
+                        <label for="phone">Phone Number</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="pass" type="password" class="validate">
+                        <label for="pass" data-error="wrong" data-success="right">Password</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="pass-confirm" type="password" class="validate">
+                        <label for="confirm pass" data-error="wrong" data-success="right">Confirm Password</label>
+                        </div>
+                        </div>
+
+
+                        <div class="row">
+                        <div class="col s12">
+                        <p class="right-align">
+                            <button class="col s12 btn btn-large waves-effect waves-light orange" type="button" name="action">Sign Up</button>
+                        </p>
+                        </div>
+                        </div>
+                    </form>
+                    <br><br>
+              </div><!--End regContent-->
+          </div>
+        </div>
+
+      </div>
+</div><!--End main-->
+
+<!--  Scripts-->
+  <script src="materialize/js/jquery.js"></script>
+  <script src="materialize/js/materialize.js"></script>
+  <script src="materialize/js/init.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    window.addEventListener('scroll', function (e) {
+        var nav = document.querySelector('nav');
+        if (document.documentElement.scrollTop || document.body.scrollTop > (window.innerHeight>0)) {
+                nav.classList.add('black');
+                nav.classList.remove('transparent');
+            } else {
+                nav.classList.add('transparent');
+                nav.classList.remove('black');
+            }
+    });
+
+  });
+  </script>
+  </body>
+</html>

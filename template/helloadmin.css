@@ -1,0 +1,172 @@
+@media screen and (min-width: 767px) and (max-width: 768px){
+    nav .brand-logo{
+        left: 15%;
+    }
+}
+
+@media screen and (min-width: 769px){
+    nav .brand-logo{
+        left: -10%;
+    }
+
+}
+
+
+@media screen and (max-width: 768px){
+    .row .user{
+      margin-left: 80%;
+    }
+}
+
+@media only screen and (min-width: 601px){
+  .row .nav-pan-child{
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .row .nav-pan{
+    padding: 0px;
+    /*height: 1000px;*/
+    background-color: #212121;
+  }
+}
+
+@media screen and (min-width: 1024px){
+    .mainCon{
+        width: 90%;
+    }
+
+    .row .user{
+      margin-left: 90%;
+    }
+}
+
+@media screen and (min-width: 767px){
+  .mainCon{
+        margin-left:25% !important;
+    }
+}
+
+.dash{
+  border: 1px solid #282830;
+  background-color: #212121;
+  color: #43353D;
+  font-size: 25px;
+  margin-top: -20px;
+  display: block;
+  text-align: center;
+  text-shadow: 1px 1px #43353D;
+}
+
+
+.collapsible-header{
+  border: 0px;
+  padding: 0px;
+}
+
+.collapsible-body{
+  border:0px;
+  width: 150%;
+  margin:0px 0px -20px -20px;
+}
+
+.row a.collapsible-header:hover{
+  background-color:orange;
+}
+
+.btn, .btn-large, .btn-flat{
+  border-radius: 0px;
+}
+
+.side-nav{
+    background-color:#000;
+}
+
+.side-nav li >a{
+    color:#FFF;
+    padding:0 18px;
+    line-height: 50px;
+}
+
+.side-nav li >a:hover{
+    background-color:#282830;
+}
+
+.card-image{
+    height: 100%;
+}
+
+
+
+/*.main-div .nav-pan>ul>li{
+  padding: 4px;
+}*/
+
+
+/*.row .user{
+  margin-left: 80%;
+}*/
+
+.row .walp{
+  background-image:url("./imgs/wall-2.jpg");
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  height:200px;
+}
+
+.row .nav-pan{
+  padding: 0px;
+}
+
+.row .nav-pan-child{
+  padding: 0px;
+  position: fixed;
+}
+
+.row .addPad ul>li{
+  padding: 15px;
+  font-size: 15px;
+}
+
+.row .addPad ul>li a{
+  color:#FFF;
+}
+
+.row .nav-pan .addPad ul>li:hover{
+  background-color: orange;
+}
+
+.row .nav-pan .addPad .collapsible-body{
+  background-color: #212121;
+}
+
+.mainNav{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    /*background-color: transparent;*/
+}
+
+/*--iDs--*/
+#sidenav-overlay{
+    height:0;
+}
+
+.card-image{
+    height: 100%;
+}
+
+.activator{
+  height: 45vh;
+}
+
+@media screen and (min-width: 1024px){
+    .mainCon{
+        width: 90%;
+    }
+
+    .activator{
+      height: 40vh !important;
+    }
+
+}

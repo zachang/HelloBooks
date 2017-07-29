@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>HelloBooks</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="./helloadmin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body style="overflow-x:hidden; overflow-y:auto;">
+  <div class="row">
+          <div class="col m9 l10 s12 right" style="padding:0px;">
+            <div class="navbar-fixed">
+                  <nav class="mainNav black col m10 l10" role="navigation">
+                    <div class="nav-wrapper container"><a id="logo-container" href="admin.html" class="brand-logo mainLogo">HelloBooks</a>
+                      <ul class="user hide-on-small-and-down">
+                        <li><a href="#">zachang</a></li>
+                      </ul>
+
+                      <ul id="nav-mobile" class="side-nav">
+                          <li><a href="#">Profile</a></li>
+                          <li><a href="#">All Books</a></li>
+                          <li><a href="#">Borrowed Books</a></li>
+                          <li><a href="#">Add Books</a></li>
+                          <li><a href="#">Logout</a></li>
+                      </ul>
+                      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons hide-on-med-only">menu</i></a>
+                    </div>
+                  </nav>
+              </div>
+          </div><!--End Nav-->
+          <div class="side col m3 l2 hide-on-small-and-down nav-pan">
+            <div class="col m3 l2 grey darken-4 addPad nav-pan-child">
+              <div class="row walp">
+              </div>
+              <div class="row dash">
+                  <span><i class="material-icons" style="margin:10% 0% 10% 0%;">dashboard</i>Dashboard</span>
+              </div>
+
+              <div class="row rowcollap">
+                <ul>
+                  <li><a href="#">Profile</a></li>
+                  <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                      <li>
+                        <a class="collapsible-header">Books Shelf<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                          <ul>
+                            <li><a href="#">All Books</a></li>
+                            <li><a href="#">Borrowed Books</a></li>
+                            <li><a href="#">Add Books</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                      <li>
+                        <a class="collapsible-header">Book Categories<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                          <ul>
+                            <li><a href="#">Computer Programming</a></li>
+                            <li><a href="#">Eentertainment</a></li>
+                            <li><a href="#">History</a></li>
+                            <li><a href="#">Science</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Travel</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                      <li>
+                        <a class="collapsible-header">Permissions<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                          <ul>
+                            <li><a href="#">Add Admin</a></li>
+                            <li><a href="#">Remove Admin</a></li>
+                            <li><a href="#">Block User</a></li>
+                            <li><a href="#">Unblock User</a></li>
+                            <li><a href="#">Upgrade User</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Logout</a></li>
+                </ul>
+              </div>
+
+            </div>
+
+          </div><!--end sidebar-->
+
+          <div class="container mainCon" style="margin-left:5%;">
+            <div class="row">
+                <div class="section">
+                    <h4 style="margin-top:7%;">All Books</h4>
+                </div>
+                <div class="divider"></div>
+            </div>
+
+            <div class="row">
+              <div class="col l3 s12 m6">
+                  <div class="card large sticky-action">
+                      <div class="card-image waves-effect waves-block waves-light">
+                          <img class="activator" src="./imgs/book1.jpg">
+                      </div>
+                      <div class="card-content">
+                          <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                      </div>
+                      <div class="card-reveal">
+                          <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                      </div>
+                      <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                  </div>
+              </div>
+
+              <div class="col l3 s12 m6">
+                  <div class="card large sticky-action">
+                      <div class="card-image waves-effect waves-block waves-light">
+                          <img class="activator" src="./imgs/book5.jpg">
+                      </div>
+                      <div class="card-content">
+                          <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                      </div>
+                      <div class="card-reveal">
+                          <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                      </div>
+                      <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                  </div>
+              </div>
+
+              <div class="col l3 s12 m6">
+                  <div class="card large sticky-action">
+                      <div class="card-image waves-effect waves-block waves-light">
+                          <img class="activator" src="./imgs/book6.jpg">
+                      </div>
+                      <div class="card-content">
+                          <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                      </div>
+                      <div class="card-reveal">
+                          <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                      </div>
+                      <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book1.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book3.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book4.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col l3 s12 m6">
+              <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book7.png">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book4.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book5.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book2.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book3.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+
+            <div class="col l3 s12 m6">
+                <div class="card large sticky-action">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="./imgs/book5.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                    <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active orange"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+        </div>
+
+      </div><!--end mainCon-->
+    </div>
+
+
+<!--  Scripts-->
+  <script src="materialize/js/jquery.js"></script>
+  <script src="materialize/js/materialize.js"></script>
+  <script src="materialize/js/init.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+
+  });
+  </script>
+  </body>
+</html>

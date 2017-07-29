@@ -5714,10 +5714,11 @@ button.btn-floating {
 }
 
 .collapsible {
-  border-top: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  margin: 0.5rem 0 1rem 0;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  margin: 0;
+  box-shadow: none;
 }
 
 .collapsible-header {
@@ -5729,7 +5730,6 @@ button.btn-floating {
   -webkit-tap-highlight-color: transparent;
   line-height: 1.5;
   padding: 1rem;
-  background-color: #fff;
   border-bottom: 1px solid #ddd;
 }
 
@@ -5743,10 +5743,10 @@ button.btn-floating {
 
 .collapsible-body {
   display: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 2rem;
+  padding: 0;
 }
 
 .side-nav .collapsible,

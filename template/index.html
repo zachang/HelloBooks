@@ -25,12 +25,11 @@
               </ul>
 
               <ul id="nav-mobile" class="side-nav">
-                  <li><a href="#">Navbar Link</a></li>
-                  <li><a href="#">Contact us</a></li>
+                  <li><a href="">Contact us</a></li>
                   <li><a href="#">About us</a></li>
                   <li><a href="#">Help</a></li>
-                  <li><a href="#">Login</a></li>
-                  <li><a href="#" class="btn-large waves-effect waves-light orange" style="margin:0px; padding:0px;">Join us</a></li>
+                  <li><a href="./smlogin.html">Login</a></li>
+                  <li><a href="./smreg.html" id="join" class="btn-large waves-effect waves-light orange" style="margin:0px; padding:0px;">Join us</a></li>
               </ul>
               <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons hide-on-med-only">menu</i></a>
             </div>
@@ -44,10 +43,14 @@
                   <br><br>
                   <h1 class="header center orange-text">Welcome!</h1>
                   <div class="row center">
-                    <h5 class="header col s12 light">Learning is never ending and Knowledge is key. So in light of this, we at HelloBooks aim to provide you with all necessary resource needed to expand your mind. Feel free to go through our library.</h5>
+                    <h5 class="header col s12 light">Learning is never ending and Knowledge is key. So in light of this, we at HelloBooks aim to provide you with all the necessary resource needed to expand your mind. Feel free to go through our library.</h5>
                   </div>
-                  <div class="row center">
+                  <div class="row center hide-on-small-and-down">
                     <a href="#" class="btn-large waves-effect waves-light orange">More...</a>
+                  </div>
+                  <div class="row center hide-on-med-and-up">
+                    <a href="./smreg.html" class="btn-large waves-effect waves-light orange">Join us</a>
+                    <a href="./smlogin.html" class="btn-large waves-effect waves-light orange">Login</a>
                   </div>
                   <br><br>
               </div>
@@ -82,7 +85,7 @@
                         <div class="row">
                         <div class="col m12">
                         <p class="right-align">
-                            <button class="btn btn-large waves-effect waves-light orange" type="button" name="action">Login</button>
+                            <button class="col m12 btn btn-large waves-effect waves-light orange" type="button" name="action">Login</button>
                         </p>
                         </div>
                         </div>
@@ -344,6 +347,18 @@
         </div>
     </div>
 
+    <div class="row">
+        <ul class="pagination">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active orange"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
+    </div>
+
 </div><!--End mainCon-->
 
 <!--  Scripts-->
@@ -368,6 +383,7 @@
       $('.loginContent').toggle("slow");
       $('.regContent').show("slow");
     });
+
   });
   </script>
   </body>
