@@ -13,28 +13,76 @@
 </head>
 <body style="overflow-x:hidden; overflow-y:auto;">
   <div class="row">
-          <div class="col m9 l10 s12 right" style="padding:0px;">
+          <div class="col m10 l10 s12 right" style="padding:0px;">
             <div class="navbar-fixed">
                   <nav class="mainNav black col m10 l10" role="navigation">
-                    <div class="nav-wrapper container"><a id="logo-container" href="admin.html" class="brand-logo mainLogo">HelloBooks</a>
+                    <div class="nav-wrapper container"><a id="logo-container" href="admin.html" class="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks"></a>
                       <ul class="user hide-on-small-and-down">
                         <li><a href="#">zachang</a></li>
                       </ul>
 
-                      <ul id="nav-mobile" class="side-nav">
+                      <ul id="nav-mobile" class="side-nav grey darken-4 hide-on-med-and-up">
+                        <li><div class="row walp">
+                        </div></li>
                           <li><a href="#">Profile</a></li>
-                          <li><a href="#">All Books</a></li>
-                          <li><a href="#">Borrowed Books</a></li>
-                          <li><a href="#">Add Books</a></li>
+                          <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                              <li>
+                                <a class="collapsible-header">Books Shelf<i class="material-icons mat-icon">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                  <ul>
+                                    <li><a href="#">All Books</a></li>
+                                    <li><a href="#">Add Books</a></li>
+                                    <li><a href="#">Borrowed Books</a></li>
+                                    <li><a href="#">Returned Books</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                              <li>
+                                <a class="collapsible-header">Book Categories<i class="material-icons mat-icon">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                  <ul>
+                                    <li><a href="#">Computer Programming</a></li>
+                                    <li><a href="#">Eentertainment</a></li>
+                                    <li><a href="#">History</a></li>
+                                    <li><a href="#">Science</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                    <li><a href="#">Travel</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                              <li>
+                                <a class="collapsible-header">Permissions<i class="material-icons mat-icon">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                  <ul>
+                                    <li><a href="#">Add Admin</a></li>
+                                    <li><a href="#">Remove Admin</a></li>
+                                    <li><a href="#">Block User</a></li>
+                                    <li><a href="#">Unblock User</a></li>
+                                    <li><a href="#">Upgrade User</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
                           <li><a href="#">Logout</a></li>
                       </ul>
-                      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons hide-on-med-only">menu</i></a>
+                      <a href="#" data-activates="nav-mobile" class="button-collapse menu-icon-link"><i class="material-icons hide-on-med-and-up">menu</i></a>
                     </div>
                   </nav>
               </div>
           </div><!--End Nav-->
-          <div class="side col m3 l2 hide-on-small-and-down nav-pan">
-            <div class="col m3 l2 grey darken-4 addPad nav-pan-child">
+
+          <div class="side col m2 l2 hide-on-small-and-down nav-pan">
+            <div class="col m2 l2 grey darken-4 addPad nav-pan-child">
               <div class="row walp">
               </div>
               <div class="row dash">
@@ -51,8 +99,9 @@
                         <div class="collapsible-body">
                           <ul>
                             <li><a href="#">All Books</a></li>
-                            <li><a href="#">Borrowed Books</a></li>
                             <li><a href="#">Add Books</a></li>
+                            <li><a href="#">Borrowed Books</a></li>
+                            <li><a href="#">Returned Books</a></li>
                           </ul>
                         </div>
                       </li>
@@ -104,11 +153,11 @@
                 <div class="section">
                     <h4 style="margin-top:7%;">All Books</h4>
                 </div>
-                <div class="divider"></div>
-            </div>
+                <div class="divider ad-vide"></div>
+            <!-- </div> -->
 
             <div class="row">
-              <div class="col l3 s12 m6">
+              <div class="col l4 s12 m6">
                   <div class="card large sticky-action">
                       <div class="card-image waves-effect waves-block waves-light">
                           <img class="activator" src="./imgs/book1.jpg">
@@ -124,7 +173,7 @@
                   </div>
               </div>
 
-              <div class="col l3 s12 m6">
+              <div class="col l4 s12 m6">
                   <div class="card large sticky-action">
                       <div class="card-image waves-effect waves-block waves-light">
                           <img class="activator" src="./imgs/book5.jpg">
@@ -140,7 +189,7 @@
                   </div>
               </div>
 
-              <div class="col l3 s12 m6">
+              <div class="col l4 s12 m6">
                   <div class="card large sticky-action">
                       <div class="card-image waves-effect waves-block waves-light">
                           <img class="activator" src="./imgs/book6.jpg">
@@ -155,10 +204,10 @@
                       <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
                   </div>
               </div>
-          </div>
+          <!-- </div> -->
 
-          <div class="row">
-            <div class="col l3 s12 m6">
+          <!-- <div class="row"> -->
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book1.jpg">
@@ -174,7 +223,7 @@
                 </div>
             </div>
 
-            <div class="col l3 s12 m6">
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book3.jpg">
@@ -190,7 +239,7 @@
                 </div>
             </div>
 
-            <div class="col l3 s12 m6">
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book4.jpg">
@@ -205,9 +254,9 @@
                     <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-          <div class="col l3 s12 m6">
+        <!-- </div> -->
+        <!-- <div class="row"> -->
+          <div class="col l4 s12 m6">
               <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book7.png">
@@ -223,7 +272,7 @@
                 </div>
             </div>
 
-            <div class="col l3 s12 m6">
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book4.jpg">
@@ -239,7 +288,7 @@
                 </div>
             </div>
 
-            <div class="col l3 s12 m6">
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book5.jpg">
@@ -254,10 +303,10 @@
                     <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
                 </div>
             </div>
-          </div>
+          <!-- </div> -->
 
-          <div class="row">
-            <div class="col l3 s12 m6">
+          <!-- <div class="row"> -->
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book2.jpg">
@@ -273,7 +322,7 @@
                 </div>
             </div>
 
-            <div class="col l3 s12 m6">
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book3.jpg">
@@ -289,7 +338,7 @@
                 </div>
             </div>
 
-            <div class="col l3 s12 m6">
+            <div class="col l4 s12 m6">
                 <div class="card large sticky-action">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="./imgs/book5.jpg">
@@ -304,7 +353,7 @@
                     <div class="card-action home-card"><a href="#index-banner">Update</a><a href="#" class="right">Delete</a></div>
                 </div>
             </div>
-        </div>
+        </div><!--end row-->
 
         <div class="row">
             <ul class="pagination">
@@ -328,6 +377,10 @@
   <script src="materialize/js/init.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
+
+    $(".menu-icon-link").click(function(){
+      $("body").css({"width": "100%", "overflow-y": "auto"});
+    });
 
   });
   </script>
