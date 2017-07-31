@@ -3,6 +3,12 @@
         left: 15%;
     }
 
+    nav ul a.btn-prof{
+      width: 0% !important;
+      text-transform: lowercase;
+      text-align: right;
+    }
+
     .mainCon{
         width: 60%;
         margin-left: 28.5% !important;
@@ -53,6 +59,10 @@
     .row .user{
       margin-left: 90%;
     }
+}
+
+.mainLogo{
+  margin-top:1%;
 }
 
 .ad-vide{
@@ -135,6 +145,12 @@
   color: #FFF;
   float: right;
   margin-right: 50%;
+}
+
+nav ul a.btn-prof{
+  width: 300%;
+  text-transform: lowercase;
+  text-align: right;
 }
 
 .row .addPad ul>li a{
