@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>HelloBooks</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="./user.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body style="overflow-x:hidden; overflow-y:auto;">
+  <div class="row">
+          <div class="col m10 l10 s12 right" style="padding:0px;">
+            <div class="navbar-fixed">
+                  <nav class="mainNav black col m10 l10" role="navigation">
+                    <div class="nav-wrapper container"><a id="logo-container" href="user.html" class="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks"></a>
+                      <ul class="user hide-on-small-and-down show-on-medium-and-up">
+                        <a class='dropdown-button btn black btn-prof' href='#' data-activates='dropdown1'><i class="material-icons mat-icon right" style="margin-left: 1%;">arrow_drop_down</i>Zachang</a>
+                      </ul>
+
+                      <ul id='dropdown1' class='dropdown-content' hide-on-small-and-down>
+                        <li><a href="userprofile.html">Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./usereturn.html">Returned Books</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./userborrow.html">Borrowed Books</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#!">Logout</a></li>
+                      </ul><!--profile drop-->
+
+                      <ul id="nav-mobile" class="side-nav grey darken-4 hide-on-med-and-up">
+                        <li><div class="row walp">
+                        </div></li>
+                          <li><a href="userprofile.html">Profile</a></li>
+                          <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                              <li>
+                                <a class="collapsible-header">Books Shelf<i class="material-icons mat-icon">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                  <ul>
+                                    <li><a href="admin.html">All Books</a></li>
+                                    <li><a href="./userborrow.html">Borrowed Books</a></li>
+                                    <li><a href="./usereturn.html">Returned Books</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                              <li>
+                                <a class="collapsible-header">Book Categories<i class="material-icons mat-icon">arrow_drop_down</i></a>
+                                <div class="collapsible-body">
+                                  <ul>
+                                    <li><a href="#">Computer Programming</a></li>
+                                    <li><a href="#">Eentertainment</a></li>
+                                    <li><a href="#">History</a></li>
+                                    <li><a href="#">Science</a></li>
+                                    <li><a href="#">Sports</a></li>
+                                    <li><a href="#">Travel</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                          <li><a href="#">Logout</a></li>
+                      </ul>
+                      <a href="#" data-activates="nav-mobile" class="button-collapse menu-icon-link"><i class="material-icons hide-on-med-and-up">menu</i></a>
+                    </div>
+                  </nav>
+              </div>
+          </div><!--End Nav-->
+
+          <div class="side col m2 l2 hide-on-small-and-down nav-pan">
+            <div class="col m2 l2 grey darken-4 addPad nav-pan-child">
+              <div class="row walp">
+                  <div class="">
+                    <img src="./imgs/eben2.jpg" style="width: 100px; height:100px; margin: 22% 0% 0% 26%; box-shadow: 2px 1px 20px #000;" alt="" class="circle responsive-img">
+                  </div>
+              </div>
+              <div class="row dash">
+                  <span><i class="material-icons" style="margin:10% 0% 10% 0%;">dashboard</i>Dashboard</span>
+              </div>
+
+              <div class="row rowcollap">
+                <ul>
+                  <li><a href="userprofile.html">Profile</a></li>
+                  <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                      <li>
+                        <a class="collapsible-header">Books Shelf<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                          <ul>
+                            <li><a href="admin.html">All Books</a></li>
+                            <li><a href="./userborrow.html">Borrowed Books</a></li>
+                            <li><a href="./usereturn.html">Returned Books</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                      <li>
+                        <a class="collapsible-header">Book Categories<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                          <ul>
+                            <li><a href="#">Computer Programming</a></li>
+                            <li><a href="#">Eentertainment</a></li>
+                            <li><a href="#">History</a></li>
+                            <li><a href="#">Science</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Travel</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li><a href="#">Logout</a></li>
+                </ul>
+              </div>
+
+            </div>
+
+          </div><!--end sidebar-->
+
+          <div class="container mainCon" style="margin-left:5%;">
+            <div class="row">
+
+              <div class="row">
+                <div class="col s10 m8 l6 profile_marg" style="margin-left:23%; margin-top:7%;">
+                  <div class="card" style="box-shadow: 2px 1px 7px #000;">
+                    <form method="post" class="col s12">
+                      <div class="card-content white-text" style="height:200px; background:rgba(77, 182, 172, 0.9);">
+
+                        <div class="profile-image circle">
+
+                        </div>
+
+                      </div>
+                      <div class="card-action" style="height:235px; background: rgba(217,217,217,0.7)">
+
+                           <div class="row">
+                                 <div class="input-field col s6">
+                                   <input value="Dawuda Ebenezer Zachang" id="full_name" type="text" class="validate">
+                                   <label for="full_name">Full Name</label>
+                                 </div>
+                                 <div class="input-field col s6">
+                                   <input value="zachang" id="user_name" type="text" class="validate">
+                                   <label for="user_name">Userame</label>
+                                 </div>
+                            </div>
+
+                            <div class="row">
+                                  <div class="input-field col s6">
+                                    <input value="zachangdawuda@gmail.com" id="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                  </div>
+                                  <div class="input-field col s6">
+                                    <input value="08197989956" id="phone_no" type="number" class="validate">
+                                    <label for="phone_no">Phone Number</label>
+                                  </div>
+                             </div>
+
+                            <a class="waves-effect waves-light btn profile-btn" style="margin-left:35%;">Update</a>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            </div><!--end row-->
+
+          </div><!--end mainCon-->
+    </div>
+
+
+<!--  Scripts-->
+  <script src="materialize/js/jquery.js"></script>
+  <script src="materialize/js/materialize.js"></script>
+  <script src="materialize/js/init.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+
+      $(".menu-icon-link").click(function(){
+        $("body").css({"width": "100%", "overflow-y": "auto"});
+      });
+
+  });
+
+  </script>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="./helloadmin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="./user.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 </head>
 <body style="overflow-x:hidden; overflow-y:auto;">
@@ -16,37 +16,34 @@
           <div class="col m10 l10 s12 right" style="padding:0px;">
             <div class="navbar-fixed">
                   <nav class="mainNav black col m10 l10" role="navigation">
-                    <div class="nav-wrapper container"><a id="logo-container" href="admin.html" class="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks"></a>
+                    <div class="nav-wrapper container"><a id="logo-container" href="user.html" class="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks"></a>
                       <ul class="user hide-on-small-and-down show-on-medium-and-up">
                         <a class='dropdown-button btn black btn-prof' href='#' data-activates='dropdown1'><i class="material-icons mat-icon right" style="margin-left: 1%;">arrow_drop_down</i>Zachang</a>
                       </ul>
 
                       <ul id='dropdown1' class='dropdown-content' hide-on-small-and-down>
-                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="userprofile.html">Profile</a></li>
                         <li class="divider"></li>
-                        <li><a href="#!">View Users</a></li>
+                        <li><a href="./usereturn.html">Returned Books</a></li>
                         <li class="divider"></li>
-                        <li><a href="#!">Remove Admin</a></li>
+                        <li><a href="./userborrow.html">Borrowed Books</a></li>
                         <li class="divider"></li>
-                        <li><a href="#!">Logout</a></li>
-                        <!-- <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                        <li><a href="#!"><i class="material-icons">cloud</i>five</a></li> -->
+                        <li><a href="#">Logout</a></li>
                       </ul><!--profile drop-->
 
                       <ul id="nav-mobile" class="side-nav grey darken-4 hide-on-med-and-up">
                         <li><div class="row walp">
                         </div></li>
-                          <li><a href="profile.html">Profile</a></li>
+                          <li><a href="userprofile.html">Profile</a></li>
                           <li class="no-padding">
                             <ul class="collapsible collapsible-accordion">
                               <li>
                                 <a class="collapsible-header">Books Shelf<i class="material-icons mat-icon">arrow_drop_down</i></a>
                                 <div class="collapsible-body">
                                   <ul>
-                                    <li><a href="./admin.html">All Books</a></li>
-                                    <li><a href="#">Add Books</a></li>
-                                    <li><a href="./borrowedbooks.html">Borrowed Books</a></li>
-                                    <li><a href="./returnedbook.html">Returned Books</a></li>
+                                    <li><a href="user.html">All Books</a></li>
+                                    <li><a href="./userborrow.html">Borrowed Books</a></li>
+                                    <li><a href="./usereturn.html">Returned Books</a></li>
                                   </ul>
                                 </div>
                               </li>
@@ -69,23 +66,7 @@
                               </li>
                             </ul>
                           </li>
-                          <li class="no-padding">
-                            <ul class="collapsible collapsible-accordion">
-                              <li>
-                                <a class="collapsible-header">Permissions<i class="material-icons mat-icon">arrow_drop_down</i></a>
-                                <div class="collapsible-body">
-                                  <ul>
-                                    <li><a href="#">Add Books</a></li>
-                                    <li><a href="#">Add Admin</a></li>
-                                    <li><a href="#">Remove Admin</a></li>
-                                    <li><a href="#">Block User</a></li>
-                                    <li><a href="#">Unblock User</a></li>
-                                    <li><a href="#">Upgrade User</a></li>
-                                  </ul>
-                                </div>
-                              </li>
-                            </ul>
-                          </li>
+
                           <li><a href="#">Logout</a></li>
                       </ul>
                       <a href="#" data-activates="nav-mobile" class="button-collapse menu-icon-link"><i class="material-icons hide-on-med-and-up">menu</i></a>
@@ -107,17 +88,16 @@
 
               <div class="row rowcollap">
                 <ul>
-                  <li><a href="profile.html">Profile</a></li>
+                  <li><a href="userprofile.html">Profile</a></li>
                   <li class="no-padding">
                     <ul class="collapsible collapsible-accordion">
                       <li>
                         <a class="collapsible-header">Books Shelf<i class="material-icons">arrow_drop_down</i></a>
                         <div class="collapsible-body">
                           <ul>
-                            <li><a href="./admin.html">All Books</a></li>
-                            <li><a href="#">Add Books</a></li>
-                            <li><a href="./borrowedbooks.html">Borrowed Books</a></li>
-                            <li><a href="./returnedbook.html">Returned Books</a></li>
+                            <li><a href="user.html">All Books</a></li>
+                            <li><a href="./userborrow.html">Borrowed Books</a></li>
+                            <li><a href="./usereturn.html">Returned Books</a></li>
                           </ul>
                         </div>
                       </li>
@@ -140,23 +120,6 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                      <li>
-                        <a class="collapsible-header">Permissions<i class="material-icons">arrow_drop_down</i></a>
-                        <div class="collapsible-body">
-                          <ul>
-                            <li><a href="#">Add Books</a></li>
-                            <li><a href="#">Add Admin</a></li>
-                            <li><a href="#">Remove Admin</a></li>
-                            <li><a href="#">Block User</a></li>
-                            <li><a href="#">Unblock User</a></li>
-                            <li><a href="#">Upgrade User</a></li>
-                          </ul>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
                   <li><a href="#">Logout</a></li>
                 </ul>
               </div>
@@ -168,9 +131,9 @@
           <div class="container mainCon" style="margin-left:5%;">
             <div class="row">
                 <div class="section">
-                    <h4 style="margin-top:7%;">All Borrowed Books</h4>
+                    <h4 style="margin-top:7%;">All Books</h4>
                 </div>
-                <div class="divider" style="width: 100%; margin-top: -2.5%; margin-bottom: 3.5%;"></div>
+                <div class="divider" style="margin-top:-2%; margin-bottom:3%;"></div>
             <!-- </div> -->
 
             <div class="row">
@@ -186,7 +149,7 @@
                           <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                           <p>Here is some more information about this product that is only revealed once clicked on.</p>
                       </div>
-                      <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                      <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                   </div>
               </div>
 
@@ -202,7 +165,7 @@
                           <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                           <p>Here is some more information about this product that is only revealed once clicked on.</p>
                       </div>
-                      <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                      <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                   </div>
               </div>
 
@@ -218,7 +181,7 @@
                           <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                           <p>Here is some more information about this product that is only revealed once clicked on.</p>
                       </div>
-                      <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                      <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                   </div>
               </div>
           <!-- </div> -->
@@ -236,7 +199,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
 
@@ -252,7 +215,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
 
@@ -268,7 +231,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
         <!-- </div> -->
@@ -285,7 +248,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
 
@@ -301,7 +264,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
 
@@ -317,7 +280,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
           <!-- </div> -->
@@ -335,7 +298,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
 
@@ -345,13 +308,13 @@
                         <img class="activator" src="./imgs/book3.jpg">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                        <span class="card-title  activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
 
@@ -367,7 +330,7 @@
                         <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
                         <p>Here is some more information about this product that is only revealed once clicked on.</p>
                     </div>
-                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn">Update</a><a href="#index-banner" class="waves-effect waves-light btn green">Borrow</a></div>
+                    <div class="card-action home-card"><a href="#index-banner" class="waves-effect waves-light btn teal">Borrow</a><a href="#index-banner" class="waves-effect waves-light btn orange">Read</a></div>
                 </div>
             </div>
         </div><!--end row-->
