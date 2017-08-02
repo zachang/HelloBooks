@@ -31,7 +31,7 @@
                   <li><a href="./smlogin.html">Login</a></li>
                   <li><a href="./smreg.html" id="join" class="btn-large waves-effect waves-light orange" style="margin:0px; padding:0px;">Join us</a></li>
               </ul>
-              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons hide-on-med-only">menu</i></a>
+              <a href="#" data-activates="nav-mobile" class="button-collapse menu-iconic-link"><i class="material-icons hide-on-med-only">menu</i></a>
             </div>
           </nav>
       </div> <!--End Nav-->
@@ -91,15 +91,8 @@
   <script src="materialize/js/init.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    window.addEventListener('scroll', function (e) {
-        var nav = document.querySelector('nav');
-        if (document.documentElement.scrollTop || document.body.scrollTop > (window.innerHeight>0)) {
-                nav.classList.add('black');
-                nav.classList.remove('transparent');
-            } else {
-                nav.classList.add('transparent');
-                nav.classList.remove('black');
-            }
+    $(".menu-iconic-link").click(function(){
+      $("body").css("width": "100% !important");
     });
 
   });

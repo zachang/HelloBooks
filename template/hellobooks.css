@@ -26,6 +26,15 @@
 
 }
 
+
+@media screen and (max-width: 426px){
+    .textContent{
+        color: #FFF;
+        margin-top: 0px !important;
+    }
+
+}
+
 .mainLogo{
   margin-top:1%;
 }
@@ -73,6 +82,7 @@
 
 .textContent{
     color: #FFF;
+    margin-top: 90px;
 }
 
 .main-div{
@@ -81,6 +91,7 @@
     background-size: cover;
     background-attachment: fixed;
     height: 100vh;
+    margin-bottom: 0px !important;
 }
 
 .mainNav{

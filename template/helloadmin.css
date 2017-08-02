@@ -15,10 +15,23 @@
     }
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 425px){
     nav .brand-logo{
         left: 55%;
     }
+
+    .bookadd{
+       margin-left: 20% !important;
+    }
+
+    .profile_marg{
+       margin-left: 8% !important
+    }
+
+    .profile-btn{
+      margin-left: 20% !important
+    }
+
 
 }
 
@@ -61,14 +74,28 @@
     }
 }
 
+.row .col.s9{
+  margin-left: 12%;
+}
+
+.profile-image{
+  width: 35%;
+  height: 100%;
+  margin-left: 30%;
+  color:#000;
+  background-color: #FFF;
+  background-image: url("./imgs/eben2.jpg");
+  background-size: 100% 100%;
+}
+
 .mainLogo{
   margin-top:1%;
 }
 
 .ad-vide{
-  margin-top: -2.5%;
+  margin-top: -4.5%;
   margin-bottom: 3.5%;
-  width: 13.5%;
+  width: 43.5%;
 }
 
 .dash{
@@ -180,9 +207,9 @@ nav ul a.btn-prof{
     height:0;
 }
 
-.card-image{
+/*.card-image{
     height: 100%;
-}
+}*/
 
 .activator{
   height: 45vh;

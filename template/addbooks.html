@@ -165,49 +165,62 @@
 
           <div class="container mainCon" style="margin-left:5%;">
             <div class="row">
+                <div class="col s10 m8 l6 bookadd" style="margin-left:35%; margin-top:4%;">
 
-              <div class="row">
-                <div class="col s10 m8 l6 profile_marg" style="margin-left:23%; margin-top:7%;">
-                  <div class="card" style="box-shadow: 2px 1px 7px #000;">
-                    <form method="post" class="col s12">
-                      <div class="card-content white-text" style="height:200px; background:rgba(77, 182, 172, 0.9);">
-
-                        <div class="profile-image circle">
-
+                  <div class="row">
+                    <form class="col s10">
+                      <div class="row">
+                        <div class="input-field col s10">
+                          <input id="book_name" type="text" class="validate">
+                          <label for="book_name">Book Name</label>
                         </div>
-
                       </div>
-                      <div class="card-action" style="height:235px; background: rgba(217,217,217,0.7)">
-
-                           <div class="row">
-                                 <div class="input-field col s6">
-                                   <input value="Dawuda Ebenezer Zachang" id="full_name" type="text" class="validate">
-                                   <label for="full_name">Full Name</label>
-                                 </div>
-                                 <div class="input-field col s6">
-                                   <input value="zachang" id="user_name" type="text" class="validate">
-                                   <label for="user_name">Userame</label>
-                                 </div>
+                      <div class="row">
+                        <div class="input-field col s10">
+                          <input id="author" type="text" class="validate">
+                          <label for="author">Author</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s10">
+                          <input id="publish_year" type="text" class="datepicker">
+                          <label for="publish_year">Publish Year</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s10">
+                          <input id="isbn" type="text" class="validate">
+                          <label for="isbn">ISBN</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s10">
+                           <select>
+                             <option value="" disabled selected>Select</option>
+                             <option value="1">Option 1</option>
+                             <option value="2">Option 2</option>
+                             <option value="3">Option 3</option>
+                           </select>
+                           <label>Choose Category</label>
+                         </div>
+                      </div>
+                      <div class="row">
+                        <div class="file-field input-field col s10">
+                          <div class="btn">
+                            <span>Add Image</span>
+                              <input type="file">
                             </div>
-
-                            <div class="row">
-                                  <div class="input-field col s6">
-                                    <input value="zachangdawuda@gmail.com" id="email" type="email" class="validate">
-                                    <label for="email">Email</label>
-                                  </div>
-                                  <div class="input-field col s6">
-                                    <input value="08197989956" id="phone_no" type="number" class="validate">
-                                    <label for="phone_no">Phone Number</label>
-                                  </div>
-                             </div>
-
-                            <a class="waves-effect waves-light btn profile-btn" style="margin-left:35%;">Update</a>
-
+                            <div class="file-path-wrapper">
+                              <input class="file-path validate" type="text">
+                            </div>
+                          </div>
                       </div>
+                      <a class="waves-effect waves-light btn col s12">Add Book</a>
                     </form>
                   </div>
-                </div>
-              </div>
+
+
+                  </div>
 
             </div><!--end row-->
 
@@ -225,6 +238,18 @@
       $(".menu-icon-link").click(function(){
         $("body").css({"width": "100%", "overflow-y": "auto"});
       });
+
+      $(document).ready(function() {
+        $('select').material_select();
+      });
+
+      $('.datepicker').pickadate({
+       selectMonths: true,
+       selectYears: 15,
+       clear: 'Clear',
+       close: 'Ok',
+       closeOnSelect: false
+     });
 
   });
 
