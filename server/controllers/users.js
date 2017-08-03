@@ -1,7 +1,11 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models').User;
+
+const secret = process.env.SECRET_TOKEN;
 
 const userDetails = (user) => {
   return {
+    id: user.id,
     fullname: user.fullname,
     username: user.username,
     email: user.email,
@@ -16,7 +20,11 @@ const userDetails = (user) => {
 module.exports = {
   create(req, res) {
     return User.create(req.body)
-      .then(newUser => res.status(201).send({ user: userDetails(newUser)}))
-      .catch(error => res.status(400).send({errors: error.errors}));
+      .then( newUser => {
+        const token = jwt.sign(userDetails(newUser),
+          secret, { expiresIn: '10h' });
+        res.status(201).send({  message: 'User successfully created', token });
+      })
+      .catch(error => res.status(400).send({ message: 'User not created', errors: error.errors}));
   },
 };

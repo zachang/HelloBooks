@@ -3,6 +3,10 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 
 const app = express();
+
+const dotenv = require('dotenv');
+dotenv.config();
+
 const routes = require('../routes/index')
 const port = parseInt(process.env.PORT, 10) || 8000;
 
