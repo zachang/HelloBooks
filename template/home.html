@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>HelloBooks</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="./hellobooks.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body>
+<div class="row main-row main-div">
+    <div class="navbar-fixed">
+          <nav class="mainNav transparent" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="home.html" class="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks"></a>
+              <ul class="right hide-on-small-and-down">
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Help</a></li>
+                <!-- <li><a href="index.html" class="login">Login</a></li> -->
+                <li><a class="btn-large waves-effect waves-light orange join-us">Join us</a></li>
+              </ul>
+
+              <ul id="nav-mobile" class="side-nav hide-on-med-and-up">
+                  <li><a href="">Contact us</a></li>
+                  <li><a href="#">About us</a></li>
+                  <li><a href="#">Help</a></li>
+                  <li><a href="./smlogin.html">Login</a></li>
+                  <li><a href="./smreg.html" id="join" class="btn-large waves-effect waves-light orange" style="margin:0px; padding:0px;">Join us</a></li>
+              </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse full top-nav hide-on-med-and-up menu-iconic-link"><i class="material-icons">menu</i></a>
+            </div>
+          </nav>
+      </div> <!--End Nav-->
+
+      <div class="section no-pad-bot" id="index-banner">
+        <div class="container textContent">
+          <div class="row">
+            <div class="col s12 l5 m5 statement">
+                  <br><br>
+                  <h1 class="header center orange-text">Welcome!</h1>
+                  <div class="row center">
+                    <h5 class="header col s12 light">Learning is never ending and Knowledge is key. So in light of this, we at HelloBooks aim to provide you with all the necessary resource needed to expand your mind. Feel free to go through our library.</h5>
+                  </div>
+                  <div class="row center hide-on-small-and-down">
+                    <a href="#" class="btn-large waves-effect waves-light orange">More...</a>
+                  </div>
+                  <div class="row center hide-on-med-and-up">
+                    <a href="./smreg.html" class="btn-large waves-effect waves-light orange">Join us</a>
+                    <a href="./smlogin.html" class="btn-large waves-effect waves-light orange">Login</a>
+                  </div>
+                  <br><br>
+              </div>
+
+              <div class="col l5 m5 hide-on-small-and-down right loginContent">
+                    <br><br>
+                    <form class="col s12">
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="pass" type="password" class="validate">
+                        <label for="pass" data-error="wrong" data-success="right">Password</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col s12">
+                        <p>
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                            <a href="#" class="right" style="color:#FF9800">Forgot password</a>
+                        </p>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col m12">
+                        <p class="right-align">
+                            <a href="./admin.html"><button class="col m12 btn btn-large waves-effect waves-light orange log-in" type="button" name="action">Login</button></a>
+                        </p>
+                        </div>
+                        </div>
+                    </form>
+                    <br><br>
+              </div><!--End loginContent-->
+
+              <div class="col l8 m8  offset-m2 offset-l2 hide-on-small-and-down regContent">
+                    <br><br>
+                    <form class="col s12">
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="phone" type="number" class="validate">
+                        <label for="phone">Phone Number</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="pass" type="password" class="validate">
+                        <label for="pass" data-error="wrong" data-success="right">Password</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="input-field col s12">
+                        <input id="pass-confirm" type="password" class="validate">
+                        <label for="confirm pass" data-error="wrong" data-success="right">Confirm Password</label>
+                        </div>
+                        </div>
+
+
+                        <div class="row">
+                        <div class="col m12">
+                        <p class="right-align">
+                            <a href="./user.html"><button class="col m12 btn btn-large waves-effect waves-light orange" type="button" name="action">Sign Up</button></a>
+                        </p>
+                        </div>
+                        </div>
+                    </form>
+                    <br><br>
+              </div><!--End regContent-->
+          </div>
+        </div>
+
+      </div>
+</div><!--End main-->
+
+
+<!--  Scripts-->
+  <script src="materialize/js/jquery.js"></script>
+  <script src="materialize/js/materialize.js"></script>
+  <script src="materialize/js/init.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".join-us").click(function(){
+       $('.statement').toggle("slow");
+       $('.loginContent').toggle("slow");
+       $('.regContent').toggle("slow");
+     });
+
+     $(".menu-iconic-link").click(function(){
+        $("body").css({"width": "100%", "overflow-y": "auto"});
+      });
+  })
+  </script>
+  </body>
+</html>
