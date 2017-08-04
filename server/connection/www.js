@@ -4,10 +4,12 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+/* working */
+
 const dotenv = require('dotenv');
 dotenv.config();
 
-const routes = require('../routes/index')
+const routes = require('../routes/index');
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 app.use(logger('dev'));
