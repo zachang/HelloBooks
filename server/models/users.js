@@ -1,32 +1,36 @@
-'use strict';
-const bcrypt = require("bcrypt-nodejs");
+const bcrypt = require('bcrypt-nodejs');
 
 module.exports = (sequelize, DataTypes) => {
-const User = sequelize.define('User', {
-    fullname:{
+  const User = sequelize.define('User', {
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    username:{
+    username: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
     },
-    email:{
+    email: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
     },
-    phone_no:{
+    phone_no: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+    },
+    image_url: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: true,
     },
     is_admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    block_status:{
+    block_status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
@@ -34,22 +38,23 @@ const User = sequelize.define('User', {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  },{
-      instanceMethods: {
-        generateHash(password){
-          this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
-        },
-        validPassword(password){
-          return bcrypt.compareSync(password, this.password)
-        },
+  },
+  {
+    instanceMethods: {
+      generateHash(password) {
+        this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+      },
+      validPassword(password) {
+        return bcrypt.compareSync(password, this.password);
+      },
     },
     hooks: {
       beforeCreate: (user) => {
-        user.generateHash()
+        user.generateHash(user.password);
       },
       beforeUpdate: (user) => {
-        if(user.password){
-          user.generateHash();
+        if (user.password) {
+          user.generateHash(user.password);
         }
       }
     }

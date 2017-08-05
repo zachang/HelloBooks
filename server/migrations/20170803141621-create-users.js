@@ -27,6 +27,11 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
+      image_url: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: true,
+      },
       is_admin: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
