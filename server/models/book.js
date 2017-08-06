@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false,
     },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     book_image: {
       type: DataTypes.STRING,
       unique: true,

@@ -11,4 +11,5 @@ module.exports = (app) => {
 
   app.post('/api/books', booksController.create);
   app.get('/api/books', booksController.list);
+  app.put('/api/books/:bookId', booksController.update);
 };
