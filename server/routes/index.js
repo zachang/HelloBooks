@@ -15,5 +15,6 @@ module.exports = (app) => {
   app.put('/api/books/:bookId', booksController.update);
 
   app.post('/api/categories', categoryController.create);
-  app.get('/api/categories', booksController.list);
+  app.get('/api/categories', categoryController.list);
+  app.put('/api/categories/:categoryId', categoryController.update);
 };
