@@ -31,5 +31,21 @@ module.exports = {
           .catch(error => res.status(400).send({ errors: error }));
       })
       .catch(error => res.status(400).send({ errors: error }));
-  }
+  },
+  destroy(req, res) {
+    return Category
+      .findById(req.params.categoryId)
+      .then((category) => {
+        if (!category) {
+          return res.status(400).send({
+            message: 'Category Not Found',
+          });
+        }
+        return category
+          .destroy()
+          .then(() => res.status(204).send())
+          .catch(error => res.status(400).send(error));
+      })
+      .catch(error => res.status(400).send(error));
+  },
 };
