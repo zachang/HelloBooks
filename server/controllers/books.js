@@ -15,7 +15,7 @@ module.exports = {
   list(req, res) {
     return Book
       .all()
-      .then(books => res.status(200).send({ message: 'All books shown', books }))
-      .catch(error => res.status(400).send({ message: 'No book shown', errors: error.errors }));
+      .then(books => res.status(200).send({ message: 'All books displayed', books}))
+      .catch(error => res.status(400).send({ message: 'No book displayed', errors: error.errors }));
   },
 };
