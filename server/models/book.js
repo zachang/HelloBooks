@@ -1,13 +1,30 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var book = sequelize.define('book', {
-    book_name: DataTypes.STRING,
-    book_count: DataTypes.INTEGER,
-    count_borrow: DataTypes.INTEGER,
-    is_available: DataTypes.BOOLEAN
+module.exports = (sequelize, DataTypes) => {
+  const book = sequelize.define('book', {
+    book_name: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    book_image: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    book_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    count_borrow: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    is_available: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: (models) => {
         // associations can be defined here
       }
     }
