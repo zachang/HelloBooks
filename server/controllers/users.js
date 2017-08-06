@@ -10,7 +10,7 @@ const userDetails = (user) => {
     username: user.username,
     email: user.email,
     phone_no: user.phone_no,
-    image_url: user.image_url,
+    user_image: user.user_image,
     is_admin: user.is_admin,
     block_status: user.block_status,
     createdAt: user.createdAt,
