@@ -1,15 +1,20 @@
+'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('categories', {
+    return queryInterface.createTable('bookAuthors', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      category_name: {
-        type: Sequelize.STRING,
-        unique: true,
+      bookId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      authorId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -21,8 +26,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('categories',
-      { force: true, cascade: true });
+  down: function(queryInterface, Sequelize) {
+    return queryInterface.dropTable('bookAuthors');
   }
 };

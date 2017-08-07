@@ -1,12 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
   const category = sequelize.define('category', {
-    category_name: DataTypes.STRING,
+    category_name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
   }, {
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
+        category.belongsToMany(models.book, { through: 'bookCategory', foreignKey: 'categoryId' });
       }
     }
   });
   return category;
-}
+};

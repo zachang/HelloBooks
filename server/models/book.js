@@ -5,10 +5,6 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false,
     },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     book_image: {
       type: DataTypes.STRING,
       unique: true,
@@ -29,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
+        book.belongsToMany(models.category, { through: 'bookCategory', foreignKey: 'bookId' });
+        book.belongsToMany(models.author, { through: 'bookAuthor', foreignKey: 'bookId' });
       }
     }
   });

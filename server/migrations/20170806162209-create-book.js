@@ -12,10 +12,6 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      author: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       book_image: {
         type: Sequelize.STRING,
         unique: true,

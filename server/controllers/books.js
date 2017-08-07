@@ -4,7 +4,6 @@ module.exports = {
   create(req, res) {
     return Book.create({
       book_name: req.body.book_name,
-      author: req.body.author,
       book_image: req.body.book_image,
       book_count: req.body.book_count,
       count_borrow: req.body.count_borrow,
@@ -31,7 +30,6 @@ module.exports = {
         return book
           .update({
             book_name: req.body.book_name,
-            author: req.body.author,
             book_image: req.body.book_image,
             book_count: req.body.book_count,
             count_borrow: req.body.count_borrow,
