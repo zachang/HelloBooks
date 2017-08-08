@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const borrow = sequelize.define('borrow', {
+  const Borrow = sequelize.define('Borrow', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -41,10 +41,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        borrow.belongsTo(models.book, { foreignKey: 'book_id' });
-        borrow.belongsTo(models.User, { foreignKey: 'user_id' });
+        Borrow.belongsTo(models.Book, { foreignKey: 'book_id' });
+        Borrow.belongsTo(models.User, { foreignKey: 'user_id' });
       }
     }
   });
-  return borrow;
+  return Borrow;
 };

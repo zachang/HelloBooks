@@ -1,15 +1,11 @@
-const users = require('./users');
-const books = require('./books');
-const categories = require('./categories');
-const author = require('./author');
-const bookcategory = require('./bookcategory');
-const borrow = require('./borrow');
+import usersController from './users';
+import booksController from './books';
+import categoryController from './categories';
+import borrowController from './borrow';
 
 module.exports = {
-  users,
-  books,
-  categories,
-  author,
-  bookcategory,
-  borrow
+  usersController,
+  booksController,
+  categoryController,
+  borrowController
 };

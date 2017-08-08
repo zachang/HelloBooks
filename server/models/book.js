@@ -1,8 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  const book = sequelize.define('book', {
+  const Book = sequelize.define('Book', {
     book_name: {
       type: DataTypes.STRING,
       unique: true,
+      allowNull: false,
+    },
+    author: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     book_image: {
@@ -11,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     book_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    category_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -25,11 +33,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        book.hasMany(models.borrow);
-        book.belongsToMany(models.category, { through: 'bookCategory', foreignKey: 'bookId' });
-        book.belongsToMany(models.author, { through: 'bookAuthor', foreignKey: 'bookId' });
+        Book.hasMany(models.Borrow);
+        Book.belongsTo(models.Category);
       }
     }
   });
-  return book;
+  return Book;
 };

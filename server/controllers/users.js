@@ -1,5 +1,7 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models').User;
+import jwt from 'jsonwebtoken';
+import db from '../models';
+
+const User = db.User;
 
 const secret = process.env.SECRET_TOKEN;
 
@@ -18,7 +20,7 @@ const userDetails = (user) => {
   };
 };
 
-module.exports = {
+const usersController = {
   create(req, res) {
     return User.create(req.body)
       .then((newUser) => {
@@ -42,3 +44,4 @@ module.exports = {
       });
   }
 };
+export default usersController;

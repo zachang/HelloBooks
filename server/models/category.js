@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const category = sequelize.define('category', {
+  const Category = sequelize.define('Category', {
     category_name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        category.belongsToMany(models.book, { through: 'bookCategory', foreignKey: 'categoryId' });
+        Category.hasMany(models.Book, { foreignKey: 'category_id' });
       }
     }
   });
-  return category;
+  return Category;
 };

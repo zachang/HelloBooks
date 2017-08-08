@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('books', {
+    return queryInterface.createTable('Books', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,12 +12,20 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
+      author: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       book_image: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
       },
       book_count: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      category_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -40,6 +48,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('books');
+    return queryInterface.dropTable('Books');
   }
 };

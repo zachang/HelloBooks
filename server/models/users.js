@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     classMethods: {
       associate: (models) => {
-        User.hasMany(models.borrow);
+        User.hasMany(models.Borrow, { foreignKey: 'user_id' });
       }
     },
     instanceMethods: {

@@ -1,8 +1,8 @@
-const sequelize = require('../models').sequelize;
-const Book = require('../models').book;
-const BookCategory = require('../models').bookCategory;
+import db from '../models';
 
-module.exports = {
+const Book = db.Book;
+
+const booksController = {
   create(req, res) {
     Book.create({
       book_name: req.body.book_name,
@@ -44,4 +44,5 @@ module.exports = {
       .catch(error => res.status(400).send({ errors: error.errors }));
   }
 };
+export default booksController;
 
