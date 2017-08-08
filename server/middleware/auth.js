@@ -20,7 +20,9 @@ const Auth = {
       req.decoded = decoded;
       next();
     });
-  }
+  },
+
+
 };
 
 module.exports = Auth;

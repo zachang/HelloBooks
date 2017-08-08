@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
+        book.hasMany(models.borrow);
         book.belongsToMany(models.category, { through: 'bookCategory', foreignKey: 'bookId' });
         book.belongsToMany(models.author, { through: 'bookAuthor', foreignKey: 'bookId' });
       }

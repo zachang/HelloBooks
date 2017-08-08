@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     bookId: DataTypes.INTEGER,
     authorId: DataTypes.INTEGER
   }, {
-    classMethods: {
+    classMethod: {
       associate: (models) => {
         bookAuthor.belongsTo(models.book, { foreignKey: 'bookId' });
         bookAuthor.belongsTo(models.author, { foreignKey: 'authorId' });
@@ -11,4 +11,4 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   return bookAuthor;
-};
+}

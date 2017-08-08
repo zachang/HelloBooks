@@ -12,7 +12,7 @@ const config = {
     dialect: 'postgres'
   },
   test: {
-    username: 'postgres',
+    username: process.env.DB_USER,
     password: process.env.PASSWORD,
     database: 'database_test',
     host: '127.0.0.1',

@@ -1,21 +1,24 @@
+const sequelize = require('../models').sequelize;
 const Book = require('../models').book;
+const BookCategory = require('../models').bookCategory;
 
 module.exports = {
   create(req, res) {
-    return Book.create({
+    Book.create({
       book_name: req.body.book_name,
       book_image: req.body.book_image,
       book_count: req.body.book_count,
       count_borrow: req.body.count_borrow,
-      is_available: req.body.is_available
+      is_available: req.body.is_available,
     })
       .then(book => res.status(201).send({ message: 'Book created', book }))
-      .catch(error => res.status(400).send({ message: 'Similar details exist', errors: error.errors }));
+      .catch(error => res.status(400).send({ message: 'Error', errors: error }));
   },
   list(req, res) {
+    // return res.status(200).send({ hello: req.decoded.username })
     return Book
       .all()
-      .then(books => res.status(200).send({ message: 'All books displayed', books}))
+      .then(books => res.status(200).send({ message: 'All books displayed', books }))
       .catch(error => res.status(400).send({ message: 'No book displayed', errors: error.errors }));
   },
   update(req, res) {
@@ -41,3 +44,4 @@ module.exports = {
       .catch(error => res.status(400).send({ errors: error.errors }));
   }
 };
+
