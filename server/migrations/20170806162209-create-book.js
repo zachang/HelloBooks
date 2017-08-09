@@ -19,7 +19,6 @@ module.exports = {
       book_image: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false,
       },
       book_count: {
         type: Sequelize.INTEGER,

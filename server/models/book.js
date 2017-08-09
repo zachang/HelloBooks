@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     book_image: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
     },
     book_count: {
       type: DataTypes.INTEGER,
@@ -29,12 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     is_available: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
+      allowNull: false,
     },
   }, {
     classMethods: {
       associate: (models) => {
-        Book.hasMany(models.Borrow);
-        Book.belongsTo(models.Category);
+        Book.hasMany(models.Borrow, { foreignKey: 'book_id' });
+        Book.belongsTo(models.Category, { foreignKey: 'category_id' });
       }
     }
   });

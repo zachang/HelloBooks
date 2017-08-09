@@ -1,12 +1,12 @@
 import { usersController, booksController,
-  categoryController } from '../controllers';
+  categoryController, borrowController } from '../controllers';
 
 const authMiddleware = require('../middleware/auth');
 
 const routes = (router) => {
   router.route('/')
     .get((req, res) => res.status(200).send({
-      message: 'Welcome to the hellobook API!',
+      message: 'Welcome to the hellobooks API!',
     }));
 
   router.route('/users/signup')
@@ -15,22 +15,24 @@ const routes = (router) => {
     .post(usersController.login);
 
   router.route('/books')
-    .get(booksController.list)
-    .post(authMiddleware.verifyToken, booksController.create);
+    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
+    .get(authMiddleware.verifyToken, booksController.list);
 
   router.route('/books/:bookId')
-    .put(authMiddleware.verifyToken, booksController.update);
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.update);
 
   router.route('/categories')
-    .get(categoryController.list)
-    .post(categoryController.create);
+    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
+    .get(authMiddleware.verifyToken, authMiddleware.verifyToken, categoryController.list);
 
   router.route('/categories/:categoryId')
-    .put(categoryController.update)
-    .delete(categoryController.destroy);
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)
+    .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.destroy);
 
-  // router.route('/users/borrow')
-  //   .post(authMiddleware.verifyToken, borrowController.create);
+  router.route('/users/:userId/books')
+    .post(authMiddleware.verifyToken, borrowController.create)
+    .get(authMiddleware.verifyToken, borrowController.borrowsByUser)
+    .put(authMiddleware.verifyToken, borrowController.returnBook);
 };
 
 export default routes;
