@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import parser from 'body-parser';
-import routes from '../routes/index';
+import routes from './server/routes/index';
 
 const dotenv = require('dotenv');
 

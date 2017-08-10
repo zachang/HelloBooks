@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon ./server/connection/app.js --exec babel-node",
-    "start": "node ./server/connection/index.js",
+    "start:dev": "nodemon app.js --exec babel-node",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
