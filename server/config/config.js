@@ -4,6 +4,7 @@ dotenv.config();
 
 const config = {
   production: {
+    use_env_variable: 'DATABASE_URL',
     protocol: 'postgres',
     database: process.env.DB_NAME,
     port: 5432,
