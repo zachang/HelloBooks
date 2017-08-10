@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const book = sequelize.define('book', {
+  const Book = sequelize.define('Book', {
     book_name: {
       type: DataTypes.STRING,
       unique: true,
@@ -12,9 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     book_image: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
     },
     book_count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    category_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -25,13 +28,15 @@ module.exports = (sequelize, DataTypes) => {
     is_available: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
+      allowNull: false,
     },
   }, {
     classMethods: {
       associate: (models) => {
-        // associations can be defined here
+        Book.hasMany(models.Borrow, { foreignKey: 'book_id' });
+        Book.belongsTo(models.Category, { foreignKey: 'category_id' });
       }
     }
   });
-  return book;
+  return Book;
 };

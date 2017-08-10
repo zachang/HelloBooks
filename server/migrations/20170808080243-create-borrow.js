@@ -1,40 +1,40 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Books', {
+    return queryInterface.createTable('Borrows', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      book_name: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
-      },
-      author: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      book_image: {
-        type: Sequelize.STRING,
-        unique: true,
-      },
-      book_count: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      category_id: {
+      book_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      count_borrow: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
+      borrow_date: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
-      is_available: {
+      collection_date: {
+        type: Sequelize.DATE,
+        defaultValue: null
+      },
+      expected_return: {
+        type: Sequelize.DATE,
+        defaultValue: null
+      },
+      actual_return: {
+        type: Sequelize.DATE,
+        defaultValue: null
+      },
+      returned: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true,
+        defaultValue: false,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +47,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Books');
+    return queryInterface.dropTable('Borrows');
   }
 };

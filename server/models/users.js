@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
     },
   },
   {
+    classMethods: {
+      associate: (models) => {
+        User.hasMany(models.Borrow, { foreignKey: 'user_id' });
+      }
+    },
     instanceMethods: {
       generateHash(password) {
         this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

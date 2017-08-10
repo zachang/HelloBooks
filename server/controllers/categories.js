@@ -1,6 +1,8 @@
-const Category = require('../models').category;
+import db from '../models';
 
-module.exports = {
+const Category = db.Category;
+
+const categoryController = {
   create(req, res) {
     return Category.create({
       category_name: req.body.category_name,
@@ -49,3 +51,4 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 };
+export default categoryController;

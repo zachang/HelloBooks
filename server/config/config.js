@@ -3,6 +3,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const config = {
+  production: {
+    use_env_variable: 'DATABASE_URL',
+    protocol: 'postgres',
+    database: process.env.DB_NAME,
+    port: 5432,
+    dialect: 'postgres'
+  },
   development: {
     username: process.env.DB_USER,
     password: process.env.PASSWORD,
@@ -12,7 +19,7 @@ const config = {
     dialect: 'postgres'
   },
   test: {
-    username: 'postgres',
+    username: process.env.DB_USER,
     password: process.env.PASSWORD,
     database: 'database_test',
     host: '127.0.0.1',

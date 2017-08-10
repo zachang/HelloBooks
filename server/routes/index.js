@@ -1,21 +1,38 @@
-const usersController = require('../controllers').users;
-const booksController = require('../controllers').books;
-const categoryController = require('../controllers').categories;
+import { usersController, booksController,
+  categoryController, borrowController } from '../controllers';
 
-module.exports = (app) => {
-  app.get('/api/users', (req, res) => res.status(200).send({
-    message: 'Welcome to the Users API!',
-  }));
+const authMiddleware = require('../middleware/auth');
 
-  app.post('/api/users/signup', usersController.create);
-  app.post('/api/users/signin', usersController.login);
+const routes = (router) => {
+  router.route('/')
+    .get((req, res) => res.status(200).send({
+      message: 'Welcome to the hellobooks API!',
+    }));
 
-  app.post('/api/books', booksController.create);
-  app.get('/api/books', booksController.list);
-  app.put('/api/books/:bookId', booksController.update);
+  router.route('/users/signup')
+    .post(usersController.create);
+  router.route('/users/signin')
+    .post(usersController.login);
 
-  app.post('/api/categories', categoryController.create);
-  app.get('/api/categories', categoryController.list);
-  app.put('/api/categories/:categoryId', categoryController.update);
-  app.delete('/api/categories/:categoryId', categoryController.destroy);
+  router.route('/books')
+    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
+    .get(authMiddleware.verifyToken, booksController.list);
+
+  router.route('/books/:bookId')
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.update);
+
+  router.route('/categories')
+    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
+    .get(authMiddleware.verifyToken, authMiddleware.verifyToken, categoryController.list);
+
+  router.route('/categories/:categoryId')
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)
+    .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.destroy);
+
+  router.route('/users/:userId/books')
+    .post(authMiddleware.verifyToken, borrowController.create)
+    .get(authMiddleware.verifyToken, borrowController.borrowsByUser)
+    .put(authMiddleware.verifyToken, borrowController.returnBook);
 };
+
+export default routes;

@@ -1,23 +1,25 @@
-const Book = require('../models').book;
+import db from '../models';
 
-module.exports = {
+const Book = db.Book;
+
+const booksController = {
   create(req, res) {
-    return Book.create({
+    Book.create({
       book_name: req.body.book_name,
       author: req.body.author,
-      book_image: req.body.book_image,
+      category_id: req.body.category_id,
       book_count: req.body.book_count,
-      count_borrow: req.body.count_borrow,
+      book_image: req.body.book_image,
       is_available: req.body.is_available
     })
       .then(book => res.status(201).send({ message: 'Book created', book }))
-      .catch(error => res.status(400).send({ message: 'Similar details exist', errors: error.errors }));
+      .catch(error => res.status(400).send({ message: 'Error', errors: error }));
   },
   list(req, res) {
     return Book
-      .all()
-      .then(books => res.status(200).send({ message: 'All books displayed', books}))
-      .catch(error => res.status(400).send({ message: 'No book displayed', errors: error.errors }));
+      .findAll()
+      .then(books => res.status(200).send({ message: 'All books displayed', books }))
+      .catch(error => res.status(400).send({ errors: error.message }));
   },
   update(req, res) {
     return Book
@@ -31,7 +33,6 @@ module.exports = {
         return book
           .update({
             book_name: req.body.book_name,
-            author: req.body.author,
             book_image: req.body.book_image,
             book_count: req.body.book_count,
             count_borrow: req.body.count_borrow,
@@ -43,3 +44,5 @@ module.exports = {
       .catch(error => res.status(400).send({ errors: error.errors }));
   }
 };
+export default booksController;
+

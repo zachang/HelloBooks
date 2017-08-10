@@ -1,5 +1,8 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models').User;
+import jwt from 'jsonwebtoken';
+import Validator from 'validatorjs';
+import db from '../models';
+
+const User = db.User;
 
 const secret = process.env.SECRET_TOKEN;
 
@@ -10,7 +13,6 @@ const userDetails = (user) => {
     username: user.username,
     email: user.email,
     phone_no: user.phone_no,
-    user_image: user.user_image,
     is_admin: user.is_admin,
     block_status: user.block_status,
     createdAt: user.createdAt,
@@ -18,18 +20,32 @@ const userDetails = (user) => {
   };
 };
 
-module.exports = {
+const signUpRules = {
+  fullname: 'required|min:3',
+  email: 'required|email',
+  password: 'required|min:6|confirmed',
+  password_confirmation: 'required',
+  phone_no: 'required',
+};
+
+const usersController = {
   create(req, res) {
-    return User.create(req.body)
-      .then((newUser) => {
-        const token = jwt.sign(userDetails(newUser),
-          secret, { expiresIn: '10h' });
-        res.status(201).send({ message: 'User successfully created', token });
-      })
-      .catch(error => res.status(400).send({ message: 'User not created', errors: error.errors }));
+    const validation = new Validator(req.body, signUpRules);
+    if (validation.passes()) {
+      return User.create(req.body)
+        .then((newUser) => {
+          const token = jwt.sign(userDetails(newUser), secret, { expiresIn: '10h' });
+          res.status(201).send({ message: 'User successfully created', token });
+        })
+        .catch(error => res.status(400).send({ message: 'User not created', errors: error }));
+    }
+    return res.status(400).json({
+      message: 'Validation error',
+      errors: validation.errors.all()
+    });
   },
   login(req, res) {
-    User.findOne({ where: { username: req.body.username } })
+    return User.findOne({ where: { username: req.body.username } })
       .then((user) => {
         if (user && user.validPassword(req.body.password)) {
           const token = jwt.sign(userDetails(user),
@@ -39,7 +55,8 @@ module.exports = {
         return res.status(400).json({ message: 'Invalid credentials' });
       })
       .catch((error) => {
-        res.send({ errors: error.message });
+        res.send({ error });
       });
   }
 };
+export default usersController;
