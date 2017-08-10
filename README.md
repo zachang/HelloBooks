@@ -55,8 +55,7 @@
   * Protected routes can only be accessed with verified tokens.
   * Invalid routes are rejected
 
-  # API Documentation
-  * You can find the API Documentation at [https://jimoh-postit.herokuapp.com/apidoc/](https://jimoh-postit.herokuapp.com/apidoc/)
+  # LINK TO API
   * You can Access API at [https://hellobooksapi.herokuapp.com/api/v1]
   
   # Want to Contribute?
