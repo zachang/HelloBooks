@@ -55,7 +55,7 @@
   * Protected routes can only be accessed with verified tokens.
   * Invalid routes are rejected
 
-  # API Documentation
+  # LINK to API
   * You can Access API at [https://hellobooksapi.herokuapp.com/api/v1]
   
   # Want to Contribute?
