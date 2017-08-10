@@ -6,6 +6,13 @@
     "es6": true,
     "mocha": true
   },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
     "one-var": 0,
     "one-var-declaration-per-line": 0,
@@ -15,6 +22,10 @@
     "comma-dangle": 0,
     "arrow-body-style": 0,
     "curly": [2, "multi-line"],
+    "prefer-const": "error",
+    "global-require": 1,
+    "max-len": 1,
+    "import/no-unresolved": [2, { "commonjs": true }],
     "no-shadow": [2, { "allow": ["req", "res", "err"] }],
     "linebreak-style": 0,
     "camelcase":0,
