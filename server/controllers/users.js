@@ -22,6 +22,7 @@ const userDetails = (user) => {
 
 const signUpRules = {
   fullname: 'required|min:3',
+  username: 'required|min:3',
   email: 'required|email',
   password: 'required|min:6|confirmed',
   password_confirmation: 'required',
@@ -52,10 +53,10 @@ const usersController = {
             secret, { expiresIn: '10h' });
           return res.status(200).send({ message: 'User Logged in', token });
         }
-        return res.status(400).json({ message: 'Invalid credentials' });
+        return res.status(404).json({ message: 'Invalid credentials' });
       })
       .catch((error) => {
-        res.send({ error });
+        res.status(400).send({ error });
       });
   }
 };

@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const router = express.Router();
-const port = parseInt(process.env.PORT, 10) || 8080;
+const port = parseInt(process.env.PORT, 10) || 8000;
 
 routes(router);
 
@@ -27,3 +27,4 @@ app.get('*', (req, res) => res.status(404).send({
 
 app.listen(port, () => console.log(`Port running at ${port}`));
 
+export default app;
