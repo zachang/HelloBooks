@@ -56,7 +56,6 @@
   * Invalid routes are rejected
 
   # API Documentation
-  * You can find the API Documentation at [https://jimoh-postit.herokuapp.com/apidoc/](https://jimoh-postit.herokuapp.com/apidoc/)
   * You can Access API at [https://hellobooksapi.herokuapp.com/api/v1]
   
   # Want to Contribute?
