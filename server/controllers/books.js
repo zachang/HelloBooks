@@ -4,7 +4,7 @@ const Book = db.Book;
 
 const booksController = {
   create(req, res) {
-    Book.create({
+    return Book.create({
       book_name: req.body.book_name,
       author: req.body.author,
       category_id: req.body.category_id,
@@ -13,7 +13,7 @@ const booksController = {
       is_available: req.body.is_available
     })
       .then(book => res.status(201).send({ message: 'Book created', book }))
-      .catch(error => res.status(400).send({ message: 'Book created'}));
+      .catch(error => res.status(400).send({ message: 'Book not created' }));
   },
   list(req, res) {
     return Book

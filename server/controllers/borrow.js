@@ -21,7 +21,7 @@ const borrowController = {
           return res.status(404).send({ message: 'Book not available' });
         }
         if (book.count_borrow >= book.book_count) {
-          return res.status(404).send({ message: 'All books have been borrowed' });
+          return res.status(404).send({ message: 'All books already borrowed' });
         }
 
         return Borrow.create({
@@ -57,7 +57,7 @@ const borrowController = {
   },
   borrowsByUser(req, res) {
     const params = req.params;
-    const returned = params.returned == true;
+    const returned = params.returned === true;
     Borrow.findAll({ where: { user_id: params.userId, returned },
       include: [{
         model: Book
