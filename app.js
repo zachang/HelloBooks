@@ -19,6 +19,10 @@ app.use(logger('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
+app.use('/', (req, res) => res.status(200).send({
+  message: 'Welcome to the hellobooks',
+}));
+
 app.use('/api/v1/', router);
 
 app.get('*', (req, res) => res.status(404).send({

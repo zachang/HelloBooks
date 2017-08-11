@@ -8,13 +8,13 @@ const categoryController = {
       category_name: req.body.category_name,
     })
       .then(category => res.status(201).send({ message: 'Category created', category }))
-      .catch(error => res.status(400).send({ errors: error }));
+      .catch(error => res.status(400).send({ message: 'Error, Category not created' }));
   },
   list(req, res) {
     return Category
       .findAll()
       .then(category => res.status(200).send({ message: 'All categories displayed', category }))
-      .catch(error => res.status(400).send({ errors: error }));
+      .catch(error => res.status(400).send({ message: 'Error, no category to displayed ' }));
   },
   update(req, res) {
     return Category
@@ -30,9 +30,9 @@ const categoryController = {
             category_name: req.body.category_name,
           })
           .then(() => res.status(200).send({ message: 'Category updated', category }))
-          .catch(error => res.status(400).send({ errors: error }));
+          .catch(error => res.status(400).send({ message: 'Error, No update done' }));
       })
-      .catch(error => res.status(400).send({ errors: error }));
+      .catch(error => res.status(400).send({ message: 'Error, No update done' }));
   },
   destroy(req, res) {
     return Category
@@ -45,8 +45,8 @@ const categoryController = {
         }
         return category
           .destroy()
-          .then(() => res.status(204).send())
-          .catch(error => res.status(400).send(error));
+          .then(() => res.status(204).send({ message: 'Category deleted' }))
+          .catch(error => res.status(400).send({ message: 'Error, No deletion occurred' }));
       })
       .catch(error => res.status(400).send(error));
   },

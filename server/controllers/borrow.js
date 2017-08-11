@@ -41,7 +41,7 @@ const borrowController = {
         return book.update(update);
       })
       .then(updated => res.status(200).send({ message: 'Borrow completed', updated }))
-      .catch(err => res.status(503).send({ message: 'Borrow failed', err }));
+      .catch(err => res.status(503).send({ message: 'Borrow failed' }));
   },
   returnBook(req, res) {
     const obj = req.body;
@@ -53,7 +53,7 @@ const borrowController = {
         return Borrow.update(update, { where: { user_id: params.userId, returned: false } });
       })
       .then(updated => res.status(200).send({ message: 'Borrow status updated', updated }))
-      .catch(err => res.status(503).send({ message: 'Error updating borrow status', err }));
+      .catch(err => res.status(503).send({ message: 'Error updating borrow status' }));
   },
   borrowsByUser(req, res) {
     const params = req.params;
@@ -66,7 +66,7 @@ const borrowController = {
         const books = _.pluck(borrows, 'Book');
         return res.status(200).send(books);
       })
-      .catch(err => res.status(503).send({ message: 'Error updating borrow status', err }));
+      .catch(err => res.status(503).send({ message: 'Error updating borrow status' }));
   }
 };
 

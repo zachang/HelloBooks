@@ -38,7 +38,7 @@ const usersController = {
           const token = jwt.sign(userDetails(newUser), secret, { expiresIn: '10h' });
           res.status(201).send({ message: 'User successfully created', token });
         })
-        .catch(error => res.status(400).send({ message: 'User not created', errors: error }));
+        .catch(error => res.status(400).send({ message: 'User not created' }));
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -56,7 +56,7 @@ const usersController = {
         return res.status(404).json({ message: 'Invalid credentials' });
       })
       .catch((error) => {
-        res.status(400).send({ error });
+        res.status(400).send({ message: 'Invalid credentials' });
       });
   }
 };

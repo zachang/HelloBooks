@@ -13,13 +13,13 @@ const booksController = {
       is_available: req.body.is_available
     })
       .then(book => res.status(201).send({ message: 'Book created', book }))
-      .catch(error => res.status(400).send({ message: 'Error', errors: error }));
+      .catch(error => res.status(400).send({ message: 'Book created'}));
   },
   list(req, res) {
     return Book
       .findAll()
       .then(books => res.status(200).send({ message: 'All books displayed', books }))
-      .catch(error => res.status(400).send({ errors: error.message }));
+      .catch(error => res.status(400).send({ message: 'Error,Nothing to display' }));
   },
   update(req, res) {
     return Book
@@ -39,9 +39,9 @@ const booksController = {
             is_available: req.body.is_available
           })
           .then(() => res.status(200).send({ message: 'Books updated', book }))
-          .catch(error => res.status(400).send({ message: 'Books not updated', errors: error.errors }));
+          .catch(error => res.status(400).send({ message: 'Error updating borrow status' }));
       })
-      .catch(error => res.status(400).send({ errors: error.errors }));
+      .catch(error => res.status(400).send({ message: 'Error updating borrow status' }));
   }
 };
 export default booksController;
