@@ -1,19 +1,30 @@
+import Validator from 'validatorjs';
 import db from '../models';
 
 const Book = db.Book;
 
+const addBookRules = {
+  book_name: 'required|min:3',
+  book_count: 'required',
+  book_image: 'required',
+};
+
 const booksController = {
   create(req, res) {
-    Book.create({
-      book_name: req.body.book_name,
-      author: req.body.author,
-      category_id: req.body.category_id,
-      book_count: req.body.book_count,
-      book_image: req.body.book_image,
-      is_available: req.body.is_available
-    })
-      .then(book => res.status(201).send({ message: 'Book created', book }))
-      .catch(error => res.status(400).send({ message: 'Book created'}));
+    const validation = new Validator(req.body, addBookRules);
+    if (validation.passes()) {
+      return Book.create({
+        book_name: req.body.book_name,
+        book_count: req.body.book_count,
+        book_image: req.body.book_image,
+      })
+        .then(book => res.status(201).send({message: 'Book created', book}))
+        .catch(error => res.status(400).send({message: 'Book created'}));
+    }
+    return res.status(400).json({
+      message: 'Validation error',
+      errors: validation.errors.all()
+    });
   },
   list(req, res) {
     return Book
@@ -35,7 +46,6 @@ const booksController = {
             book_name: req.body.book_name,
             book_image: req.body.book_image,
             book_count: req.body.book_count,
-            count_borrow: req.body.count_borrow,
             is_available: req.body.is_available
           })
           .then(() => res.status(200).send({ message: 'Books updated', book }))

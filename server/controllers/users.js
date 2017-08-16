@@ -15,6 +15,7 @@ const userDetails = (user) => {
     phone_no: user.phone_no,
     is_admin: user.is_admin,
     block_status: user.block_status,
+    level: user.level,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };

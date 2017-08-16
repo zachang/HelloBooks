@@ -57,7 +57,7 @@ const borrowController = {
   },
   borrowsByUser(req, res) {
     const params = req.params;
-    const returned = params.returned == true;
+    const returned = params.returned === false;
     Borrow.findAll({ where: { user_id: params.userId, returned },
       include: [{
         model: Book

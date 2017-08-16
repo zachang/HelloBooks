@@ -46,9 +46,9 @@ const categoryController = {
         return category
           .destroy()
           .then(() => res.status(204).send({ message: 'Category deleted' }))
-          .catch(error => res.status(400).send({ message: 'Error, No deletion occurred' }));
+          .catch(error => res.status(400).send({ message: 'No deletion occurred' }));
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => res.status(400).send({ message: 'Deletion failed' }));
   },
 };
 export default categoryController;
