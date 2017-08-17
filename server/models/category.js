@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     category_name: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
   }, {
     classMethods: {
       associate: (models) => {
-        //
+        Category.hasMany(models.Book, { foreignKey: 'category_id' });
       }
     }
   });
