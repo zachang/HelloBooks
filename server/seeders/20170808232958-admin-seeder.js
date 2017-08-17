@@ -20,8 +20,9 @@ module.exports = {
       username: process.env.ADMIN_USERNAME,
       email: process.env.ADMIN_EMAIL,
       phone_no: process.env.ADMIN_PHONE,
+      level:process.env.ADMIN_LEVEL,
       password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8), null),
-      is_admin: true,
+      is_admin: process.env.ADMIN_STATUS,
       createdAt: new Date(),
       updatedAt: new Date()
     };

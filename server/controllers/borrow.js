@@ -8,7 +8,7 @@ const borrowController = {
   create(req, res) {
     const obj = req.body;
     const params = req.params;
-    return Borrow.findAll({ where: { user_id: params.userId, book_id: obj.book_id, returned: false } })
+    return Borrow.findAll({ where: { user_id: params.userId, book_id: obj.book_id, returned: 'false' } })
       .then((found) => {
         if (found.length) return res.status(403).send({ message: 'You have not returned the previous book you borrowed' });
         return Book.findById(obj.book_id);
@@ -49,8 +49,8 @@ const borrowController = {
     return Book.findById(obj.book_id)
       .then((found) => {
         if (!found) return res.status(404).send({ message: 'Book not found' });
-        const update = { returned: true, actual_return: new Date() };
-        return Borrow.update(update, { where: { user_id: params.userId, book_id: obj.book_id, returned: false } });
+        const update = { returned: 'pending', actual_return: new Date() };
+        return Borrow.update(update, { where: { user_id: params.userId, book_id: obj.book_id, returned: 'false' } });
       })
       .then((updatedCount) => {
         if (updatedCount > 0) {
@@ -78,7 +78,7 @@ const borrowController = {
         const books = _.pluck(borrows, 'Book');
         return res.status(200).send(books);
       })
-      .catch(err => res.status(503).send({message: 'Request not available' }));
+      .catch(() => res.status(503).send({ message: 'Request not available' }));
   }
 };
 

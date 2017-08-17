@@ -27,7 +27,8 @@ module.exports = {
       username: 'ebenezer',
       email: 'eben@gmail.com',
       phone_no: '08075568940',
-      password: 'password' })
+      password: 'password',
+      level: 'silver' })
       .then(user => done())
       .catch(err => done(err));
   }

@@ -32,8 +32,8 @@ module.exports = {
         defaultValue: null
       },
       returned: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        type: Sequelize.STRING,
+        defaultValue: 'false',
         allowNull: false,
       },
       createdAt: {
