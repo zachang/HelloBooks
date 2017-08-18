@@ -22,12 +22,12 @@ const userDetails = (user) => {
 };
 
 const signUpRules = {
-  fullname: 'required|min:3',
-  username: 'required|min:3',
+  fullname: 'required|string|min:5',
+  username: 'required|string|min:6',
   email: 'required|email',
   password: 'required|min:6|confirmed',
   password_confirmation: 'required',
-  phone_no: 'required',
+  phone_no: 'required|string|min:11|max:11',
 };
 
 const usersController = {
