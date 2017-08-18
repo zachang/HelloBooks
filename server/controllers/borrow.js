@@ -8,7 +8,7 @@ const borrowController = {
   create(req, res) {
     const obj = req.body;
     const params = req.params;
-    Borrow.findAll({ where: { user_id: params.userId, book_id: obj.book_id, returned: false } })
+    return Borrow.findAll({ where: { user_id: params.userId, book_id: obj.book_id, returned: 'false' } })
       .then((found) => {
         if (found.length) return res.status(403).send({ message: 'You have not returned the previous book you borrowed' });
         return Book.findById(obj.book_id);
@@ -41,32 +41,44 @@ const borrowController = {
         return book.update(update);
       })
       .then(updated => res.status(200).send({ message: 'Borrow completed', updated }))
-      .catch(err => res.status(503).send({ message: 'Borrow failed', err }));
+      .catch(() => res.status(503).send({ message: 'Borrow failed' }));
   },
   returnBook(req, res) {
     const obj = req.body;
     const params = req.params;
-    Book.findById(obj.book_id)
+    return Book.findById(obj.book_id)
       .then((found) => {
         if (!found) return res.status(404).send({ message: 'Book not found' });
-        const update = { returned: true, actual_return: new Date() };
-        return Borrow.update(update, { where: { user_id: params.userId, returned: false } });
+        const update = { returned: 'pending', actual_return: new Date() };
+        return Borrow.update(update, { where: { user_id: params.userId, book_id: obj.book_id, returned: 'false' } });
       })
-      .then(updated => res.status(200).send({ message: 'Borrow status updated', updated }))
-      .catch(err => res.status(503).send({ message: 'Error updating borrow status', err }));
+      .then((updatedCount) => {
+        if (updatedCount > 0) {
+          return Book.findById(obj.book_id);
+        }
+      })
+      .then((book) => {
+        const counts = book.count_borrow - 1;
+        return book.update({ count_borrow: counts });
+      })
+      .then((updateBook) => {
+        res.status(200).send({ message: 'return completed', updateBook });
+      })
+      .catch(() => res.status(503).send({ message: 'request not available' }));
   },
   borrowsByUser(req, res) {
     const params = req.params;
-    const returned = params.returned == true;
-    Borrow.findAll({ where: { user_id: params.userId, returned },
+    return Borrow.findAll({
+      where: { user_id: params.userId, returned: req.query.returned },
       include: [{
         model: Book
-      }] })
+      }]
+    })
       .then((borrows) => {
         const books = _.pluck(borrows, 'Book');
         return res.status(200).send(books);
       })
-      .catch(err => res.status(503).send({ message: 'Error updating borrow status', err }));
+      .catch(() => res.status(503).send({ message: 'Request not available' }));
   }
 };
 

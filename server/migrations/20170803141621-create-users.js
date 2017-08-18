@@ -39,6 +39,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
+      level: {
+        type: Sequelize.STRING,
+        defaultValue: 'silver',
+      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,

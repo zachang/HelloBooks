@@ -15,6 +15,7 @@ const userDetails = (user) => {
     phone_no: user.phone_no,
     is_admin: user.is_admin,
     block_status: user.block_status,
+    level: user.level,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };
@@ -22,6 +23,7 @@ const userDetails = (user) => {
 
 const signUpRules = {
   fullname: 'required|min:3',
+  username: 'required|min:3',
   email: 'required|email',
   password: 'required|min:6|confirmed',
   password_confirmation: 'required',
@@ -37,7 +39,7 @@ const usersController = {
           const token = jwt.sign(userDetails(newUser), secret, { expiresIn: '10h' });
           res.status(201).send({ message: 'User successfully created', token });
         })
-        .catch(error => res.status(400).send({ message: 'User not created', errors: error }));
+        .catch(() => res.status(400).send({ message: 'User not created' }));
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -52,10 +54,10 @@ const usersController = {
             secret, { expiresIn: '10h' });
           return res.status(200).send({ message: 'User Logged in', token });
         }
-        return res.status(400).json({ message: 'Invalid credentials' });
+        return res.status(404).json({ message: 'Invalid credentials' });
       })
-      .catch((error) => {
-        res.send({ error });
+      .catch(() => {
+        res.status(400).send({ message: 'Invalid credentials' });
       });
   }
 };
