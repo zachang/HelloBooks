@@ -41,7 +41,7 @@ const borrowController = {
         return book.update(update);
       })
       .then(updated => res.status(200).send({ message: 'Borrow completed', updated }))
-      .catch(err => res.status(503).send({ message: 'Borrow failed' }));
+      .catch(() => res.status(503).send({ message: 'Borrow failed' }));
   },
   returnBook(req, res) {
     const obj = req.body;
@@ -64,7 +64,7 @@ const borrowController = {
       .then((updateBook) => {
         res.status(200).send({ message: 'return completed', updateBook });
       })
-      .catch(err => res.status(503).send({ message: 'request not available' }));
+      .catch(() => res.status(503).send({ message: 'request not available' }));
   },
   borrowsByUser(req, res) {
     const params = req.params;

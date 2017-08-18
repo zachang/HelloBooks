@@ -66,9 +66,9 @@ const booksController = {
               is_available: req.body.is_available
             })
             .then(() => res.status(200).send({ message: 'Books updated', book }))
-            .catch(error => res.status(400).send({ message: 'Error updating books' }));
+            .catch(() => res.status(400).send({ message: 'Error updating books' }));
         })
-        .catch(error => res.status(400).send({ message: 'Error updating books' }));
+        .catch(() => res.status(400).send({ message: 'Error updating books' }));
     }
     return res.status(400).json({
       message: 'Validation error',

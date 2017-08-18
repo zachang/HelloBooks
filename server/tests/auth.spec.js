@@ -17,7 +17,7 @@ describe('POST api/v1/users/signup', () => {
   it('Should return status code 400 and a message when some inputs are invalid. i.e Username', (done) => {
     request(app)
       .post('/api/v1/users/signup')
-      .send(seeder.setData('Dawuda Ebenezer', '', 'zachangdawuda@gmail.com', '08153191512', 'level', 'password', 'password'))
+      .send(seeder.setData('Dawuda Ebenezer', '', 'zachangdawuda@gmail.com', '08153191512', 'password', 'password'))
       .expect(400)
       .end((err, res) => {
         if (err) return done(err);
@@ -28,7 +28,7 @@ describe('POST api/v1/users/signup', () => {
   it('should return status code 400 and a message when password not matched', (done) => {
     request(app)
       .post('/api/v1/users/signup')
-      .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08153191512', 'level', 'asasas', 'password'))
+      .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08153191512', 'asasassffff', 'password'))
       .expect(400)
       .end((err, res) => {
         if (err) return done(err);
