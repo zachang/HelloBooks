@@ -2,10 +2,8 @@ import request from 'supertest';
 import jwtDecode from 'jwt-decode';
 import chai from 'chai';
 import app from '../../app';
-import db from '../models';
 import seeder from './seeder/auth_seed';
 
-const User = db.User;
 const assert = chai.assert;
 
 require('dotenv').config();
