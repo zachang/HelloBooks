@@ -31,5 +31,18 @@ module.exports = {
       level: 'silver' })
       .then(user => done())
       .catch(err => done(err));
+  },
+
+  addAdminToDb(done) {
+    User.create({
+      fullname: 'Eben Dawuda',
+      username: 'ebenezer',
+      email: 'eben@gmail.com',
+      phone_no: '08075568940',
+      password: 'password',
+      is_admin: true,
+      level: 'silver' })
+      .then(user => done())
+      .catch(err => done(err));
   }
 };

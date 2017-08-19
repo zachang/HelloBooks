@@ -236,7 +236,7 @@ describe('POST api/users/v1/signin', () => {
   it('should return 200 and give the user token if credentials are correct.', (done) => {
     request(app)
       .post('/api/v1/users/signin')
-      .send(seeder.setLoginData('ebenezer', 'password'))
+      .send({ username: 'ebenezer', password: 'password' })
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);

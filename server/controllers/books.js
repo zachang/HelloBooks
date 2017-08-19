@@ -33,7 +33,7 @@ const booksController = {
         book_image: req.body.book_image,
       })
         .then(book => res.status(201).send({ message: 'Book created', book }))
-        .catch(error => res.status(400).send({ message: 'Book not created' }));
+        .catch(() => res.status(400).send({ message: 'Book not created' }));
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -44,7 +44,7 @@ const booksController = {
     return Book
       .findAll()
       .then(books => res.status(200).send({ message: 'All books displayed', books }))
-      .catch(error => res.status(400).send({ message: 'Error,Nothing to display' }));
+      .catch(() => res.status(400).send({ message: 'Error,Nothing to display' }));
   },
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);
