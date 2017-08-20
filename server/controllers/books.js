@@ -5,19 +5,19 @@ import db from '../models';
 const Book = db.Book;
 
 const addBookRules = {
-  book_name: 'required|min:1',
-  author: 'required|min:2',
-  category_id: 'required',
+  book_name: 'required|string|min:2',
+  author: 'required|string|min:2',
+  category_id: 'required|min:1',
   book_count: 'required|min:1',
-  book_image: 'required',
+  book_image: 'required|string',
 };
 
 const updateBookRules = {
-  book_name: 'required|min:1',
-  author: 'required|min:2',
-  category_id: 'required',
+  book_name: 'required|string|min:1',
+  author: 'required|string|min:2',
+  category_id: 'required|min:1',
   book_count: 'required|min:1',
-  book_image: 'required',
+  book_image: 'required|string',
   is_available: 'required',
 };
 
@@ -62,6 +62,7 @@ const booksController = {
               book_name: req.body.book_name,
               book_image: req.body.book_image,
               author: req.body.author,
+              category_id: req.body.category_id,
               book_count: req.body.book_count,
               is_available: req.body.is_available
             })

@@ -2,8 +2,8 @@ import db from '../../models';
 
 const User = db.User;
 
-module.exports = {
-  emptyDB(done) {
+const seeder = {
+  emptyUserTable(done) {
     User.destroy({ truncate: true })
       .then(() => done())
       .catch(err => done(err));
@@ -35,14 +35,16 @@ module.exports = {
 
   addAdminToDb(done) {
     User.create({
-      fullname: 'Eben Dawuda',
-      username: 'ebenezer',
-      email: 'eben@gmail.com',
-      phone_no: '08075568940',
+      fullname: 'Ebene Dawuda',
+      username: 'ebenez',
+      email: 'ebenz@gmail.com',
+      phone_no: '08075568980',
       password: 'password',
       is_admin: true,
       level: 'silver' })
-      .then(user => done())
+      .then(admin => done())
       .catch(err => done(err));
   }
 };
+
+export default seeder;

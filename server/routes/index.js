@@ -17,7 +17,6 @@ const routes = (router) => {
 
   router.route('/books')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
-    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.update)
     .get(authMiddleware.verifyToken, booksController.list);
 
   router.route('/books/:bookId')

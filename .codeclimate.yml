@@ -15,7 +15,6 @@ ratings:
   - "server/**/*.js"
 exclude_paths:
 - node_modules/
-- server/migrations
-- server/models
-- server/tests/
+- server/migrations/
+- server/models/
 - template/

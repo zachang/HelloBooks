@@ -10,11 +10,8 @@ require('dotenv').config();
 
 // Test for Signup route
 describe('POST api/v1/users/signup', () => {
-  // Empty DB
-  beforeEach(seeder.emptyDB);
-
-  // Add to DB
-  beforeEach(seeder.addUserToDb);
+  before(seeder.emptyUserTable);// Empty user table
+  before(seeder.addUserToDb);// Add to DB
 
   describe('test for fullname inputs', () => {
     it('should return status code 400 and a message when fullname input is empty', (done) => {
@@ -208,6 +205,7 @@ describe('POST api/v1/users/signup', () => {
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
+          assert.equal(res.body.message, 'Validation error');
           done();
         });
     });
@@ -216,10 +214,9 @@ describe('POST api/v1/users/signup', () => {
 
 // Test for Signin route
 describe('POST api/users/v1/signin', () => {
-  // Empty DB
-  before(seeder.emptyDB);
-  // add to DB
-  before(seeder.addUserToDb);
+  before(seeder.emptyUserTable);// Empty DB
+  before(seeder.addUserToDb);// add to DB
+
   it('should return status code 404 and a message if username or password incorrect', (done) => {
     request(app)
       .post('/api/v1/users/signin')
