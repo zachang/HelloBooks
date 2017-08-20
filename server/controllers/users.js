@@ -40,7 +40,6 @@ const usersController = {
           res.status(201).send({ message: 'User successfully created', token });
         })
         .catch((err) => {
-          console.log(err, 'signup>>>>>>>>>>>>>>>>>>>>>>');
           res.status(400).send({ message: 'User not created' });
         });
     }
@@ -60,7 +59,6 @@ const usersController = {
         return res.status(404).json({ message: 'Invalid credentials' });
       })
       .catch((err) => {
-        console.log(err, 'signup>>>>>>>>>>>>>>>>>>>>>>');
         res.status(400).send({ message: 'Invalid credentials' });
       });
   }
