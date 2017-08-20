@@ -24,7 +24,7 @@ describe('TEST BOOK ROUTES', () => {
   before((done) => {
     request(app)
       .post('/api/v1/users/signin')
-      .send({ username: 'ebenezer', password: 'password' })
+      .send(seeder.setLoginData('ebenezer', 'password'))
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -37,7 +37,7 @@ describe('TEST BOOK ROUTES', () => {
   before((done) => {
     request(app)
       .post('/api/v1/users/signin')
-      .send({ username: 'ebenez', password: 'password' })
+      .send(seeder.setLoginData('ebenez', 'password'))
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);

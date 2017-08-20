@@ -32,7 +32,6 @@ const seeder = {
       .then(user => done())
       .catch(err => done(err));
   },
-
   addAdminToDb(done) {
     User.create({
       fullname: 'Ebene Dawuda',

@@ -10,7 +10,7 @@ script:
 services:
   - postgresql
 env:
-  - JWT_SECRET=abcxyz
+  - SECRET_TOKEN=abcxyz
 before_script:
   - psql -c 'CREATE DATABASE travis;' -U postgres
 before_install:
