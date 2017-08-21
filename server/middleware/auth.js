@@ -4,7 +4,7 @@ const secret = process.env.SECRET_TOKEN;
 
 const Auth = {
   verifyToken(req, res, next) {
-    const token = req.headers.Authorization || req.headers['x-access-token'];
+    const token = req.headers.Authorization || req.headers['x-access-token'] || req.body.token;
     if (!token) {
       return res.status(401)
         .send({ message: 'No authorization token provided' });

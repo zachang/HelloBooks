@@ -11,6 +11,7 @@ const routes = (router) => {
 
   router.route('/users/signup')
     .post(usersController.create);
+
   router.route('/users/signin')
     .post(usersController.login);
 
@@ -21,6 +22,11 @@ const routes = (router) => {
   router.route('/books/:bookId')
     .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.update);
 
+  router.route('/users/:userId/books')
+    .post(authMiddleware.verifyToken, borrowController.create)
+    .get(authMiddleware.verifyToken, borrowController.borrowsByUser)
+    .put(authMiddleware.verifyToken, borrowController.returnBook);
+
   router.route('/categories')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
     .get(authMiddleware.verifyToken, authMiddleware.verifyToken, categoryController.list);
@@ -28,11 +34,6 @@ const routes = (router) => {
   router.route('/categories/:categoryId')
     .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)
     .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.destroy);
-
-  router.route('/users/:userId/books')
-    .post(authMiddleware.verifyToken, borrowController.create)
-    .get(authMiddleware.verifyToken, borrowController.borrowsByUser)
-    .put(authMiddleware.verifyToken, borrowController.returnBook);
 };
 
 export default routes;

@@ -1,5 +1,6 @@
 # HelloBooks
-
+[![Coverage Status](https://coveralls.io/repos/github/zachang/HelloBooks/badge.svg?branch=server)](https://coveralls.io/github/zachang/HelloBooks?branch=server)
+[![Build Status](https://travis-ci.org/zachang/HelloBooks.svg?branch=server)](https://travis-ci.org/zachang/HelloBooks)
 
 **HelloBooks** is an Andela app that leverages on modern technology that aims to ease the way users borrow books.
 

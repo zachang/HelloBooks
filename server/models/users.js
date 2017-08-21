@@ -10,16 +10,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+      validate: {
+        is: /^[a-z0-9_-]+$/i,
+      },
     },
     email: {
       type: DataTypes.STRING,
       unique: true,
+      isEmail: true,
       allowNull: false,
     },
     phone_no: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+      validate: {
+        isNumeric: true,
+        len: [11, 11],
+      },
     },
     user_image: {
       type: DataTypes.STRING,
@@ -33,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
     block_status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    level: {
+      type: DataTypes.STRING,
+      defaultValue: 'silver',
     },
     password: {
       type: DataTypes.STRING,
