@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import db from '../models';
 
 const Category = db.Category;

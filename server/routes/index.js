@@ -29,7 +29,10 @@ const routes = (router) => {
 
   router.route('/categories')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
-    .get(authMiddleware.verifyToken, authMiddleware.verifyToken, categoryController.list);
+    .get(authMiddleware.verifyToken, categoryController.list);
+
+  router.route('/:categoryId/books')
+    .get(authMiddleware.verifyToken, booksController.listCatBook);
 
   router.route('/categories/:categoryId')
     .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)

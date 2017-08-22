@@ -3,6 +3,7 @@ import Validator from 'validatorjs';
 import db from '../models';
 
 const Book = db.Book;
+const Category = db.Category;
 
 const addBookRules = {
   book_name: 'required|string|min:2',
@@ -45,6 +46,29 @@ const booksController = {
       .findAll()
       .then(books => res.status(200).send({ message: 'All books displayed', books }))
       .catch(() => res.status(400).send({ message: 'Error,Nothing to display' }));
+  },
+  listCatBook(req, res) {
+    const params = req.params;
+    Category
+      .findById(params.categoryId)
+      .then((found) => {
+        if (!found) {
+          return Promise.reject({ status: 404, message: 'Category not found' });
+        }
+        return Book.findAll({ where: { category_id: found.id } });
+      })
+      .then((books) => {
+        if (books.length === 0) {
+          return res.status(404).send({ message: 'No books for this category' });
+        }
+        return res.status(200).send({ message: 'All books displayed by category', books });
+      })
+      .catch((error) => {
+        if (error.status && error.message) {
+          return res.status(error.status).json({ message: error.message });
+        }
+        return res.status(400).send({ message: error });
+      });
   },
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);

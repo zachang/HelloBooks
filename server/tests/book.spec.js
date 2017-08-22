@@ -1,6 +1,5 @@
 import request from 'supertest';
 import chai from 'chai';
-import db from '../models';
 import app from '../../app';
 import seeder from './seeder/auth_seed';
 import bookseeder from './seeder/book_seed';
@@ -12,6 +11,7 @@ require('dotenv').config();
 // Test for books POST route
 describe('TEST BOOK ROUTES', () => {
   let createdBookId;
+  let createdCategoryId;
   before(seeder.emptyUserTable);
   before(bookseeder.emptyBookTable);
   before(bookseeder.emptyCategoryTable);
@@ -47,7 +47,6 @@ describe('TEST BOOK ROUTES', () => {
   });
 
   describe('POST api/v1/books when creating books', () => {
-
     describe('test for empty, valid and invalid token when creating a book', () => {
       it('should return status code 401 when no token is provided', (done) => {
         request(app)
@@ -93,6 +92,7 @@ describe('TEST BOOK ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             createdBookId = res.body.book.id;
+            createdCategoryId = res.body.book.category_id;
             assert.equal(res.body.message, 'Book created');
             done();
           });
@@ -259,6 +259,39 @@ describe('TEST BOOK ROUTES', () => {
           assert.equal(res.body.message, 'All books displayed');
           assert.exists(res.body.books);
           assert.isArray(res.body.books);
+          done();
+        });
+    });
+    it('should return status code 400 when user wants to view all books belonging to a non existing category', (done) => {
+      request(app)
+        .get('/api/v1/5/books')
+        .set({ 'x-access-token': userToken })
+        .expect(404)
+        .end((err, res) => {
+          if (err) return done(err);
+          assert.equal(res.body.message, 'Category not found');
+          done();
+        });
+    });
+    it('should return status code 200 when user wants to view all books belonging to a category', (done) => {
+      request(app)
+        .get(`/api/v1/${createdCategoryId}/books`)
+        .set({ 'x-access-token': userToken })
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err);
+          assert.equal(res.body.message, 'All books displayed by category');
+          done();
+        });
+    });
+    it('should return status code 404 when user wants to view all books belonging to a category with no books', (done) => {
+      request(app)
+        .get('/api/v1/2/books')
+        .set({ 'x-access-token': userToken })
+        .expect(404)
+        .end((err, res) => {
+          if (err) return done(err);
+          assert.equal(res.body.message, 'No books for this category');
           done();
         });
     });

@@ -45,9 +45,17 @@ const bookseeder = {
       .catch(err => done(err));
   },
   addCategoryToDb(done) {
-    Category.create({
-      category_name: 'Politics'
-    })
+    const categories = [
+      {
+        id: 1,
+        category_name: 'Politics'
+      },
+      {
+        id: 2,
+        category_name: 'Health'
+      }
+    ]
+    Category.bulkCreate(categories, { returning: true })
       .then(() => done())
       .catch(err => done(err));
   },
