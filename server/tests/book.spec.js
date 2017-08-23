@@ -2,6 +2,7 @@ import request from 'supertest';
 import chai from 'chai';
 import app from '../../app';
 import seeder from './seeder/auth_seed';
+import categoryseeder from './seeder/category_seed';
 import bookseeder from './seeder/book_seed';
 
 const assert = chai.assert;
@@ -14,10 +15,10 @@ describe('TEST BOOK ROUTES', () => {
   let createdCategoryId;
   before(seeder.emptyUserTable);
   before(bookseeder.emptyBookTable);
-  before(bookseeder.emptyCategoryTable);
+  before(categoryseeder.emptyCategoryTable);
   before(seeder.addUserToDb);
   before(seeder.addAdminToDb);
-  before(bookseeder.addCategoryToDb);
+  before(categoryseeder.addCategoryToDb);
   before(bookseeder.addBookToDb);
 
   let userToken; // store token for normal user authentication
@@ -83,7 +84,7 @@ describe('TEST BOOK ROUTES', () => {
             done();
           });
       });
-      it('should return status code 201 when token valid and authorised', (done) => {
+      it('should return status code 201 and create book when token valid and authorised', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -227,7 +228,7 @@ describe('TEST BOOK ROUTES', () => {
   });// POST route for books
 
   // Test for books GET route
-  describe('test for GET api/v1/books when creating books', () => {
+  describe('test for GET api/v1/books when viewing books', () => {
     it('should return status code 401 when user wants to view all books with invalid token', (done) => {
       request(app)
         .get('/api/v1/books')
@@ -249,10 +250,10 @@ describe('TEST BOOK ROUTES', () => {
           done();
         });
     });
-    it('should return status code 200 when user wants to view all books', (done) => {
+    it('should return status code 200 when user wants to view all books with valid token', (done) => {
       request(app)
         .get('/api/v1/books')
-        .set({ 'x-access-token': userToken })
+        .set({ 'x-access-token': userToken || adminToken })
         .expect(200)
         .end((err, res) => {
           if (err) return done(err);
@@ -323,9 +324,9 @@ describe('TEST BOOK ROUTES', () => {
             done();
           });
       });
-      it('should return status code 404 when bookId is not found', (done) => {
+      it('should return status code 404  when bookId is not found', (done) => {
         request(app)
-          .put('/api/v1/books/100')
+          .put('/api/v1/books/10000000')
           .set({ 'x-access-token': adminToken })
           .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png', true))
           .expect(404)
