@@ -52,7 +52,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 401 when no token is provided', (done) => {
         request(app)
           .post('/api/v1/books')
-          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png'))
+          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png'))
           .expect(401)
           .end((err, res) => {
             if (err) return done(err);
@@ -64,7 +64,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': 'bajjlkall' })
-          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png'))
+          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png'))
           .expect(401)
           .end((err, res) => {
             if (err) return done(err);
@@ -76,7 +76,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': userToken })
-          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png'))
+          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png'))
           .expect(401)
           .end((err, res) => {
             if (err) return done(err);
@@ -88,7 +88,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png'))
+          .send(bookseeder.setBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png'))
           .expect(201)
           .end((err, res) => {
             if (err) return done(err);
@@ -105,7 +105,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('', '', '', '', ''))
+          .send(bookseeder.setBookData('', '', '', '', '', '', '', ''))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -117,7 +117,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('', 'Michel Pat', 1, 3, 'koon.png'))
+          .send(bookseeder.setBookData('', 'Michel Pat', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -129,7 +129,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Hamlet', '', 1, 3, 'koon.png'))
+          .send(bookseeder.setBookData('Hamlet', '', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -141,7 +141,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Hamlet', 'Michel Pat', '', 3, 'koon.png'))
+          .send(bookseeder.setBookData('Hamlet', 'Michel Pat', '', new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -153,7 +153,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Hamlet', 'Michel Pat', 1, '', 'koon.png'))
+          .send(bookseeder.setBookData('Hamlet', 'Michel Pat', 1, new Date('1991/08/06'), 'ISBN88889999', 679, '', 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -165,7 +165,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Hamlet', 'Michel Pat', 1, 5, ''))
+          .send(bookseeder.setBookData('Hamlet', 'Michel Pat', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 5, ''))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -180,7 +180,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Y', 'Michel Pat', 1, 5, 'koon.png'))
+          .send(bookseeder.setBookData('Y', 'Michel Pat', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 5, 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -192,7 +192,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData(756, 'Michel Pat', 1, 5, 'koon.png'))
+          .send(bookseeder.setBookData(756, 'Michel Pat', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 5, 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -204,7 +204,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Yi Moon', 'M', 1, 5, 'koon.png'))
+          .send(bookseeder.setBookData('Yi Moon', 'M', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 5, 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -216,7 +216,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Yi Mon', 98, 3, 5, 'koon.png'))
+          .send(bookseeder.setBookData('Yi Mon', 98, 3, new Date('1991/08/06'), 'ISBN88889999', 679, 5, 'koon.png'))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
@@ -304,7 +304,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 401 when no token is provided', (done) => {
         request(app)
           .put('/api/v1/books/1')
-          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png', false))
+          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png', false))
           .expect(401)
           .end((err, res) => {
             if (err) return done(err);
@@ -316,7 +316,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .put('/api/v1/books/1')
           .set({ 'x-access-token': 'bajjlkall' })
-          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png', true))
+          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png', true))
           .expect(401)
           .end((err, res) => {
             if (err) return done(err);
@@ -328,7 +328,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .put('/api/v1/books/10000000')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png', true))
+          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png', true))
           .expect(404)
           .end((err, res) => {
             if (err) return done(err);
@@ -340,7 +340,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .put('/api/v1/books/')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png', true))
+          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png', true))
           .expect(404)
           .end((err, res) => {
             if (err) return done(err);
@@ -352,7 +352,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .put('/api/v1/books/1')
           .set({ 'x-access-token': userToken })
-          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, 3, 'koo.png', true))
+          .send(bookseeder.setUpdateBookData('Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koo.png', true))
           .expect(401)
           .end((err, res) => {
             if (err) return done(err);
@@ -364,7 +364,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .put(`/api/v1/books/${createdBookId}`)
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setUpdateBookData('Harry Mack', 'Michel Patts', 1, 3, 'koons.png', false))
+          .send(bookseeder.setUpdateBookData('Harry Mack', 'Michel Patts', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 3, 'koons.png', false))
           .expect(200)
           .end((err, res) => {
             if (err) return done(err);
@@ -379,7 +379,7 @@ describe('TEST BOOK ROUTES', () => {
         request(app)
           .put(`/api/v1/books/${createdBookId}`)
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('', '', '', '', ''))
+          .send(bookseeder.setBookData('', '', '', '', '', '', '', ''))
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);

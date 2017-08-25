@@ -28,6 +28,18 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      publish_year: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      isbn: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      pages: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       count_borrow: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
