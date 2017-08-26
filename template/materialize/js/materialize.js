@@ -4733,7 +4733,7 @@ if (jQuery) {
 
                     var autocompleteOption = $('<li></li>');
                     if (!!data[key]) {
-                      autocompleteOption.append('<img store="' + data[key] + '" class="right circle"><span>' + key + '</span>');
+                      autocompleteOption.append('<img src="' + data[key] + '" class="right circle"><span>' + key + '</span>');
                     } else {
                       autocompleteOption.append('<span>' + key + '</span>');
                     }
@@ -4864,7 +4864,7 @@ if (jQuery) {
           if (!!classes) classString = ' class="' + classes + '"';
 
           // Check for multiple type.
-          options.append($('<li class="' + disabledClass + optgroupClass + '"><img alt="" store="' + icon_url + '"' + classString + '><span>' + multipleCheckbox + option.html() + '</span></li>'));
+          options.append($('<li class="' + disabledClass + optgroupClass + '"><img alt="" src="' + icon_url + '"' + classString + '><span>' + multipleCheckbox + option.html() + '</span></li>'));
           return true;
         }
 
@@ -5223,7 +5223,7 @@ if (jQuery) {
           captionTransition($(this), 0);
         });
 
-        // Move img store into background-image
+        // Move img src into background-image
         $slides.find('img').each(function () {
           var placeholderBase64 = 'data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
           if ($(this).attr('src') !== placeholderBase64) {
