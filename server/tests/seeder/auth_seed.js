@@ -29,7 +29,7 @@ const seeder = {
       phone_no: '08075568940',
       password: 'password',
       level: 'silver' })
-      .then(user => done())
+      .then(() => done())
       .catch(err => done(err));
   },
   addAdminToDb(done) {
@@ -41,7 +41,7 @@ const seeder = {
       password: 'password',
       is_admin: true,
       level: 'silver' })
-      .then(admin => done())
+      .then(() => done())
       .catch(err => done(err));
   }
 };
