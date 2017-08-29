@@ -1,5 +1,5 @@
 import { usersController, booksController,
-  categoryController, borrowController } from '../controllers';
+  categoryController, borrowController } from '../controllers/index';
 
 const authMiddleware = require('../middleware/auth');
 

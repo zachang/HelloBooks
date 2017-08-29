@@ -19,11 +19,13 @@ app.use(logger('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
+app.use(express.static('client'));
 app.use('/api/v1/', router);
 
-app.get('*', (req, res) => res.status(404).send({
+app.get('/api/v1/*', (req, res) => res.status(404).send({
   message: 'Welcome to the hellobooks',
 }));
+
 
 app.listen(port, () => console.log(`Port running at ${port}`));
 
