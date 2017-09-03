@@ -2,4 +2,4 @@ server/migrations
 server/seeders
 node_modules/
 template/
-dist/bundle.js
+./client/src/bundle.js
