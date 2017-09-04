@@ -10,6 +10,6 @@ export default (
     <Route path="/" component={Homepage}/>
     <Route path="/register" component={SmallRegpage}/>
     <Route path="/login" component={SmallLoginpage}/>
-    <Route path="/user" component={Userdashboard}/>
+    <Route path="/users" component={Userdashboard}/>
   </Router>
 );
