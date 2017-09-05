@@ -7,36 +7,36 @@ export default class UserHeader extends React.Component {
             <div className="col m10 l10 s12 right" style={{ padding: '0px' }}>
                 <div className="navbar-fixed">
                     <nav className="mainNav black col m10 l10" role="navigation">
-                        <div className="nav-wrapper container"><a id="logo-container" href="user.html" className="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks" /></a>
+                        <div className="nav-wrapper container"><Link id="logo-container" to="/user" className="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks" /></Link>
                             <ul className="user hide-on-small-and-down show-on-medium-and-up">
-                                <a className='dropdown-button btn black btn-prof' href='#' data-activates='dropdown1'><i className="material-icons mat-icon right" style={{ margin: '0% 0% 0% 1%' }}>arrow_drop_down</i>Zachang</a>
+                                <Link className='dropdown-button btn black btn-prof' to='' data-activates='dropdown1'><i className="material-icons mat-icon right" style={{ margin: '0% 0% 0% 1%' }}>arrow_drop_down</i>Zachang</Link>
                             </ul>
 
                             <ul id='dropdown1' className='dropdown-content hide-on-small-and-down'>
-                                <li><a href="userprofile.html">Profile</a></li>
+                                <li><a href="/profile">Profile</a></li>
                                 <li className="divider"></li>
-                                <li><a href="./usereturn.html">Returned Books</a></li>
+                                <li><Link to="/returned">Returned Books</Link></li>
                                 <li className="divider"></li>
-                                <li><a href="./userborrow.html">Borrowed Books</a></li>
+                                <li><Link to="/borrowed">Borrowed Books</Link></li>
                                 <li className="divider"></li>
-                                <li><a href="./userborrow.html">Change Password</a></li>
+                                <li><Link to="">Change Password</Link></li>
                                 <li className="divider"></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><Link to="/">Logout</Link></li>
                             </ul>
 
                             <ul id="nav-mobile" className="side-nav grey darken-4 hide-on-med-and-up">
                                 <li><div className="row walp">
                                 </div></li>
-                                <li><a href="userprofile.html">Profile</a></li>
+                                <li><Link to="/profile">Profile</Link></li>
                                 <li className="no-padding">
                                     <ul className="collapsible collapsible-accordion">
                                         <li>
                                             <a className="collapsible-header">Books Shelf<i className="material-icons mat-icon">arrow_drop_down</i></a>
                                             <div className="collapsible-body">
                                                 <ul>
-                                                    <li><a href="user.html">All Books</a></li>
-                                                    <li><a href="./userborrow.html">Borrowed Books</a></li>
-                                                    <li><a href="./usereturn.html">Returned Books</a></li>
+                                                    <li><Link to="/user">All Books</Link></li>
+                                                    <li><Link to="/borrowed">Borrowed Books</Link></li>
+                                                    <li><Link to="/returned">Returned Books</Link></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -59,8 +59,8 @@ export default class UserHeader extends React.Component {
                                         </li>
                                     </ul>
                                 </li>
-
-                                <li><a href="#">Logout</a></li>
+                                <li><Link to="">Change Password</Link></li>
+                                <li><Link to="/">Logout</Link></li>
                             </ul>
                             <a href="#" data-activates="nav-mobile" className="button-collapse menu-icon-link"><i className="material-icons hide-on-med-and-up">menu</i></a>
                         </div>

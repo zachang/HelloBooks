@@ -17,16 +17,16 @@ export default class UserSidebar extends React.Component {
 
                     <div className="row rowcollap">
                         <ul>
-                            <li><a href="userprofile.html">Profile</a></li>
+                            <li><Link to="/profile">Profile</Link></li>
                             <li className="no-padding">
                                 <ul className="collapsible collapsible-accordion">
                                     <li>
                                         <a className="collapsible-header">Books Shelf<i className="material-icons">arrow_drop_down</i></a>
                                         <div className="collapsible-body">
                                             <ul>
-                                                <li><a href="user.html">All Books</a></li>
-                                                <li><a href="./userborrow.html">Borrowed Books</a></li>
-                                                <li><a href="./usereturn.html">Returned Books</a></li>
+                                                <li><Link to="/user">All Books</Link></li>
+                                                <li><Link to="/borrowed">Borrowed Books</Link></li>
+                                                <li><Link to="/returned">Returned Books</Link></li>
                                             </ul>
                                         </div>
                                     </li>
@@ -49,7 +49,7 @@ export default class UserSidebar extends React.Component {
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="#">Logout</a></li>
+                            <li><Link to="/">Logout</Link></li>
                         </ul>
                     </div>
 
