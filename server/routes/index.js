@@ -15,6 +15,9 @@ const routes = (router) => {
   router.route('/users/signin')
     .post(usersController.login);
 
+  router.route('/users')
+    .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, usersController.list);
+
   router.route('/books')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
     .get(authMiddleware.verifyToken, booksController.list);

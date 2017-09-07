@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
+    description: {
+      allowNull: false,
+      type: DataTypes.TEXT
+    },
     count_borrow: {
       type: DataTypes.INTEGER,
       defaultValue: 0,

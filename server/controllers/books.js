@@ -11,10 +11,14 @@ const addBookRules = {
   category_id: 'required|min:1',
   book_count: 'required|min:1',
   book_image: 'required|string',
+  publish_year: 'required',
+  isbn: 'required',
+  pages: 'required',
+  description: 'required|string|min:15'
 };
 
 const updateBookRules = {
-  book_name: 'required|string|min:1',
+  book_name: 'required|string|min:2',
   author: 'required|string|min:2',
   category_id: 'required|min:1',
   publish_year: 'required',
@@ -22,6 +26,7 @@ const updateBookRules = {
   pages: 'required',
   book_count: 'required|min:1',
   book_image: 'required|string',
+  description: 'required|string|min:15',
   is_available: 'required',
 };
 
@@ -37,6 +42,7 @@ const booksController = {
         publish_year: req.body.publish_year,
         isbn: req.body.isbn,
         pages: req.body.pages,
+        description: req.body.description,
         book_image: req.body.book_image,
       })
         .then(book => res.status(201).send({ message: 'Book created', book }))
@@ -97,6 +103,7 @@ const booksController = {
               publish_year: req.body.publish_year,
               isbn: req.body.isbn,
               pages: req.body.pages,
+              description: req.body.description,
               is_available: req.body.is_available
             })
             .then(() => res.status(200).send({ message: 'Books updated', book }))
