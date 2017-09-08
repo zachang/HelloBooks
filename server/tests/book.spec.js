@@ -5,6 +5,8 @@ import seeder from './seeder/auth_seed';
 import categoryseeder from './seeder/category_seed';
 import bookseeder from './seeder/book_seed';
 
+process.env.NODE_ENV = 'test';
+
 const assert = chai.assert;
 
 require('dotenv').config();
@@ -158,18 +160,6 @@ describe('TEST BOOK ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.errors.book_count[0], 'The book count field is required.');
-            done();
-          });
-      });
-      it('should return status code 400 when book_image input missing', (done) => {
-        request(app)
-          .post('/api/v1/books')
-          .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('Hamlet', 'Michel Pat', 1, new Date('1991/08/06'), 'ISBN88889999', 679, 5, '', 'Inspiring story of a young scottish barbarian'))
-          .expect(400)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.errors.book_image[0], 'The book image field is required.');
             done();
           });
       });

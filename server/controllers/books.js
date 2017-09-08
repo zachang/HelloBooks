@@ -31,19 +31,21 @@ const updateBookRules = {
 const booksController = {
   create(req, res) {
     const validation = new Validator(req.body, addBookRules);
-    if (!req.file) return res.status(400).send({ message: 'Book image needs to be uploaded' });
+    const obj = {
+      book_name: req.body.book_name,
+      author: req.body.author,
+      book_count: req.body.book_count,
+      category_id: req.body.category_id,
+      publish_year: req.body.publish_year,
+      isbn: req.body.isbn,
+      pages: req.body.pages,
+      description: req.body.description
+    };
+    if (req.file) {
+      obj.book_image = req.file.filename;
+    }
     if (validation.passes()) {
-      return Book.create({
-        book_name: req.body.book_name,
-        author: req.body.author,
-        book_count: req.body.book_count,
-        category_id: req.body.category_id,
-        publish_year: req.body.publish_year,
-        isbn: req.body.isbn,
-        pages: req.body.pages,
-        description: req.body.description,
-        book_image: req.file.filename
-      })
+      return Book.create(obj)
         .then(book => res.status(201).send({ message: 'Book created', book }))
         .catch(err => res.status(400).send({ message: 'Book not created', err }));
     }
