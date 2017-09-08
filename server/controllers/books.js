@@ -56,8 +56,13 @@ const booksController = {
   list(req, res) {
     return Book
       .findAll()
-      .then(books => res.status(200).send({ message: 'All books displayed', books }))
-      .catch(() => res.status(400).send({ message: 'Error,Nothing to display' }));
+      .then((books) => {
+        if (books.length === 0) {
+          return res.status(200).send({ message: 'Nothing to display'});
+        }
+        return res.status(200).send({ message: 'All books displayed', books });
+      })
+      .catch(() => res.status(400).send({ message: 'Oops, failed to display' }));
   },
   listCatBook(req, res) {
     const params = req.params;
