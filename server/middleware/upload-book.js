@@ -1,7 +1,7 @@
 /**
  * Created by zachang on 9/8/2017.
  */
-const multer = require('multer');
+import multer from 'multer';
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
