@@ -10,7 +10,6 @@ const addBookRules = {
   author: 'required|string|min:2',
   category_id: 'required|min:1',
   book_count: 'required|min:1',
-  book_image: 'required|string',
   publish_year: 'required',
   isbn: 'required',
   pages: 'required',
@@ -25,7 +24,6 @@ const updateBookRules = {
   isbn: 'required',
   pages: 'required',
   book_count: 'required|min:1',
-  book_image: 'required|string',
   description: 'required|string|min:15',
   is_available: 'required',
 };
@@ -33,6 +31,7 @@ const updateBookRules = {
 const booksController = {
   create(req, res) {
     const validation = new Validator(req.body, addBookRules);
+    if (!req.file) return res.status(400).send({ message: 'Book image needs to be uploaded' });
     if (validation.passes()) {
       return Book.create({
         book_name: req.body.book_name,
@@ -43,10 +42,10 @@ const booksController = {
         isbn: req.body.isbn,
         pages: req.body.pages,
         description: req.body.description,
-        book_image: req.body.book_image,
+        book_image: req.file.filename
       })
         .then(book => res.status(201).send({ message: 'Book created', book }))
-        .catch(() => res.status(400).send({ message: 'Book not created' }));
+        .catch(err => res.status(400).send({ message: 'Book not created', err }));
     }
     return res.status(400).json({
       message: 'Validation error',

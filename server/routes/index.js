@@ -1,5 +1,6 @@
 import { usersController, booksController,
   categoryController, borrowController } from '../controllers';
+import upload from '../middleware/upload-book';
 
 const authMiddleware = require('../middleware/auth');
 
@@ -19,7 +20,7 @@ const routes = (router) => {
     .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, usersController.list);
 
   router.route('/books')
-    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
+    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, upload.single('book_image'), booksController.create)
     .get(authMiddleware.verifyToken, booksController.list);
 
   router.route('/books/:bookId')
