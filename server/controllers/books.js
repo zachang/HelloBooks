@@ -1,4 +1,5 @@
 import Validator from 'validatorjs';
+import fs from 'fs';
 
 import db from '../models';
 
@@ -59,7 +60,7 @@ const booksController = {
       .findAll()
       .then((books) => {
         if (books.length === 0) {
-          return res.status(200).send({ message: 'Nothing to display'});
+          return res.status(200).send({ message: 'Nothing to display' });
         }
         return res.status(200).send({ message: 'All books displayed', books });
       })
@@ -90,30 +91,38 @@ const booksController = {
   },
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);
+    const obj = {
+      book_name: req.body.book_name,
+      author: req.body.author,
+      book_count: req.body.book_count,
+      category_id: req.body.category_id,
+      publish_year: req.body.publish_year,
+      isbn: req.body.isbn,
+      pages: req.body.pages,
+      description: req.body.description,
+      is_available: req.body.is_available
+    };
+    if (req.file) {
+      obj.book_image = req.file.filename;
+    }
     if (validation.passes()) {
       return Book
         .findById(req.params.bookId)
         .then((book) => {
+          try {
+            fs.unlinkSync(`./server/uploads/books/${book.book_image}`);
+          } catch (err) {
+            //
+          }
           if (!book) {
             return res.status(404).send({
               message: 'Book Not Found',
             });
           }
           return book
-            .update({
-              book_name: req.body.book_name,
-              book_image: req.body.book_image,
-              author: req.body.author,
-              book_count: req.body.book_count,
-              category_id: req.body.category_id,
-              publish_year: req.body.publish_year,
-              isbn: req.body.isbn,
-              pages: req.body.pages,
-              description: req.body.description,
-              is_available: req.body.is_available
-            })
+            .update(obj)
             .then(() => res.status(200).send({ message: 'Books updated', book }))
-            .catch(() => res.status(400).send({ message: 'Error updating books' }));
+            .catch(err => res.status(400).send({ message: 'Error updating books', err }));
         })
         .catch(() => res.status(400).send({ message: 'Error updating books' }));
     }
