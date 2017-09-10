@@ -24,6 +24,10 @@
        margin-left: 20% !important;
     }
 
+    .bookcat{
+       margin-left: 16% !important;
+    }
+
     .profile_marg{
        margin-left: 8% !important
     }
@@ -88,7 +92,7 @@
   margin-left: 30%;
   color:#000;
   background-color: #FFF;
-  background-image: url("./imgs/eben2.jpg");
+  background-image: url("../../imgs/eben2.jpg");
   background-size: 100% 100%;
 }
 
@@ -152,7 +156,7 @@
 }
 
 .row .walp{
-  background-image:url("./imgs/wall-2.jpg");
+  background-image:url("../../imgs/wall-2.jpg");
   background-size: 100% 100%;
   background-repeat:no-repeat;
   height:200px;
