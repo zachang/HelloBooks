@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 import UserHeader from './common/userheader';
 import UserSidebar from './common/usersidebar';
-import Paginate from './common/paginate';
+import Paginate from './common/paginate-userborrow';
 
 export default class Returned extends React.Component {
     render() {
