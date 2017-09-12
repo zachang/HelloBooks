@@ -8,19 +8,7 @@ const bookseeder = {
       .then(() => done())
       .catch(err => done(err));
   },
-  setBookData(book_name, author, category_id, publish_year, isbn, pages, book_count, book_image) {
-    return {
-      book_name,
-      author,
-      category_id,
-      publish_year,
-      isbn,
-      pages,
-      book_count,
-      book_image
-    };
-  },
-  setUpdateBookData(book_name, author, category_id, publish_year, isbn, pages, book_count, book_image, is_available) {
+  setBookData(book_name, author, category_id, publish_year, isbn, pages, book_count, book_image, description) {
     return {
       book_name,
       author,
@@ -30,6 +18,20 @@ const bookseeder = {
       pages,
       book_count,
       book_image,
+      description
+    };
+  },
+  setUpdateBookData(book_name, author, category_id, publish_year, isbn, pages, book_count, book_image, description, is_available) {
+    return {
+      book_name,
+      author,
+      category_id,
+      publish_year,
+      isbn,
+      pages,
+      book_count,
+      book_image,
+      description,
       is_available
     };
   },
@@ -42,7 +44,8 @@ const bookseeder = {
       isbn: 'ISBN43333334',
       pages: 506,
       book_count: 2,
-      book_image: 'brave.jpg'
+      book_image: 'brave.jpg',
+      description: 'Inspiring story of a young scottish barbarian'
     })
       .then(() => done())
       .catch(err => done(err));

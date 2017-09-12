@@ -201,7 +201,7 @@ describe('POST api/v1/users/signup', () => {
     it('should not create a new user account when all inputs are incomplete and return status code 400 without token', (done) => {
       request(app)
         .post('/api/v1/users/signup')
-        .send(seeder.setData('', '', '', '', '', ''))
+        .send(seeder.setData('', '', '', '', '', '', ''))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
