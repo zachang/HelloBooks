@@ -13,6 +13,7 @@ const userDetails = (user) => {
     username: user.username,
     email: user.email,
     phone_no: user.phone_no,
+    user_image: user.user_image,
     is_admin: user.is_admin,
     block_status: user.block_status,
     level: user.level,
@@ -61,6 +62,12 @@ const usersController = {
       .catch(() => {
         res.status(400).send({ message: 'Invalid credentials' });
       });
-  }
+  },
+  list(req, res) {
+    return User
+      .findAll()
+      .then(user => res.status(200).send({ user }))
+      .catch(() => res.status(400).send({ message: 'Error, nothing to display' }));
+  },
 };
 export default usersController;
