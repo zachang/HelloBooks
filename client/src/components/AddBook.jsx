@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, IndexLink} from 'react-router';
-import AdminHeader from './common/adminheader';
-import AdminSidebar from './common/adminsidebar';
+import AdminHeader from './common/AdminHeader';
+import AdminSidebar from './common/AdminSidebar';
 
 export default class AddBook extends React.Component {
     render() {

@@ -1,18 +1,18 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
-import Homepage from './components/homepage.jsx';
-import SmallRegpage from './components/smallreg.jsx';
-import SmallLoginpage from './components/smlogin.jsx';
-import Userdashboard from './components/user.jsx';
-import Admindashboard from './components/admin.jsx';
-import UserList from './components/userlist.jsx';
-import Profile from './components/profile.jsx';
-import Returned from './components/returned.jsx';
-import Borrowed from './components/borrowed.jsx';
-import BorrowList from './components/borrowlist.jsx';
-import ReturnedList from './components/returnedlist.jsx';
-import AddBook from './components/addbook.jsx';
-import AddCategory from './components/addcategory.jsx';
+import Homepage from './components/Homepage.jsx';
+import SmallRegpage from './components/SmallReg.jsx';
+import SmallLoginpage from './components/SmLogin.jsx';
+import Userdashboard from './components/User.jsx';
+import Admindashboard from './components/Admin.jsx';
+import UserList from './components/UserList.jsx';
+import Profile from './components/Profile.jsx';
+import Returned from './components/Returned.jsx';
+import Borrowed from './components/Borrowed.jsx';
+import BorrowList from './components/Borrowlist.jsx';
+import ReturnedList from './components/ReturnedList.jsx';
+import AddBook from './components/AddBook.jsx';
+import AddCategory from './components/AddCategory.jsx';
 
 export default (
   <Router history={browserHistory}>

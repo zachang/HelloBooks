@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
-import AdminHeader from './common/adminheader';
-import AdminSidebar from './common/adminsidebar';
-import Paginate from './common/paginate-returnedlist';
+import AdminHeader from './common/AdminHeader';
+import AdminSidebar from './common/AdminSidebar';
+import Paginate from './common/Paginate-ReturnedList';
 
 export default class ReturnedList extends React.Component {
     render() {

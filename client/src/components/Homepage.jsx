@@ -2,8 +2,8 @@ import React from 'react';
 import {Link, IndexLink} from 'react-router';
 import RegForm from './RegForm';
 import LoginForm from './LoginForm';
-import HomepageHeader from './common/homepageheader';
-import HomepageStatement from './homepagestatement';
+import HomepageHeader from './common/HomepageHeader';
+import HomepageStatement from './HomepageStatement';
 
 export default class Homepage extends React.Component {
   constructor(props){

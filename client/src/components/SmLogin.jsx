@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, IndexLink} from 'react-router';
-import HomepageHeader from './common/homepageheader';
+import HomepageHeader from './common/HomepageHeader';
 import LoginForm from './LoginForm';
 
 export default class SmallLoginpage extends React.Component {

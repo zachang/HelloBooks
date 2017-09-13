@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
-import UserHeader from './common/userheader';
-import UserSidebar from './common/usersidebar';
-import Paginate from './common/paginate-userborrow';
+import UserHeader from './common/UserHeader';
+import UserSidebar from './common/UserSidebar';
+import Paginate from './common/Paginate-UserBorrow';
 
 export default class Returned extends React.Component {
     render() {

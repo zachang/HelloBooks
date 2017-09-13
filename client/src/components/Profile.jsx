@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
-import UserHeader from './common/userheader';
-import UserSidebar from './common/usersidebar';
+import UserHeader from './common/UserHeader';
+import UserSidebar from './common/UserSidebar';
 
 export default class Profile extends React.Component {
   render() {
