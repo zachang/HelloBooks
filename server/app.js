@@ -2,7 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 import parser from 'body-parser';
 import path from 'path';
-import routes from './server/routes/index';
+import routes from './routes/index';
 
 const dotenv = require('dotenv');
 
@@ -20,7 +20,7 @@ app.use(logger('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
-app.use(express.static('client/src'));
+app.use(express.static('../client/public'));
 app.use('/api/v1/', router);
 
 app.get('/api/v1/*', (req, res) => res.status(404).send({
@@ -28,7 +28,7 @@ app.get('/api/v1/*', (req, res) => res.status(404).send({
 }));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/src/index.html'));
+  res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 

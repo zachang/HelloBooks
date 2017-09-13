@@ -8,9 +8,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="assets/css/hellobooks.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="assets/css/helloadmin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="assets/css/user.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <div id="root"></div>
@@ -24,15 +22,10 @@
 <script src="./bundle.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $(".join-us").click(function(){
-      $('.statement').toggle("slow");
-      $('.loginContent').toggle("slow");
-      $('.regContent').toggle("slow");
-    });
 
     $(".menu-iconic-link").click(function(){
       $("body").css({"width": "100%", "overflow-y": "auto"});
     });
-  })
+  });
 </script>
 </html>

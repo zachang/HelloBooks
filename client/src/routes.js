@@ -11,6 +11,7 @@ import Returned from './components/returned.jsx';
 import Borrowed from './components/borrowed.jsx';
 import BorrowList from './components/borrowlist.jsx';
 import ReturnedList from './components/returnedlist.jsx';
+import AddBook from './components/addbook.jsx';
 import AddCategory from './components/addcategory.jsx';
 
 export default (
@@ -26,6 +27,7 @@ export default (
     <Route path="/userlist" component={UserList}/>
     <Route path="/borrowlist" component={BorrowList}/>
     <Route path="/returnlist" component={ReturnedList}/>
+    <Route path="/addbook" component={AddBook}/>
     <Route path="/addcategory" component={AddCategory}/>
   </Router>
 );

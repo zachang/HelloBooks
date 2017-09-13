@@ -2,6 +2,10 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
 export default class UserSidebar extends React.Component {
+    componentDidMount() {
+        $('.collapsible').collapsible();
+    }
+
     render() {
         return (
             <div className="side col m2 l2 hide-on-small-and-down nav-pan">

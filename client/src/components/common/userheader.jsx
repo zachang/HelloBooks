@@ -2,6 +2,10 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
 export default class UserHeader extends React.Component {
+    componentDidMount() {
+        $('.collapsible').collapsible();
+    }
+
     render() {
         return (
             <div className="col m10 l10 s12 right" style={{ padding: '0px' }}>

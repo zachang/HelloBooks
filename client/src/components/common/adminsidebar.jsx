@@ -2,6 +2,9 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
 export default class AdminSidebar extends React.Component {
+    componentDidMount() {
+        $('.collapsible').collapsible();
+    }
     render() {
         return (
             <div className="side col m2 l2 hide-on-small-and-down nav-pan">
@@ -55,7 +58,7 @@ export default class AdminSidebar extends React.Component {
                                         <a className="collapsible-header">Permissions<i className="material-icons">arrow_drop_down</i></a>
                                         <div className="collapsible-body">
                                             <ul>
-                                                <li><a href="addbooks.html">Add Books</a></li>
+                                                <li><Link to="/addbook">Add Books</Link></li>
                                                 <li><a href="addcategories.html">Add Categories</a></li>
                                                 <li><a href="#">Add Admin</a></li>
                                                 <li><a href="#">Remove Admin</a></li>

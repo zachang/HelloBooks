@@ -2,12 +2,16 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
 export default class AdminHeader extends React.Component {
+    componentDidMount() {
+        $('.collapsible').collapsible();
+    }
+
     render() {
         return (
             <div className="col m10 l10 s12 right" style={{ padding:'0px' }}>
                 <div className="navbar-fixed">
                     <nav className="mainNav black col m10 l10" role="navigation">
-                        <div className="nav-wrapper container"><a id="logo-container" href="admin.html" className="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks"/></a>
+                        <div className="nav-wrapper container"><Link id="logo-container" to="/admin" className="brand-logo mainLogo"><img src="./imgs/hello.png" alt="hellobooks"/></Link>
                             <ul className="user hide-on-small-and-down show-on-medium-and-up">
                                 <a className='dropdown-button btn black btn-prof' href='#' data-activates='dropdown1'><i className="material-icons mat-icon right" style={{ marginLeft: "1%" }}>arrow_drop_down</i>Zachang</a>
                             </ul>
@@ -63,7 +67,7 @@ export default class AdminHeader extends React.Component {
                                             <a className="collapsible-header">Permissions<i className="material-icons mat-icon">arrow_drop_down</i></a>
                                             <div className="collapsible-body">
                                                 <ul>
-                                                    <li><a href="#">Add Books</a></li>
+                                                    <li><Link to="/addbook">Add Books</Link></li>
                                                     <li><a href="addcategories.html">Add Categories</a></li>
                                                     <li><a href="#">Add Admin</a></li>
                                                     <li><a href="#">Remove Admin</a></li>
