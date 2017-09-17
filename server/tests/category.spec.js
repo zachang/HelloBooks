@@ -1,6 +1,6 @@
 import request from 'supertest';
 import chai from 'chai';
-import app from '../../app';
+import app from './../app';
 import seeder from './seeder/auth_seed';
 import categoryseeder from './seeder/category_seed';
 

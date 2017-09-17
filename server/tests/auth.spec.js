@@ -1,7 +1,7 @@
 import request from 'supertest';
 import jwtDecode from 'jwt-decode';
 import chai from 'chai';
-import app from '../../app';
+import app from './../app';
 import seeder from './seeder/auth_seed';
 
 const assert = chai.assert;

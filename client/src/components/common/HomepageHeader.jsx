@@ -15,7 +15,6 @@ export default class HomepageHeader extends React.Component {
     }
 
     handleToggle(e) {
-        console.log(e.currentTarget.getAttribute('data-toggle'), '>>>>>>>>');
         const value = (e.currentTarget.getAttribute('data-toggle') === 'login');
         this.props.regLoginToggle(value);
     }

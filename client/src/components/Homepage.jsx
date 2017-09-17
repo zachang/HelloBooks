@@ -15,7 +15,6 @@ export default class Homepage extends React.Component {
   }
 
   regLoginToggle(showLogin = true) {
-    console.log(showLogin, 'Toggle made>>>>>>>>');
     if(!showLogin){
       this.setState({regLoginToggle: !this.state.regLoginToggle});
     } else {
@@ -23,7 +22,6 @@ export default class Homepage extends React.Component {
     }
   }
   render() {
-    console.log(this.state, 'State>>>>>>>>');
     return (
       <div className="row main-row main-div">
 
