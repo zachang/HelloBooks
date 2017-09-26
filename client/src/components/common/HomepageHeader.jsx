@@ -4,19 +4,10 @@ import { Link, IndexLink } from 'react-router';
 export default class HomepageHeader extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            regLoginToggle: true
-        };
-        this.handleToggle = this.handleToggle.bind(this);
     }
 
     componentDidMount() {
         $('.button-collapse').sideNav();
-    }
-
-    handleToggle(e) {
-        const value = (e.currentTarget.getAttribute('data-toggle') === 'login');
-        this.props.regLoginToggle(value);
     }
 
     render() {
@@ -24,20 +15,25 @@ export default class HomepageHeader extends React.Component {
             <div className="navbar-fixed">
                 <nav className="mainNav transparent" role="navigation">
                     <div className="nav-wrapper container">
-                        <a href="#" onClick={this.handleToggle} data-toggle="login" id="logo-container" className="brand-logo mainLogo brand">
+
+                        <Link to="/" id="logo-container" className="brand-logo mainLogo brand">
                             <img src="./imgs/hello.png" alt="hellobooks"/>
-                        </a>
+                        </Link>
                         <ul className="right hide-on-small-and-down">
                             <li><Link to="/">Contact us</Link></li>
                             <li><Link to="/">About us</Link></li>
                             <li><Link to="/">Help</Link></li>
                             <li>
-                                <a href="#" onClick={this.handleToggle} data-toggle="toggle" className="btn-large waves-effect waves-light orange join-us">
-                                    {(
-                                      (this.props.btnText === true) ?
-                                        'Join Us': 'Login'
+                                  {(
+                                      (this.props.btnText === false) ?
+                                        <Link to="/register"  className="btn-large waves-effect waves-light orange join-us">
+                                          Join Us
+                                        </Link>
+                                        :
+                                        <Link to="/login" className="btn-large waves-effect waves-light orange join-us">
+                                          Login
+                                        </Link>
                                     )}
-                                </a>
                             </li>
                         </ul>
 

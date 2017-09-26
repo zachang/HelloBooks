@@ -65,7 +65,7 @@ module.exports = {
     port: process.env.PORT,
     proxy: {
       '/api/v1/**': {
-        target: 'http://localhost:8000',
+        target: 'http://[::1]:8000',
         secure: false
       }
     },

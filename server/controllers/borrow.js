@@ -1,4 +1,4 @@
-import * as _ from 'underscore';
+import map from 'lodash/map';
 import db from '../models';
 
 const Borrow = db.Borrow;
@@ -75,7 +75,7 @@ const borrowController = {
       }]
     })
       .then((borrows) => {
-        const books = _.pluck(borrows, 'Book');
+        const books = map(borrows, 'Book');
         return res.status(200).send(books);
       })
       .catch(() => res.status(503).send({ message: 'Request not available' }));

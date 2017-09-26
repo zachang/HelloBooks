@@ -4,9 +4,21 @@ body {
   height: 100%;
 }
 
-@media screen and (min-width: 767px) and (max-width: 768px) {
+@media screen and (min-width: 601px) and (max-width: 768px) {
   nav .brand-logo {
     left: 15%;
+  }
+
+  .regsmContent .row {
+    margin-top: -15%;
+  }
+
+  .regsmContent{
+    margin-top: -4%;
+  }
+
+  .textContent {
+    margin-top: 40px;
   }
 }
 
@@ -47,6 +59,10 @@ body {
     margin-top: -15%;
   }
 
+  .regsmContent{
+    margin-top: -3% !important;
+  }
+
 }
 
 .mainLogo {
@@ -64,8 +80,9 @@ body {
 }
 
 .regsmContent {
-  margin-top: -10%;
+  margin-top: -5%;
   display: block;
+  background-color: rgba(0,0,0,0.5)
 }
 
 .regsmContent .row {
@@ -113,6 +130,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
+  overflow-y: hidden;
   margin-bottom: 0px !important;
 }
 
@@ -132,4 +150,13 @@ body {
 /*--iDs--*/
 #sidenav-overlay {
   height: 0;
+}
+
+.infoText{
+  font-size: 0.8rem !important;
+  text-align: center;
+}
+
+.sloginContent{
+  background-color: rgba(0,0,0,0.5);
 }
