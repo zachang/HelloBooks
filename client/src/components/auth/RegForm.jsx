@@ -1,7 +1,13 @@
 import React from 'react';
+import PropTypes from 'react-proptypes';
+import classnames from 'classnames';
 import {Link, IndexLink} from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import signupAction from '../../actions/signupAction';
+import decodeToken from '../../utils/tokenDecode';
 
-export default class RegForm extends React.Component {
+export class RegForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,12 +18,18 @@ export default class RegForm extends React.Component {
             phone_no: '',
             password: '',
             password_confirmation: ''
-          }
+          },
+          errors: {}
         };
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
     }
 
+  componentWillMount() {
+    if (window.sessionStorage.token) {
+      decodeToken(window.sessionStorage.token);
+    }
+  }
 
   handleChange(e) {
     const regCredentials = this.state.regCredentials;
@@ -27,10 +39,13 @@ export default class RegForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.regCredentials);
+    this.props.signupAction(this.state.regCredentials);
   }
 
     render() {
+      console.log(this.props.signupState.errors);
+      const { regCredentials } = this.state;
+      const { errors } = this.props.signupState;
         return (
             <form className="col s12" onSubmit={this.handleSubmit}>
                 <div className="row">
@@ -39,12 +54,20 @@ export default class RegForm extends React.Component {
                           id="fullname"
                           name="fullname"
                           type="text"
-                          className="validate"
-                          data-error="field required"
+                          className={ classnames( 'validate', {
+                            'invalid': (errors && errors['fullname'])
+                          })}
+                          value={regCredentials.fullname}
                           onChange={ this.handleChange }
-                          required
                         />
-                        <label htmlFor="fullname">Full Name</label>
+                        <label
+                          htmlFor="fullname"
+                          data-error={(errors && errors['fullname']) ? errors['fullname'] : ''}
+                          className={(regCredentials.fullname.length > 0 || (errors && errors['fullname']))
+                            ? 'active' : ''}
+                        >
+                          Full Name
+                        </label>
                     </div>
                 </div>
 
@@ -54,12 +77,19 @@ export default class RegForm extends React.Component {
                           id="username"
                           name="username"
                           type="text"
-                          className="validate"
-                          data-error="field required"
+                          className={ classnames( 'validate', {
+                            'invalid': (errors && errors['username'])
+                          })}
+                          value={regCredentials.username}
                           onChange={ this.handleChange }
-                          required
                         />
-                        <label htmlFor="username">Username</label>
+                      <label
+                        htmlFor="username"
+                        data-error={(errors && errors['username']) ? errors['username'] : ''}
+                        className={(regCredentials.username.length > 0 || (errors && errors['username'])) ? 'active' : ''}
+                      >
+                        Username
+                      </label>
                     </div>
                 </div>
 
@@ -69,12 +99,19 @@ export default class RegForm extends React.Component {
                           id="email"
                           name="email"
                           type="email"
-                          data-error="field required"
-                          className="validate"
+                          className={ classnames( 'validate', {
+                            'invalid': (errors && errors['email'])
+                          })}
+                          value={regCredentials.email}
                           onChange={ this.handleChange }
-                          required
                         />
-                        <label htmlFor="email">Email</label>
+                      <label
+                        htmlFor="email"
+                        data-error={(errors && errors['email']) ? errors['email'] : ''}
+                        className={(regCredentials.email.length > 0 || (errors && errors['email'])) ? 'active' : ''}
+                      >
+                        Email
+                      </label>
                     </div>
                 </div>
 
@@ -84,12 +121,19 @@ export default class RegForm extends React.Component {
                           id="phone"
                           name="phone_no"
                           type="number"
-                          data-error="field required"
-                          className="validate"
+                          className={ classnames( 'validate', {
+                            'invalid': (errors && errors['phone_no'])
+                          })}
+                          value={regCredentials.phone_no}
                           onChange={ this.handleChange }
-                          required
                         />
-                        <label htmlFor="phone">Phone Number</label>
+                      <label
+                        htmlFor="Phone Number"
+                        data-error={(errors && errors['phone_no']) ? errors['phone_no'] : ''}
+                        className={(regCredentials.phone_no.length > 0 || (errors && errors['phone_no'])) ? 'active' : ''}
+                      >
+                        Phone Number
+                      </label>
                     </div>
                 </div>
 
@@ -99,12 +143,19 @@ export default class RegForm extends React.Component {
                           id="pass"
                           name="password"
                           type="password"
-                          data-error="field required"
-                          className="validate"
+                          className={ classnames( 'validate', {
+                            'invalid': (errors && errors['password'])
+                          })}
+                          value={regCredentials.password}
                           onChange={ this.handleChange }
-                          required
                         />
-                        <label htmlFor="pass" data-error="wrong">Password</label>
+                      <label
+                        htmlFor="password"
+                        data-error={(errors && errors['password']) ? errors['password'] : ''}
+                        className={(regCredentials.password.length > 0 || (errors && errors['password'])) ? 'active' : ''}
+                      >
+                        Password
+                      </label>
                     </div>
                 </div>
 
@@ -115,14 +166,23 @@ export default class RegForm extends React.Component {
                           name="password_confirmation"
                           type="password"
                           data-error="field required"
-                          className="validate"
+                          className={ classnames( 'validate', {
+                            'invalid': (errors && errors['password_confirmation'])
+                          })}
+                          value={regCredentials.password_confirmation}
                           onChange={ this.handleChange }
-                          required
                         />
-                        <label htmlFor="confirm pass" data-error="wrong">Confirm Password</label>
+                      <label
+                        htmlFor="password_confirmation"
+                        data-error={(errors && errors['password_confirmation'] && errors['password_confirmation'])
+                          ? errors.password_confirmation[0] : ''}
+                        className={(regCredentials.password_confirmation.length > 0 || (errors && errors['password_confirmation']))
+                          ? 'active' : ''}
+                      >
+                        Confirmation Password
+                      </label>
                     </div>
                 </div>
-
 
                 <div className="row">
                     <div className="col s12">
@@ -141,3 +201,15 @@ export default class RegForm extends React.Component {
         );
     }
 }
+
+RegForm.propTypes = {
+  signupState: PropTypes.object.isRequired,
+  signupAction: PropTypes.func.isRequired
+};
+const mapStateToProps = state => ({
+  signupState: state.signupReducer
+});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ signupAction }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegForm);

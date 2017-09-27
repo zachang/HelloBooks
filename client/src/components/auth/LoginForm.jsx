@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import signinAction from '../../actions/signinAction';
 import loginValidate from '../../utils/loginValidate.js';
+import decodeToken from '../../utils/tokenDecode';
 
 export class LoginForm extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export class LoginForm extends React.Component {
 
   componentWillMount() {
     if (window.sessionStorage.token) {
-      browserHistory.push('/admin');
+      decodeToken(window.sessionStorage.token);
     }
   }
 

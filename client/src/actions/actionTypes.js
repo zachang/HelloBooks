@@ -6,5 +6,4 @@ export default keymirror({
   SIGNUP_VALIDATION_ERROR: null,
   SIGNIN_SUCCESSFUL: null,
   SIGNIN_UNSUCCESSFUL: null,
-  SIGNIN_VALIDATION_ERROR: null,
 });
