@@ -41,13 +41,18 @@ export class RegForm extends React.Component {
     e.preventDefault();
     this.props.signupAction(this.state.regCredentials);
   }
+  componentWillReceiveProps(nextProps){
+      console.log(this.props.signupState.errors, 'yyyy');
+      console.log(nextProps.signupState.errors, 'zzzz');
+      this.setState({ errors: nextProps.signupState.errors });
+      // console.log(this.state.errors,'nowwww');
+  }
 
     render() {
-      console.log(this.props.signupState.errors);
       const { regCredentials } = this.state;
-      const { errors } = this.props.signupState;
         return (
             <form className="col s12" onSubmit={this.handleSubmit}>
+              <p>{(this.state.errors['fullname']) ? this.state.errors['fullname'] : 'Mew'}</p>
                 <div className="row">
                     <div className="input-field col s12">
                         <input
@@ -55,16 +60,16 @@ export class RegForm extends React.Component {
                           name="fullname"
                           type="text"
                           className={ classnames( 'validate', {
-                            'invalid': (errors && errors['fullname'])
+                            'invalid': !!(this.state.errors['fullname'])
                           })}
                           value={regCredentials.fullname}
                           onChange={ this.handleChange }
                         />
                         <label
                           htmlFor="fullname"
-                          data-error={(errors && errors['fullname']) ? errors['fullname'] : ''}
-                          className={(regCredentials.fullname.length > 0 || (errors && errors['fullname']))
-                            ? 'active' : ''}
+                          data-error={(this.state.errors['fullname']) ? this.state.errors['fullname'] : ''}
+                          className={classnames({'active':
+                            (regCredentials.fullname.length > 0 || !!this.state.errors['fullname'])})}
                         >
                           Full Name
                         </label>
@@ -78,15 +83,15 @@ export class RegForm extends React.Component {
                           name="username"
                           type="text"
                           className={ classnames( 'validate', {
-                            'invalid': (errors && errors['username'])
+                            'invalid': (this.state.errors['username'])
                           })}
                           value={regCredentials.username}
                           onChange={ this.handleChange }
                         />
                       <label
                         htmlFor="username"
-                        data-error={(errors && errors['username']) ? errors['username'] : ''}
-                        className={(regCredentials.username.length > 0 || (errors && errors['username'])) ? 'active' : ''}
+                        data-error={(this.state.errors['username']) ? this.state.errors['username'] : ''}
+                        className={(regCredentials.username.length > 0 || (this.state.errors['username'])) ? 'active' : ''}
                       >
                         Username
                       </label>
@@ -98,17 +103,17 @@ export class RegForm extends React.Component {
                         <input
                           id="email"
                           name="email"
-                          type="email"
+                          type="text"
                           className={ classnames( 'validate', {
-                            'invalid': (errors && errors['email'])
+                            'invalid': (this.state.errors['email'])
                           })}
                           value={regCredentials.email}
                           onChange={ this.handleChange }
                         />
                       <label
                         htmlFor="email"
-                        data-error={(errors && errors['email']) ? errors['email'] : ''}
-                        className={(regCredentials.email.length > 0 || (errors && errors['email'])) ? 'active' : ''}
+                        data-error={(this.state.errors['email']) ? this.state.errors['email'] : ''}
+                        className={(regCredentials.email.length > 0 || (this.state.errors['email'])) ? 'active' : ''}
                       >
                         Email
                       </label>
@@ -122,15 +127,15 @@ export class RegForm extends React.Component {
                           name="phone_no"
                           type="number"
                           className={ classnames( 'validate', {
-                            'invalid': (errors && errors['phone_no'])
+                            'invalid': (this.state.errors['phone_no'])
                           })}
                           value={regCredentials.phone_no}
                           onChange={ this.handleChange }
                         />
                       <label
                         htmlFor="Phone Number"
-                        data-error={(errors && errors['phone_no']) ? errors['phone_no'] : ''}
-                        className={(regCredentials.phone_no.length > 0 || (errors && errors['phone_no'])) ? 'active' : ''}
+                        data-error={(this.state.errors['phone_no']) ? this.state.errors['phone_no'] : ''}
+                        className={(regCredentials.phone_no.length > 0 || (this.state.errors['phone_no'])) ? 'active' : ''}
                       >
                         Phone Number
                       </label>
@@ -144,15 +149,15 @@ export class RegForm extends React.Component {
                           name="password"
                           type="password"
                           className={ classnames( 'validate', {
-                            'invalid': (errors && errors['password'])
+                            'invalid': (this.state.errors['password'])
                           })}
                           value={regCredentials.password}
                           onChange={ this.handleChange }
                         />
                       <label
                         htmlFor="password"
-                        data-error={(errors && errors['password']) ? errors['password'] : ''}
-                        className={(regCredentials.password.length > 0 || (errors && errors['password'])) ? 'active' : ''}
+                        data-error={(this.state.errors['password']) ? this.state.errors['password'] : ''}
+                        className={(regCredentials.password.length > 0 || (this.state.errors['password'])) ? 'active' : ''}
                       >
                         Password
                       </label>
@@ -167,16 +172,16 @@ export class RegForm extends React.Component {
                           type="password"
                           data-error="field required"
                           className={ classnames( 'validate', {
-                            'invalid': (errors && errors['password_confirmation'])
+                            'invalid': (this.state.errors['password_confirmation'])
                           })}
                           value={regCredentials.password_confirmation}
                           onChange={ this.handleChange }
                         />
                       <label
                         htmlFor="password_confirmation"
-                        data-error={(errors && errors['password_confirmation'] && errors['password_confirmation'])
-                          ? errors.password_confirmation[0] : ''}
-                        className={(regCredentials.password_confirmation.length > 0 || (errors && errors['password_confirmation']))
+                        data-error={(this.state.errors['password_confirmation'])
+                          ? this.state.errors['password_confirmation'] : ''}
+                        className={(regCredentials.password_confirmation.length > 0 || (this.state.errors['password_confirmation']))
                           ? 'active' : ''}
                       >
                         Confirmation Password

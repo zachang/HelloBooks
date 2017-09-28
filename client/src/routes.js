@@ -1,5 +1,5 @@
 import React from 'react';
-import {Router, Route, browserHistory} from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 import Homepage from './components/Homepage.jsx';
 import RegisterPage from './components/auth/RegisterPage.jsx';
 import Userdashboard from './components/User.jsx';
