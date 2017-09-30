@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
 import actionTypes from './actionTypes';
 
 const signupAction = userCredentials => (dispatch) => {
@@ -7,7 +6,6 @@ const signupAction = userCredentials => (dispatch) => {
     .then((res) => {
       const token = res.data.token; // get the token
       window.sessionStorage.setItem('token', token);
-      browserHistory.push('/user');
       return dispatch({ type: actionTypes.SIGNUP_SUCCESSFUL });
     })
     .catch((err) => {

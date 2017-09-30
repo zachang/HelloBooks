@@ -5,9 +5,9 @@ const initialState = {
   errors: null,
   fails: null,
 };
-const signupReducer = (state = initialState, action) => {
+const addBookReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SIGNUP_SUCCESSFUL:
+    case actionTypes.ADDBOOK_SUCCESSFUL:
       state = {
         ...state,
         success: true,
@@ -15,14 +15,14 @@ const signupReducer = (state = initialState, action) => {
         fails: null
       };
       break;
-    case actionTypes.SIGNUP_VALIDATION_ERROR:
+    case actionTypes.ADDBOOK_VALIDATION_ERROR:
       state = {
         ...state,
         success: false,
         errors: action.payload
       };
       break;
-    case actionTypes.SIGNUP_UNSUCCESSFUL:
+    case actionTypes.ADDBOOK_UNSUCCESSFUL:
       state = {
         ...state,
         success: false,
@@ -34,4 +34,4 @@ const signupReducer = (state = initialState, action) => {
   }
   return state;
 };
-export default signupReducer;
+export default addBookReducer;

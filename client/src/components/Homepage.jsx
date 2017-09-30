@@ -15,7 +15,9 @@ export default class Homepage extends React.Component {
     return (
       <div className="row main-row main-div">
 
-        <HomepageHeader btnText={this.state.showLoginText}/>
+        <HomepageHeader
+          btnText={this.state.showLoginText}
+        />
 
         <div className="section no-pad-bot" id="index-banner">
           <div className="container textContent">

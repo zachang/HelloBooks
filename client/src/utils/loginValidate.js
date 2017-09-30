@@ -17,4 +17,5 @@ const loginValidate = (data) => {
     isValid: isEmpty(errors)
   };
 };
+
 export default loginValidate;

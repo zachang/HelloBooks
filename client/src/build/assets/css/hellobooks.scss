@@ -160,3 +160,17 @@ body {
 .sloginContent{
   background-color: rgba(0,0,0,0.5);
 }
+.custom-validate{
+  width: 100%;
+  font-size: 1rem;
+  color: #F44336;
+  opacity: 1;
+  transform: translateY(-14px) scale(0.8);
+}
+
+.input-field label:not(.label-icon).custom-active {
+  -webkit-transform: translateY(-14px) scale(0.8);
+  transform: translateY(-14px) scale(0.8);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}

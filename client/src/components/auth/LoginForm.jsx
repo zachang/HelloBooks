@@ -38,7 +38,6 @@ export class LoginForm extends React.Component {
   isValid() {
     const { errors, isValid } = loginValidate(this.state.loginCredentials);
     if (!isValid) {
-      // this.state = Object.assign({}, this.state, {errors});
       this.setState({ errors });
     }
     return isValid;
@@ -47,11 +46,9 @@ export class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.isValid()) {
-      console.log('uuuuuuu');
       this.setState({ errors: {} });
       this.props.signinAction(this.state.loginCredentials);
     }
-    console.log(this.state, 'mmmmmmmm');
   }
 
   render() {
@@ -64,7 +61,7 @@ export class LoginForm extends React.Component {
               id="username"
               name="username"
               type="text"
-              className={ classnames( 'validate', {
+              className={ classnames({
                 'invalid': !!this.state.errors.username
               })}
               value={loginCredentials.username}
@@ -72,8 +69,9 @@ export class LoginForm extends React.Component {
             />
             <label
               htmlFor="username"
-              data-error={(this.state.errors.username) ? this.state.errors.username : ''}
-              className={(loginCredentials.username.length > 0 || (this.state.errors.username)) ? 'active' : ''}
+              className={(!!(this.state.errors['username']) || (loginCredentials.username.length > 0)) ?
+                'custom-active custom-validate' : 'custom-validate'}
+              data-error={ !!(this.state.errors['username']) ? this.state.errors['username'] : '' }
             >
               Username
             </label>
@@ -86,7 +84,7 @@ export class LoginForm extends React.Component {
               id="password"
               name="password"
               type="password"
-              className={ classnames( 'validate', {
+              className={ classnames( {
                 'invalid': !!this.state.errors.password
               })}
               value={loginCredentials.password}
@@ -94,8 +92,10 @@ export class LoginForm extends React.Component {
             />
             <label
               htmlFor="password"
-              data-error={(this.state.errors.password) ? this.state.errors.password : ''}
-              className={(loginCredentials.password.length > 0 || this.state.errors.password) ? 'active' : ''}
+              className={ classnames( 'custom-validate', {
+                'custom-active': (!!this.state.errors.password || (loginCredentials.password.length > 0))
+              })}
+              data-error={ !!(this.state.errors['password']) ? this.state.errors['password'] : '' }
             >
               Password
             </label>
