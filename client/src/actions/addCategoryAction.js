@@ -1,11 +1,11 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
-const addBookAction = bookContents => (dispatch) => {
-  axios.post('/api/v1/books', bookContents,
+const addCategoryAction = categoryContents => (dispatch) => {
+  axios.post('/api/v1/categories', categoryContents,
     { headers: { 'x-access-token': window.sessionStorage.token } })
     .then((res) => {
-      return dispatch({ type: actionTypes.ADDBOOK_SUCCESSFUL,
+      return dispatch({ type: actionTypes.ADDCATEGORY_SUCCESSFUL,
         payload: res.data.message });
     })
     .catch((err) => {
@@ -18,12 +18,12 @@ const addBookAction = bookContents => (dispatch) => {
           payload: err.response.data.message });
       }
       if (err.response.data.message === 'Validation error') {
-        return dispatch({ type: actionTypes.ADDBOOK_VALIDATION_ERROR,
+        return dispatch({ type: actionTypes.ADDCATEGORY_VALIDATION_ERROR,
           payload: err.response.data.errors });
       }
-      return dispatch({ type: actionTypes.ADDBOOK_UNSUCCESSFUL,
+      return dispatch({ type: actionTypes.ADDCATEGORY_UNSUCCESSFUL,
         payload: err.response.data.message });
     });
 };
 
-export default addBookAction;
+export default addCategoryAction;

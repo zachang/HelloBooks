@@ -5,9 +5,9 @@ const initialState = {
   errors: null,
   fails: null,
 };
-const addBookReducer = (state = initialState, action) => {
+const addCategoryReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADDBOOK_SUCCESSFUL:
+    case actionTypes.ADDCATEGORY_SUCCESSFUL:
       state = {
         ...state,
         success: true,
@@ -15,14 +15,14 @@ const addBookReducer = (state = initialState, action) => {
         fails: null
       };
       break;
-    case actionTypes.ADDBOOK_VALIDATION_ERROR:
+    case actionTypes.ADDCATEGORY_VALIDATION_ERROR:
       state = {
         ...state,
         success: false,
         errors: action.payload
       };
       break;
-    case actionTypes.ADDBOOK_UNSUCCESSFUL:
+    case actionTypes.ADDCATEGORY_UNSUCCESSFUL:
       state = {
         ...state,
         success: false,
@@ -35,9 +35,4 @@ const addBookReducer = (state = initialState, action) => {
   return state;
 };
 
-const updateReducer = {};
-
-export {
-  addBookReducer,
-  updateReducer
-};
+export default addCategoryReducer;

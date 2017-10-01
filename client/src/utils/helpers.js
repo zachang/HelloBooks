@@ -8,6 +8,18 @@ const decodeToken = (token) => {
   } else {
     browserHistory.push('/admin');
   }
-}
+};
 
-export default decodeToken;
+const tokenValidate = (type) => {
+  if (type === 1) {
+    window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
+  } else if (type === 2) {
+    // unauthorize component
+  }
+};
+
+export {
+  decodeToken,
+  tokenValidate
+};

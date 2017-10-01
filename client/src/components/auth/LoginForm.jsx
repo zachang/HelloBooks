@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import signinAction from '../../actions/signinAction.js';
 import loginValidate from '../../utils/loginValidate.js';
-import decodeToken from '../../utils/tokenDecode';
+import { decodeToken } from '../../utils/helpers';
 
 export class LoginForm extends React.Component {
   constructor(props) {

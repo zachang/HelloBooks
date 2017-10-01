@@ -1,19 +1,24 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
 import { browserHistory } from 'react-router';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 
 /**
  * AuthenticateUser class declaration
+ *
  */
 class Authenticate extends React.Component {
-
+  /**
+   * @return {void} void
+   */
   componentDidMount() {
     if (!window.sessionStorage.token) {
       browserHistory.push('/login');
     }
   }
+  /**
+   * renders component
+   * @return {XML} JSX
+   */
   render() {
     return this.props.children;
   }

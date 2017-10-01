@@ -5,7 +5,7 @@ import {Link, IndexLink, browserHistory} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import signupAction from '../../actions/signupAction.js';
-import decodeToken from '../../utils/tokenDecode';
+import { decodeToken } from '../../utils/helpers';
 
 export class RegForm extends React.Component {
   constructor(props) {

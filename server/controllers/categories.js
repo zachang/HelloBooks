@@ -19,8 +19,7 @@ const categoryController = {
         category_name: req.body.category_name,
       })
         .then(category => res.status(201).send({ message: 'Category created', category }))
-        .catch((err) => {
-          console.log(err, '>>>>>>>>>>>>>>>');
+        .catch(() => {
           res.status(400).send({ message: 'Error, Category not created' });
         });
     }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
-import decodeToken from '../utils/tokenDecode';
+import { decodeToken } from '../utils/helpers';
 
 const signinAction = userCredentials => (dispatch) => {
   axios.post('/api/v1/users/signin', userCredentials)

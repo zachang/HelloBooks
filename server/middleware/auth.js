@@ -20,7 +20,7 @@ const Auth = {
   },
   verifyAdmin(req, res, next) {
     if (req.decoded && req.decoded.is_admin) return next();
-    return res.status(401).send({ message: 'You must be an admin to perform this operation' });
+    return res.status(403).send({ message: 'You must be an admin to perform this operation' });
   }
 
 };
