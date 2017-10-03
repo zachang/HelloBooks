@@ -11,14 +11,14 @@ const tokenReducer = (state = initialState, action) => {
       state = {
         ...state,
         message: action.payload,
-        type: 1
+        type: 'invalid'
       };
       break;
     case actionTypes.UNAUTHORIZED_TOKEN:
       state = {
         ...state,
         message: action.payload,
-        type: 2
+        type: 'unauthorized'
       };
       break;
     default:

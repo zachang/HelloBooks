@@ -11,10 +11,10 @@ const decodeToken = (token) => {
 };
 
 const tokenValidate = (type) => {
-  if (type === 1) {
+  if (type === 'invalid') {
     window.sessionStorage.removeItem('token');
     browserHistory.push('/');
-  } else if (type === 2) {
+  } else if (type === 'unauthorized') {
     // unauthorize component
   }
 };

@@ -56,8 +56,12 @@ const booksController = {
     });
   },
   list(req, res) {
+    let whereClause = {};
+    if (req.query.cat) {
+      whereClause = { where: { category_id: req.query.cat } };
+    }
     return Book
-      .findAll()
+      .findAll(whereClause)
       .then((books) => {
         if (books.length === 0) {
           return res.status(200).send({ message: 'Nothing to display' });

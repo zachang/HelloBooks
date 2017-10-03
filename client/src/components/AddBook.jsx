@@ -9,6 +9,7 @@ import { tokenValidate } from '../utils/helpers';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
 import addBookAction from '../actions/addBookAction.js';
+import { getCategoryAction} from '../actions/categoryAction.js';
 
 export class AddBook extends React.Component {
   constructor(props) {
@@ -25,11 +26,17 @@ export class AddBook extends React.Component {
         description: '',
         book_image: ''
       },
-      errors: {}
+      errors: null,
+      categories: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+
+  componentWillMount() {
+    this.props.getCategoryAction();
+  }
+
 
   handleChange(e) {
     const bookData = this.state.bookData;
@@ -43,30 +50,39 @@ export class AddBook extends React.Component {
   }
 
   componentDidMount() {
-    $('select').material_select();
-    $('.datepicker').pickadate();
-    $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
-    $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
+      $('select').material_select();
+      $('.datepicker').pickadate();
+      $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
+      $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.tokenState.message === null) {
-      this.setState({errors: nextProps.addBookState.errors});
-    }
-    else {
+    if(nextProps.tokenState.message != null) {
       tokenValidate(nextProps.tokenState.type);
     }
+    else {
+      this.setState({errors: nextProps.addBookState.errors});
+      this.setState({ categories: nextProps.categoryState.categories});
+    }
+  }
+
+  componentDidUpdate() {
+      $('select').material_select();
+      $('.datepicker').pickadate();
+      $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
+      $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
   }
 
   render() {
     const {bookData} = this.state;
+
     return (
       <div className='row'>
         <AdminHeader/>
         <AdminSidebar/>
         <div className='container mainCon' style={{marginLeft: '5%'}}>
           <div className='row'>
-            <div className='col s10 m8 l6 bookadd' style={{marginLeft: '35%', marginTop: '4%'}}>
+            <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '4%'}}>
 
               <div className='row'>
                 <form className='col s10' onSubmit={this.handleSubmit}>
@@ -85,7 +101,7 @@ export class AddBook extends React.Component {
                       />
                       <label
                         htmlFor='book_name'
-                        className={(this.state.errors && !!this.state.errors['book_name'] || categoryData.book_name.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['book_name'] || bookData.book_name.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['book_name']) ?
                           this.state.errors['book_name'] : '' }
@@ -109,7 +125,7 @@ export class AddBook extends React.Component {
                       />
                       <label
                         htmlFor='author'
-                        className={(this.state.errors && !!this.state.errors['author'] || categoryData.author.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['author'] || bookData.author.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['author']) ?
                           this.state.errors['author'] : '' }
@@ -133,7 +149,7 @@ export class AddBook extends React.Component {
                       />
                       <label
                         htmlFor='publish_year'
-                        className={(this.state.errors && !!this.state.errors['publish_year'] || categoryData.publish_year.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['publish_year'] || bookData.publish_year.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['publish_year']) ?
                           this.state.errors['publish_year'] : '' }
@@ -157,7 +173,7 @@ export class AddBook extends React.Component {
                       />
                       <label
                         htmlFor='isbn'
-                        className={(this.state.errors && !!this.state.errors['isbn'] || categoryData.isbn.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['isbn'] || bookData.isbn.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['isbn']) ?
                           this.state.errors['isbn'] : '' }
@@ -181,7 +197,7 @@ export class AddBook extends React.Component {
                       />
                       <label
                         htmlFor='pages'
-                        className={(this.state.errors && !!this.state.errors['pages'] || categoryData.pages.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['pages'] || bookData.pages.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['pages']) ?
                           this.state.errors['pages'] : '' }
@@ -205,7 +221,7 @@ export class AddBook extends React.Component {
                       </textarea>
                       <label
                         htmlFor='description'
-                        className={(this.state.errors && !!this.state.errors['description'] || categoryData.description.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['description'] || bookData.description.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['description']) ?
                           this.state.errors['description'] : '' }
@@ -227,13 +243,13 @@ export class AddBook extends React.Component {
                         }) }
                       >
                         <option value=''>Select</option>
-                        <option value='1'>Health</option>
-                        <option value='2'>Entertainment</option>
-                        <option value='3'>Science</option>
+                        { this.state.categories.map((category, i) =>
+                          <option key={i} value={ category.id }>{ category.category_name }</option>
+                        )}
                       </select>
                       <label
                         htmlFor='category_id'
-                        className={(this.state.errors && !!this.state.errors['category_id'] || categoryData.category_id.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['category_id'] || bookData.category_id.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['category_id']) ?
                           this.state.errors['category_id'] : '' }
@@ -257,7 +273,7 @@ export class AddBook extends React.Component {
                       />
                       <label
                         htmlFor='book_count'
-                        className={(this.state.errors && !!this.state.errors['book_count'] || categoryData.book_count.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['book_count'] || bookData.book_count.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
                         data-error={ (this.state.errors && !!this.state.errors['book_count']) ?
                           this.state.errors['book_count'] : '' }
@@ -293,7 +309,9 @@ export class AddBook extends React.Component {
                     <button
                       className='col s10 btn btn-large waves-effect waves-light'
                       type='submit'
-                      name='action'> Add Book
+                      name='action'
+                    >
+                      Add Book
                     </button>
 
                 </form>
@@ -309,13 +327,15 @@ export class AddBook extends React.Component {
 
 AddBook.propTypes = {
   addBookState: PropTypes.object.isRequired,
+  categoryState: PropTypes.object.isRequired,
   addBookAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   addBookState: state.addBookReducer,
+  categoryState: state.categoryReducer,
   tokenState: state.tokenReducer
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({addBookAction}, dispatch);
+  bindActionCreators({ addBookAction, getCategoryAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);

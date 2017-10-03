@@ -12,7 +12,7 @@ class Authenticate extends React.Component {
    */
   componentDidMount() {
     if (!window.sessionStorage.token) {
-      browserHistory.push('/login');
+      browserHistory.push('/');
     }
   }
   /**

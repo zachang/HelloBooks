@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
 import { tokenValidate } from '../utils/helpers';
-import addCategoryAction from '../actions/addCategoryAction.js';
+import { addCategoryAction} from '../actions/categoryAction.js';
 
 
 export class AddCategory extends React.Component {
@@ -17,7 +17,7 @@ export class AddCategory extends React.Component {
       categoryData: {
         category_name: '',
       },
-      errors: {}
+      errors: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,12 +36,7 @@ export class AddCategory extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.tokenState.message === null) {
-      this.setState({errors: nextProps.addCategoryState.errors});
-    }
-    else {
-      tokenValidate(nextProps.tokenState.type);
-    }
+    this.setState({errors: nextProps.categoryState.errors});
   }
 
   render() {
@@ -88,7 +83,7 @@ export class AddCategory extends React.Component {
                         name='action'> Add Category
                       </button>
 
-                      <div style={{ color:'red', float:'right' }}>{this.props.addCategoryState.fails}</div>
+                      <div style={{ color:'red', float:'right' }}>{this.props.categoryState.fails}</div>
                     </div>
                   </div>
                 </form>
@@ -105,14 +100,14 @@ export class AddCategory extends React.Component {
 }
 
 AddCategory.propTypes = {
-  addCategoryState: PropTypes.object.isRequired,
+  categoryState: PropTypes.object.isRequired,
   addCategoryAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  addCategoryState: state.addCategoryReducer,
+  categoryState: state.categoryReducer,
   tokenState: state.tokenReducer
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({addCategoryAction}, dispatch);
+  bindActionCreators({ addCategoryAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCategory);
