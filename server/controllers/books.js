@@ -56,9 +56,20 @@ const booksController = {
     });
   },
   list(req, res) {
-    let whereClause = {};
+    let whereClause = {
+      include: [{
+        model: Category,
+        attributes: ['category_name']
+      }]
+    };
     if (req.query.cat) {
-      whereClause = { where: { category_id: req.query.cat } };
+      whereClause = {
+        where: { category_id: req.query.cat },
+        include: [{
+          model: Category,
+          attributes: ['category_name']
+        }]
+      };
     }
     return Book
       .findAll(whereClause)

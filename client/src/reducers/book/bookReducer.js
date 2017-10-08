@@ -4,8 +4,10 @@ const initialState = {
   success: false,
   errors: null,
   fails: null,
+  books: []
 };
-const addBookReducer = (state = initialState, action) => {
+
+const bookReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADDBOOK_SUCCESSFUL:
       state = {
@@ -29,15 +31,27 @@ const addBookReducer = (state = initialState, action) => {
         fails: action.payload
       };
       break;
+    case actionTypes.GETBOOKS_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        books: action.payload
+      };
+      break;
+    case actionTypes.GETBOOKS_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload,
+        books: null
+      };
+      break;
     default:
       return state;
   }
   return state;
 };
 
-const updateReducer = {};
 
-export {
-  addBookReducer,
-  updateReducer
-};
+export default bookReducer;

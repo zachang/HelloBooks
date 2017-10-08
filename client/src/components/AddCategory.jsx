@@ -1,13 +1,12 @@
 import React from 'react';
-import {Link, IndexLink} from 'react-router';
+//import {Link, IndexLink} from 'react-router';
 import classnames from 'classnames';
 import PropTypes from 'react-proptypes';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
-import { tokenValidate } from '../utils/helpers';
-import { addCategoryAction} from '../actions/categoryAction.js';
+import { addCategoryAction} from '../actions/categoryAction';
 
 
 export class AddCategory extends React.Component {
@@ -31,7 +30,6 @@ export class AddCategory extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //console.log(this.state.categoryData);
     this.props.addCategoryAction(this.state.categoryData);
   }
 

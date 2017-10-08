@@ -44,7 +44,9 @@ app.use(logger('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
+// app.use('/uploads/', express.static(path.join(__dirname, './public/uploads')));
 app.use(express.static('../client/src'));
+
 app.use('/api/v1/', router);
 
 app.get('/api/v1/*', (req, res) => res.status(404).send({

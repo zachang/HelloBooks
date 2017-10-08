@@ -115,7 +115,7 @@ export class LoginForm extends React.Component {
         <div className="row">
           <div className="col m12 s12">
             <button className="col m12 s12 btn btn-large waves-effect waves-light orange log-in"
-                    type="submit" name="action">Login
+              type="submit" name="action">Login
             </button>
 
             <div style={{ color:'red', float:'right' }}>{this.props.signinState.fails}</div>

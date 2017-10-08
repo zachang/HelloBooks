@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link, IndexLink} from 'react-router';
+// import {Link, IndexLink} from 'react-router';
 import classnames from 'classnames';
 import PropTypes from 'react-proptypes';
 import {bindActionCreators} from 'redux';
@@ -8,8 +8,8 @@ import {connect} from 'react-redux';
 import { tokenValidate } from '../utils/helpers';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
-import addBookAction from '../actions/addBookAction.js';
-import { getCategoryAction} from '../actions/categoryAction.js';
+import { addBookAction } from '../actions/bookAction';
+import { getCategoryAction } from '../actions/categoryAction';
 
 export class AddBook extends React.Component {
   constructor(props) {
@@ -37,11 +37,45 @@ export class AddBook extends React.Component {
     this.props.getCategoryAction();
   }
 
+  componentDidMount() {
+    $('select').material_select();
+    $('.datepicker').pickadate();
+    $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.bookState.success === true) {
+      this.setState({
+        bookData: {
+          book_name: '',
+          author: '',
+          book_count: '',
+          category_id: '',
+          publish_year: '',
+          isbn: '',
+          pages: '',
+          description: '',
+          book_image: ''
+        }
+      });
+    } else {
+      this.setState({ errors: nextProps.bookState.errors });
+    }
+    this.setState({ categories: nextProps.categoryState.categories });
+  }
+
+  componentDidUpdate() {
+    $('select').material_select();
+    $('.datepicker').pickadate();
+    $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
+  }
 
   handleChange(e) {
     const bookData = this.state.bookData;
     bookData[e.target.name] = e.target.value;
-    this.setState({bookData})
+    this.setState({ bookData });
   }
 
   handleSubmit(e) {
@@ -49,43 +83,19 @@ export class AddBook extends React.Component {
     this.props.addBookAction(this.state.bookData);
   }
 
-  componentDidMount() {
-      $('select').material_select();
-      $('.datepicker').pickadate();
-      $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
-      $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.tokenState.message != null) {
-      tokenValidate(nextProps.tokenState.type);
-    }
-    else {
-      this.setState({errors: nextProps.addBookState.errors});
-      this.setState({ categories: nextProps.categoryState.categories});
-    }
-  }
-
-  componentDidUpdate() {
-      $('select').material_select();
-      $('.datepicker').pickadate();
-      $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
-      $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
-  }
-
   render() {
-    const {bookData} = this.state;
+    const { bookData } = this.state;
 
     return (
       <div className='row'>
         <AdminHeader/>
         <AdminSidebar/>
-        <div className='container mainCon' style={{marginLeft: '5%'}}>
+        <div className='container mainCon' style={{ marginLeft: '5%'} }>
           <div className='row'>
-            <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '4%'}}>
+            <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '4%' }}>
 
               <div className='row'>
-                <form className='col s10' onSubmit={this.handleSubmit}>
+                <form className='col s10' onSubmit={this.handleSubmit} formEncType='multipart/form-data'>
                   <div className='row'>
                     <div className='input-field col s10'>
                       <input
@@ -287,10 +297,10 @@ export class AddBook extends React.Component {
                       <div className='btn'>
                         <span>Add Image</span>
                         <input type='file'
-                         id='book_image'
-                         name='book_image'
-                         value={bookData.book_image}
-                         onChange={ this.handleChange }
+                          id='book_image'
+                          name='book_image'
+                          value={ bookData.book_image }
+                          onChange={ this.handleChange }
                         />
                       </div>
                       <div className='file-path-wrapper'>
@@ -306,13 +316,13 @@ export class AddBook extends React.Component {
                     </div>
                   </div>
 
-                    <button
-                      className='col s10 btn btn-large waves-effect waves-light'
-                      type='submit'
-                      name='action'
-                    >
-                      Add Book
-                    </button>
+                  <button
+                    className='col s10 btn btn-large waves-effect waves-light'
+                    type='submit'
+                    name='action'
+                  >
+                    Add Book
+                  </button>
 
                 </form>
               </div>
@@ -326,14 +336,14 @@ export class AddBook extends React.Component {
 }
 
 AddBook.propTypes = {
-  addBookState: PropTypes.object.isRequired,
+  bookState: PropTypes.object.isRequired,
   categoryState: PropTypes.object.isRequired,
-  addBookAction: PropTypes.func.isRequired
+  addBookAction: PropTypes.func.isRequired,
+  getCategoryAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  addBookState: state.addBookReducer,
+  bookState: state.bookReducer,
   categoryState: state.categoryReducer,
-  tokenState: state.tokenReducer
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ addBookAction, getCategoryAction }, dispatch);

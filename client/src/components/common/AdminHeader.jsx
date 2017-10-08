@@ -19,7 +19,6 @@ export default class AdminHeader extends React.Component {
 
   render() {
     const userDetails = jwt_decode(window.sessionStorage.token);
-    console.log(userDetails);
     return (
       <div className="col m10 l10 s12 right" style={{padding: '0px'}}>
         <div className="navbar-fixed">

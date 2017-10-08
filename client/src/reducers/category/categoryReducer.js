@@ -33,7 +33,7 @@ const categoryReducer = (state = initialState, action) => {
     case actionTypes.GETCATEGORY_SUCCESSFUL:
       state = {
         ...state,
-        success: false,
+        success: true,
         errors: null,
         categories: action.payload
       };

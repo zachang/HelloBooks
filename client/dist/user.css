@@ -226,3 +226,7 @@ nav ul a.btn-prof{
     }
 
 }
+
+.grey-text.text-darken-4.adjust {
+  color: orange !important;
+}
