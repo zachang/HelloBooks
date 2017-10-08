@@ -16,17 +16,14 @@ const addBookAction = bookContents => (dispatch) => {
     .catch((err) => {
       if (err.response.status === 401) {
         tokenValidate('invalid');
-      }
-      else if (err.response.status === 403) {
+      } else if (err.response.status === 403) {
         tokenValidate('unauthorized');
-      }
-      else if (err.response.data.message === 'Validation error') {
+      } else if (err.response.data.message === 'Validation error') {
         return dispatch({
           type: actionTypes.ADDBOOK_VALIDATION_ERROR,
           payload: err.response.data.errors
         });
-      }
-      else {
+      } else {
         return dispatch({
           type: actionTypes.ADDBOOK_UNSUCCESSFUL,
           payload: err.response.data.message
@@ -49,11 +46,9 @@ const getBookAction = () => (dispatch) => {
     .catch((err) => {
       if (err.response.status === 401) {
         tokenValidate('invalid');
-      }
-      else if (err.response.status === 403) {
+      } else if (err.response.status === 403) {
         tokenValidate('unauthorized');
-      }
-      else {
+      } else {
         return dispatch({
           type: actionTypes.GETBOOKS_UNSUCCESSFUL,
           payload: err.response.data.message

@@ -3,7 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'react-proptypes';
 import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
 import { addCategoryAction} from '../actions/categoryAction';
@@ -25,7 +25,7 @@ export class AddCategory extends React.Component {
   handleChange(e) {
     const categoryData = this.state.categoryData;
     categoryData[e.target.name] = e.target.value;
-    this.setState({categoryData})
+    this.setState({ categoryData })
   }
 
   handleSubmit(e) {
@@ -34,11 +34,11 @@ export class AddCategory extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({errors: nextProps.categoryState.errors});
+    this.setState({ errors: nextProps.categoryState.errors });
   }
 
   render() {
-    const {categoryData} = this.state;
+    const { categoryData } = this.state;
 
     return (
       <div className="row">

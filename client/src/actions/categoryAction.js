@@ -11,19 +11,20 @@ const addCategoryAction = categoryContents => (dispatch) => {
     })
     .catch((err) => {
       if (err.response.status === 401) {
-        return dispatch({ type: actionTypes.INVALID_TOKEN,
-          payload: err.response.data.message });
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else if (err.response.data.message === 'Validation error') {
+        return dispatch({
+          type: actionTypes.ADDCATEGORY_VALIDATION_ERROR,
+          payload: err.response.data.errors
+        });
+      } else {
+        return dispatch({
+          type: actionTypes.ADDCATEGORY_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
       }
-      if (err.response.status === 403) {
-        return dispatch({ type: actionTypes.UNAUTHORIZED_TOKEN,
-          payload: err.response.data.message });
-      }
-      if (err.response.data.message === 'Validation error') {
-        return dispatch({ type: actionTypes.ADDCATEGORY_VALIDATION_ERROR,
-          payload: err.response.data.errors });
-      }
-      return dispatch({ type: actionTypes.ADDCATEGORY_UNSUCCESSFUL,
-        payload: err.response.data.message });
     });
 };
 
@@ -37,15 +38,15 @@ const getCategoryAction = () => (dispatch) => {
     })
     .catch((err) => {
       if (err.response.status === 401) {
-        return dispatch({ type: actionTypes.INVALID_TOKEN,
-          payload: err.response.data.message });
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.GETCATEGORY_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
       }
-      if (err.response.status === 403) {
-        return dispatch({ type: actionTypes.UNAUTHORIZED_TOKEN,
-          payload: err.response.data.message });
-      }
-      return dispatch({ type: actionTypes.GETCATEGORY_UNSUCCESSFUL,
-        payload: err.response.data.message });
     });
 };
 

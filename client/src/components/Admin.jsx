@@ -10,14 +10,6 @@ import BookCard from './book/BookCard.jsx';
 import Paginate from './common/Paginate.jsx';
 
 export class Admindashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      errors: null,
-      books: []
-    };
-  }
-
   componentWillMount() {
     this.props.getBookAction();
   }
