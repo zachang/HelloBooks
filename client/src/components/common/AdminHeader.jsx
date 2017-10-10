@@ -20,16 +20,16 @@ export default class AdminHeader extends React.Component {
   render() {
     const userDetails = jwt_decode(window.sessionStorage.token);
     return (
-      <div className="col m10 l10 s12 right" style={{padding: '0px'}}>
+      <div className="col m10 l10 s12 right" style={{ padding: '0px'} }>
         <div className="navbar-fixed">
           <nav className="mainNav black col m10 l10" role="navigation">
             <div className="nav-wrapper container">
               <Link id="logo-container" to="/admin" className="brand-logo mainLogo">
-              <img src="./imgs/hello.png" alt="hellobooks"/>
+                <img src="./imgs/hello.png" alt="hellobooks"/>
               </Link>
               <ul className="user hide-on-small-and-down show-on-medium-and-up">
                 <a className='dropdown-button btn black btn-prof' href='#' data-activates='dropdown1'>
-                  <i className="material-icons mat-icon right" style={{marginLeft: "1%"}}>arrow_drop_down</i>
+                  <i className="material-icons mat-icon right" style={{ marginLeft: "1%" }}>arrow_drop_down</i>
                   {userDetails.username}
                 </a>
               </ul>
@@ -67,23 +67,6 @@ export default class AdminHeader extends React.Component {
                 <li className="no-padding">
                   <ul className="collapsible collapsible-accordion">
                     <li>
-                      <a className="collapsible-header">Book Categories<i className="material-icons mat-icon">arrow_drop_down</i></a>
-                      <div className="collapsible-body">
-                        <ul>
-                          <li><a href="#">Computer Programming</a></li>
-                          <li><a href="#">Eentertainment</a></li>
-                          <li><a href="#">History</a></li>
-                          <li><a href="#">Science</a></li>
-                          <li><a href="#">Sports</a></li>
-                          <li><a href="#">Travel</a></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <li className="no-padding">
-                  <ul className="collapsible collapsible-accordion">
-                    <li>
                       <a className="collapsible-header">Permissions<i className="material-icons mat-icon">arrow_drop_down</i></a>
                       <div className="collapsible-body">
                         <ul>
@@ -91,8 +74,6 @@ export default class AdminHeader extends React.Component {
                           <li><a href="addcategories.html">Add Categories</a></li>
                           <li><a href="#">Add Admin</a></li>
                           <li><a href="#">Remove Admin</a></li>
-                          <li><a href="#">Block User</a></li>
-                          <li><a href="#">Unblock User</a></li>
                           <li><a href="#">Upgrade User</a></li>
                         </ul>
                       </div>

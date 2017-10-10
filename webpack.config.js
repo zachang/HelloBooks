@@ -22,9 +22,14 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.css'),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery'
+    })
   ],
   devtool: 'eval-source-map',
+
   module: {
     loaders: [
       {
@@ -69,7 +74,7 @@ module.exports = {
         secure: false
       }
     },
-    contentBase: PATHS.build
+    contentBase: '/'
   },
   externals: {
     jquery: 'jQuery'

@@ -5,3 +5,4 @@ node_modules/
 npm-debug.log
 npm-debug.log.400741070
 coverage/
+server/uploads/books/

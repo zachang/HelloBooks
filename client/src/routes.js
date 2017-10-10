@@ -12,6 +12,7 @@ import BorrowList from './components/Borrowlist.jsx';
 import ReturnedList from './components/ReturnedList.jsx';
 import AddBook from './components/AddBook.jsx';
 import AddCategory from './components/AddCategory.jsx';
+import UpdateBook from './components/UpdateBook.jsx';
 import auth from './components/auth';
 
 export default (
@@ -25,11 +26,12 @@ export default (
       <Route path="/returned" component={Returned}/>
       <Route path="/borrowed" component={Borrowed}/>
       <Route path="/admin" component={Admindashboard}/>
-      <Route path="/userlist" component={UserList}/>
-      <Route path="/borrowlist" component={BorrowList}/>
-      <Route path="/returnlist" component={ReturnedList}/>
-      <Route path="/addbook" component={AddBook}/>
-      <Route path="/addcategory" component={AddCategory}/>
+      <Route path="/user" component={UserList}/>
+      <Route path="/borrow" component={BorrowList}/>
+      <Route path="/return" component={ReturnedList}/>
+      <Route path="/books" component={AddBook}/>
+      <Route path="/books/:id" component={UpdateBook}/>
+      <Route path="/category" component={AddCategory}/>
     </Route>
   </Router>
 );

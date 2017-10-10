@@ -4,7 +4,8 @@ const initialState = {
   success: false,
   errors: null,
   fails: null,
-  books: []
+  books: [],
+  book: null
 };
 
 const bookReducer = (state = initialState, action) => {
@@ -31,6 +32,28 @@ const bookReducer = (state = initialState, action) => {
         fails: action.payload
       };
       break;
+    case actionTypes.UPDATEBOOK_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        fails: null
+      };
+      break;
+    case actionTypes.UPDATEBOOK_VALIDATION_ERROR:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload
+      };
+      break;
+    case actionTypes.UPDATEBOOK_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        fails: action.payload
+      };
+      break;
     case actionTypes.GETBOOKS_SUCCESSFUL:
       state = {
         ...state,
@@ -47,11 +70,26 @@ const bookReducer = (state = initialState, action) => {
         books: null
       };
       break;
+    case actionTypes.GETONEBOOK_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        book: action.payload
+      };
+      break;
+    case actionTypes.GETONEBOOK_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload,
+        book: null
+      };
+      break;
     default:
       return state;
   }
   return state;
 };
-
 
 export default bookReducer;

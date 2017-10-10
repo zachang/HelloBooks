@@ -39,7 +39,7 @@ const BookCard = props => (
       </div>
       <div className="card-action home-card">
         <Link
-          to="updatebook.html"
+          to={`books/${props.book.id}`}
           className="waves-effect waves-light btn teal"
         >
           Update

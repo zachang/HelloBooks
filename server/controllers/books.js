@@ -64,7 +64,7 @@ const booksController = {
     };
     if (req.query.cat) {
       whereClause = {
-        where: {category_id: req.query.cat},
+        where: { category_id: req.query.cat },
         include: [{
           model: Category,
           attributes: ['category_name']
@@ -75,11 +75,22 @@ const booksController = {
       .findAll(whereClause)
       .then((books) => {
         if (books.length === 0) {
-          return res.status(200).send({message: 'Nothing to display'});
+          return res.status(200).send({ message: 'Nothing to display' });
         }
-        return res.status(200).send({message: 'All books displayed', books});
+        return res.status(200).send({ message: 'All books displayed', books });
       })
-      .catch(() => res.status(400).send({message: 'Oops, failed to display'}));
+      .catch(() => res.status(400).send({ message: 'Oops, failed to display' }));
+  },
+  listOne(req, res) {
+    return Book
+      .findById(req.params.bookId)
+      .then((book) => {
+        if (!book) {
+          return res.status(404).send({message: 'Book not found'});
+        }
+        return res.status(200).send({ message: 'Book displayed', book });
+      })
+      .catch(() => res.status(400).send({ message: 'Book display failed' }));
   },
   listCatBook(req, res) {
     const params = req.params;
@@ -87,9 +98,9 @@ const booksController = {
       .findById(params.categoryId)
       .then((found) => {
         if (!found) {
-          return Promise.reject({status: 404, message: 'Category not found'});
+          return Promise.reject({ status: 404, message: 'Category not found' });
         }
-        return Book.findAll({where: {category_id: found.id}});
+        return Book.findAll({ where: { category_id: found.id } });
       })
       .then((books) => {
         if (books.length === 0) {
@@ -99,7 +110,7 @@ const booksController = {
       })
       .catch((error) => {
         if (error.status && error.message) {
-          return res.status(error.status).json({message: error.message});
+          return res.status(error.status).json({ message: error.message });
         }
         return res.status(400).send({message: error});
       });
@@ -136,10 +147,10 @@ const booksController = {
           }
           return book
             .update(obj)
-            .then(() => res.status(200).send({message: 'Books updated', book}))
-            .catch(err => res.status(400).send({message: 'Error updating books', err}));
+            .then(() => res.status(200).send({ message: 'Books updated', book }))
+            .catch(err => res.status(400).send({ message: 'Error updating books', err }));
         })
-        .catch(() => res.status(400).send({message: 'Error updating books'}));
+        .catch(() => res.status(400).send({ message: 'Error updating books' }));
     }
     return res.status(400).json({
       message: 'Validation error',

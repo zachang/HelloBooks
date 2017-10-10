@@ -1,12 +1,11 @@
 import React from 'react';
-//import {Link, IndexLink} from 'react-router';
 import classnames from 'classnames';
 import PropTypes from 'react-proptypes';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import AdminHeader from './common/AdminHeader';
-import AdminSidebar from './common/AdminSidebar';
-import { addCategoryAction} from '../actions/categoryAction';
+import AdminHeader from './common/AdminHeader.jsx';
+import AdminSidebar from './common/AdminSidebar.jsx';
+import { addCategoryAction } from '../actions/categoryAction';
 
 
 export class AddCategory extends React.Component {
@@ -22,6 +21,10 @@ export class AddCategory extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ errors: nextProps.categoryState.errors });
+  }
+
   handleChange(e) {
     const categoryData = this.state.categoryData;
     categoryData[e.target.name] = e.target.value;
@@ -33,10 +36,6 @@ export class AddCategory extends React.Component {
     this.props.addCategoryAction(this.state.categoryData);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ errors: nextProps.categoryState.errors });
-  }
-
   render() {
     const { categoryData } = this.state;
 
@@ -44,9 +43,9 @@ export class AddCategory extends React.Component {
       <div className="row">
         <AdminHeader/>
         <AdminSidebar/>
-        <div className="container mainCon" style={{marginLeft: '5%'}}>
+        <div className="container mainCon" style={{ marginLeft: '5%' }}>
           <div className="row">
-            <div className="col s10 m8 l6 bookcat" style={{marginLeft: '35%', marginTop: '20%'}}>
+            <div className="col s10 m8 l6 bookcat" style={{ marginLeft: '35%', marginTop: '20%' }}>
 
               <div className="row">
                 <form className="col s10" onSubmit={this.handleSubmit}>
@@ -66,7 +65,7 @@ export class AddCategory extends React.Component {
                         htmlFor='category'
                         className={(this.state.errors && !!this.state.errors['category_name'] || categoryData.category_name.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
-                        data-error={ (this.state.errors && !!this.state.errors['category_name']) ? this.state.errors['category_name'] : '' }
+                        data-error={(this.state.errors && !!this.state.errors['category_name']) ? this.state.errors['category_name'] : ''}
                       >
                         Category
                       </label>
@@ -81,7 +80,7 @@ export class AddCategory extends React.Component {
                         name='action'> Add Category
                       </button>
 
-                      <div style={{ color:'red', float:'right' }}>{this.props.categoryState.fails}</div>
+                      <div style={{ color: 'red', float: 'right' }}>{this.props.categoryState.fails}</div>
                     </div>
                   </div>
                 </form>

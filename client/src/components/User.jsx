@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { tokenValidate } from '../utils/helpers';
 import { getBookAction } from '../actions/bookAction';
-import UserHeader from './common/UserHeader';
-import UserSidebar from './common/UserSidebar';
-import Paginate from './common/Paginate';
+import UserHeader from './common/UserHeader.jsx';
+import UserSidebar from './common/UserSidebar.jsx';
+import Paginate from './common/Paginate.jsx';
 import BookCardUser from './book/BookCardUser.jsx';
 
 export class Userdashboard extends React.Component {

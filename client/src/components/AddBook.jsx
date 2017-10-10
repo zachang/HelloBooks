@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import {Link, IndexLink} from 'react-router';
 import classnames from 'classnames';
 import PropTypes from 'react-proptypes';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import { tokenValidate } from '../utils/helpers';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
 import { addBookAction } from '../actions/bookAction';

@@ -51,24 +51,6 @@ export default class AdminSidebar extends React.Component {
               <li className="no-padding">
                 <ul className="collapsible collapsible-accordion">
                   <li>
-                    <a className="collapsible-header">Book Categories<i
-                      className="material-icons">arrow_drop_down</i></a>
-                    <div className="collapsible-body">
-                      <ul>
-                        <li><a href="#">Computer Programming</a></li>
-                        <li><a href="#">Eentertainment</a></li>
-                        <li><a href="#">History</a></li>
-                        <li><a href="#">Science</a></li>
-                        <li><a href="#">Sports</a></li>
-                        <li><a href="#">Travel</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li className="no-padding">
-                <ul className="collapsible collapsible-accordion">
-                  <li>
                     <a className="collapsible-header">Permissions<i className="material-icons">arrow_drop_down</i></a>
                     <div className="collapsible-body">
                       <ul>
@@ -76,8 +58,6 @@ export default class AdminSidebar extends React.Component {
                         <li><a href="addcategories.html">Add Categories</a></li>
                         <li><a href="#">Add Admin</a></li>
                         <li><a href="#">Remove Admin</a></li>
-                        <li><a href="#">Block User</a></li>
-                        <li><a href="#">Unblock User</a></li>
                         <li><a href="#">Upgrade User</a></li>
                       </ul>
                     </div>
