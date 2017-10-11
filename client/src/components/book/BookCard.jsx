@@ -6,7 +6,7 @@ const BookCard = props => (
   <div className="col l4 s10 m6 cardsm">
     <div className="card large sticky-action">
       <div className="card-image waves-effect waves-block waves-light">
-        <img className="activator" src="./imgs/book1.jpg"/>
+        <img className="activator" src={ (props.book.book_image !== null) ? props.book.book_image : './imgs/book1.jpg' }/>
       </div>
       <div className="card-content">
         <span className="card-title activator grey-text text-darken-4">

@@ -42,8 +42,8 @@ const booksController = {
       pages: req.body.pages,
       description: req.body.description
     };
-    if (req.file) {
-      obj.book_image = req.file.filename;
+    if (req.body.book_image) {
+      obj.book_image = req.body.book_image;
     }
     if (validation.passes()) {
       return Book.create(obj)
@@ -112,7 +112,7 @@ const booksController = {
         if (error.status && error.message) {
           return res.status(error.status).json({ message: error.message });
         }
-        return res.status(400).send({message: error});
+        return res.status(400).send({ message: error });
       });
   },
   update(req, res) {

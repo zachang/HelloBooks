@@ -22,13 +22,15 @@ export class AddBook extends React.Component {
         isbn: '',
         pages: '',
         description: '',
-        book_image: ''
+        book_image: '',
+        book_image_text: ''
       },
       errors: null,
       categories: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   componentWillMount() {
@@ -54,7 +56,8 @@ export class AddBook extends React.Component {
           isbn: '',
           pages: '',
           description: '',
-          book_image: ''
+          book_image: '',
+          book_image_text: ''
         }
       });
     } else {
@@ -70,19 +73,28 @@ export class AddBook extends React.Component {
     $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
   }
 
+
+  handleImageChange(e) {
+    let bookData = this.state.bookData;
+    bookData['book_image_text'] =  e.target.value;
+    bookData['book_image'] =  e.target.files[0];
+    this.setState({ bookData });
+  }
+
   handleChange(e) {
-    const bookData = this.state.bookData;
-    bookData[e.target.name] = e.target.value;
+    let bookData = this.state.bookData;
+    bookData[e.target.name] =  e.target.value;
     this.setState({ bookData });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state);
     this.props.addBookAction(this.state.bookData);
   }
 
   render() {
-    const { bookData } = this.state;
+    let { bookData } = this.state;
 
     return (
       <div className='row'>
@@ -93,7 +105,7 @@ export class AddBook extends React.Component {
             <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '4%' }}>
 
               <div className='row'>
-                <form className='col s10' onSubmit={this.handleSubmit} formEncType='multipart/form-data'>
+                <form className='col s10' onSubmit={this.handleSubmit}>
                   <div className='row'>
                     <div className='input-field col s10'>
                       <input
@@ -297,8 +309,8 @@ export class AddBook extends React.Component {
                         <input type='file'
                           id='book_image'
                           name='book_image'
-                          value={ bookData.book_image }
-                          onChange={ this.handleChange }
+                          value={ bookData.book_image_text }
+                          onChange={ this.handleImageChange }
                         />
                       </div>
                       <div className='file-path-wrapper'>
@@ -306,8 +318,8 @@ export class AddBook extends React.Component {
                           type='text'
                           name='book_image_txt'
                           className={ classnames('file-path', {
-                            'invalid': (this.state.errors && !!this.state.errors['book_image'])?
-                              !!this.state.errors['book_image'] : false
+                            'invalid': (this.state.errors && !!this.state.errors['book_image_text'])?
+                              !!this.state.errors['book_image_text'] : false
                           }) }
                         />
                       </div>

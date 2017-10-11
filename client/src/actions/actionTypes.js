@@ -24,5 +24,7 @@ export default keymirror({
   GETUSERS_SUCCESSFUL: null,
   GETUSERS_UNSUCCESSFUL: null,
   INVALID_TOKEN: null,
-  UNAUTHORIZED_TOKEN: null
+  UNAUTHORIZED_TOKEN: null,
+  UPLOAD_IMAGE: null,
+  UPLOAD_IMAGE_UNSUCCESSFUL: null
 });
