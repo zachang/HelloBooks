@@ -5,9 +5,8 @@ import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 
 const addBookAction = bookContents => (dispatch) => {
-  // const form = document.querySelector('form');
-  // const data = new FormData(form);
-  dispatch({ type: 'UPLOAD_IMAGE'});
+
+  dispatch({ type: 'UPDATE_IMAGE'});
   const cloudName = 'hellobookz';
   const url = 'https://api.cloudinary.com/v1_1/'+cloudName+'/image/upload';
   const timestamp = Date.now()/1000;
@@ -27,12 +26,11 @@ const addBookAction = bookContents => (dispatch) => {
   });
   uploadRequest.end((err, resp) => {
     if(err){
-      dispatch({type: 'UPLOAD_IMAGE_UNSUCCESSFUL'});
+      dispatch({type: 'UPDATE_IMAGE_UNSUCCESSFUL'});
       console.log(err);
       return
     }
     bookContents.book_image = resp.body.url;
-    console.log(bookContents, 'from cloudinary');
 
     axios.post('/api/v1/books', bookContents ,
       { headers: { 'x-access-token': window.sessionStorage.token } })
@@ -63,9 +61,34 @@ const addBookAction = bookContents => (dispatch) => {
 };
 
 const updateBookAction = (bookContents, id) => (dispatch) => {
-  const form = document.querySelector('form');
-  const data = new FormData(form);
-  axios.put(`/api/v1/books/${id}`, data,
+
+  dispatch({ type: 'UPLOAD_IMAGE'});
+  const cloudName = 'hellobookz';
+  const url = 'https://api.cloudinary.com/v1_1/'+cloudName+'/image/upload';
+  const timestamp = Date.now()/1000;
+  const uploadPreset = 'iatwiohn';
+  const paramsStr = 'timestamp='+timestamp+'&upload_preset='+uploadPreset+'V9wVd_HdjhVrnZYCYyGo3mNszNE';
+  const signature = sha1(paramsStr);
+  const params = {
+    'api_key': '471689873521792',
+    'timestamp': timestamp,
+    'upload_preset': uploadPreset,
+    'signature': signature
+  };
+  let uploadRequest = superagent.post(url);
+  uploadRequest.attach('file', bookContents.book_image);
+  Object.keys(params).forEach((key) => {
+    uploadRequest.field(key, params[key])
+  });
+  uploadRequest.end((err, resp) => {
+    if(err){
+      dispatch({type: 'UPLOAD_IMAGE_UNSUCCESSFUL'});
+      console.log(err);
+      return
+    }
+    bookContents.book_image = resp.body.url;
+    console.log(bookContents, 'from cloudinary');
+  axios.put(`/api/v1/books/${id}`, bookContents,
     { headers: { 'x-access-token': window.sessionStorage.token } })
     .then((res) => {
       return dispatch({
@@ -90,6 +113,7 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
         });
       }
     });
+  });
 };
 
 const getBookAction = () => (dispatch) => {

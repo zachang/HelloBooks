@@ -23,13 +23,15 @@ export class UpdateBook extends React.Component {
         pages: '',
         description: '',
         is_available: '',
-        book_image: ''
+        book_image: '',
+        book_image_text: ''
       },
       errors: null,
       categories: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   componentWillMount() {
@@ -60,6 +62,13 @@ export class UpdateBook extends React.Component {
     $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
   }
 
+  handleImageChange(e) {
+    let bookData = this.state.bookData;
+    bookData['book_image_text'] =  e.target.value;
+    bookData['book_image'] =  e.target.files[0];
+    this.setState({ bookData });
+  }
+
   handleChange(e) {
     const bookData = this.state.bookData;
     bookData[e.target.name] = e.target.value;
@@ -68,7 +77,6 @@ export class UpdateBook extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log(this.state.bookData);
     this.props.updateBookAction(this.state.bookData, this.props.params.id);
   }
 
@@ -311,8 +319,8 @@ export class UpdateBook extends React.Component {
                         <input type='file'
                           id='book_image'
                           name='book_image'
-                          value={ bookData.book_image }
-                          onChange={ this.handleChange }
+                          value={ bookData.book_image_text }
+                          onChange={ this.handleImageChange }
                         />
                       </div>
                       <div className='file-path-wrapper'>
@@ -320,8 +328,8 @@ export class UpdateBook extends React.Component {
                           type='text'
                           name='book_image_txt'
                           className={ classnames('file-path', {
-                            'invalid': (this.state.errors && !!this.state.errors['book_image'])?
-                              !!this.state.errors['book_image'] : false
+                            'invalid': (this.state.errors && !!this.state.errors['book_image_text'])?
+                              !!this.state.errors['book_image_text'] : false
                           }) }
                         />
                       </div>

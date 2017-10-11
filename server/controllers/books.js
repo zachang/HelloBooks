@@ -128,18 +128,13 @@ const booksController = {
       description: req.body.description,
       is_available: req.body.is_available
     };
-    if (req.file) {
-      obj.book_image = req.file.filename;
+    if (req.body.book_image) {
+      obj.book_image = req.body.book_image;
     }
     if (validation.passes()) {
       return Book
         .findById(req.params.bookId)
         .then((book) => {
-          try {
-            fs.unlinkSync(`./server/uploads/books/${book.book_image}`);
-          } catch (err) {
-            //
-          }
           if (!book) {
             return res.status(404).send({
               message: 'Book Not Found',
