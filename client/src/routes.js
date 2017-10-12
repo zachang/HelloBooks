@@ -25,8 +25,10 @@ export default (
       <Route path="/profile" component={Profile}/>
       <Route path="/returned" component={Returned}/>
       <Route path="/borrowed" component={Borrowed}/>
+    </Route>
+    <Route component={auth.AdminAuth}>
       <Route path="/admin" component={Admindashboard}/>
-      <Route path="/user" component={UserList}/>
+      <Route path="/users" component={UserList}/>
       <Route path="/borrow" component={BorrowList}/>
       <Route path="/return" component={ReturnedList}/>
       <Route path="/books" component={AddBook}/>

@@ -166,4 +166,30 @@ const getOneBookAction = id => (dispatch) => {
     });
 }
 
-export { addBookAction, updateBookAction, getBookAction, getOneBookAction };
+
+const deleteBookAction = id => (dispatch) => {
+  axios.delete(`/api/v1/books/${id}`,
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.DELETE_BOOK_SUCCESSFUL,
+        payload: id
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.DELETE_BOOK_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+}
+
+export { addBookAction, updateBookAction, getBookAction, getOneBookAction, deleteBookAction  };

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import signinAction from '../../actions/signinAction.js';
 import loginValidate from '../../utils/loginValidate.js';
-import { decodeToken } from '../../utils/helpers';
+import { redirectIfLoggedIn } from '../../utils/helpers';
 
 export class LoginForm extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export class LoginForm extends React.Component {
 
   componentWillMount() {
     if (window.sessionStorage.token) {
-      decodeToken(window.sessionStorage.token);
+      redirectIfLoggedIn(window.sessionStorage.token);
     }
   }
 

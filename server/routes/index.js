@@ -120,7 +120,8 @@ const routes = (router) => {
 
   router.route('/books/:bookId')
     .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.update)
-    .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.listOne);
+    .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.listOne)
+    .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.destroy);
 
   router.route('/users/:userId/books')
     .post(authMiddleware.verifyToken, borrowController.create)

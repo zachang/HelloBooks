@@ -5,7 +5,7 @@ import {Link, IndexLink, browserHistory} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import signupAction from '../../actions/signupAction.js';
-import { decodeToken } from '../../utils/helpers';
+import { redirectIfLoggedIn } from '../../utils/helpers';
 
 export class RegForm extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export class RegForm extends React.Component {
 
   componentWillMount() {
     if (window.sessionStorage.token) {
-      decodeToken(window.sessionStorage.token);
+      redirectIfLoggedIn(window.sessionStorage.token);
     }
   }
 

@@ -1,18 +1,25 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
 import { browserHistory } from 'react-router';
+import { decodeToken } from '../../utils/helpers';
 
 /**
- * AuthenticateUser class declaration
+ * AuthenticateAdmin class declaration
  *
  */
-class Authenticate extends React.Component {
+class AdminAuth extends React.Component {
   /**
    * @return {void} void
    */
   componentWillMount() {
     if (!window.sessionStorage.token) {
       browserHistory.push('/');
+    }
+    else{
+      const userDetails = decodeToken(window.sessionStorage.token);
+      if(userDetails.is_admin === false){
+        browserHistory.push('/user');
+      }
     }
   }
   /**
@@ -23,8 +30,8 @@ class Authenticate extends React.Component {
     return this.props.children;
   }
 }
-Authenticate.propTypes = {
+AdminAuth.propTypes = {
   children: PropTypes.element.isRequired
 };
 
-export default Authenticate;
+export default AdminAuth;

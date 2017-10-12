@@ -3,21 +3,27 @@ import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { tokenValidate } from '../utils/helpers';
-import { getBookAction } from '../actions/bookAction';
+import { getBookAction, deleteBookAction  } from '../actions/bookAction';
 import AdminHeader from './common/AdminHeader.jsx';
 import AdminSidebar from './common/AdminSidebar.jsx';
 import BookCard from './book/BookCard.jsx';
 import Paginate from './common/Paginate.jsx';
 
 export class Admindashboard extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      errors:'',
+      books:[]
+    }
+
+  }
   componentWillMount() {
     this.props.getBookAction();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.tokenState.message != null) {
-      tokenValidate(nextProps.tokenState.type);
-    } else {
+    if(nextProps.bookState.success === false){
       this.setState({ errors: nextProps.bookState.errors });
     }
   }
@@ -41,6 +47,7 @@ export class Admindashboard extends React.Component {
                 <BookCard
                   key={i}
                   book={ book }
+                  deleteBookAction={ this.props.deleteBookAction }
                 />
               )}
 
@@ -58,14 +65,13 @@ export class Admindashboard extends React.Component {
 
 Admindashboard.propTypes = {
   bookState: PropTypes.object.isRequired,
-  tokenState: PropTypes.object.isRequired,
   getBookAction: PropTypes.func.isRequired,
+  deleteBookAction: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
-  bookState: state.bookReducer,
-  tokenState: state.tokenReducer
+  bookState: state.bookReducer
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getBookAction }, dispatch);
+  bindActionCreators({ getBookAction, deleteBookAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admindashboard);

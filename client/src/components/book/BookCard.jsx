@@ -3,10 +3,11 @@ import PropTypes from 'react-proptypes';
 import { Link } from 'react-router';
 
 const BookCard = props => (
+
   <div className="col l4 s10 m6 cardsm">
     <div className="card large sticky-action">
       <div className="card-image waves-effect waves-block waves-light">
-        <img className="activator" src={ (props.book.book_image !== null) ? props.book.book_image : './imgs/book1.jpg' }/>
+        <img className="activator" src={ (props.book.book_image !== null) ? props.book.book_image : '../../imgs/default.jpg' }/>
       </div>
       <div className="card-content">
         <span className="card-title activator grey-text text-darken-4">
@@ -32,24 +33,21 @@ const BookCard = props => (
         <p>Published: { new Date(props.book.publish_year).getFullYear() }</p>
         <p>Pages: { props.book.pages }</p>
         <p>Stock: { props.book.book_count }</p>
-        <p>Description: {
-          (props.book.description)
-        }
-        </p>
+        <p>Description: { props.book.description }</p>
       </div>
       <div className="card-action home-card">
         <Link
-          to={`books/${props.book.id}`}
+          to={`books/${ props.book.id }`}
           className="waves-effect waves-light btn teal"
         >
           Update
         </Link>
-        <Link
-          to="#index-banner"
+        <button
+          onClick={() => (props.deleteBookAction(props.book.id))}
           className="waves-effect waves-light btn red"
         >
           Delete
-        </Link>
+        </button>
       </div>
 
     </div>

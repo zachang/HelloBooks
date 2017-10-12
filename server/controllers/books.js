@@ -57,6 +57,7 @@ const booksController = {
   },
   list(req, res) {
     let whereClause = {
+      where: { is_available: true },
       include: [{
         model: Category,
         attributes: ['category_name']
@@ -64,7 +65,7 @@ const booksController = {
     };
     if (req.query.cat) {
       whereClause = {
-        where: { category_id: req.query.cat },
+        where: { is_available: true, category_id: req.query.cat },
         include: [{
           model: Category,
           attributes: ['category_name']
@@ -151,6 +152,23 @@ const booksController = {
       message: 'Validation error',
       errors: validation.errors.all()
     });
+  },
+  destroy(req, res) {
+    const update = { is_available: false };
+    return Book
+      .findById(req.params.bookId)
+      .then((book) => {
+        if (!book) {
+          return res.status(404).send({
+            message: 'Book Not Found',
+          });
+        }
+        return book
+          .update(update, { where: { id: book.id } })
+          .then(() => res.status(200).send({ message: 'Book deleted' }))
+          .catch(() => res.status(400).send({ message: 'Error, No deletion occurred' }));
+      })
+      .catch(error => res.status(400).send(error));
   }
 };
 export default booksController;

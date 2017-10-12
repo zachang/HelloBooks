@@ -71,19 +71,37 @@ const bookReducer = (state = initialState, action) => {
       };
       break;
     case actionTypes.GETONEBOOK_SUCCESSFUL:
-      state = {
-        ...state,
-        success: true,
-        errors: null,
-        book: action.payload
-      };
-      break;
+    state = {
+      ...state,
+      success: true,
+      errors: null,
+      book: action.payload
+    };
+    break;
     case actionTypes.GETONEBOOK_UNSUCCESSFUL:
       state = {
         ...state,
         success: false,
         errors: action.payload,
         book: null
+      };
+      break;
+    case actionTypes.DELETE_BOOK_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        fails: null,
+        books: state.books.filter((book) =>
+          book.id !== action.payload
+        )
+      };
+      break;
+    case actionTypes.DELETE_BOOK_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        fails: action.payload,
       };
       break;
     default:
