@@ -139,7 +139,7 @@ const getBookAction = () => (dispatch) => {
         });
       }
     });
-}
+};
 
 const getOneBookAction = id => (dispatch) => {
   axios.get(`/api/v1/books/${id}`,
@@ -164,7 +164,7 @@ const getOneBookAction = id => (dispatch) => {
         });
       }
     });
-}
+};
 
 
 const deleteBookAction = id => (dispatch) => {
@@ -190,6 +190,116 @@ const deleteBookAction = id => (dispatch) => {
         });
       }
     });
-}
+};
 
-export { addBookAction, updateBookAction, getBookAction, getOneBookAction, deleteBookAction  };
+const borrowBookAction = (userId, bookId)=> (dispatch) => {
+  axios.post(`/api/v1/users/${userId}/books`, { 'book_id': bookId },
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.BORROW_BOOK_SUCCESSFUL,
+        payload: res.data.message
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.BORROW_BOOK_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
+const returnBookAction = (userId, bookId)=> (dispatch) => {
+  axios.put(`/api/v1/users/${userId}/books`, { 'book_id': bookId },
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.RETURNED_BOOK_SUCCESSFUL,
+        payload: res.data.message
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.RETURNED_BOOK_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
+const viewUserBorrowAction = (userId) => (dispatch) => {
+  axios.get(`/api/v1/users/${userId}/books?owe=false`,
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.GET_USER_BORROW_SUCCESSFUL,
+        payload: res.data.borrowed
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.GET_USER_BORROW_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
+const viewUserReturnAction = (userId) => (dispatch) => {
+  axios.get(`/api/v1/users/${userId}/books?owe=true`,
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.GET_USER_RETURNED_SUCCESSFUL,
+        payload: res.data.borrowed
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.GET_USER_RETURNED_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
+export {
+  addBookAction,
+  updateBookAction,
+  getBookAction,
+  getOneBookAction,
+  deleteBookAction,
+  borrowBookAction,
+  viewUserBorrowAction,
+  returnBookAction,
+  viewUserReturnAction
+};

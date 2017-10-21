@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link, IndexLink} from 'react-router';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
 import Paginate from './common/Paginate-BorrowList';

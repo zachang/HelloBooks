@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, IndexLink, browserHistory} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import jwt_decode from 'jwt-decode';
 
 export default class AdminHeader extends React.Component {

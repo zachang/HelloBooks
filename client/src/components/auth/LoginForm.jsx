@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
 import classnames from 'classnames';
-import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import signinAction from '../../actions/signinAction.js';

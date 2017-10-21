@@ -47,8 +47,8 @@ const booksController = {
     }
     if (validation.passes()) {
       return Book.create(obj)
-        .then(book => res.status(201).send({message: 'Book created', book}))
-        .catch(err => res.status(400).send({message: 'Book not created', err}));
+        .then(book => res.status(201).send({ message: 'Book created', book }))
+        .catch(err => res.status(400).send({ message: 'Book not created', err} ));
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -105,9 +105,9 @@ const booksController = {
       })
       .then((books) => {
         if (books.length === 0) {
-          return res.status(404).send({message: 'No books for this category'});
+          return res.status(404).send({ message: 'No books for this category' });
         }
-        return res.status(200).send({message: 'All books displayed by category', books});
+        return res.status(200).send({ message: 'All books displayed by category', books });
       })
       .catch((error) => {
         if (error.status && error.message) {

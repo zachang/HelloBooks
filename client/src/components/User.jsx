@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { tokenValidate } from '../utils/helpers';
-import { getBookAction } from '../actions/bookAction';
+import { getBookAction, borrowBookAction } from '../actions/bookAction';
 import UserHeader from './common/UserHeader.jsx';
 import UserSidebar from './common/UserSidebar.jsx';
 import Paginate from './common/Paginate.jsx';
 import BookCardUser from './book/BookCardUser.jsx';
+import { decodeToken } from '../utils/helpers';
 
 export class Userdashboard extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ export class Userdashboard extends React.Component {
       errors: null,
       books: []
     };
+    this.borrowBook = this.borrowBook.bind(this);
   }
 
   componentWillMount() {
@@ -23,13 +24,15 @@ export class Userdashboard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.tokenState.message != null) {
-      tokenValidate(nextProps.tokenState.type);
-    } else {
+    if(nextProps.bookState.success === false){
       this.setState({ errors: nextProps.bookState.errors });
     }
   }
 
+  borrowBook(token, bookId){
+    const userId = decodeToken(token).id;
+    this.props.borrowBookAction(userId, bookId);
+  }
 
   render() {
     return (
@@ -49,6 +52,7 @@ export class Userdashboard extends React.Component {
                 <BookCardUser
                   key={i}
                   book={ book }
+                  borrowBook = { this.borrowBook }
                 />
               )}
 
@@ -66,14 +70,13 @@ export class Userdashboard extends React.Component {
 
 Userdashboard.propTypes = {
   bookState: PropTypes.object.isRequired,
-  tokenState: PropTypes.object.isRequired,
   getBookAction: PropTypes.func.isRequired,
+  borrowBookAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   bookState: state.bookReducer,
-  tokenState: state.tokenReducer
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getBookAction }, dispatch);
+  bindActionCreators({ getBookAction, borrowBookAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Userdashboard);

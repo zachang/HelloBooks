@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { tokenValidate } from '../utils/helpers';
 import { getBookAction, deleteBookAction  } from '../actions/bookAction';
 import AdminHeader from './common/AdminHeader.jsx';
 import AdminSidebar from './common/AdminSidebar.jsx';

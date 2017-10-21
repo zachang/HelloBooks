@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
-import { Link } from 'react-router';
 
 const BookCardUser = props => (
+
   <div className="col l4 s10 m6 cardsm">
     <div className="card large sticky-action">
       <div className="card-image waves-effect waves-block waves-light">
-        <img className="activator" src="./imgs/book5.jpg"/>
+        <img className="activator" src={ (props.book.book_image !== null) ? props.book.book_image : '../../imgs/default.jpg' }/>
       </div>
       <div className="card-content">
         <span className="card-title activator grey-text text-darken-4">
@@ -36,7 +36,12 @@ const BookCardUser = props => (
         </p>
       </div>
       <div className="card-action home-card">
-        <Link to="#" className="waves-effect waves-light btn teal">Borrow</Link>
+        <button
+          onClick={ () => (props.borrowBook(window.sessionStorage.token,  props.book.id )) }
+          className="waves-effect waves-light btn teal"
+        >
+          Borrow
+        </button>
       </div>
     </div>
   </div>

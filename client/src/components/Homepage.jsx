@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link, IndexLink} from 'react-router';
 import HomepageHeader from './common/HomepageHeader';
 import HomepageStatement from './HomepageStatement';
 

@@ -1,10 +1,43 @@
 import React from 'react';
-import {Link, IndexLink} from 'react-router';
+import PropTypes from 'react-proptypes';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { viewUserBorrowAction, returnBookAction } from '../actions/bookAction';
 import UserHeader from './common/UserHeader';
 import UserSidebar from './common/UserSidebar';
 import Paginate from './common/Paginate-UserBorrow';
+import UserBorrow from './borrow/UserBorrow.jsx';
+import { decodeToken } from '../utils/helpers';
 
-export default class Returned extends React.Component {
+
+export class Borrowed extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: null,
+      books: []
+    };
+    this.returnBook = this.returnBook.bind(this);
+  }
+
+  componentWillMount() {
+    const userDetails = decodeToken(window.sessionStorage.token);
+    this.props.viewUserBorrowAction(userDetails.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.bookState.success === false){
+      this.setState({ errors: nextProps.bookState.errors });
+    }
+  }
+
+
+  returnBook(bookId){
+    const userDetails = decodeToken(window.sessionStorage.token);
+    this.props.returnBookAction(userDetails.id, bookId);
+  }
+
+
   render() {
     return (
       <div className="row">
@@ -13,39 +46,19 @@ export default class Returned extends React.Component {
         <div className="container mainCon" style={{ marginLeft: '5%' }}>
           <div className="row">
             <div className="section">
-              <h4 style={{ marginTop: '7%' }}>Returned Books</h4>
+              <h4 style={{ marginTop: '7%' }}>Borrowed Books</h4>
             </div>
             <div className="divider" style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
 
             <div className="row">
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book1.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">
-                      Card Title
-                      <i className="material-icons right">
-                        close
-                      </i>
-                    </span>
-                    <p>
-                      Here is some more information about this product that is only revealed
-                      once clicked on.
-                    </p>
-                  </div>
-                  <div className="card-action home-card">
-                    <a href="#" className="waves-effect waves-light btn red">
-                      Return
-                    </a>
-                  </div>
-                </div>
-              </div>
+              { (this.props.bookState.borrows) ? this.props.bookState.borrows.map((borrow, i) =>
+                <UserBorrow
+                  key={i}
+                  borrow={ borrow }
+                  returnBook ={ this.returnBook }
+                />
+              ): null }
+
             </div>
 
             <Paginate/>
@@ -56,3 +69,16 @@ export default class Returned extends React.Component {
     );
   }
 }
+
+Borrowed.propTypes = {
+  bookState: PropTypes.object.isRequired,
+  viewUserBorrowAction: PropTypes.func.isRequired,
+  returnBookAction: PropTypes.func.isRequired
+};
+const mapStateToProps = state => ({
+  bookState: state.bookReducer,
+});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ viewUserBorrowAction, returnBookAction }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Borrowed);

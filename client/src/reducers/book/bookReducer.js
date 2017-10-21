@@ -5,7 +5,9 @@ const initialState = {
   errors: null,
   fails: null,
   books: [],
-  book: null
+  book: null,
+  borrows: null,
+  returnings: null
 };
 
 const bookReducer = (state = initialState, action) => {
@@ -102,6 +104,68 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: false,
         fails: action.payload,
+      };
+      break;
+    case actionTypes.BORROW_BOOK_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        fails: null,
+      };
+      break;
+    case actionTypes.BORROW_BOOK_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        fails: action.payload,
+      };
+      break;
+    case actionTypes.RETURNED_BOOK_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        fails: null,
+      };
+      break;
+    case actionTypes.RETURNED_BOOK_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        fails: action.payload,
+      };
+      break;
+    case actionTypes.GET_USER_BORROW_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        borrows: action.payload
+      };
+      break;
+    case actionTypes.GET_USER_BORROW_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload,
+        borrows: null
+      };
+      break;
+    case actionTypes.GET_USER_RETURNED_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        returnings: action.payload
+      };
+      break;
+    case actionTypes.GET_USER_RETURNED_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload,
+        returnings: null
       };
       break;
     default:

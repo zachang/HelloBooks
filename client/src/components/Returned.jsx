@@ -1,10 +1,35 @@
 import React from 'react';
-import {Link, IndexLink} from 'react-router';
+import PropTypes from 'react-proptypes';
+import jwt_decode from 'jwt-decode';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { viewUserReturnAction } from '../actions/bookAction';
 import UserHeader from './common/UserHeader';
 import UserSidebar from './common/UserSidebar';
 import Paginate from './common/Paginate';
+import UserReturn from './return/UserReturn.jsx';
 
-export default class Returned extends React.Component {
+export class Returned extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: null,
+      books: []
+    };
+  }
+
+  componentWillMount() {
+    const userDetails = jwt_decode(window.sessionStorage.token);
+    this.props.viewUserReturnAction(userDetails.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.bookState.success === false){
+      this.setState({ errors: nextProps.bookState.errors });
+    }
+  }
+
+
   render() {
     return (
       <div className="row">
@@ -17,235 +42,14 @@ export default class Returned extends React.Component {
             </div>
             <div className="divider" style={{marginTop: '-2%', marginBottom: '3%'}}></div>
 
-
             <div className="row">
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book1.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
+              { (this.props.bookState.returnings) ? this.props.bookState.returnings.map((returning, i) =>
+                <UserReturn
+                  key={i}
+                  returning={ returning }
+                />
+              ): null }
 
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book5.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book6.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book1.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book3.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book4.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book7.png"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book4.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book5.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book2.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book3.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title  activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col l4 s10 m6 cardsm">
-                <div className="card large sticky-action">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="activator" src="./imgs/book5.jpg"/>
-                  </div>
-                  <div className="card-content">
-                    <span className="card-title activator grey-text text-darken-4">Card Title<i
-                      className="material-icons right">more_vert</i></span>
-                  </div>
-                  <div className="card-reveal">
-                    <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                  <div className="card-action home-card"><a href="#index-banner"
-                                                            className="waves-effect waves-light btn green">Returned</a>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <Paginate/>
@@ -256,3 +60,15 @@ export default class Returned extends React.Component {
     );
   }
 }
+
+Returned.propTypes = {
+  bookState: PropTypes.object.isRequired,
+  viewUserReturnAction: PropTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+  bookState: state.bookReducer,
+});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ viewUserReturnAction }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Returned);
