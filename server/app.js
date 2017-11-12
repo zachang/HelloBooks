@@ -1,7 +1,6 @@
 import express from 'express';
 import logger from 'morgan';
 import parser from 'body-parser';
-import path from 'path';
 import swaggerJSDoc from 'swagger-jsdoc';
 import routes from './routes/index';
 
@@ -56,11 +55,6 @@ app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(swaggerSpec);
 });
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/src/build/index.html'));
-});
-
 app.listen(port, () => console.log(`Port running at ${port}`));
 
 export default app;

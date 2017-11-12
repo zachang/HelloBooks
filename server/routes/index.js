@@ -114,6 +114,9 @@ const routes = (router) => {
   router.route('/users')
     .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, usersController.list);
 
+  router.route('/:userId/users')
+    .put(authMiddleware.verifyToken, usersController.update);
+
   router.route('/books')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
     .get(authMiddleware.verifyToken, booksController.list);

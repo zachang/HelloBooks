@@ -63,9 +63,9 @@ const booksController = {
         attributes: ['category_name']
       }]
     };
-    if (req.query.cat) {
+    if (req.query.category) {
       whereClause = {
-        where: { is_available: true, category_id: req.query.cat },
+        where: { is_available: true, category_id: req.query.category },
         include: [{
           model: Category,
           attributes: ['category_name']
@@ -76,7 +76,7 @@ const booksController = {
       .findAll(whereClause)
       .then((books) => {
         if (books.length === 0) {
-          return res.status(200).send({ message: 'Nothing to display' });
+          return res.status(200).send({ message: 'Nothing to display', books: [] });
         }
         return res.status(200).send({ message: 'All books displayed', books });
       })
@@ -143,7 +143,7 @@ const booksController = {
           }
           return book
             .update(obj)
-            .then(() => res.status(200).send({ message: 'Books updated', book }))
+            .then(update => res.status(200).send({ message: 'Books updated', update }))
             .catch(err => res.status(400).send({ message: 'Error updating books', err }));
         })
         .catch(() => res.status(400).send({ message: 'Error updating books' }));

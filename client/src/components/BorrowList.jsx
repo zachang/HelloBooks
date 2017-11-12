@@ -39,26 +39,6 @@ export default class BorrowList extends React.Component {
                   </td>
                   <td><a className="waves-effect waves-light btn btn-small teal">View</a></td>
                 </tr>
-                <tr>
-                  <td>Brave Heart</td>
-                  <td>Kony Baines</td>
-                  <td>False</td>
-                  <td>
-                    <a className="waves-effect waves-light btn btn-small green">Accept</a>
-                    <a className="waves-effect waves-light  btn btn-small red">Reject</a>
-                  </td>
-                  <td><a className="waves-effect waves-light btn btn-small teal">View</a></td>
-                </tr>
-                <tr>
-                  <td>Davinci Code</td>
-                  <td>Matt Kyle</td>
-                  <td>True</td>
-                  <td>
-                    <a className="waves-effect waves-light btn btn-small green">Accept</a>
-                    <a className="waves-effect waves-light  btn btn-small red">Reject</a>
-                  </td>
-                  <td><a className="waves-effect waves-light btn btn-small teal">View</a></td>
-                </tr>
                 </tbody>
               </table>
             </div>

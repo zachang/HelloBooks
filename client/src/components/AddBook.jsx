@@ -74,21 +74,21 @@ export class AddBook extends React.Component {
   }
 
 
-  handleImageChange(e) {
+  handleImageChange(event) {
     let bookData = this.state.bookData;
-    bookData['book_image_text'] =  e.target.value;
-    bookData['book_image'] =  e.target.files[0];
+    bookData['book_image_text'] =  event.target.value;
+    bookData['book_image'] =  event.target.files[0];
     this.setState({ bookData });
   }
 
-  handleChange(e) {
+  handleChange(event) {
     let bookData = this.state.bookData;
-    bookData[e.target.name] =  e.target.value;
+    bookData[event.target.name] =  event.target.value;
     this.setState({ bookData });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     this.props.addBookAction(this.state.bookData);
   }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { tokenValidate } from '../utils/helpers';
 import getUserAction from '../actions/userAction';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
@@ -10,15 +9,20 @@ import Paginate from './common/Paginate-UserList';
 import UserRow from './user/UserRow.jsx';
 
 export class UserList extends React.Component {
+  constructor(props){
+    super(props);
+      this.state = {
+        errors: null
+      }
+
+  }
 
   componentWillMount() {
     this.props.getUserAction();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.tokenState.message != null) {
-      tokenValidate(nextProps.tokenState.type);
-    } else {
+    if(nextProps.userState.success === false){
       this.setState({ errors: nextProps.userState.errors });
     }
   }
@@ -37,14 +41,12 @@ export class UserList extends React.Component {
 
             <div className="row">
               <table className="bordered highlight">
-                <thead>
+                <thead className="black white-text">
                   <tr>
                     <th>Name</th>
                     <th>Username</th>
                     <th>Phone</th>
                     <th>email</th>
-                    <th>Blocked</th>
-                    <th>Restrict_Access</th>
                     <th>borrow History</th>
                   </tr>
                 </thead>

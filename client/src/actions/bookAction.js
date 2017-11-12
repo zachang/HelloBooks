@@ -61,7 +61,6 @@ const addBookAction = bookContents => (dispatch) => {
 };
 
 const updateBookAction = (bookContents, id) => (dispatch) => {
-
   dispatch({ type: 'UPLOAD_IMAGE'});
   const cloudName = 'hellobookz';
   const url = 'https://api.cloudinary.com/v1_1/'+cloudName+'/image/upload';
@@ -80,44 +79,77 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
   Object.keys(params).forEach((key) => {
     uploadRequest.field(key, params[key])
   });
-  uploadRequest.end((err, resp) => {
-    if(err){
-      dispatch({type: 'UPLOAD_IMAGE_UNSUCCESSFUL'});
-      console.log(err);
-      return
-    }
-    bookContents.book_image = resp.body.url;
-    console.log(bookContents, 'from cloudinary');
-  axios.put(`/api/v1/books/${id}`, bookContents,
-    { headers: { 'x-access-token': window.sessionStorage.token } })
-    .then((res) => {
-      return dispatch({
-        type: actionTypes.UPDATEBOOK_SUCCESSFUL,
-        payload: res.data.message
+
+  if (typeof bookContents.book_image !== 'object' || bookContents.book_image === null){
+    axios.put(`/api/v1/books/${id}`, bookContents,
+      {headers: {'x-access-token': window.sessionStorage.token}})
+      .then((res) => {
+        return dispatch({
+          type: actionTypes.UPDATEBOOK_SUCCESSFUL,
+          payload: res.data.message
+        });
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          tokenValidate('invalid');
+        } else if (err.response.status === 403) {
+          tokenValidate('unauthorized');
+        } else if (err.response.data.message === 'Validation error') {
+          return dispatch({
+            type: actionTypes.UPDATEBOOK_VALIDATION_ERROR,
+            payload: err.response.data.errors
+          });
+        } else {
+          return dispatch({
+            type: actionTypes.UPDATEBOOK_UNSUCCESSFUL,
+            payload: err.response.data.message
+          });
+        }
       });
-    })
-    .catch((err) => {
-      if (err.response.status === 401) {
-        tokenValidate('invalid');
-      } else if (err.response.status === 403) {
-        tokenValidate('unauthorized');
-      } else if (err.response.data.message === 'Validation error') {
-        return dispatch({
-          type: actionTypes.UPDATEBOOK_VALIDATION_ERROR,
-          payload: err.response.data.errors
-        });
-      } else {
-        return dispatch({
-          type: actionTypes.UPDATEBOOK_UNSUCCESSFUL,
-          payload: err.response.data.message
-        });
+  } else {
+    uploadRequest.end((err, resp) => {
+      if (err) {
+        dispatch({type: 'UPLOAD_IMAGE_UNSUCCESSFUL'});
+        console.log(err);
+        return
       }
+      bookContents.book_image = resp.body.url;
+      axios.put(`/api/v1/books/${id}`, bookContents,
+        {headers: {'x-access-token': window.sessionStorage.token}})
+        .then((res) => {
+          return dispatch({
+            type: actionTypes.UPDATEBOOK_SUCCESSFUL,
+            payload: res.data.message
+          });
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            tokenValidate('invalid');
+          } else if (err.response.status === 403) {
+            tokenValidate('unauthorized');
+          } else if (err.response.data.message === 'Validation error') {
+            return dispatch({
+              type: actionTypes.UPDATEBOOK_VALIDATION_ERROR,
+              payload: err.response.data.errors
+            });
+          } else {
+            return dispatch({
+              type: actionTypes.UPDATEBOOK_UNSUCCESSFUL,
+              payload: err.response.data.message
+            });
+          }
+        });
     });
-  });
+  }
 };
 
-const getBookAction = () => (dispatch) => {
-  axios.get('/api/v1/books',
+const getBookAction = (categoryId = false) => (dispatch) => {
+
+  let url = '/api/v1/books';
+  if (categoryId){
+    url = `/api/v1/books?category=${categoryId}`;
+  }
+  axios.get(url,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -223,8 +255,9 @@ const returnBookAction = (userId, bookId)=> (dispatch) => {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
+      console.log(actionTypes.RETURN_BOOK_SUCCESSFUL, 'hello');
       return dispatch({
-        type: actionTypes.RETURNED_BOOK_SUCCESSFUL,
+        type: actionTypes.RETURN_BOOK_SUCCESSFUL,
         payload: res.data.message
       });
     })
@@ -235,7 +268,7 @@ const returnBookAction = (userId, bookId)=> (dispatch) => {
         tokenValidate('unauthorized');
       } else {
         return dispatch({
-          type: actionTypes.RETURNED_BOOK_UNSUCCESSFUL,
+          type: actionTypes.RETURN_BOOK_UNSUCCESSFUL,
           payload: err.response.data.message
         });
       }
@@ -248,6 +281,7 @@ const viewUserBorrowAction = (userId) => (dispatch) => {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
+      console.log(actionTypes.GET_USER_BORROW_SUCCESSFUL, 'hello>>>>>>>>>>>>>>90');
       return dispatch({
         type: actionTypes.GET_USER_BORROW_SUCCESSFUL,
         payload: res.data.borrowed
@@ -274,7 +308,7 @@ const viewUserReturnAction = (userId) => (dispatch) => {
     })
     .then((res) => {
       return dispatch({
-        type: actionTypes.GET_USER_RETURNED_SUCCESSFUL,
+        type: actionTypes.GET_USER_RETURN_SUCCESSFUL,
         payload: res.data.borrowed
       });
     })
@@ -285,7 +319,7 @@ const viewUserReturnAction = (userId) => (dispatch) => {
         tokenValidate('unauthorized');
       } else {
         return dispatch({
-          type: actionTypes.GET_USER_RETURNED_UNSUCCESSFUL,
+          type: actionTypes.GET_USER_RETURN_UNSUCCESSFUL,
           payload: err.response.data.message
         });
       }

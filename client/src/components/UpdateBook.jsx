@@ -103,7 +103,7 @@ export class UpdateBook extends React.Component {
                           'invalid': (this.state.errors && !!this.state.errors['book_name'])?
                             !!this.state.errors['book_name'] : false
                         }) }
-                        value={this.state.bookData.book_name}
+                        value={ bookData.book_name }
                         onChange={ this.handleChange }
                       />
                       <label
@@ -248,7 +248,7 @@ export class UpdateBook extends React.Component {
                             !!this.state.errors['category_id'] : false
                         }) }
                       >
-                        <option value=''>Select</option>
+                        <option value='' disabled>Select</option>
                         { this.state.categories.map((category, i) =>
                           <option key={i} value={ category.id }>{ category.category_name }</option>
                         )}

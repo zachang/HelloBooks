@@ -32,7 +32,7 @@ const categoryController = {
     return Category
       .findAll()
       .then(category => res.status(200).send({ message: 'All categories displayed', category }))
-      .catch(() => res.status(400).send({ message: 'Error, no category to displayed ' }));
+      .catch(() => res.status(400).send({ message: 'Error, no category to display' }));
   },
   update(req, res) {
     const validation = new Validator(req.body, updateCatRules);
@@ -49,7 +49,7 @@ const categoryController = {
             .update({
               category_name: req.body.category_name,
             })
-            .then(() => res.status(200).send({ message: 'Category updated', category }))
+            .then(update => res.status(200).send({ message: 'Category updated', update }))
             .catch(() => res.status(400).send({ message: 'Error, No update done' }));
         })
         .catch(() => res.status(400).send({ message: 'Error, No update done' }));

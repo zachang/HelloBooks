@@ -15,6 +15,7 @@ export default class AdminHeader extends React.Component {
 
   componentDidMount() {
     $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
   }
 
   render() {

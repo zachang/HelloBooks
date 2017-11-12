@@ -78,6 +78,7 @@
     "serve-favicon": "^2.4.3",
     "style-loader": "^0.18.2",
     "swagger-jsdoc": "^1.9.7",
+    "sweetalert": "^2.0.8",
     "underscore": "^1.8.3",
     "url-loader": "^0.5.9",
     "validator": "^8.2.0",

@@ -8,7 +8,7 @@ const getUserAction = () => (dispatch) => {
     })
     .then((res) => {
       return dispatch({ type: actionTypes.GETUSERS_SUCCESSFUL,
-        payload: res.data.user });
+        payload: res.data.users });
     })
     .catch((err) => {
       if (err.response.status === 401) {

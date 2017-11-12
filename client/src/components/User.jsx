@@ -9,7 +9,7 @@ import Paginate from './common/Paginate.jsx';
 import BookCardUser from './book/BookCardUser.jsx';
 import { decodeToken } from '../utils/helpers';
 
-export class Userdashboard extends React.Component {
+export class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,7 +68,7 @@ export class Userdashboard extends React.Component {
   }
 }
 
-Userdashboard.propTypes = {
+User.propTypes = {
   bookState: PropTypes.object.isRequired,
   getBookAction: PropTypes.func.isRequired,
   borrowBookAction: PropTypes.func.isRequired
@@ -79,4 +79,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ getBookAction, borrowBookAction }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Userdashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(User);

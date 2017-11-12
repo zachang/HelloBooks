@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import Homepage from './components/Homepage.jsx';
-import Userdashboard from './components/User.jsx';
-import Admindashboard from './components/Admin.jsx';
+import User from './components/User.jsx';
+import Admin from './components/Admin.jsx';
 import UserList from './components/UserList.jsx';
 import Profile from './components/Profile.jsx';
 import Returned from './components/Returned.jsx';
@@ -20,13 +20,13 @@ export default (
     <Route path="/register" component={auth.RegisterPage}/>
     <Route path="/login" component={auth.LoginPage}/>
     <Route component={auth.Authenticate}>
-      <Route path="/user" component={Userdashboard}/>
+      <Route path="/user" component={User}/>
       <Route path="/profile" component={Profile}/>
       <Route path="/returned" component={Returned}/>
       <Route path="/borrowed" component={Borrowed}/>
     </Route>
     <Route component={auth.AdminAuth}>
-      <Route path="/admin" component={Admindashboard}/>
+      <Route path="/admin" component={Admin}/>
       <Route path="/users" component={UserList}/>
       <Route path="/borrow" component={BorrowList}/>
       <Route path="/return" component={ReturnedList}/>
