@@ -1,6 +1,9 @@
 .idea/
-node_modules/
-.env
-npm-debug.log
 .nyc_output/
+.env
+node_modules/
+npm-debug.log
+npm-debug.log.400741070
 coverage/
+server/uploads/books/
+client/src/build/imgs/

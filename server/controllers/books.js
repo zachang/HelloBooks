@@ -42,13 +42,13 @@ const booksController = {
       pages: req.body.pages,
       description: req.body.description
     };
-    if (req.file) {
-      obj.book_image = req.file.filename;
+    if (req.body.book_image) {
+      obj.book_image = req.body.book_image;
     }
     if (validation.passes()) {
       return Book.create(obj)
         .then(book => res.status(201).send({ message: 'Book created', book }))
-        .catch(err => res.status(400).send({ message: 'Book not created', err }));
+        .catch(err => res.status(400).send({ message: 'Book not created', err} ));
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -56,38 +56,42 @@ const booksController = {
     });
   },
   list(req, res) {
+    let whereClause = {
+      where: { is_available: true },
+      include: [{
+        model: Category,
+        attributes: ['category_name']
+      }]
+    };
+    if (req.query.category) {
+      whereClause = {
+        where: { is_available: true, category_id: req.query.category },
+        include: [{
+          model: Category,
+          attributes: ['category_name']
+        }]
+      };
+    }
     return Book
-      .findAll()
+      .findAll(whereClause)
       .then((books) => {
         if (books.length === 0) {
-          return res.status(200).send({ message: 'Nothing to display' });
+          return res.status(200).send({ message: 'Nothing to display', books: [] });
         }
         return res.status(200).send({ message: 'All books displayed', books });
       })
-      .catch(() => res.status(400).send({ message: 'Oops, failed to display' }));
+      .catch(() => res.status(400).send({ message: 'Oops, failed to display books' }));
   },
-  listCatBook(req, res) {
-    const params = req.params;
-    Category
-      .findById(params.categoryId)
-      .then((found) => {
-        if (!found) {
-          return Promise.reject({ status: 404, message: 'Category not found' });
+  listOne(req, res) {
+    return Book
+      .findById(req.params.bookId)
+      .then((book) => {
+        if (!book) {
+          return res.status(404).send({message: 'Book not found'});
         }
-        return Book.findAll({ where: { category_id: found.id } });
+        return res.status(200).send({ message: 'Book displayed', book });
       })
-      .then((books) => {
-        if (books.length === 0) {
-          return res.status(404).send({ message: 'No books for this category' });
-        }
-        return res.status(200).send({ message: 'All books displayed by category', books });
-      })
-      .catch((error) => {
-        if (error.status && error.message) {
-          return res.status(error.status).json({ message: error.message });
-        }
-        return res.status(400).send({ message: error });
-      });
+      .catch(() => res.status(400).send({ message: 'Book display failed' }));
   },
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);
@@ -102,18 +106,13 @@ const booksController = {
       description: req.body.description,
       is_available: req.body.is_available
     };
-    if (req.file) {
-      obj.book_image = req.file.filename;
+    if (req.body.book_image) {
+      obj.book_image = req.body.book_image;
     }
     if (validation.passes()) {
       return Book
         .findById(req.params.bookId)
         .then((book) => {
-          try {
-            fs.unlinkSync(`./server/uploads/books/${book.book_image}`);
-          } catch (err) {
-            //
-          }
           if (!book) {
             return res.status(404).send({
               message: 'Book Not Found',
@@ -121,7 +120,7 @@ const booksController = {
           }
           return book
             .update(obj)
-            .then(() => res.status(200).send({ message: 'Books updated', book }))
+            .then(update => res.status(200).send({ message: 'Books updated', update }))
             .catch(err => res.status(400).send({ message: 'Error updating books', err }));
         })
         .catch(() => res.status(400).send({ message: 'Error updating books' }));
@@ -130,6 +129,23 @@ const booksController = {
       message: 'Validation error',
       errors: validation.errors.all()
     });
+  },
+  destroy(req, res) {
+    const update = { is_available: false };
+    return Book
+      .findById(req.params.bookId)
+      .then((book) => {
+        if (!book) {
+          return res.status(404).send({
+            message: 'Book Not Found',
+          });
+        }
+        return book
+          .update(update, { where: { id: book.id } })
+          .then(() => res.status(200).send({ message: 'Book deleted' }))
+          .catch(() => res.status(400).send({ message: 'Error, No deletion occurred' }));
+      })
+      .catch(error => res.status(400).send(error));
   }
 };
 export default booksController;

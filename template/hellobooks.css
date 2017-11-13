@@ -13,6 +13,10 @@
         margin-top: 7%;
     }
 
+    .regContent .row{
+        margin-bottom: 0px;
+    }
+
 }
 
 @media screen and (min-width: 1024px){
@@ -82,7 +86,7 @@
 
 .textContent{
     color: #FFF;
-    margin-top: 90px;
+    margin-top: 70px;
 }
 
 .main-div{
