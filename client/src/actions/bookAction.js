@@ -145,7 +145,7 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
 
 const getBookAction = (categoryId = false) => (dispatch) => {
 
-  let url = '/api/v1/books';
+  let url = '/api/v1/books?limit=15&&offset=0&&order=\'ASC\'';
   if (categoryId){
     url = `/api/v1/books?category=${categoryId}`;
   }
