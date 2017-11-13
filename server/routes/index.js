@@ -21,52 +21,39 @@ const routes = (router) => {
    *     parameters:
    *       - name: fullname
    *         description: User's fullname.
-   *         in: body
+   *         in: formData
    *         required: true
    *         type: string
    *       - name: username
    *         description: User's username.
-   *         in: body
+   *         in: formData
    *         required: true
    *         type: string
    *       - name: email
    *         description: User's email
-   *         in: body
+   *         in: formData
    *         required: true
    *         type: string
    *       - name: phone_no
    *         description: User's phone number
-   *         in: body
-   *         required: true
-   *         type: string
-   *       - name: user_image
-   *         description: User's profile image
-   *         in: body
-   *         required: true
-   *         type: string
-   *       - name: is_admin
-   *         description: User's role
-   *         in: body
-   *         required: true
-   *         type: boolean
-   *       - name: block_status
-   *         description: User's restriction
-   *         in: body
-   *         required: true
-   *         type: boolean
-   *       - name: level
-   *         description: User's plan
-   *         in: body
+   *         in: formData
    *         required: true
    *         type: string
    *       - name: password
    *         description: User's password
-   *         in: body
+   *         in: formData
+   *         required: true
+   *         type: string
+   *       - name: password_confirmation
+   *         description: User's password confirmation
+   *         in: formData
    *         required: true
    *         type: string
    *     responses:
-   *       200:
-   *        description: Successfully created
+   *       201:
+   *        description: User Successfully created
+   *       400:
+   *        description: User not created
    */
   router.route('/users/signup')
     .post(usersController.create);
@@ -83,17 +70,19 @@ const routes = (router) => {
    *     parameters:
    *       - name: username
    *         description: User's username.
-   *         in: body
+   *         in: formData
    *         required: true
    *         type: string
    *       - name: password
    *         description: User's password
-   *         in: body
+   *         in: formData
    *         required: true
    *         type: string
    *     responses:
    *       200:
    *        description: Successful login
+   *       404:
+   *        description: Invalid credentials
    */
   router.route('/users/signin')
     .post(usersController.login);
@@ -110,6 +99,8 @@ const routes = (router) => {
    *     responses:
    *       200:
    *         description: Display all users
+   *       401:
+   *         description: No authorization token provided
    */
   router.route('/users')
     .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, usersController.list);
@@ -134,9 +125,6 @@ const routes = (router) => {
   router.route('/categories')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
     .get(authMiddleware.verifyToken, categoryController.list);
-
-  router.route('/:categoryId/books')
-    .get(authMiddleware.verifyToken, booksController.listCatBook);
 
   router.route('/categories/:categoryId')
     .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)

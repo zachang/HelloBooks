@@ -80,7 +80,7 @@ const booksController = {
         }
         return res.status(200).send({ message: 'All books displayed', books });
       })
-      .catch(() => res.status(400).send({ message: 'Oops, failed to display' }));
+      .catch(() => res.status(400).send({ message: 'Oops, failed to display books' }));
   },
   listOne(req, res) {
     return Book
@@ -92,29 +92,6 @@ const booksController = {
         return res.status(200).send({ message: 'Book displayed', book });
       })
       .catch(() => res.status(400).send({ message: 'Book display failed' }));
-  },
-  listCatBook(req, res) {
-    const params = req.params;
-    Category
-      .findById(params.categoryId)
-      .then((found) => {
-        if (!found) {
-          return Promise.reject({ status: 404, message: 'Category not found' });
-        }
-        return Book.findAll({ where: { category_id: found.id } });
-      })
-      .then((books) => {
-        if (books.length === 0) {
-          return res.status(404).send({ message: 'No books for this category' });
-        }
-        return res.status(200).send({ message: 'All books displayed by category', books });
-      })
-      .catch((error) => {
-        if (error.status && error.message) {
-          return res.status(error.status).json({ message: error.message });
-        }
-        return res.status(400).send({ message: error });
-      });
   },
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);

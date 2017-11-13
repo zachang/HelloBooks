@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import logger from 'morgan';
 import parser from 'body-parser';
@@ -13,12 +14,12 @@ const app = express();
 // swagger definition
 const swaggerDefinition = {
   info: {
-    title: 'Node Swagger API',
+    title: 'HelloBooks API',
     version: '1.0.0',
-    description: 'Demonstrating how to describe a RESTful API with Swagger',
+    description: 'Web App for a Library',
   },
   host: 'localhost:8000',
-  basePath: '/api/v1',
+  basePath: '/',
 };
 
 // options for the swagger docs
@@ -26,7 +27,7 @@ const options = {
   // import swaggerDefinitions
   swaggerDefinition,
   // path to the API docs
-  apis: ['./server/routes/*.js'],
+  apis: ['./server/routes/index.js'],
 };
 
 // initialize swagger-jsdoc
@@ -37,13 +38,18 @@ const port = parseInt(process.env.PORT, 10) || 8000;
 
 routes(router);
 
+app.get('/swagger.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
 app.set('port', port);
 
 app.use(logger('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
-app.use(express.static('../client/src'));
+app.use(express.static(path.join(__dirname, './public')));
 
 app.use('/api/v1/', router);
 
@@ -51,10 +57,6 @@ app.get('/api/v1/*', (req, res) => res.status(404).send({
   message: 'Invalid route',
 }));
 
-app.get('/swagger.json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
-});
 app.listen(port, () => console.log(`Port running at ${port}`));
 
 export default app;
