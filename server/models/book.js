@@ -21,6 +21,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    publish_year: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    isbn: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    pages: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    description: {
+      allowNull: false,
+      type: DataTypes.TEXT
+    },
     count_borrow: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
