@@ -1,6 +1,5 @@
 import Validator from 'validatorjs';
-import fs from 'fs';
-
+import { generatePaginationMeta } from '../utils/helpers';
 import db from '../models';
 
 const Book = db.Book;
@@ -56,12 +55,20 @@ const booksController = {
     });
   },
   list(req, res) {
+    const limit = req.query.limit || 2;
+    const offset = req.query.offset || 0;
+    const order = (req.query.order && req.query.order.toLowerCase() === 'desc')
+      ? [['createdAt', 'DESC']] : [['createdAt', 'ASC']];
+
     let whereClause = {
       where: { is_available: true },
       include: [{
         model: Category,
         attributes: ['category_name']
-      }]
+      }],
+      limit,
+      offset,
+      order,
     };
     if (req.query.category) {
       whereClause = {
@@ -69,16 +76,22 @@ const booksController = {
         include: [{
           model: Category,
           attributes: ['category_name']
-        }]
+        }],
+        limit,
+        offset,
+        order,
       };
     }
     return Book
-      .findAll(whereClause)
+      .findAndCountAll(whereClause)
       .then((books) => {
         if (books.length === 0) {
           return res.status(200).send({ message: 'Nothing to display', books: [] });
         }
-        return res.status(200).send({ message: 'All books displayed', books });
+        return res.status(200).send({
+          message: 'All books displayed',
+          paginationMeta: generatePaginationMeta(books, limit, offset),
+          books: books.rows });
       })
       .catch(() => res.status(400).send({ message: 'Oops, failed to display books' }));
   },

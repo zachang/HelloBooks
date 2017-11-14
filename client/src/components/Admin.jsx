@@ -3,11 +3,11 @@ import PropTypes from 'react-proptypes';
 import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Pagination } from 'react-materialize';
 import { getBookAction, deleteBookAction } from '../actions/bookAction';
 import AdminHeader from './common/AdminHeader.jsx';
 import AdminSidebar from './common/AdminSidebar.jsx';
 import BookCard from './book/BookCard.jsx';
-import Paginate from './common/Paginate.jsx';
 import { getCategoryAction } from '../actions/categoryAction';
 
 
@@ -17,13 +17,15 @@ export class Admin extends React.Component {
     this.state = {
       errors: '',
       categories: [],
-      category_id: ''
+      category_id: '',
+      pageCount: null,
+      limit:3
     };
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
   }
 
   componentWillMount() {
-    this.props.getBookAction();
+    this.props.getBookAction(this.state.limit, 0, this.state.category_id);
     this.props.getCategoryAction();
   }
 
@@ -31,19 +33,23 @@ export class Admin extends React.Component {
     if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
     }
-    if (this.state.categories !== nextProps.categoryState.categories) {
+    if (this.state.categories !== nextProps.categoryState.categories ) {
       this.setState({ categories: nextProps.categoryState.categories });
+    }
+    if (this.state.pageCount !== nextProps.bookState.pageCount ) {
+      this.setState({ pageCount: nextProps.bookState.pageCount });
     }
   }
 
   componentDidUpdate() {
+    $('select').material_select();
     $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.bookCategoryChange.bind(this));
   }
 
 
   bookCategoryChange(event) {
     this.setState({ category_id: event.target.value });
-    this.props.getBookAction(event.target.value);
+    this.props.getBookAction(this.state.limit, 0, event.target.value);
   }
 
 
@@ -68,7 +74,7 @@ export class Admin extends React.Component {
                   ref = 'category_id'
                   onChange= {this.bookCategoryChange}
                 >
-                  <option value='' disabled>Select Category</option>
+                  <option value=''>Select Category</option>
                   { this.state.categories.map((category, i) =>
                     <option key={i} value={category.id}>{category.category_name}</option>
                   )}
@@ -77,17 +83,29 @@ export class Admin extends React.Component {
             </div>
 
             <div className='row'>
-              { this.props.bookState.books.map((book, i) =>
-                <BookCard
-                  key={i}
-                  book={book}
-                  deleteBookAction={this.props.deleteBookAction}
-                />
-              )}
+              <div className='row'>
+                { this.props.bookState.books.map((book, i) =>
+                  <BookCard
+                    key={i}
+                    book={book}
+                    deleteBookAction={this.props.deleteBookAction}
+                  />
+                )}
+              </div>
 
+              <div className='row'>
+                {
+                  ((this.state.pageCount) ?
+                    <Pagination
+                      items={this.state.pageCount}
+                      onSelect={(page) => {
+                        const offset = (page - 1) * this.state.limit;
+                        this.props.getBookAction(this.state.limit, offset, this.state.category_id);
+                      }
+                    } /> : '')
+                }
+              </div>
             </div>
-
-            <Paginate/>
 
           </div>
         </div>

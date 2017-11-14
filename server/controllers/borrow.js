@@ -1,5 +1,5 @@
 import db from '../models';
-import handleError from '../utils/helpers';
+import { handleError } from '../utils/helpers';
 
 const Borrow = db.Borrow;
 const Book = db.Book;

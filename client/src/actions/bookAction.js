@@ -143,20 +143,22 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
   }
 };
 
-const getBookAction = (categoryId = false) => (dispatch) => {
+const getBookAction = (limit, offset, categoryId) => (dispatch) => {
 
-  let url = '/api/v1/books';
-  if (categoryId){
-    url = `/api/v1/books?category=${categoryId}`;
+  let url = `/api/v1/books?limit=${limit}&offset=${offset}`;
+  if (categoryId !== ''){
+    url = `${url}&category=${categoryId}`;
   }
-  axios.get(url,
+  axios.get(
+    url,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
       return dispatch({
         type: actionTypes.GETBOOKS_SUCCESSFUL,
-        payload: res.data.books
+        books: res.data.books,
+        pageCount: res.data.paginationMeta.pageCount
       });
     })
     .catch((err) => {

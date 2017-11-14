@@ -7,7 +7,8 @@ const initialState = {
   books: [],
   book: null,
   borrows: null,
-  returnings: null
+  returnings: null,
+  pageCount: null
 };
 
 const bookReducer = (state = initialState, action) => {
@@ -61,7 +62,8 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: true,
         errors: null,
-        books: action.payload
+        books: action.books,
+        pageCount: action.pageCount
       };
       break;
     case actionTypes.GETBOOKS_UNSUCCESSFUL:

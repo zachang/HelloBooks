@@ -5,5 +5,17 @@ const handleError = (err, res) => {
   return res.status(400).json({ message: 'Borrow failed' });
 };
 
-export default handleError;
+
+const generatePaginationMeta = (dbResult, limit, offset) => {
+  const paginationMeta = {
+    pageCount: Math.ceil(dbResult.count / limit),
+    totalCount: dbResult.count,
+    outputCount: dbResult.rows.length,
+    pageSize: limit,
+    currentPage: Math.floor(offset / limit) + 1
+  };
+  return paginationMeta;
+};
+
+export { handleError, generatePaginationMeta } ;
 
