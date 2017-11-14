@@ -12,15 +12,15 @@ export default class Homepage extends React.Component {
 
   render() {
     return (
-      <div className="row main-row main-div">
+      <div className='row main-row main-div'>
 
         <HomepageHeader
           btnText={this.state.showLoginText}
         />
 
-        <div className="section no-pad-bot" id="index-banner">
-          <div className="container textContent">
-            <div className="row">
+        <div className='section no-pad-bot' id='index-banner'>
+          <div className='container textContent'>
+            <div className='row'>
 
               <HomepageStatement/>
 

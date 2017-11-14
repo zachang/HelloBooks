@@ -23,6 +23,7 @@ class Authenticate extends React.Component {
     return this.props.children;
   }
 }
+
 Authenticate.propTypes = {
   children: PropTypes.element.isRequired
 };

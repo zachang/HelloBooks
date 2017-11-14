@@ -40,17 +40,17 @@ export class AddCategory extends React.Component {
     const { categoryData } = this.state;
 
     return (
-      <div className="row">
+      <div className='row'>
         <AdminHeader/>
         <AdminSidebar/>
-        <div className="container mainCon" style={{ marginLeft: '5%' }}>
-          <div className="row">
-            <div className="col s10 m8 l6 bookcat" style={{ marginLeft: '35%', marginTop: '20%' }}>
+        <div className='container mainCon' style={{ marginLeft: '5%' }}>
+          <div className='row'>
+            <div className='col s10 m8 l6 bookcat' style={{ marginLeft: '35%', marginTop: '20%' }}>
 
-              <div className="row">
-                <form className="col s10" onSubmit={this.handleSubmit}>
-                  <div className="row">
-                    <div className="input-field col s12">
+              <div className='row'>
+                <form className='col s10' onSubmit={this.handleSubmit}>
+                  <div className='row'>
+                    <div className='input-field col s12'>
                       <input
                         id='category_name'
                         name='category_name'
@@ -72,8 +72,8 @@ export class AddCategory extends React.Component {
                     </div>
                   </div>
 
-                  <div className="row">
-                    <div className="col m12 s12">
+                  <div className='row'>
+                    <div className='col m12 s12'>
                       <button
                         className='col s12 btn btn-large waves-effect waves-light'
                         type='submit'

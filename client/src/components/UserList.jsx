@@ -29,19 +29,19 @@ export class UserList extends React.Component {
 
   render() {
     return (
-      <div className="row">
+      <div className='row'>
         <AdminHeader/>
         <AdminSidebar/>
-        <div className="container mainCon" style={{ marginLeft: '5%' }}>
-          <div className="row">
-            <div className="section">
+        <div className='container mainCon' style={{ marginLeft: '5%' }}>
+          <div className='row'>
+            <div className='section'>
               <h4 style={{marginTop: '7%'}}>Borrowed Books</h4>
             </div>
-            <div className="divider" style={{width: '100%', marginTop: '-2.5%', marginBottom: '3.5%'}}></div>
+            <div className='divider' style={{width: '100%', marginTop: '-2.5%', marginBottom: '3.5%'}}></div>
 
-            <div className="row">
-              <table className="bordered highlight">
-                <thead className="black white-text">
+            <div className='row'>
+              <table className='bordered highlight'>
+                <thead className='black white-text'>
                   <tr>
                     <th>Name</th>
                     <th>Username</th>

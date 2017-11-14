@@ -3,25 +3,25 @@ import PropTypes from 'react-proptypes';
 
 const BookCardUser = props => (
 
-  <div className="col l4 s10 m6 cardsm">
-    <div className="card large sticky-action">
-      <div className="card-image waves-effect waves-block waves-light">
-        <img className="activator" src={ (props.book.book_image !== null) ? props.book.book_image : '../../imgs/default.jpg' }/>
+  <div className='col l4 s10 m6 cardsm'>
+    <div className='card large sticky-action'>
+      <div className='card-image waves-effect waves-block waves-light'>
+        <img className='activator' src={ (props.book.book_image !== null) ? props.book.book_image : '../../imgs/default.jpg' }/>
       </div>
-      <div className="card-content">
-        <span className="card-title activator grey-text text-darken-4">
+      <div className='card-content'>
+        <span className='card-title activator grey-text text-darken-4'>
           <small>{props.book.book_name}</small>
-          <i className="material-icons right">
+          <i className='material-icons right'>
             more_vert
           </i>
         </span>
       </div>
-      <div className="card-reveal"
+      <div className='card-reveal'
         style={{ wordWrap: 'break-word', backgroundColor: 'rgba(0,0,0,1)', color: '#FFF' }}
       >
-        <span className="card-title grey-text text-darken-4">
+        <span className='card-title grey-text text-darken-4'>
           <small>{ props.book.book_name }</small>
-          <i className="material-icons right">
+          <i className='material-icons right'>
             close
           </i>
         </span>
@@ -35,10 +35,10 @@ const BookCardUser = props => (
         }
         </p>
       </div>
-      <div className="card-action home-card">
+      <div className='card-action home-card'>
         <button
           onClick={ () => (props.borrowBook(window.sessionStorage.token,  props.book.id )) }
-          className="waves-effect waves-light btn teal"
+          className='waves-effect waves-light btn teal'
         >
           Borrow
         </button>

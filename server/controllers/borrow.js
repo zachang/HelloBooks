@@ -85,7 +85,8 @@ const borrowController = {
         {
           model: Book,
           include: [{
-            model: Category
+            model: Category,
+            attributes: ['category_name']
           }],
           attributes: ['id', 'book_name', 'author',
             'book_count', 'book_image',

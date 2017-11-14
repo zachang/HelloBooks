@@ -2,22 +2,22 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 
 const UserBorrow = props => (
-    <div className="col l4 s10 m6 cardsm">
-      <div className="card large sticky-action">
-        <div className="card-image waves-effect waves-block waves-light">
-          <img className="activator"
+    <div className='col l4 s10 m6 cardsm'>
+      <div className='card large sticky-action'>
+        <div className='card-image waves-effect waves-block waves-light'>
+          <img className='activator'
                src={(props.borrow.Book.book_image !== null) ? props.borrow.Book.book_image : '../../imgs/default.jpg'}/>
         </div>
-        <div className="card-content">
-        <span className="card-title activator grey-text text-darken-4">
+        <div className='card-content'>
+        <span className='card-title activator grey-text text-darken-4'>
           <small>{ props.borrow.Book.book_name }</small>
-          <i className="material-icons right">more_vert</i>
+          <i className='material-icons right'>more_vert</i>
         </span>
         </div>
-        <div className="card-reveal">
-        <span className="card-title grey-text text-darken-4">
+        <div className='card-reveal'>
+        <span className='card-title grey-text text-darken-4'>
          <small>{ props.borrow.Book.book_name }</small>
-          <i className="material-icons right">
+          <i className='material-icons right'>
             close
           </i>
         </span>
@@ -31,10 +31,10 @@ const UserBorrow = props => (
           }
           </p>
         </div>
-        <div className="card-action home-card">
+        <div className='card-action home-card'>
           <button
             onClick={ () => (props.returnBook(props.borrow.Book.id )) }
-            className="waves-effect waves-light btn red"
+            className='waves-effect waves-light btn red'
           >
             Return
           </button>
