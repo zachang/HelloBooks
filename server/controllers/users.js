@@ -13,19 +13,29 @@ const userDetails = (user) => {
     username: user.username,
     email: user.email,
     phone_no: user.phone_no,
+    user_image: user.user_image,
     is_admin: user.is_admin,
     block_status: user.block_status,
+    level: user.level,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };
 };
 
 const signUpRules = {
-  fullname: 'required|min:3',
+  fullname: 'required|string|min:5',
+  username: 'required|string|min:6',
   email: 'required|email',
   password: 'required|min:6|confirmed',
   password_confirmation: 'required',
-  phone_no: 'required',
+  phone_no: 'required|string|min:11|max:11',
+};
+
+const updateRules = {
+  fullname: 'required|string|min:2',
+  username: 'required|string|min:6',
+  email: 'required|email',
+  phone_no: 'required|string|min:11|max:11',
 };
 
 const usersController = {
@@ -37,7 +47,9 @@ const usersController = {
           const token = jwt.sign(userDetails(newUser), secret, { expiresIn: '10h' });
           res.status(201).send({ message: 'User successfully created', token });
         })
-        .catch(error => res.status(400).send({ message: 'User not created', errors: error }));
+        .catch(() => {
+          res.status(400).send({ message: 'User not created' });
+        });
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -52,11 +64,56 @@ const usersController = {
             secret, { expiresIn: '10h' });
           return res.status(200).send({ message: 'User Logged in', token });
         }
-        return res.status(400).json({ message: 'Invalid credentials' });
+        return res.status(404).json({ message: 'Invalid credentials' });
       })
-      .catch((error) => {
-        res.send({ error });
+      .catch(() => {
+        res.status(400).send({ message: 'Invalid credentials' });
       });
-  }
+  },
+  list(req, res) {
+    return User
+      .findAll()
+      .then((users) => {
+        if (users.length === 0) {
+          return res.status(200).send({ message: 'No user to display', users: [] });
+        }
+        return res.status(200).send({ users });
+      })
+      .catch(() => res.status(400).send({ message: 'Error, nothing to display' }));
+  },
+  update(req, res) {
+    const validation = new Validator(req.body, updateRules);
+    const userInfo = {
+      fullname: req.body.fullname,
+      username: req.body.username,
+      email: req.body.email,
+      phone_no: req.body.phone_no
+    };
+
+    if (req.body.book_image) {
+      userInfo.user_image = req.body.user_image;
+    }
+
+    if (validation.passes()) {
+      return User
+        .findById(req.params.userId)
+        .then((user) => {
+          if (!user) {
+            return res.status(404).send({
+              message: 'User Not Found',
+            });
+          }
+          return user
+            .update(userInfo)
+            .then(update => res.status(200).send({ message: 'User updated', update }))
+            .catch(() => res.status(400).send({ message: 'Error, No update done' }));
+        })
+        .catch(() => res.status(400).send({ message: 'Error, No update done' }));
+    }
+    return res.status(400).json({
+      message: 'Validation error',
+      errors: validation.errors.all()
+    });
+  },
 };
 export default usersController;

@@ -1,2 +1,6 @@
 server/migrations
 server/seeders
+node_modules/
+template/
+./client/src/build
+client/
