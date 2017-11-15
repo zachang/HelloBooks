@@ -90,7 +90,7 @@ const borrowController = {
           }],
           attributes: ['id', 'book_name', 'author',
             'book_count', 'book_image',
-            'publish_year','pages', 'description']
+            'publish_year', 'pages', 'description']
         }]
     };
     if (req.query.owe === 'false') {
@@ -104,6 +104,31 @@ const borrowController = {
       })
       .catch(() => res.status(503).send({ message: 'Request not available' }));
   },
+  borrowsViewByAdmin(req, res) {
+    const whereClause = {
+      where: { returned: { $or: ['pending', 'false'] } },
+      include: [
+        {
+          model: Book,
+          include: [{
+            model: Category,
+            attributes: ['category_name']
+          }],
+          attributes: ['id', 'book_name', 'author',
+            'book_count', 'book_image',
+            'publish_year', 'pages', 'description']
+        },
+        {
+          model: User,
+          attributes: ['fullname', 'level', 'email']
+        }]
+    };
+    Borrow.findAll(whereClause)
+      .then((borrower) => {
+        return res.status(200).send({ borrowers: borrower });
+      })
+      .catch(() => res.status(503).send({ message: 'Request not available' }));
+  }
 };
 
 export default borrowController;

@@ -1,9 +1,32 @@
 import React from 'react';
+import PropTypes from 'react-proptypes';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { viewAllBorrowAction }from '../actions/bookAction';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
 import Paginate from './common/Paginate-BorrowList';
+import UserBorrowList from './borrow/UserBorrowList.jsx';
 
-export default class BorrowList extends React.Component {
+export class BorrowList extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      errors: null
+    }
+  }
+
+
+  componentWillMount() {
+    this.props.viewAllBorrowAction();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.bookState.success === false){
+      this.setState({ errors: nextProps.bookState.errors });
+    }
+  }
+
   render() {
     return (
       <div className='row'>
@@ -30,17 +53,12 @@ export default class BorrowList extends React.Component {
                 </thead>
 
                 <tbody>
-                <tr>
-                  <td>Harry Potter</td>
-                  <td>Health</td>
-                  <td>Kiky Martins</td>
-                  <td>2017/07/08</td>
-                  <td>Pending</td>
-                  <td>
-                    <a className='waves-effect waves-light btn btn-small green'>Accept</a>
-                    <a className='waves-effect waves-light  btn btn-small red'>Reject</a>
-                  </td>
-                </tr>
+                { this.props.bookState.borrowers.map((borrower, i) =>
+                    <UserBorrowList
+                      key={i}
+                      borrower={ borrower }
+                    />
+                )}
                 </tbody>
               </table>
             </div>
@@ -54,3 +72,15 @@ export default class BorrowList extends React.Component {
     );
   }
 }
+
+
+BorrowList.propTypes = {
+  viewAllBorrowAction: PropTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+  bookState: state.bookReducer,
+});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ viewAllBorrowAction }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(BorrowList);

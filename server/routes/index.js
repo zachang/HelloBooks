@@ -122,6 +122,10 @@ const routes = (router) => {
     .get(authMiddleware.verifyToken, borrowController.borrowsByUser)
     .put(authMiddleware.verifyToken, borrowController.returnBook);
 
+  router.route('/users/books/borrows')
+    .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      borrowController.borrowsViewByAdmin);
+
   router.route('/categories')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
     .get(authMiddleware.verifyToken, categoryController.list);

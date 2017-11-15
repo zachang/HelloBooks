@@ -283,7 +283,6 @@ const viewUserBorrowAction = (userId) => (dispatch) => {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
-      console.log(actionTypes.GET_USER_BORROW_SUCCESSFUL, 'hello>>>>>>>>>>>>>>90');
       return dispatch({
         type: actionTypes.GET_USER_BORROW_SUCCESSFUL,
         payload: res.data.borrowed
@@ -328,6 +327,32 @@ const viewUserReturnAction = (userId) => (dispatch) => {
     });
 };
 
+const viewAllBorrowAction = () => (dispatch) => {
+  axios.get('/api/v1/users/books/borrows',
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.GET_ALL_BORROW_SUCCESSFUL,
+        payload: res.data.borrowers,
+        tests: console.log('>>>>>>>>', res.data.borrowers)
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.GET_ALL_BORROW_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
 export {
   addBookAction,
   updateBookAction,
@@ -337,5 +362,6 @@ export {
   borrowBookAction,
   viewUserBorrowAction,
   returnBookAction,
-  viewUserReturnAction
+  viewUserReturnAction,
+  viewAllBorrowAction
 };
