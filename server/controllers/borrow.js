@@ -91,10 +91,6 @@ const borrowController = {
           attributes: ['id', 'book_name', 'author',
             'book_count', 'book_image',
             'publish_year','pages', 'description']
-        },
-        {
-          model: User,
-          attributes: ['fullname', 'level', 'email']
         }]
     };
     if (req.query.owe === 'false') {
@@ -107,7 +103,7 @@ const borrowController = {
         return res.status(200).send({ borrowed: borrows });
       })
       .catch(() => res.status(503).send({ message: 'Request not available' }));
-  }
+  },
 };
 
 export default borrowController;
