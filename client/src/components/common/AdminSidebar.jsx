@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, IndexLink, browserHistory} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 
 export default class AdminSidebar extends React.Component {
   constructor() {
@@ -18,53 +18,50 @@ export default class AdminSidebar extends React.Component {
 
   render() {
     return (
-      <div className="side col m2 l2 hide-on-small-and-down nav-pan">
-        <div className="col m2 l2 grey darken-4 addPad nav-pan-child">
-          <div className="row walp">
-            <div className="">
-              <img src="./imgs/eben2.jpg"
+      <div className='side col m2 l2 hide-on-small-and-down nav-pan'>
+        <div className='col m2 l2 grey darken-4 addPad nav-pan-child'>
+          <div className='row walp'>
+            <div className=''>
+              <img src='./imgs/eben2.jpg'
                    style={{width: '100px', height: '100px', margin: '22% 0% 0% 26%', boxShadow: '2px 1px 20px #000'}}
-                   alt="" className="circle responsive-img"/>
+                   alt='' className='circle responsive-img'/>
             </div>
           </div>
-          <div className="row dash">
-            <span><i className="material-icons" style={{margin: '10% 0% 10% 0%'}}>dashboard</i>Dashboard</span>
+          <div className='row dash'>
+            <span><i className='material-icons' style={{margin: '10% 0% 10% 0%'}}>dashboard</i>Dashboard</span>
           </div>
 
-          <div className="row rowcollap">
+          <div className='row rowcollap'>
             <ul>
-              <li><a href="profile.html">Profile</a></li>
-              <li className="no-padding">
-                <ul className="collapsible collapsible-accordion">
+              <li><Link to='/profile'>Profile</Link></li>
+              <li className='no-padding'>
+                <ul className='collapsible collapsible-accordion'>
                   <li>
-                    <a className="collapsible-header">Books Shelf<i className="material-icons">arrow_drop_down</i></a>
-                    <div className="collapsible-body">
+                    <Link className='collapsible-header'>Books Shelf<i className='material-icons'>arrow_drop_down</i></Link>
+                    <div className='collapsible-body'>
                       <ul>
-                        <li><a href="admin.html">All Books</a></li>
-                        <li><a href="./borrowedbooks.html">Borrowed Books</a></li>
-                        <li><a href="./returnedbook.html">Returned Books</a></li>
+                        <li><Link to='/admin'>All Books</Link></li>
+                        <li><Link to='/borrow'>Borrowed Books</Link></li>
+                        <li><Link to='/return'>Returned Books</Link></li>
                       </ul>
                     </div>
                   </li>
                 </ul>
               </li>
-              <li className="no-padding">
-                <ul className="collapsible collapsible-accordion">
+              <li className='no-padding'>
+                <ul className='collapsible collapsible-accordion'>
                   <li>
-                    <a className="collapsible-header">Permissions<i className="material-icons">arrow_drop_down</i></a>
-                    <div className="collapsible-body">
+                    <a className='collapsible-header'>Permissions<i className='material-icons'>arrow_drop_down</i></a>
+                    <div className='collapsible-body'>
                       <ul>
-                        <li><Link to="/addbook">Add Books</Link></li>
-                        <li><a href="addcategories.html">Add Categories</a></li>
-                        <li><a href="#">Add Admin</a></li>
-                        <li><a href="#">Remove Admin</a></li>
-                        <li><a href="#">Upgrade User</a></li>
+                        <li><Link to='/books'>Add Books</Link></li>
+                        <li><Link to='category'>Add Categories</Link></li>
                       </ul>
                     </div>
                   </li>
                 </ul>
               </li>
-              <li><Link to="#" onClick={this.logOut}>Logout</Link></li>
+              <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
             </ul>
           </div>
 

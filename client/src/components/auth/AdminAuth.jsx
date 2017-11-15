@@ -30,6 +30,7 @@ class AdminAuth extends React.Component {
     return this.props.children;
   }
 }
+
 AdminAuth.propTypes = {
   children: PropTypes.element.isRequired
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, IndexLink } from 'react-router';
 
 export default class Paginate extends React.Component {
     render() {

@@ -59,15 +59,15 @@ export class User extends React.Component {
 
   render() {
     return (
-      <div className="row">
+      <div className='row'>
         <UserHeader/>
         <UserSidebar/>
-        <div className="container mainCon" style={{marginLeft: '5%'}}>
-          <div className="row">
-            <div className="section">
+        <div className='container mainCon' style={{marginLeft: '5%'}}>
+          <div className='row'>
+            <div className='section'>
               <h4 style={{ marginTop: '7%' }}>All Books</h4>
             </div>
-            <div className="divider" style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
+            <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
 
             <div className='row'>
               <div className='input-field col s6 l4  m4'>
@@ -85,8 +85,8 @@ export class User extends React.Component {
               </div>
             </div>
 
-            <div className="row">
-              <div className="row">
+            <div className='row'>
+              <div className='row'>
                 { this.props.bookState.books.map((book, i) =>
                   <BookCardUser
                     key={i}
@@ -96,7 +96,7 @@ export class User extends React.Component {
                 )}
               </div>
 
-              <div className="row">
+              <div className='row'>
                 {
                   ((this.state.pageCount) ?
                     <Pagination

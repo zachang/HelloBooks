@@ -16,23 +16,23 @@ import auth from './components/auth';
 
 export default (
   <Router history={browserHistory}>
-    <Route path="/" component={Homepage}/>
-    <Route path="/register" component={auth.RegisterPage}/>
-    <Route path="/login" component={auth.LoginPage}/>
+    <Route path='/' component={Homepage}/>
+    <Route path='/register' component={auth.RegisterPage}/>
+    <Route path='/login' component={auth.LoginPage}/>
     <Route component={auth.Authenticate}>
-      <Route path="/user" component={User}/>
-      <Route path="/profile" component={Profile}/>
-      <Route path="/returned" component={Returned}/>
-      <Route path="/borrowed" component={Borrowed}/>
+      <Route path='/user' component={User}/>
+      <Route path='/profile' component={Profile}/>
+      <Route path='/returned' component={Returned}/>
+      <Route path='/borrowed' component={Borrowed}/>
     </Route>
     <Route component={auth.AdminAuth}>
-      <Route path="/admin" component={Admin}/>
-      <Route path="/users" component={UserList}/>
-      <Route path="/borrow" component={BorrowList}/>
-      <Route path="/return" component={ReturnedList}/>
-      <Route path="/books" component={AddBook}/>
-      <Route path="/books/:id" component={UpdateBook}/>
-      <Route path="/category" component={AddCategory}/>
+      <Route path='/admin' component={Admin}/>
+      <Route path='/users' component={UserList}/>
+      <Route path='/borrow' component={BorrowList}/>
+      <Route path='/return' component={ReturnedList}/>
+      <Route path='/books' component={AddBook}/>
+      <Route path='/books/:id' component={UpdateBook}/>
+      <Route path='/category' component={AddCategory}/>
     </Route>
   </Router>
 );
