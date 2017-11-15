@@ -5,8 +5,7 @@
   <title>Hellobooks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -15,12 +14,13 @@
 
 
 <!-- Import bundled JavaScript -->
-<script src="materialize/js/jquery.js"></script>
-<script src="materialize/js/materialize.js"></script>
-<script src="materialize/js/init.js"></script>
-<script src="/bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.0/js/materialize.min.js"></script>
+<script src="./bundle.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
+    $('.button-collapse').sideNav();
+
     $(".menu-iconic-link").click(function () {
       $("body").css({"width": "100%", "overflow-y": "auto"});
     });

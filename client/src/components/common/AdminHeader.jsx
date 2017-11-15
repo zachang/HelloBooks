@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
 import jwt_decode from 'jwt-decode';
+import logo from '../../build/imgs/hello.png';
 
 export default class AdminHeader extends React.Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class AdminHeader extends React.Component {
           <nav className='mainNav black col m10 l10' role='navigation'>
             <div className='nav-wrapper container'>
               <Link id='logo-container' to='/admin' className='brand-logo mainLogo'>
-                <img src='./imgs/hello.png' alt='hellobooks'/>
+                <img src={logo} alt='hellobooks'/>
               </Link>
               <ul className='user hide-on-small-and-down show-on-medium-and-up'>
                 <Link className='dropdown-button btn black btn-prof' href='#' data-activates='dropdown1'>
@@ -36,7 +37,7 @@ export default class AdminHeader extends React.Component {
               </ul>
 
               <ul id='dropdown1' className='dropdown-content hide-on-small-and-down'>
-                <li><Link to='/profile'>Profile</Link></li>
+                <li><Link to='/admin/profile'>Profile</Link></li>
                 <li className='divider'></li>
                 <li><Link to='/users'>View Users</Link></li>
                 <li className='divider'></li>

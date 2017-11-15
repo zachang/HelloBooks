@@ -18,7 +18,7 @@ const swaggerDefinition = {
     version: '1.0.0',
     description: 'Web App for a Library',
   },
-  host: 'localhost:8000',
+  host: process.env.API_HOST,
   basePath: '/',
 };
 

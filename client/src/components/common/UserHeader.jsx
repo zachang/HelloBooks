@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
 import jwt_decode from 'jwt-decode';
+import logo from '../../build/imgs/hello.png';
 
 export default class UserHeader extends React.Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class UserHeader extends React.Component {
         <div className='navbar-fixed'>
           <nav className='mainNav black col m10 l10' role='navigation'>
             <div className='nav-wrapper container'><Link id='logo-container' to='/user' className='brand-logo mainLogo'><img
-              src='./imgs/hello.png' alt='hellobooks'/></Link>
+              src={logo} alt='hellobooks'/></Link>
               <ul className='user hide-on-small-and-down show-on-medium-and-up'>
                 <Link className='dropdown-button btn black btn-prof' to='' data-activates='dropdown1'>
                   <i className='material-icons mat-icon right' style={{margin: '0% 0% 0% 1%'}}>arrow_drop_down</i>

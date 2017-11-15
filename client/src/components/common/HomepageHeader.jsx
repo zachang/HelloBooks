@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import logo from '../../build/imgs/hello.png';
 
 export default class HomepageHeader extends React.Component {
     constructor(props){
@@ -17,7 +18,7 @@ export default class HomepageHeader extends React.Component {
                     <div className='nav-wrapper container'>
 
                         <Link to='/' id='logo-container' className='brand-logo mainLogo brand'>
-                            <img src='./imgs/hello.png' alt='hellobooks'/>
+                            <img src={logo} alt='hellobooks'/>
                         </Link>
                         <ul className='right hide-on-small-and-down'>
                             <li><Link to='/'>Contact us</Link></li>
