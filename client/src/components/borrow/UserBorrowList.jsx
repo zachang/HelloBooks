@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { Link } from 'react-router';
 
-const userBorrowList = props => (
+const UserBorrowList = props => (
   <tr>
     <td>{ props.borrower.Book.book_name }</td>
     <td>{ props.borrower.Book.Category.category_name }</td>
@@ -16,8 +16,8 @@ const userBorrowList = props => (
   </tr>
 );
 
-userBorrowList.propTypes = {
+UserBorrowList.propTypes = {
   borrower: PropTypes.object.isRequired,
 
 };
-export default userBorrowList;
+export default UserBorrowList;

@@ -1,9 +1,31 @@
 import React from 'react';
+import PropTypes from 'react-proptypes';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { viewAllReturnAction }from '../actions/bookAction';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
 import Paginate from './common/Paginate-ReturnedList';
+import UserReturnList from './borrow/UserReturnList.jsx';
 
-export default class ReturnedList extends React.Component {
+export class ReturnedList extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      errors: null
+    }
+  }
+
+  componentWillMount() {
+    this.props.viewAllReturnAction();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.bookState.success === false){
+      this.setState({ errors: nextProps.bookState.errors });
+    }
+  }
+
   render() {
     return (
       <div className='row'>
@@ -21,39 +43,22 @@ export default class ReturnedList extends React.Component {
                 <thead>
                   <tr>
                     <th>Book Name</th>
-                    <th>Borrower</th>
+                    <th>Category</th>
+                    <th>Username</th>
                     <th>Borrow_Date</th>
                     <th>Return_Date</th>
+                    <th>Return_status</th>
                     <th>Overdue</th>
-                    <th>More</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>Harry Potter</td>
-                    <td>Kiky Martins</td>
-                    <td>2017/7/1</td>
-                    <td>2017/7/4</td>
-                    <td>No</td>
-                    <td><a className='waves-effect waves-light btn btn-small teal'>View</a></td>
-                  </tr>
-                  <tr>
-                    <td>Brave Heart</td>
-                    <td>Kony Baines</td>
-                    <td>2017/7/1</td>
-                    <td>2017/7/2</td>
-                    <td>No</td>
-                    <td><a className='waves-effect waves-light btn btn-small teal'>View</a></td>
-                  </tr>
-                  <tr>
-                    <td>Davinci Code</td>
-                    <td>Matt Kyle</td>
-                    <td>2017/7/1</td>
-                    <td>2017/7/7</td>
-                    <td>Yes</td>
-                    <td><a className='waves-effect waves-light btn btn-small teal'>View</a></td>
-                  </tr>
+                { this.props.bookState.returners.map((returner, i) =>
+                  <UserReturnList
+                    key={i}
+                    returner={ returner }
+                  />
+                )}
                 </tbody>
               </table>
             </div>
@@ -67,3 +72,14 @@ export default class ReturnedList extends React.Component {
     );
   }
 }
+
+ReturnedList.propTypes = {
+  viewAllReturnAction: PropTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+  bookState: state.bookReducer,
+});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ viewAllReturnAction }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReturnedList);

@@ -26,8 +26,7 @@ const addBookAction = bookContents => (dispatch) => {
   });
   uploadRequest.end((err, resp) => {
     if(err){
-      dispatch({type: 'UPDATE_IMAGE_UNSUCCESSFUL'});
-      console.log(err);
+      dispatch({type: 'UPDATE_IMAGE_UNSUCCESSFUL'});;
       return
     }
     bookContents.book_image = resp.body.url;
@@ -110,7 +109,6 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
     uploadRequest.end((err, resp) => {
       if (err) {
         dispatch({type: 'UPLOAD_IMAGE_UNSUCCESSFUL'});
-        console.log(err);
         return
       }
       bookContents.book_image = resp.body.url;
@@ -257,7 +255,6 @@ const returnBookAction = (userId, bookId)=> (dispatch) => {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
-      console.log(actionTypes.RETURN_BOOK_SUCCESSFUL, 'hello');
       return dispatch({
         type: actionTypes.RETURN_BOOK_SUCCESSFUL,
         payload: res.data.message
@@ -336,7 +333,6 @@ const viewAllBorrowAction = () => (dispatch) => {
       return dispatch({
         type: actionTypes.GET_ALL_BORROW_SUCCESSFUL,
         payload: res.data.borrowers,
-        tests: console.log('>>>>>>>>', res.data.borrowers)
       });
     })
     .catch((err) => {
@@ -353,6 +349,31 @@ const viewAllBorrowAction = () => (dispatch) => {
     });
 };
 
+const viewAllReturnAction = () => (dispatch) => {
+  axios.get('/api/v1/users/books/returned',
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.GET_ALL_RETURNED_SUCCESSFUL,
+        payload: res.data.returners,
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.GET_ALL_RETURNED_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
 export {
   addBookAction,
   updateBookAction,
@@ -363,5 +384,6 @@ export {
   viewUserBorrowAction,
   returnBookAction,
   viewUserReturnAction,
-  viewAllBorrowAction
+  viewAllBorrowAction,
+  viewAllReturnAction
 };

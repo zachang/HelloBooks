@@ -104,7 +104,7 @@ const borrowController = {
       })
       .catch(() => res.status(503).send({ message: 'Request not available' }));
   },
-  borrowsViewByAdmin(req, res) {
+  viewBorrowsByAdmin(req, res) {
     const whereClause = {
       where: { returned: { $or: ['pending', 'false'] } },
       include: [
@@ -126,6 +126,31 @@ const borrowController = {
     Borrow.findAll(whereClause)
       .then((borrower) => {
         return res.status(200).send({ borrowers: borrower });
+      })
+      .catch(() => res.status(503).send({ message: 'Request not available' }));
+  },
+  viewReturnedByAdmin(req, res) {
+    const whereClause = {
+      where: { returned: 'true' },
+      include: [
+        {
+          model: Book,
+          include: [{
+            model: Category,
+            attributes: ['category_name']
+          }],
+          attributes: ['id', 'book_name', 'author',
+            'book_count', 'book_image',
+            'publish_year', 'pages', 'description']
+        },
+        {
+          model: User,
+          attributes: ['fullname', 'level', 'email']
+        }]
+    };
+    Borrow.findAll(whereClause)
+      .then((returner) => {
+        return res.status(200).send({ returners: returner });
       })
       .catch(() => res.status(503).send({ message: 'Request not available' }));
   }
