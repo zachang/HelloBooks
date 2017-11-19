@@ -35,10 +35,6 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      block_status: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
       level: {
         type: Sequelize.STRING,
         defaultValue: 'silver',
@@ -56,5 +52,5 @@ module.exports = {
         type: Sequelize.DATE
       }
     }),
-  down: (queryInterface/*, Sequelize*/) => queryInterface.dropTable('Users'),
+  down: (queryInterface) => queryInterface.dropTable('Users'),
 };

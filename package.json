@@ -14,7 +14,7 @@
     "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
     "start": "node tools/buildTools/publicServer.js",
     "test": "cross-env-shell NODE_ENV=test sequelize db:migrate:undo:all && sequelize db:migrate && nyc --reporter=html --reporter=text mocha server/tests/*.spec.js --reporter spec --compilers js:babel-register",
-    "testdev": "cross-env-shell NODE_ENV=test mocha server/tests/*.spec.js --compilers js:babel-register",
+    "testdev": "cross-env-shell NODE_ENV=test mocha server/tests/auth.spec.js --compilers js:babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean-production": "npm install && npm run remove-production && mkdir production",
     "remove-production": "rimraf ./production",

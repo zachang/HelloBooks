@@ -309,7 +309,7 @@ const viewUserReturnAction = (userId) => (dispatch) => {
     })
     .then((res) => {
       return dispatch({
-        type: actionTypes.GET_USER_RETURN_SUCCESSFUL,
+        type: actionTypes.GET_USER_RETURNED_SUCCESSFUL,
         payload: res.data.borrowed
       });
     })
@@ -320,7 +320,7 @@ const viewUserReturnAction = (userId) => (dispatch) => {
         tokenValidate('unauthorized');
       } else {
         return dispatch({
-          type: actionTypes.GET_USER_RETURN_UNSUCCESSFUL,
+          type: actionTypes.GET_USER_RETURNED_UNSUCCESSFUL,
           payload: err.response.data.message
         });
       }

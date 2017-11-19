@@ -38,10 +38,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    block_status: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
     level: {
       type: DataTypes.STRING,
       defaultValue: 'silver',
