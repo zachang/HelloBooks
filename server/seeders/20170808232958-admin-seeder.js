@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up: function (queryInterface) {
 
     const adminUser = {
       fullname: process.env.ADMIN_NAME,

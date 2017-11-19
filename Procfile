@@ -1,0 +1,1 @@
+node tools/buildTools/publicServer.js

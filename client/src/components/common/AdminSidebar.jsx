@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
+import profileImage from '../../build/imgs/eben2.jpg';
 
 export default class AdminSidebar extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ export default class AdminSidebar extends React.Component {
         <div className='col m2 l2 grey darken-4 addPad nav-pan-child'>
           <div className='row walp'>
             <div className=''>
-              <img src='./imgs/eben2.jpg'
+              <img src={profileImage}
                    style={{width: '100px', height: '100px', margin: '22% 0% 0% 26%', boxShadow: '2px 1px 20px #000'}}
                    alt='' className='circle responsive-img'/>
             </div>

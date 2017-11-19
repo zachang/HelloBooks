@@ -7,3 +7,5 @@ npm-debug.log.400741070
 coverage/
 server/uploads/books/
 client/src/build/imgs/
+production
+.DS_Store
