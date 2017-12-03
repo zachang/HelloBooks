@@ -89,7 +89,7 @@ const usersController = {
       phone_no: req.body.phone_no
     };
 
-    if (req.body.book_image) {
+    if (req.body.user_image) {
       userInfo.user_image = req.body.user_image;
     }
 

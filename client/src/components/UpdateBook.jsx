@@ -87,7 +87,7 @@ export class UpdateBook extends React.Component {
       <div className='row'>
         <AdminHeader/>
         <AdminSidebar/>
-        <div className='container mainCon' style={{ marginLeft: '5%' }}>
+        {bookData && <div className='container mainCon' style={{ marginLeft: '5%' }}>
           <div className='row'>
             <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '4%' }}>
 
@@ -103,7 +103,7 @@ export class UpdateBook extends React.Component {
                           'invalid': (this.state.errors && !!this.state.errors['book_name'])?
                             !!this.state.errors['book_name'] : false
                         }) }
-                        value={ bookData.book_name }
+                        value={ bookData.book_name || '' }
                         onChange={ this.handleChange }
                       />
                       <label
@@ -348,7 +348,7 @@ export class UpdateBook extends React.Component {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
 
     );

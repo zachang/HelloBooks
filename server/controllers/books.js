@@ -10,6 +10,7 @@ const addBookRules = {
   author: 'required|string|min:2',
   category_id: 'required|min:1',
   book_count: 'required|min:1',
+  book_content: 'required',
   publish_year: 'required',
   isbn: 'required',
   pages: 'required',
@@ -21,6 +22,7 @@ const updateBookRules = {
   author: 'required|string|min:2',
   category_id: 'required|min:1',
   publish_year: 'required',
+  book_content: 'required',
   isbn: 'required',
   pages: 'required',
   book_count: 'required|min:1',
@@ -31,10 +33,11 @@ const updateBookRules = {
 const booksController = {
   create(req, res) {
     const validation = new Validator(req.body, addBookRules);
-    const obj = {
+    const bookDetails = {
       book_name: req.body.book_name,
       author: req.body.author,
       book_count: req.body.book_count,
+      book_content: req.body.book_content,
       category_id: req.body.category_id,
       publish_year: req.body.publish_year,
       isbn: req.body.isbn,
@@ -42,12 +45,18 @@ const booksController = {
       description: req.body.description
     };
     if (req.body.book_image) {
-      obj.book_image = req.body.book_image;
+      bookDetails.book_image = req.body.book_image;
     }
     if (validation.passes()) {
-      return Book.create(obj)
-        .then(book => res.status(201).send({ message: 'Book created', book }))
-        .catch(err => res.status(400).send({ message: 'Book not created', err} ));
+      return Book.create(bookDetails)
+        .then(book => res.status(201).send({
+          message: 'Book created',
+          book
+        }))
+        .catch(err => res.status(500).send({
+          message: 'Oops... Book not created. Try again.',
+          err
+        }));
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -108,7 +117,7 @@ const booksController = {
   },
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);
-    const obj = {
+    const bookUpdateDetails = {
       book_name: req.body.book_name,
       author: req.body.author,
       book_count: req.body.book_count,
@@ -120,7 +129,10 @@ const booksController = {
       is_available: req.body.is_available
     };
     if (req.body.book_image) {
-      obj.book_image = req.body.book_image;
+      bookUpdateDetails.book_image = req.body.book_image;
+    }
+    if (req.body.book_content) {
+      bookUpdateDetails.book_content = req.body.book_content;
     }
     if (validation.passes()) {
       return Book
@@ -132,7 +144,7 @@ const booksController = {
             });
           }
           return book
-            .update(obj)
+            .update(bookUpdateDetails)
             .then(update => res.status(200).send({ message: 'Books updated', update }))
             .catch(err => res.status(400).send({ message: 'Error updating books', err }));
         })

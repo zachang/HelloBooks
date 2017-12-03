@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    book_content: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
     book_image: {
       type: DataTypes.STRING,
       unique: true,

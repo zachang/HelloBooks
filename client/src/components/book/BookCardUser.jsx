@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
+import { Link } from 'react-router';
 
 const BookCardUser = props => (
 
@@ -36,12 +37,37 @@ const BookCardUser = props => (
         </p>
       </div>
       <div className='card-action home-card'>
-        <button
-          onClick={ () => (props.borrowBook(window.sessionStorage.token,  props.book.id )) }
-          className='waves-effect waves-light btn teal'
+
+        <Link
+          target='blank'
+          to={ props.book.book_content }
+          className='white tooltipped'
+          data-position="bottom"
+          data-delay="50"
+          data-tooltip="Read book"
         >
-          Borrow
-        </button>
+          <i
+            className="small material-icons"
+            style={{ color: 'teal', cursor: 'pointer'  }}
+          >
+            remove_red_eye
+          </i>
+        </Link>
+
+        <Link
+          className='white tooltipped'
+          data-position="bottom"
+          data-delay="50"
+          data-tooltip="Borrow book"
+        >
+          <i
+            className="small material-icons"
+            onClick={ () => (props.borrowBook(window.sessionStorage.token,  props.book.id )) }
+            style={{ color: 'teal', cursor: 'pointer' }}
+          >
+            dlibrary_books
+          </i>
+        </Link>
       </div>
     </div>
   </div>

@@ -38,18 +38,52 @@ const BookCard = props => (
         <p>Description: { props.book.description }</p>
       </div>
       <div className='card-action home-card'>
+
+        <Link
+          target='blank'
+          to={ props.book.book_content }
+          className='white tooltipped hidetooltip'
+          data-position="bottom"
+          data-delay="50"
+          data-tooltip="Read book"
+        >
+          <i
+            className="small material-icons"
+            style={{ color: 'teal', cursor: 'pointer'  }}
+          >
+            remove_red_eye
+          </i>
+        </Link>
+
         <Link
           to={`books/${ props.book.id }`}
-          className='waves-effect waves-light btn teal'
+          className='white tooltipped hidetooltip'
+          data-position="bottom"
+          data-delay="50"
+          data-tooltip="Edit book"
         >
-          Update
+          <i
+            className="small material-icons"
+            style={{ color: 'teal' }}
+          >
+            edit
+          </i>
         </Link>
-        <button
-          onClick={() => (props.deleteBookAction(props.book.id))}
-          className='waves-effect waves-light btn red'
+
+        <Link
+          className='white tooltipped hidetooltip'
+          data-position="bottom"
+          data-delay="50"
+          data-tooltip="Delete book"
         >
-          Delete
-        </button>
+          <i
+            className="small material-icons"
+            onClick={() => (props.deleteBook(props.book.id))}
+            style={{ color: 'red', cursor: 'pointer' }}
+          >
+            delete
+          </i>
+        </Link>
       </div>
 
     </div>

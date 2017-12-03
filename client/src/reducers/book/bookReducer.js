@@ -2,8 +2,8 @@ import actionTypes from '../../actions/actionTypes';
 
 const initialState = {
   success: false,
+  passes: null,
   errors: null,
-  fails: null,
   books: [],
   book: null,
   borrows: null,
@@ -19,7 +19,7 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: true,
         errors: null,
-        fails: null
+        passes: action.payload,
       };
       break;
     case actionTypes.ADDBOOK_VALIDATION_ERROR:
@@ -33,15 +33,15 @@ const bookReducer = (state = initialState, action) => {
       state = {
         ...state,
         success: false,
-        fails: action.payload
+        passes: null,
+        errors: action.payload
       };
       break;
     case actionTypes.UPDATEBOOK_SUCCESSFUL:
       state = {
         ...state,
         success: true,
-        errors: null,
-        fails: null
+        errors: null
       };
       break;
     case actionTypes.UPDATEBOOK_VALIDATION_ERROR:

@@ -69,6 +69,7 @@
     "jsx-quotes": ["error", "prefer-single"],
     "react/display-name": [ 1, {"ignoreTranspilerName": false }],
     "react/forbid-prop-types": [1, {"forbid": ["any"]}],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-boolean-value": 1,
     "react/jsx-closing-bracket-location": 0,
     "react/jsx-curly-spacing": 1,
@@ -97,6 +98,8 @@
     "react/require-extension": 0,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1,
-    "react/wrap-multilines": 0
+    "react/wrap-multilines": 0,
+    "react/no-string-refs": 0,
+    "react/no-find-dom-node": 0,
   }
 }

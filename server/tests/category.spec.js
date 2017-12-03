@@ -16,7 +16,6 @@ describe('TEST CATEGORY ROUTES', () => {
   before(categoryseeder.emptyCategoryTable);
   before(seeder.addUserToDb);
   before(seeder.addAdminToDb);
-  // before(categoryseeder.addCategoryToDb);
 
   let userToken; // store token for normal user authentication
   before((done) => {
@@ -75,7 +74,7 @@ describe('TEST CATEGORY ROUTES', () => {
           .post('/api/v1/categories')
           .set({ 'x-access-token': userToken })
           .send(categoryseeder.setCatData('Epic'))
-          .expect(401)
+          .expect(403)
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'You must be an admin to perform this operation');
@@ -178,7 +177,7 @@ describe('TEST CATEGORY ROUTES', () => {
         .put('/api/v1/categories/1')
         .set({ 'x-access-token': userToken })
         .send(categoryseeder.setUpdateCatData('Sport'))
-        .expect(401)
+        .expect(403)
         .end((err, res) => {
           if (err) return done(err);
           assert.equal(res.body.message, 'You must be an admin to perform this operation');
@@ -250,7 +249,7 @@ describe('TEST CATEGORY ROUTES', () => {
       request(app)
         .delete('/api/v1/categories/1')
         .set({ 'x-access-token': userToken })
-        .expect(401)
+        .expect(403)
         .end((err, res) => {
           if (err) return done(err);
           assert.equal(res.body.message, 'You must be an admin to perform this operation');

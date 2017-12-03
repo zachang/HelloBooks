@@ -3,61 +3,65 @@ import superagent from 'superagent';
 import sha1 from 'sha1';
 import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
+import uploader from '../utils/uploader';
 
-const addBookAction = bookContents => (dispatch) => {
+const addBookAction = (bookContents) => (dispatch) => {
 
-  dispatch({ type: 'UPDATE_IMAGE'});
-  const cloudName = 'hellobookz';
-  const url = 'https://api.cloudinary.com/v1_1/'+cloudName+'/image/upload';
-  const timestamp = Date.now()/1000;
-  const uploadPreset = 'iatwiohn';
-  const paramsStr = 'timestamp='+timestamp+'&upload_preset='+uploadPreset+'V9wVd_HdjhVrnZYCYyGo3mNszNE';
-  const signature = sha1(paramsStr);
-  const params = {
-    'api_key': '471689873521792',
-    'timestamp': timestamp,
-    'upload_preset': uploadPreset,
-    'signature': signature
-  };
-  let uploadRequest = superagent.post(url);
-  uploadRequest.attach('file', bookContents.book_image);
-  Object.keys(params).forEach((key) => {
-    uploadRequest.field(key, params[key])
-  });
-  uploadRequest.end((err, resp) => {
-    if(err){
-      dispatch({type: 'UPDATE_IMAGE_UNSUCCESSFUL'});
-      console.log(err);
-      return
-    }
-    bookContents.book_image = resp.body.url;
-
-    axios.post('/api/v1/books', bookContents ,
-      { headers: { 'x-access-token': window.sessionStorage.token } })
-      .then((res) => {
-        return dispatch({
-          type: actionTypes.ADDBOOK_SUCCESSFUL,
-          payload: res.data.message
-        });
-      })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          tokenValidate('invalid');
-        } else if (err.response.status === 403) {
-          tokenValidate('unauthorized');
-        } else if (err.response.data.message === 'Validation error') {
-          return dispatch({
-            type: actionTypes.ADDBOOK_VALIDATION_ERROR,
-            payload: err.response.data.errors
-          });
-        } else {
-          return dispatch({
-            type: actionTypes.ADDBOOK_UNSUCCESSFUL,
-            payload: err.response.data.message
-          });
-        }
+  uploader(bookContents.book_image, 'image')
+    .then((res) => {
+      dispatch({
+        type: 'UPLOAD_IMAGE_SUCCESSFUL',
+        payLoad: res.response.body.url
       });
-  });
+      bookContents.book_image = res.response.body.url;
+      uploader(bookContents.book_content, 'pdf').then((res) => {
+        dispatch({
+          type: 'UPLOAD_PDF_SUCCESSFUL',
+          payLoad: res.response.body.url
+        });
+        bookContents.book_content = res.response.body.url;
+        axios.post('/api/v1/books', bookContents ,
+          { headers: { 'x-access-token': window.sessionStorage.token } })
+          .then((res) => {
+            return dispatch({
+              type: actionTypes.ADDBOOK_SUCCESSFUL,
+              payload: res.data.message
+            });
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              tokenValidate('invalid');
+            } else if (err.response.status === 403) {
+              tokenValidate('unauthorized');
+            } else if (err.response.data.message === 'Validation error') {
+              return dispatch({
+                type: actionTypes.ADDBOOK_VALIDATION_ERROR,
+                payload: err.response.data.errors
+              });
+            } else {
+              return dispatch({
+                type: actionTypes.ADDBOOK_UNSUCCESSFUL,
+                payload: err.response.data.message
+              });
+            }
+          });
+      })
+        .catch((err) => {
+          if(err.uploadType && err.uploadType === 'image') {
+            dispatch({
+              type: 'UPLOAD_IMAGE_FAILED',
+              payLoad: err.error.response.data
+            });
+          }
+
+          if(err.uploadType && err.uploadType === 'pdf') {
+            dispatch({
+              type: 'UPLOAD_PDF_FAILED',
+              payLoad: err.error.response.data
+            });
+          }
+        });
+    });
 };
 
 const updateBookAction = (bookContents, id) => (dispatch) => {
@@ -109,7 +113,7 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
   } else {
     uploadRequest.end((err, resp) => {
       if (err) {
-        dispatch({type: 'UPLOAD_IMAGE_UNSUCCESSFUL'});
+        dispatch({type: 'UPDATE_IMAGE_UNSUCCESSFUL'});
         console.log(err);
         return
       }
