@@ -22,6 +22,7 @@ export class Admin extends React.Component {
       limit:3
     };
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
+    this.deleteBook = this.deleteBook.bind(this);
   }
 
   componentWillMount() {
@@ -42,6 +43,7 @@ export class Admin extends React.Component {
   }
 
   componentDidUpdate() {
+    $('.tooltipped').tooltip({ delay: 50 });
     $('select').material_select();
     $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.bookCategoryChange.bind(this));
   }
@@ -50,6 +52,12 @@ export class Admin extends React.Component {
   bookCategoryChange(event) {
     this.setState({ category_id: event.target.value });
     this.props.getBookAction(this.state.limit, 0, event.target.value);
+  }
+
+  deleteBook(bookId) {
+    this.props.deleteBookAction(bookId);
+    $('.tooltipped').tooltip('remove');
+
   }
 
 
@@ -88,7 +96,7 @@ export class Admin extends React.Component {
                   <BookCard
                     key={i}
                     book={book}
-                    deleteBookAction={this.props.deleteBookAction}
+                    deleteBook={this.deleteBook}
                   />
                 )}
               </div>

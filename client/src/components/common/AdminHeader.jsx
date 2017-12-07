@@ -30,7 +30,7 @@ export default class AdminHeader extends React.Component {
                 <img src={logo} alt='hellobooks'/>
               </Link>
               <ul className='user hide-on-small-and-down show-on-medium-and-up'>
-                <Link className='dropdown-button btn black btn-prof' href='#' data-activates='dropdown1'>
+                <Link className='dropdown-button btn black btn-prof' to='#' data-activates='dropdown1'>
                   <i className='material-icons mat-icon right' style={{ marginLeft: '1%' }}>arrow_drop_down</i>
                   {userDetails.username}
                 </Link>

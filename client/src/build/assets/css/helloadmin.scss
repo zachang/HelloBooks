@@ -221,9 +221,10 @@ nav ul a.btn-prof{
     height:0;
 }
 
-/*.card-image{
-    height: 100%;
-}*/
+.imagePreview{
+    margin-left: 48% !important;
+    width: 100px !important;
+}
 
 .activator{
   height: 45vh;
@@ -239,4 +240,8 @@ nav ul a.btn-prof{
 
 th {
   border-radius: 0px;
+}
+
+.home-card {
+  text-align: center !important;
 }

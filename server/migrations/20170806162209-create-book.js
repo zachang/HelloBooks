@@ -16,6 +16,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      book_content: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
+      },
       book_image: {
         type: Sequelize.STRING,
         unique: true,
@@ -62,7 +67,5 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Books');
-  }
+  down: (queryInterface) => queryInterface.dropTable('Books'),
 };
