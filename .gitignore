@@ -1,4 +1,11 @@
 .idea/
-node_modules/
+.nyc_output/
 .env
+node_modules/
 npm-debug.log
+npm-debug.log.400741070
+coverage/
+server/uploads/books/
+client/src/build/imgs/
+production
+.DS_Store

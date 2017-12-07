@@ -16,6 +16,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      book_content: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
+      },
       book_image: {
         type: Sequelize.STRING,
         unique: true,
@@ -27,6 +32,22 @@ module.exports = {
       category_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+      },
+      publish_year: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      isbn: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      pages: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      description: {
+        allowNull: false,
+        type: Sequelize.TEXT
       },
       count_borrow: {
         type: Sequelize.INTEGER,
@@ -46,7 +67,5 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Books');
-  }
+  down: (queryInterface) => queryInterface.dropTable('Books'),
 };

@@ -20,8 +20,8 @@ const config = {
   },
   test: {
     username: process.env.DB_USER,
-    password: process.env.PASSWORD,
-    database: 'database_test',
+    password: process.env.TEST_DB_PASSWORD,
+    database: process.env.TEST_DB_NAME,
     host: '127.0.0.1',
     port: 5432,
     dialect: 'postgres'
