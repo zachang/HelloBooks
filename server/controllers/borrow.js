@@ -1,29 +1,27 @@
+import * as _ from 'underscore';
 import db from '../models';
-import { handleError } from '../utils/helpers';
 
 const Borrow = db.Borrow;
 const Book = db.Book;
-const User = db.User;
-const Category = db.Category;
 
 const borrowController = {
   create(req, res) {
     const obj = req.body;
     const params = req.params;
-    Borrow.findAll({ where: { user_id: params.userId, returned: { $or: ['pending', 'false'] } } })
+    Borrow.findAll({ where: { user_id: params.userId, book_id: obj.book_id, returned: false } })
       .then((found) => {
-        if (found.length) return Promise.reject({ code: 400, message: 'You have not returned the previous book you borrowed' });
+        if (found.length) return res.status(403).send({ message: 'You have not returned the previous book you borrowed' });
         return Book.findById(obj.book_id);
       })
       .then((book) => {
         if (!book) {
-          return Promise.reject({ code: 404, message: 'Book not found' });
+          return res.status(404).send({ message: 'Book not found' });
         }
         if (!book.is_available) {
-          return Promise.reject({ code: 404, message: 'Book not available' });
+          return res.status(404).send({ message: 'Book not available' });
         }
         if (book.count_borrow >= book.book_count) {
-          return Promise.reject({ code: 404, message: 'All books have been borrowed' });
+          return res.status(404).send({ message: 'All books have been borrowed' });
         }
 
         return Borrow.create({
@@ -43,91 +41,32 @@ const borrowController = {
         return book.update(update);
       })
       .then(updated => res.status(200).send({ message: 'Borrow completed', updated }))
-      .catch(err => handleError(err, res));
+      .catch(err => res.status(503).send({ message: 'Borrow failed', err }));
   },
   returnBook(req, res) {
-    const bookId = req.body.book_id;
-    const userId = req.params.userId;
-    return Book.findById(bookId)
+    const obj = req.body;
+    const params = req.params;
+    Book.findById(obj.book_id)
       .then((found) => {
-        if (!found) return Promise.reject({ code: 400, message: 'Book not found' });
-        return Borrow.findOne({ where: { user_id: userId, book_id: bookId, returned: 'false' } });
+        if (!found) return res.status(404).send({ message: 'Book not found' });
+        const update = { returned: true, actual_return: new Date() };
+        return Borrow.update(update, { where: { user_id: params.userId, returned: false } });
       })
-      .then((borrowed) => {
-        if (!borrowed) {
-          return Promise.reject({ code: 400, message: 'Book already returned' });
-        }
-        const update = { returned: 'pending', actual_return: new Date() };
-        return Borrow.update(update, { where: { user_id: userId, book_id: bookId, returned: 'false' } });
-      })
-      .then((updatedCount) => {
-        if (updatedCount[0] > 0) {
-          return Book.findById(bookId);
-        }
-        return Promise.reject({ code: 400, message: 'Error returning book' });
-      })
-      .then((book) => {
-        if (book.count_borrow > 0) {
-          const counts = book.count_borrow - 1;
-          return book.update({ count_borrow: counts });
-        }
-        return Promise.reject({ code: 400, message: 'Error returning book' });
-      })
-      .then((updateBook) => {
-        res.status(200).send({ message: 'return completed', updateBook });
-      })
-      .catch(err => handleError(err, res));
+      .then(updated => res.status(200).send({ message: 'Borrow status updated', updated }))
+      .catch(err => res.status(503).send({ message: 'Error updating borrow status', err }));
   },
   borrowsByUser(req, res) {
-    const userId = req.params.userId;
-    const whereClause = {
-      include: [
-        {
-          model: Book,
-          include: [{
-            model: Category,
-            attributes: ['category_name']
-          }],
-          attributes: ['id', 'book_name', 'author',
-            'book_count', 'book_image',
-            'publish_year', 'pages', 'description']
-        }]
-    };
-    if (req.query.owe === 'false') {
-      whereClause.where = { user_id: userId, returned: { $or: ['pending', 'false'] } };
-    } else if (req.query.owe === 'true') {
-      whereClause.where = { user_id: userId, returned: 'true' };
-    }
-    Borrow.findAll(whereClause)
+    const params = req.params;
+    const returned = params.returned == true;
+    Borrow.findAll({ where: { user_id: params.userId, returned },
+      include: [{
+        model: Book
+      }] })
       .then((borrows) => {
-        return res.status(200).send({ borrowed: borrows });
+        const books = _.pluck(borrows, 'Book');
+        return res.status(200).send(books);
       })
-      .catch(() => res.status(503).send({ message: 'Request not available' }));
-  },
-  borrowsViewByAdmin(req, res) {
-    const whereClause = {
-      where: { returned: { $or: ['pending', 'false'] } },
-      include: [
-        {
-          model: Book,
-          include: [{
-            model: Category,
-            attributes: ['category_name']
-          }],
-          attributes: ['id', 'book_name', 'author',
-            'book_count', 'book_image',
-            'publish_year', 'pages', 'description']
-        },
-        {
-          model: User,
-          attributes: ['fullname', 'level', 'email']
-        }]
-    };
-    Borrow.findAll(whereClause)
-      .then((borrower) => {
-        return res.status(200).send({ borrowers: borrower });
-      })
-      .catch(() => res.status(503).send({ message: 'Request not available' }));
+      .catch(err => res.status(503).send({ message: 'Error updating borrow status', err }));
   }
 };
 
