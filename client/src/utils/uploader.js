@@ -6,7 +6,7 @@ const upload = (data) => {
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const timestamp = Date.now() / 1000;
   const uploadPreset = 'iatwiohn';
-  const paramsStr = 'timestamp=' + timestamp + '&upload_preset=' + uploadPreset + 'V9wVd_HdjhVrnZYCYyGo3mNszNE';
+  const paramsStr = `timestamp=${timestamp}&upload_preset=${uploadPreset}V9wVd_HdjhVrnZYCYyGo3mNszNE`;
   const signature = sha1(paramsStr);
   const params = {
     api_key: 471689873521792,

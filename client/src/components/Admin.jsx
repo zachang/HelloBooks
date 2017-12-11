@@ -23,6 +23,7 @@ export class Admin extends React.Component {
     };
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
+    this.editBook = this.editBook.bind(this);
   }
 
   componentWillMount() {
@@ -60,6 +61,10 @@ export class Admin extends React.Component {
 
   }
 
+  editBook() {
+    $('.tooltipped').tooltip('remove');
+
+  }
 
   render() {
     return (
@@ -97,6 +102,7 @@ export class Admin extends React.Component {
                     key={i}
                     book={book}
                     deleteBook={this.deleteBook}
+                    editBook={this.editBook}
                   />
                 )}
               </div>
