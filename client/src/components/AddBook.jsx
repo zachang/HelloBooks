@@ -34,7 +34,7 @@ export class AddBook extends React.Component {
         book_image: '',
         book_image_text: '',
         book_content: '',
-        book_content_text: '',
+        book_content_text: ''
       },
       imagePreviewUrl: '',
       errors: null,
@@ -87,7 +87,10 @@ export class AddBook extends React.Component {
       }
       this.setState({ errors: nextProps.bookState.errors });
     } else if (!nextProps.bookState.success && nextProps.bookState.errors !== 'Book not created') {
-      Materialize.toast('Fill the form properly', 4000);
+      if (this.state.showToast) {
+        Materialize.toast('Fill the form properly!', 4000);
+        this.setState({ showToast: false });
+      }
       this.setState({
         errors: nextProps.bookState.errors
       });
@@ -409,6 +412,7 @@ export class AddBook extends React.Component {
                         <span>Add Image</span>
                         <input
                           type='file'
+                          accept='image/*'
                           id='book_image'
                           name='book_image'
                           onChange={this.handleImageChange}
@@ -432,6 +436,7 @@ export class AddBook extends React.Component {
                         <span>Add PDF</span>
                         <input
                           type='file'
+                          accept='application/pdf'
                           id='book_content'
                           name='book_content'
                           value={bookData.book_content_text}

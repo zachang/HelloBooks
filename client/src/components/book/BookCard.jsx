@@ -65,6 +65,7 @@ const BookCard = props => (
           <i
             className="small material-icons"
             style={{ color: 'teal' }}
+            onClick={() => (props.editBook())}
           >
             edit
           </i>

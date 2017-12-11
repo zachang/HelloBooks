@@ -148,7 +148,7 @@ const booksController = {
             .then(update => res.status(200).send({ message: 'Books updated', update }))
             .catch(err => res.status(400).send({ message: 'Error updating books', err }));
         })
-        .catch(() => res.status(400).send({ message: 'Error updating books' }));
+        .catch(() => res.status(500).send({ message: 'Oops... Book not updated. Try again.' }));
     }
     return res.status(400).json({
       message: 'Validation error',
