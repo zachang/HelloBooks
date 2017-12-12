@@ -10,8 +10,16 @@ import AdminSidebar from './common/AdminSidebar.jsx';
 import BookCard from './book/BookCard.jsx';
 import { getCategoryAction } from '../actions/categoryAction';
 
-
+/**
+ * Admin class declaration
+ * @class Admin
+ * @extends {React.Component}
+ */
 export class Admin extends React.Component {
+  /**
+   * class constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -19,60 +27,99 @@ export class Admin extends React.Component {
       categories: [],
       category_id: '',
       pageCount: null,
-      limit:3
+      limit: 3,
+      showToast: false,
     };
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
     this.editBook = this.editBook.bind(this);
   }
 
+  /**
+   * @method componentWillMount
+   * @return {void} void
+   */
   componentWillMount() {
     this.props.getBookAction(this.state.limit, 0, this.state.category_id);
     this.props.getCategoryAction();
   }
 
+  /**
+   * @method componentWillReceiveProps
+   * @param {object} nextProps - nextProps
+   * @return {object} nextProps
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
     }
-    if (this.state.categories !== nextProps.categoryState.categories ) {
+    if (nextProps.bookState.success === true && nextProps.bookState.fails === null) {
+      if (this.state.showToast) {
+        Materialize.toast('Book deleted!', 4000);
+        this.setState({ showToast: false });
+      }
+    }
+    if (this.state.categories !== nextProps.categoryState.categories) {
       this.setState({ categories: nextProps.categoryState.categories });
     }
-    if (this.state.pageCount !== nextProps.bookState.pageCount ) {
+    if (this.state.pageCount !== nextProps.bookState.pageCount) {
       this.setState({ pageCount: nextProps.bookState.pageCount });
     }
   }
 
+  /**
+   * @method componentDidUpdate
+   * @return {void} void
+   */
   componentDidUpdate() {
     $('.tooltipped').tooltip({ delay: 50 });
     $('select').material_select();
     $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.bookCategoryChange.bind(this));
   }
 
-
+  /**
+   * Handles book search by category
+   * @method bookCategoryChange
+   * @return {void}
+   * @param {object} event - event
+   */
   bookCategoryChange(event) {
     this.setState({ category_id: event.target.value });
     this.props.getBookAction(this.state.limit, 0, event.target.value);
   }
 
+  /**
+   * Handles book deletion
+   * @method deleteBook
+   * @return {void}
+   * @param {integer} bookId - bookId
+   */
   deleteBook(bookId) {
     this.props.deleteBookAction(bookId);
+    this.setState({ showToast: true });
     $('.tooltipped').tooltip('remove');
-
   }
 
+  /**
+   * Handles edit book
+   * @method editBook
+   * @return {void}
+   */
   editBook() {
     $('.tooltipped').tooltip('remove');
-
   }
 
+  /**
+   * Renders AddBook component
+   * @return {XML} JSX
+   */
   render() {
     return (
       <div className='row'>
         <AdminHeader/>
         <AdminSidebar/>
 
-        <div className='container mainCon' style={{ marginLeft: '5%'}}>
+        <div className='container mainCon' style={{ marginLeft: '5%' }}>
           <div className='row'>
             <div className='section'>
               <h4 style={{ marginTop: '7%' }}>All Books</h4>
@@ -116,7 +163,7 @@ export class Admin extends React.Component {
                         const offset = (page - 1) * this.state.limit;
                         this.props.getBookAction(this.state.limit, offset, this.state.category_id);
                       }
-                    } /> : '')
+                      } /> : '')
                 }
               </div>
             </div>
@@ -131,6 +178,7 @@ export class Admin extends React.Component {
 
 Admin.propTypes = {
   bookState: PropTypes.object.isRequired,
+  categoryState: PropTypes.object.isRequired,
   getBookAction: PropTypes.func.isRequired,
   getCategoryAction: PropTypes.func.isRequired,
   deleteBookAction: PropTypes.func.isRequired,

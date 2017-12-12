@@ -7,8 +7,8 @@ const BookCard = props => (
   <div className='col l4 s10 m6 cardsm'>
     <div className='card large sticky-action'>
       <div className='card-image waves-effect waves-block waves-light'>
-        <img className='activator' src={ (props.book.book_image !== null)
-          ? props.book.book_image : '../../imgs/default.jpg' }
+        <img className='activator' src={(props.book.book_image !== null)
+          ? props.book.book_image : '../../imgs/default.jpg'}
         />
       </div>
       <div className='card-content'>
@@ -43,27 +43,27 @@ const BookCard = props => (
           target='blank'
           to={ props.book.book_content }
           className='white tooltipped hidetooltip'
-          data-position="bottom"
-          data-delay="50"
-          data-tooltip="Read book"
+          data-position='bottom'
+          data-delay='50'
+          data-tooltip='Read book'
         >
           <i
-            className="small material-icons"
-            style={{ color: 'teal', cursor: 'pointer'  }}
+            className='small material-icons'
+            style={{ color: 'teal', cursor: 'pointer' }}
           >
             remove_red_eye
           </i>
         </Link>
 
         <Link
-          to={`books/${ props.book.id }`}
+          to={`books/${props.book.id}`}
           className='white tooltipped hidetooltip'
-          data-position="bottom"
-          data-delay="50"
-          data-tooltip="Edit book"
+          data-position='bottom'
+          data-delay='50'
+          data-tooltip='Edit book'
         >
           <i
-            className="small material-icons"
+            className='small material-icons'
             style={{ color: 'teal' }}
             onClick={() => (props.editBook())}
           >
@@ -73,12 +73,12 @@ const BookCard = props => (
 
         <Link
           className='white tooltipped hidetooltip'
-          data-position="bottom"
-          data-delay="50"
-          data-tooltip="Delete book"
+          data-position='bottom'
+          data-delay='50'
+          data-tooltip='Delete book'
         >
           <i
-            className="small material-icons"
+            className='small material-icons'
             onClick={() => (props.deleteBook(props.book.id))}
             style={{ color: 'red', cursor: 'pointer' }}
           >
