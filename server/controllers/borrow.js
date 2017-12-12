@@ -30,8 +30,6 @@ const borrowController = {
           user_id: params.userId,
           book_id: req.body.book_id,
           borrow_date: new Date(),
-          expected_return: new Date(Date.now() + (5 * 24 * 60 * 60 * 1000)),
-          collection_date: new Date()
         });
       })
       .then((borrow) => {

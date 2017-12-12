@@ -7,7 +7,7 @@ const initialState = {
   books: [],
   book: null,
   borrows: null,
-  borrowers:[],
+  borrowers: [],
   returnings: null,
   pageCount: null
 };
@@ -76,13 +76,13 @@ const bookReducer = (state = initialState, action) => {
       };
       break;
     case actionTypes.GETONEBOOK_SUCCESSFUL:
-    state = {
-      ...state,
-      success: true,
-      errors: null,
-      book: action.payload
-    };
-    break;
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        book: action.payload
+      };
+      break;
     case actionTypes.GETONEBOOK_UNSUCCESSFUL:
       state = {
         ...state,
@@ -115,6 +115,7 @@ const bookReducer = (state = initialState, action) => {
         success: true,
         errors: null,
         fails: null,
+        borrows: action.payload
       };
       break;
     case actionTypes.BORROW_BOOK_UNSUCCESSFUL:
