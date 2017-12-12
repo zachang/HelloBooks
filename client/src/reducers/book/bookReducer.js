@@ -97,7 +97,7 @@ const bookReducer = (state = initialState, action) => {
         success: true,
         errors: null,
         fails: null,
-        books: state.books.filter((book) =>
+        books: state.books.filter(book =>
           book.id !== action.payload
         )
       };
