@@ -19,7 +19,8 @@ export class User extends React.Component {
       categories: [],
       category_id: '',
       pageCount: null,
-      limit:3
+      limit:3,
+      showToast: false,
     };
     this.borrowBook = this.borrowBook.bind(this);
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
@@ -31,19 +32,45 @@ export class User extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.bookState.success === false){
+    if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
     }
-    if (this.state.categories !== nextProps.categoryState.categories ) {
+
+    if (nextProps.bookState.borrows === 'Borrow completed') {
+      if (this.state.showToast) {
+        Materialize.toast('Book borrowed, collect within 24hrs to prevent reversal!', 10000);
+        this.setState({ showToast: false });
+      }
+    }
+
+    if (nextProps.bookState.fails === 'You have not returned the previous book you borrowed') {
+      if (this.state.showToast) {
+        Materialize.toast('Please, return the previous book you borrowed', 5000);
+        this.setState({ showToast: false });
+      }
+    } else if (nextProps.bookState.fails === 'All books have been borrowed') {
+      if (this.state.showToast) {
+        Materialize.toast('All copies have been borrowed, try again later!', 5000);
+        this.setState({ showToast: false });
+      }
+    } else if (nextProps.bookState.fails === 'Borrow failed') {
+      if (this.state.showToast) {
+        Materialize.toast('Borrow failed, try again!', 5000);
+        this.setState({ showToast: false });
+      }
+    }
+
+    if (this.state.categories !== nextProps.categoryState.categories) {
       this.setState({ categories: nextProps.categoryState.categories });
     }
-    if (this.state.pageCount !== nextProps.bookState.pageCount ) {
+    if (this.state.pageCount !== nextProps.bookState.pageCount) {
       this.setState({ pageCount: nextProps.bookState.pageCount });
     }
   }
 
   componentDidUpdate() {
     $('select').material_select();
+    $('.tooltipped').tooltip({ delay: 50 });
     $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.bookCategoryChange.bind(this));
   }
 
@@ -55,6 +82,7 @@ export class User extends React.Component {
   borrowBook(token, bookId){
     const userId = decodeToken(token).id;
     this.props.borrowBookAction(userId, bookId);
+    this.setState({ showToast: true });
   }
 
   render() {
@@ -62,7 +90,7 @@ export class User extends React.Component {
       <div className='row'>
         <UserHeader/>
         <UserSidebar/>
-        <div className='container mainCon' style={{marginLeft: '5%'}}>
+        <div className='container mainCon' style={{ marginLeft: '5%' }}>
           <div className='row'>
             <div className='section'>
               <h4 style={{ marginTop: '7%' }}>All Books</h4>
@@ -121,6 +149,7 @@ export class User extends React.Component {
 
 User.propTypes = {
   bookState: PropTypes.object.isRequired,
+  categoryState: PropTypes.object.isRequired,
   getBookAction: PropTypes.func.isRequired,
   getCategoryAction: PropTypes.func.isRequired,
   borrowBookAction: PropTypes.func.isRequired

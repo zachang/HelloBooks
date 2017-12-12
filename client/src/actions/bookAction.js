@@ -261,8 +261,8 @@ const deleteBookAction = id => (dispatch) => {
     });
 };
 
-const borrowBookAction = (userId, bookId)=> (dispatch) => {
-  axios.post(`/api/v1/users/${userId}/books`, { 'book_id': bookId },
+const borrowBookAction = (userId, bookId) => (dispatch) => {
+  axios.post(`/api/v1/users/${userId}/books`, { book_id: bookId },
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
