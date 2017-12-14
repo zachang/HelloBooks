@@ -1,5 +1,5 @@
 import db from '../models';
-import { handleError } from '../utils/helpers';
+import { handleError, generatePaginationMeta } from '../utils/helpers';
 
 const Borrow = db.Borrow;
 const Book = db.Book;
@@ -55,7 +55,7 @@ const borrowController = {
         if (!borrowed) {
           return Promise.reject({ code: 400, message: 'Book already returned' });
         }
-        const update = { returned: 'pending', actual_return: new Date() };
+        const update = { returned: 'pending' };
         return Borrow.update(update, { where: { user_id: userId, book_id: bookId, returned: 'false' } });
       })
       .then((updatedCount) => {
@@ -125,7 +125,58 @@ const borrowController = {
       .then((borrower) => {
         return res.status(200).send({ borrowers: borrower });
       })
-      .catch(() => res.status(503).send({ message: 'Request not available' }));
+      .catch(() => res.status(503).send({ message: 'Service not available' }));
+  },
+  returnsViewByAdmin(req, res) {
+    const limit = req.query.limit || 15;
+    const offset = req.query.offset || 0;
+    const order = (req.query.order && req.query.order.toLowerCase() === 'desc')
+      ? [['createdAt', 'DESC']] : [['createdAt', 'ASC']];
+
+    const whereClause = {
+      where: { returned: { $or: ['true', 'pending'] } },
+      include: [
+        {
+          model: Book,
+          include: [{
+            model: Category,
+            attributes: ['category_name']
+          }],
+          attributes: ['id', 'book_name', 'author',
+            'book_count', 'book_image',
+            'publish_year', 'pages', 'description']
+        },
+        {
+          model: User,
+          attributes: ['fullname', 'level', 'email']
+        }],
+      limit,
+      offset,
+      order
+    };
+    Borrow.findAndCountAll(whereClause)
+      .then((returner) => {
+        if (returner.count === 0) {
+          return res.status(200).send({ message: 'Nothing to display', returner: [] });
+        }
+        return res.status(200).send({
+          paginationMeta: generatePaginationMeta(returner, limit, offset),
+          returners: returner.rows,
+        });
+      })
+      .catch(() => res.status(503).send({ message: 'Service not available' }));
+  },
+  acceptReturns(req, res) {
+    const parameter = req.params;
+    return Borrow.findOne({ where: { id: parameter.borrowId, returned: 'pending' } })
+      .then((borrowed) => {
+        if (!borrowed) {
+          return res.status(404).send({ message: 'Borrow not found' });
+        }
+        return borrowed.update({ returned: 'true', actual_return: new Date() })
+          .then(() => res.status(200).send({ message: 'Return confirmed' }));
+      })
+      .catch(() => res.status(503).send({ message: 'Service not available' }));
   }
 };
 

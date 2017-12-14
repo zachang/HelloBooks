@@ -96,6 +96,7 @@
     "swagger": "^0.7.5",
     "swagger-jsdoc": "^1.9.7",
     "sweetalert": "^2.0.8",
+    "sweetalert2": "^7.0.9",
     "underscore": "^1.8.3",
     "url-loader": "^0.5.9",
     "validator": "^8.2.0",

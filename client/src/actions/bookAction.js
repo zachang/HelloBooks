@@ -388,6 +388,59 @@ const viewAllBorrowAction = () => (dispatch) => {
     });
 };
 
+const viewAllReturnedAction = (limit, offset) => (dispatch) => {
+  axios.get(`/api/v1/users/books/returned?limit=${limit}&offset=${offset}`,
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.GET_ALL_RETURNED_SUCCESSFUL,
+        payload: {
+          returners: res.data.returners,
+          pageCount: res.data.paginationMeta.pageCount
+        }
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.GET_ALL_RETURNED_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
+const confirmReturnAction = borrowId => (dispatch) => {
+  axios.put(`/api/v1/borrows/${borrowId}`, {},
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.CONFIRM_RETURNED_SUCCESSFUL,
+        payload: { message: res.data.message, borrowId }
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.CONFIRM_RETURNED_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
 export {
   addBookAction,
   updateBookAction,
@@ -398,5 +451,7 @@ export {
   viewUserBorrowAction,
   returnBookAction,
   viewUserReturnAction,
-  viewAllBorrowAction
+  viewAllBorrowAction,
+  viewAllReturnedAction,
+  confirmReturnAction
 };

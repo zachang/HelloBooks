@@ -126,6 +126,10 @@ const routes = (router) => {
     .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
       borrowController.borrowsViewByAdmin);
 
+  router.route('/users/books/returned')
+    .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      borrowController.returnsViewByAdmin);
+
   router.route('/categories')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
     .get(authMiddleware.verifyToken, categoryController.list);
@@ -133,6 +137,9 @@ const routes = (router) => {
   router.route('/categories/:categoryId')
     .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)
     .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.destroy);
+
+  router.route('/borrows/:borrowId')
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, borrowController.acceptReturns);
 };
 
 export default routes;
