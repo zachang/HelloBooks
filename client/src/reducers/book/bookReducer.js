@@ -9,7 +9,10 @@ const initialState = {
   borrows: null,
   borrowers: [],
   returnings: null,
-  pageCount: null
+  returners: [],
+  pageCount: null,
+  confirmReturn: null,
+  clickedReturnedBorrowList: []
 };
 
 const bookReducer = (state = initialState, action) => {
@@ -186,6 +189,39 @@ const bookReducer = (state = initialState, action) => {
         success: false,
         errors: action.payload,
         returnings: null
+      };
+      break;
+    case actionTypes.GET_ALL_RETURNED_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        returners: action.payload.returners,
+        pageCount: action.payload.pageCount
+      };
+      break;
+    case actionTypes.GET_ALL_RETURNED_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload,
+        returners: null
+      };
+      break;
+    case actionTypes.CONFIRM_RETURNED_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        confirmReturn: action.payload.message,
+        clickedReturnedBorrowList: [...state.clickedReturnedBorrowList, action.payload.borrowId]
+      };
+      break;
+    case actionTypes.CONFIRM_RETURNED_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload
       };
       break;
     default:
