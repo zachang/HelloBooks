@@ -10,8 +10,14 @@ const userBorrowList = props => (
     <td>{ new Date(props.borrower.createdAt).toLocaleString() }</td>
     <td>{ props.borrower.returned}</td>
     <td>
-      <Link className='waves-effect waves-light btn btn-small green'>Accept</Link>
-      <Link className='waves-effect waves-light  btn btn-small red'>Reject</Link>
+      { ((props.borrower.borrow_status === 'true') || (props.clickedBorrowList.indexOf(props.borrower.id) > -1)) ? 'Confirmed' :
+        <Link
+          className='waves-effect waves-light btn btn-small'
+          onClick={() => (props.confirmBorrow(props.borrower.id))}
+        >
+          Confirm
+        </Link>
+      }
     </td>
   </tr>
 );

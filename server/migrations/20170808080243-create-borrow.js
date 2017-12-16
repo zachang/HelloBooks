@@ -19,6 +19,9 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      borrow_status: {
+        type: Sequelize.STRING,
+      },
       collection_date: {
         type: Sequelize.DATE,
         defaultValue: null

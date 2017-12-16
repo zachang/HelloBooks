@@ -362,16 +362,18 @@ const viewUserReturnAction = (userId) => (dispatch) => {
     });
 };
 
-const viewAllBorrowAction = () => (dispatch) => {
-  axios.get('/api/v1/users/books/borrows',
+const viewAllBorrowAction = (limit, offset) => (dispatch) => {
+  axios.get(`/api/v1/users/books/borrows?limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
       return dispatch({
         type: actionTypes.GET_ALL_BORROW_SUCCESSFUL,
-        payload: res.data.borrowers,
-        tests: console.log('>>>>>>>>', res.data.borrowers)
+        payload: {
+          borrowers: res.data.borrowers,
+          pageCount: res.data.paginationMeta.pageCount
+       }
       });
     })
     .catch((err) => {
@@ -417,7 +419,7 @@ const viewAllReturnedAction = (limit, offset) => (dispatch) => {
 };
 
 const confirmReturnAction = borrowId => (dispatch) => {
-  axios.put(`/api/v1/borrows/${borrowId}`, {},
+  axios.put(`/api/v1/borrows/${borrowId}/confirm`, {},
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -440,6 +442,30 @@ const confirmReturnAction = borrowId => (dispatch) => {
       }
     });
 };
+const confirmBorrowAction = borrowId => (dispatch) => {
+  axios.patch(`/api/v1/borrows/${borrowId}/confirm`, {},
+    {
+      headers: { 'x-access-token': window.sessionStorage.token }
+    })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.CONFIRM_BORROW_SUCCESSFUL,
+        payload: { message: res.data.message, borrowId }
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else {
+        return dispatch({
+          type: actionTypes.CONFIRM_BORROW_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
 
 export {
   addBookAction,
@@ -453,5 +479,6 @@ export {
   viewUserReturnAction,
   viewAllBorrowAction,
   viewAllReturnedAction,
-  confirmReturnAction
+  confirmReturnAction,
+  confirmBorrowAction
 };

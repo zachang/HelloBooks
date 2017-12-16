@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
+    borrow_status: {
+      type: DataTypes.STRING,
+    },
     collection_date: {
       type: DataTypes.DATE,
       defaultValue: null
