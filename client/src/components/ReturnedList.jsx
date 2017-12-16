@@ -73,7 +73,7 @@ export class ReturnedList extends React.Component {
       if (result.value) {
         swal(
           'Confirmed!',
-          'Return has been deleted.',
+          'Return has been confirmed.',
           'success'
         );
         this.props.confirmReturnAction(borrowId);

@@ -138,8 +138,9 @@ const routes = (router) => {
     .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)
     .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.destroy);
 
-  router.route('/borrows/:borrowId')
-    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, borrowController.acceptReturns);
+  router.route('/borrows/:borrowId/confirm')
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, borrowController.acceptReturns)
+    .patch(authMiddleware.verifyToken, authMiddleware.verifyAdmin, borrowController.acceptBorrows);
 };
 
 export default routes;

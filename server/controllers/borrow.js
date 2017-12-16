@@ -30,6 +30,7 @@ const borrowController = {
           user_id: params.userId,
           book_id: req.body.book_id,
           borrow_date: new Date(),
+          borrow_status: 'pending'
         });
       })
       .then((borrow) => {
@@ -103,8 +104,13 @@ const borrowController = {
       .catch(() => res.status(503).send({ message: 'Request not available' }));
   },
   borrowsViewByAdmin(req, res) {
+    const limit = req.query.limit || 15;
+    const offset = req.query.offset || 0;
+    const order = (req.query.order && req.query.order.toLowerCase() === 'desc')
+      ? [['createdAt', 'DESC']] : [['createdAt', 'ASC']];
+
     const whereClause = {
-      where: { returned: { $or: ['pending', 'false'] } },
+      where: { borrow_status: { $or: ['pending', 'true'] } },
       include: [
         {
           model: Book,
@@ -119,11 +125,17 @@ const borrowController = {
         {
           model: User,
           attributes: ['fullname', 'level', 'email']
-        }]
+        }],
+      limit,
+      offset,
+      order
     };
-    Borrow.findAll(whereClause)
+    Borrow.findAndCountAll(whereClause)
       .then((borrower) => {
-        return res.status(200).send({ borrowers: borrower });
+        return res.status(200).send({
+          paginationMeta: generatePaginationMeta(borrower, limit, offset),
+          borrowers: borrower.rows,
+        });
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   },
@@ -156,9 +168,6 @@ const borrowController = {
     };
     Borrow.findAndCountAll(whereClause)
       .then((returner) => {
-        if (returner.count === 0) {
-          return res.status(200).send({ message: 'Nothing to display', returner: [] });
-        }
         return res.status(200).send({
           paginationMeta: generatePaginationMeta(returner, limit, offset),
           returners: returner.rows,
@@ -175,6 +184,18 @@ const borrowController = {
         }
         return borrowed.update({ returned: 'true', actual_return: new Date() })
           .then(() => res.status(200).send({ message: 'Return confirmed' }));
+      })
+      .catch(() => res.status(503).send({ message: 'Service not available' }));
+  },
+  acceptBorrows(req, res) {
+    const params = req.params;
+    return Borrow.findOne({ where: { id: params.borrowId, collection_date: null } })
+      .then((borrowed) => {
+        if (!borrowed) {
+          return res.status(404).send({ message: 'Borrow not found' });
+        }
+        return borrowed.update({ borrow_status: 'true', collection_date: new Date(), expected_return: new Date(Date.now() + (5 * 24 * 60 * 60 * 1000)) })
+          .then(() => res.status(200).send({ message: 'Borrow confirmed' }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   }

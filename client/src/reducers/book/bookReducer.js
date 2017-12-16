@@ -12,7 +12,9 @@ const initialState = {
   returners: [],
   pageCount: null,
   confirmReturn: null,
-  clickedReturnedBorrowList: []
+  clickedReturnedBorrowList: [],
+  confirmBorrow: null,
+  clickedBorrowList: []
 };
 
 const bookReducer = (state = initialState, action) => {
@@ -164,7 +166,8 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: true,
         errors: null,
-        borrowers: action.payload
+        borrowers: action.payload.borrowers,
+        pageCount: action.payload.pageCount
       };
       break;
     case actionTypes.GET_ALL_BORROW_UNSUCCESSFUL:
@@ -218,6 +221,22 @@ const bookReducer = (state = initialState, action) => {
       };
       break;
     case actionTypes.CONFIRM_RETURNED_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload
+      };
+      break;
+    case actionTypes.CONFIRM_BORROW_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        confirmBorrow: action.payload.message,
+        clickedBorrowList: [...state.clickedBorrowList, action.payload.borrowId]
+      };
+      break;
+    case actionTypes.CONFIRM_BORROW_UNSUCCESSFUL:
       state = {
         ...state,
         success: false,

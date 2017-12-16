@@ -245,3 +245,11 @@ th {
 .home-card {
   text-align: center !important;
 }
+
+.pagination li.active a {
+  background-color: #26a69a;
+}
+
+.swal2-popup .swal2-confirm{
+  background-color: #26a69a !important;
+}

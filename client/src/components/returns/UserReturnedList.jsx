@@ -13,7 +13,7 @@ const UserReturnedList = props => (
     <td>
       { (props.returner.returned === 'true' || (props.clickedReturnedBorrowList.indexOf(props.returner.id) > -1)) ? 'Confirmed' :
         <Link
-          className='waves-effect waves-light btn btn-small green'
+          className='waves-effect waves-light btn btn-small'
           onClick={() => (props.confirmReturn(props.returner.id))}
         >
           Confirm
