@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
+import swal from 'sweetalert2';
 import { getBookAction, deleteBookAction } from '../actions/bookAction';
 import AdminHeader from './common/AdminHeader.jsx';
 import AdminSidebar from './common/AdminSidebar.jsx';
@@ -95,7 +96,24 @@ export class Admin extends React.Component {
    * @param {integer} bookId - bookId
    */
   deleteBook(bookId) {
-    this.props.deleteBookAction(bookId);
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#26a69a',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm!'
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted!',
+          'Book has been Deleted.',
+          'success'
+        );
+        this.props.deleteBookAction(bookId);
+      }
+    });
     this.setState({ showToast: true });
     $('.tooltipped').tooltip('remove');
   }
