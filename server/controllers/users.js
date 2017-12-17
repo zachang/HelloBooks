@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Validator from 'validatorjs';
+import { generatePaginationMeta } from '../utils/helpers';
 import db from '../models';
 
 const User = db.User;
@@ -70,13 +71,19 @@ const usersController = {
       });
   },
   list(req, res) {
+    const limit = req.query.limit || 2;
+    const offset = req.query.offset || 0;
+    const order = (req.query.order && req.query.order.toLowerCase() === 'desc')
+      ? [['createdAt', 'DESC']] : [['createdAt', 'ASC']];
     return User
-      .findAll()
+      .findAndCountAll({ limit, offset, order })
       .then((users) => {
         if (users.length === 0) {
           return res.status(200).send({ message: 'No user to display', users: [] });
         }
-        return res.status(200).send({ users });
+        return res.status(200).send({
+        paginationMeta: generatePaginationMeta(users, limit, offset),
+        users: users.rows});
       })
       .catch(() => res.status(400).send({ message: 'Error, nothing to display' }));
   },

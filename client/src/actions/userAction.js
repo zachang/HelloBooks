@@ -2,13 +2,16 @@ import axios from 'axios';
 import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 
-const getUserAction = () => (dispatch) => {
-  axios.get('/api/v1/users',
+const getUserAction = (limit, offset) => (dispatch) => {
+  axios.get(`/api/v1/users?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
       return dispatch({ type: actionTypes.GETUSERS_SUCCESSFUL,
-        payload: res.data.users });
+        payload: {
+          users: res.data.users,
+          pageCount: res.data.paginationMeta.pageCount
+      }});
     })
     .catch((err) => {
       if (err.response.status === 401) {
@@ -18,7 +21,7 @@ const getUserAction = () => (dispatch) => {
       } else {
         return dispatch({
           type: actionTypes.GETUSERS_UNSUCCESSFUL,
-          payload: err.response.data.message
+          payload: err.response.data.message,
         });
       }
     });

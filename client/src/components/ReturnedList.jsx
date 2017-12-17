@@ -25,7 +25,7 @@ export class ReturnedList extends React.Component {
       errors: null,
       showToast: false,
       pageCount: null,
-      limit: 1,
+      limit: 15,
       clickedReturnedBorrowList: []
     };
     this.confirmReturn = this.confirmReturn.bind(this);

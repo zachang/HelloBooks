@@ -2,31 +2,59 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Pagination } from 'react-materialize';
 import getUserAction from '../actions/userAction';
 import AdminHeader from './common/AdminHeader';
 import AdminSidebar from './common/AdminSidebar';
-import Paginate from './common/Paginate-UserList';
 import UserRow from './user/UserRow.jsx';
 
+/**
+ * UserList class declaration
+ * @class UserList
+ * @extends {React.Component}
+ */
 export class UserList extends React.Component {
+
+  /**
+   * class constructor
+   * @param {object} props
+   */
   constructor(props){
     super(props);
       this.state = {
-        errors: null
+        errors: null,
+        pageCount: null,
+        limit: 1
       }
-
   }
 
+  /**
+   * @method componentWillMount
+   * @return {void} void
+   */
   componentWillMount() {
-    this.props.getUserAction();
+    this.props.getUserAction(this.state.limit, 0);
   }
 
+  /**
+   * @method componentWillReceiveProps
+   * @param {object} nextProps - nextProps
+   * @return {object} nextProps
+   */
   componentWillReceiveProps(nextProps) {
     if(nextProps.userState.success === false){
       this.setState({ errors: nextProps.userState.errors });
     }
+
+    if (this.state.pageCount !== nextProps.userState.pageCount) {
+      this.setState({ pageCount: nextProps.userState.pageCount });
+    }
   }
 
+  /**
+   * Renders UserList component
+   * @return {XML} JSX
+   */
   render() {
     return (
       <div className='row'>
@@ -62,7 +90,17 @@ export class UserList extends React.Component {
               </table>
             </div>
 
-            <Paginate/>
+            <div className='row'>
+              {
+                ((this.state.pageCount) ?
+                  <Pagination
+                    items={this.state.pageCount}
+                    onSelect={(page) => {
+                      const offset = (page - 1) * this.state.limit;
+                      this.props.getUserAction(this.state.limit, offset);
+                    }} /> : '')
+              }
+            </div>
 
           </div>
         </div>
