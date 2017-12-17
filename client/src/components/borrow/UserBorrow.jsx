@@ -32,12 +32,18 @@ const UserBorrow = props => (
           </p>
         </div>
         <div className='card-action home-card'>
-          <button
-            onClick={ () => (props.returnBook(props.borrow.Book.id )) }
-            className='waves-effect waves-light btn red'
-          >
-            Return
-          </button>
+          {(props.borrow.borrow_status === 'pending') ?
+            <button
+              className='waves-effect waves-light btn red' disabled
+            >
+              Return
+            </button> :
+            <button
+              onClick={ () => (props.returnBook(props.borrow.Book.id )) }
+              className='waves-effect waves-light btn red'
+            >
+              Return
+            </button>}
         </div>
       </div>
     </div>

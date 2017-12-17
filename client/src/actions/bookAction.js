@@ -292,9 +292,8 @@ const returnBookAction = (userId, bookId)=> (dispatch) => {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
-      console.log(actionTypes.RETURN_BOOK_SUCCESSFUL, 'hello');
       return dispatch({
-        type: actionTypes.RETURN_BOOK_SUCCESSFUL,
+        type: actionTypes.RETURNED_BOOK_SUCCESSFUL,
         payload: res.data.message
       });
     })
@@ -305,7 +304,7 @@ const returnBookAction = (userId, bookId)=> (dispatch) => {
         tokenValidate('unauthorized');
       } else {
         return dispatch({
-          type: actionTypes.RETURN_BOOK_UNSUCCESSFUL,
+          type: actionTypes.RETURNED_BOOK_UNSUCCESSFUL,
           payload: err.response.data.message
         });
       }

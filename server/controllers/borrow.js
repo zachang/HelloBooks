@@ -93,7 +93,7 @@ const borrowController = {
         }]
     };
     if (req.query.owe === 'false') {
-      whereClause.where = { user_id: userId, returned: { $or: ['pending', 'false'] } };
+      whereClause.where = { user_id: userId, borrow_status: { $or: ['pending', 'true'] } };
     } else if (req.query.owe === 'true') {
       whereClause.where = { user_id: userId, returned: 'true' };
     }
