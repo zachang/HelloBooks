@@ -4,7 +4,8 @@ const initialState = {
   success: false,
   errors: null,
   fails: null,
-  users: []
+  users: [],
+  pageCount: null,
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,7 +14,8 @@ const userReducer = (state = initialState, action) => {
         ...state,
         success: true,
         errors: null,
-        users: action.payload
+        users: action.payload.users,
+        pageCount: action.payload.pageCount
       };
       break;
     case actionTypes.GETUSERS_UNSUCCESSFUL:

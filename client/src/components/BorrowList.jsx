@@ -24,7 +24,7 @@ export class BorrowList extends React.Component {
     this.state = {
       errors: null,
       pageCount: null,
-      limit: 1,
+      limit: 15,
       clickedBorrowList: []
     };
     this.confirmBorrow = this.confirmBorrow.bind(this);
