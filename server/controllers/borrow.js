@@ -78,6 +78,10 @@ const borrowController = {
       .catch(err => handleError(err, res));
   },
   borrowsByUser(req, res) {
+    const limit = req.query.limit || 3;
+    const offset = req.query.offset || 0;
+    const order = (req.query.order && req.query.order.toLowerCase() === 'desc')
+      ? [['createdAt', 'DESC']] : [['createdAt', 'ASC']];
     const userId = req.params.userId;
     const whereClause = {
       include: [
@@ -90,16 +94,22 @@ const borrowController = {
           attributes: ['id', 'book_name', 'author',
             'book_count', 'book_image',
             'publish_year', 'pages', 'description']
-        }]
+        }],
+      limit,
+      offset,
+      order
     };
     if (req.query.owe === 'false') {
       whereClause.where = { user_id: userId, borrow_status: { $or: ['pending', 'true'] } };
     } else if (req.query.owe === 'true') {
       whereClause.where = { user_id: userId, returned: 'true' };
     }
-    Borrow.findAll(whereClause)
+    Borrow.findAndCountAll(whereClause)
       .then((borrows) => {
-        return res.status(200).send({ borrowed: borrows });
+        return res.status(200).send({
+          borrowed: borrows.rows,
+          paginationMeta: generatePaginationMeta(borrows, limit, offset)
+        });
       })
       .catch(() => res.status(503).send({ message: 'Request not available' }));
   },

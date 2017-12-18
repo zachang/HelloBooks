@@ -53,7 +53,7 @@ export class User extends React.Component {
         Materialize.toast('All copies have been borrowed, try again later!', 5000);
         this.setState({ showToast: false });
       }
-    } else if (nextProps.bookState.fails === 'Borrow failed') {
+    } else if (nextProps.bookState.fails === 'Process failed') {
       if (this.state.showToast) {
         Materialize.toast('Borrow failed, try again!', 5000);
         this.setState({ showToast: false });

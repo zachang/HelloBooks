@@ -34,9 +34,20 @@ const UserBorrow = props => (
         <div className='card-action home-card'>
           {(props.borrow.borrow_status === 'pending') ?
             <button
-              className='waves-effect waves-light btn red' disabled
+              className='waves-effect waves-light btn grey tooltipped'
+              data-position='bottom'
+              data-delay='50'
+              data-tooltip='Wait for borrow confirmation'
             >
               Return
+            </button> : (props.borrow.returned === 'true') ?
+            <button
+              className='waves-effect waves-light btn grey tooltipped'
+              data-position='bottom'
+              data-delay='50'
+              data-tooltip='Book return confirmed'
+            >
+              Confirmed
             </button> :
             <button
               onClick={ () => (props.returnBook(props.borrow.Book.id )) }
