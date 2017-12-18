@@ -2,43 +2,104 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Pagination } from 'react-materialize';
 import { viewUserBorrowAction, returnBookAction } from '../actions/bookAction';
 import UserHeader from './common/UserHeader';
 import UserSidebar from './common/UserSidebar';
-import Paginate from './common/Paginate-UserBorrow';
 import UserBorrow from './borrow/UserBorrow.jsx';
 import { decodeToken } from '../utils/helpers';
 
-
+/**
+ * Borrowed class declaration
+ * @class Borrowed
+ * @extends {React.Component}
+ */
 export class Borrowed extends React.Component {
+
+  /**
+   * class constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
       errors: null,
-      books: []
+      books: [],
+      pageCount: null,
+      limit: 1,
+      showToast: false,
     };
     this.returnBook = this.returnBook.bind(this);
   }
 
+  /**
+   * @method componentWillMount
+   * @return {void} void
+   */
   componentWillMount() {
     const userDetails = decodeToken(window.sessionStorage.token);
-    this.props.viewUserBorrowAction(userDetails.id);
+    this.props.viewUserBorrowAction(userDetails.id, this.state.limit, 0);
   }
 
+  /**
+   * @method componentWillReceiveProps
+   * @param {object} nextProps - nextProps
+   * @return {object} nextProps
+   */
   componentWillReceiveProps(nextProps) {
-    if(nextProps.bookState.success === false){
-      this.setState({ errors: nextProps.bookState.errors });
+    if (nextProps.bookState.success === false) {
+      this.setState({errors: nextProps.bookState.errors});
+    }
+    if (this.state.pageCount !== nextProps.bookState.pageCount) {
+      this.setState({pageCount: nextProps.bookState.pageCount});
+    }
+    if (nextProps.bookState.success === true && nextProps.bookState.returned === 'return completed') {
+      if (this.state.showToast) {
+        Materialize.toast('Book returned successfully, visit library for confirmation!', 4000);
+        this.setState({showToast: false});
+      }
+    }
+    if (nextProps.bookState.fails === 'Error returning book') {
+      if (this.state.showToast) {
+        Materialize.toast('Return failed, try again!', 5000);
+        this.setState({showToast: false});
+      }
+    } else if (nextProps.bookState.fails === 'Process failed') {
+      if (this.state.showToast) {
+        Materialize.toast('Return failed, try again!', 5000);
+        this.setState({showToast: false});
+      }
+    } else if (nextProps.bookState.fails === 'Book already returned') {
+      if (this.state.showToast) {
+        Materialize.toast('Book returned already!', 5000);
+        this.setState({showToast: false});
+      }
     }
   }
 
+  /**
+   * @method componentDidUpdate
+   * @return {void} void
+   */
+  componentDidUpdate() {
+    $('.tooltipped').tooltip({ delay: 50 });
+  }
 
+  /**
+   * Handles book return
+   * @method returnBook
+   * @return {void}
+   * @param {integer} bookId - bookId
+   */
   returnBook(bookId){
     const userDetails = decodeToken(window.sessionStorage.token);
     this.props.returnBookAction(userDetails.id, bookId);
+    this.setState({ showToast: true });
   }
 
 
   render() {
+    const userId = decodeToken(window.sessionStorage.token);
     return (
       <div className='row'>
         <UserHeader/>
@@ -51,7 +112,7 @@ export class Borrowed extends React.Component {
             <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
 
             <div className='row'>
-              { (this.props.bookState.borrows) ? this.props.bookState.borrows.map((borrow, i) =>
+              { (this.props.bookState.allBorrows) ? this.props.bookState.allBorrows.map((borrow, i) =>
                 <UserBorrow
                   key={i}
                   borrow={ borrow }
@@ -61,7 +122,18 @@ export class Borrowed extends React.Component {
 
             </div>
 
-            <Paginate/>
+            <div className='row'>
+              {
+                ((this.state.pageCount) ?
+                  <Pagination
+                    items={this.state.pageCount}
+                    onSelect={(page) => {
+                      const offset = (page - 1) * this.state.limit;
+                      this.props.viewUserBorrowAction(userId.id, this.state.limit, offset);
+                    }
+                    } /> : '')
+              }
+            </div>
           </div>
         </div>
       </div>

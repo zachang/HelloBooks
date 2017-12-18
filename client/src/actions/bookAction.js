@@ -311,15 +311,18 @@ const returnBookAction = (userId, bookId)=> (dispatch) => {
     });
 };
 
-const viewUserBorrowAction = (userId) => (dispatch) => {
-  axios.get(`/api/v1/users/${userId}/books?owe=false`,
+const viewUserBorrowAction = (userId, limit, offset) => (dispatch) => {
+  axios.get(`/api/v1/users/${userId}/books?owe=false&limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
       return dispatch({
         type: actionTypes.GET_USER_BORROW_SUCCESSFUL,
-        payload: res.data.borrowed
+        payload: {
+          borrows: res.data.borrowed,
+          pageCount: res.data.paginationMeta.pageCount
+        }
       });
     })
     .catch((err) => {

@@ -7,7 +7,9 @@ const initialState = {
   books: [],
   book: null,
   borrows: null,
+  allBorrows: null,
   borrowers: [],
+  returned: null,
   returnings: null,
   returners: [],
   pageCount: null,
@@ -134,6 +136,7 @@ const bookReducer = (state = initialState, action) => {
       state = {
         ...state,
         success: true,
+        returned: action.payload,
         errors: null,
         fails: null,
       };
@@ -150,7 +153,8 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: true,
         errors: null,
-        borrows: action.payload
+        allBorrows: action.payload.borrows,
+        pageCount: action.payload.pageCount
       };
       break;
     case actionTypes.GET_USER_BORROW_UNSUCCESSFUL:
@@ -158,7 +162,7 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: false,
         errors: action.payload,
-        borrows: null
+        allBorrows: null
       };
       break;
     case actionTypes.GET_ALL_BORROW_SUCCESSFUL:
