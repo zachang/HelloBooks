@@ -15,6 +15,7 @@ module.exports = {
   },
   output: {
     path: PATHS.build,
+    publicPath: '/',
     filename: 'bundle.js'
   },
   resolve: {
@@ -33,9 +34,6 @@ module.exports = {
   module: {
     loaders: [
       {
-        query: {
-          presets: ['react', 'es2015', 'react-hmre']
-        },
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/

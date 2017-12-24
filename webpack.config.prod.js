@@ -17,6 +17,7 @@ const common = {
   },
   output: {
     path: PATHS.build,
+    publicPath: '/',
     filename: 'bundle.js'
   },
   plugins: [

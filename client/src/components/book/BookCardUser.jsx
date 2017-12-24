@@ -40,7 +40,7 @@ const BookCardUser = props => (
 
         <Link
           target='blank'
-          to={ props.book.book_content }
+          to={`read/${props.book.id}`}
           className='white tooltipped'
           data-position="bottom"
           data-delay="50"

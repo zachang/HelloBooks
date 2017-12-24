@@ -3,7 +3,6 @@ server/seeders
 node_modules/
 template/
 ./client/src/build
-//client/
 tools/
 webpack.config.js
 webpack.config.prod.js
