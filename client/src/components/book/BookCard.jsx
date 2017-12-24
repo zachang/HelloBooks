@@ -41,7 +41,7 @@ const BookCard = props => (
 
         <Link
           target='blank'
-          to={ props.book.book_content }
+          to={`read/${props.book.id}`}
           className='white tooltipped hidetooltip'
           data-position='bottom'
           data-delay='50'
