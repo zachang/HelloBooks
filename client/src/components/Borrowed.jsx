@@ -101,10 +101,6 @@ export class Borrowed extends React.Component {
   render() {
     const userId = decodeToken(window.sessionStorage.token);
     return (
-      <div className='row'>
-        <UserHeader/>
-        <UserSidebar/>
-        <div className='container mainCon' style={{ marginLeft: '5%' }}>
           <div className='row'>
             <div className='section'>
               <h4 style={{ marginTop: '7%' }}>Borrowed Books</h4>
@@ -135,9 +131,6 @@ export class Borrowed extends React.Component {
               }
             </div>
           </div>
-        </div>
-      </div>
-
     );
   }
 }

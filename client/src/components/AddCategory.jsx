@@ -40,10 +40,7 @@ export class AddCategory extends React.Component {
     const { categoryData } = this.state;
 
     return (
-      <div className='row'>
-        <AdminHeader/>
-        <AdminSidebar/>
-        <div className='container mainCon' style={{ marginLeft: '5%' }}>
+        <div>
           <div className='row'>
             <div className='col s10 m8 l6 bookcat' style={{ marginLeft: '35%', marginTop: '20%' }}>
 
@@ -88,9 +85,7 @@ export class AddCategory extends React.Component {
 
             </div>
           </div>
-
         </div>
-      </div>
 
     );
   }

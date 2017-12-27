@@ -89,57 +89,50 @@ export class ReturnedList extends React.Component {
   render() {
     return (
       <div className='row'>
-        <AdminHeader/>
-        <AdminSidebar/>
-        <div className='container mainCon' style={{ marginLeft: '5%' }}>
-          <div className='row'>
-            <div className='section'>
-              <h4 style={{ marginTop: '7%' }}>Returned Books</h4>
-            </div>
-            <div className='divider' style={{ width: '100%', marginTop: '-2.5%', marginBottom: '3.5%' }}></div>
+        <div className='section'>
+          <h4 style={{ marginTop: '7%' }}>Returned Books</h4>
+        </div>
+        <div className='divider' style={{ width: '100%', marginTop: '-2.5%', marginBottom: '3.5%' }}></div>
 
-            <div className='row'>
-              <table className='bordered highlight'>
-                <thead className='black white-text'>
-                  <tr>
-                    <th>Book Name</th>
-                    <th>Borrower</th>
-                    <th>Borrow_Date</th>
-                    <th>Expected_Return_Date</th>
-                    <th>Return_Date</th>
-                    <th>Overdue</th>
-                    <th>Confirm</th>
-                  </tr>
-                </thead>
+        <div className='row'>
+          <table className='bordered highlight'>
+            <thead className='black white-text'>
+              <tr>
+                <th>Book Name</th>
+                <th>Borrower</th>
+                <th>Borrow_Date</th>
+                <th>Expected_Return_Date</th>
+                <th>Return_Date</th>
+                <th>Overdue</th>
+                <th>Confirm</th>
+              </tr>
+            </thead>
 
-                <tbody>
-                  { this.props.bookState.returners.map((returner, i) =>
-                    <UserReturnedList
-                      key={i}
-                      returner={returner}
-                      clickedReturnedBorrowList={this.state.clickedReturnedBorrowList}
-                      confirmReturn={this.confirmReturn}
-                    />
-                  )}
-                </tbody>
-              </table>
-            </div>
+            <tbody>
+              { this.props.bookState.returners.map((returner, i) =>
+                <UserReturnedList
+                  key={i}
+                  returner={returner}
+                  clickedReturnedBorrowList={this.state.clickedReturnedBorrowList}
+                  confirmReturn={this.confirmReturn}
+                />
+              )}
+            </tbody>
+          </table>
+        </div>
 
-            <div className='row'>
-              {
-                ((this.state.pageCount) ?
-                  <Pagination
-                    items={this.state.pageCount}
-                    onSelect={(page) => {
-                      const offset = (page - 1) * this.state.limit;
-                      this.props.viewAllReturnedAction(this.state.limit, offset);
-                    }} /> : '')
-              }
-            </div>
-          </div>
+        <div className='row'>
+          {
+            ((this.state.pageCount) ?
+              <Pagination
+                items={this.state.pageCount}
+                onSelect={(page) => {
+                  const offset = (page - 1) * this.state.limit;
+                  this.props.viewAllReturnedAction(this.state.limit, offset);
+                }} /> : '')
+          }
         </div>
       </div>
-
     );
   }
 }

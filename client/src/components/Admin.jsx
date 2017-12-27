@@ -133,11 +133,7 @@ export class Admin extends React.Component {
    */
   render() {
     return (
-      <div className='row'>
-        <AdminHeader/>
-        <AdminSidebar/>
-
-        <div className='container mainCon' style={{ marginLeft: '5%' }}>
+        <div>
           <div className='row'>
             <div className='section'>
               <h4 style={{ marginTop: '7%' }}>All Books</h4>
@@ -188,7 +184,6 @@ export class Admin extends React.Component {
 
           </div>
         </div>
-      </div>
     );
   }
 }

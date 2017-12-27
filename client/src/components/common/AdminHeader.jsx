@@ -32,12 +32,12 @@ export default class AdminHeader extends React.Component {
               <ul className='user hide-on-small-and-down show-on-medium-and-up'>
                 <Link className='dropdown-button btn black btn-prof' to='#' data-activates='dropdown1'>
                   <i className='material-icons mat-icon right' style={{ marginLeft: '1%' }}>arrow_drop_down</i>
-                  {userDetails.username}
+                  {this.props.profileUsername}
                 </Link>
               </ul>
 
               <ul id='dropdown1' className='dropdown-content hide-on-small-and-down'>
-                <li><Link to='/admin/profile'>Profile</Link></li>
+                <li><Link to={ `/profile/${userDetails.id}` }>Profile</Link></li>
                 <li className='divider'></li>
                 <li><Link to='/users'>View Users</Link></li>
                 <li className='divider'></li>
@@ -49,7 +49,7 @@ export default class AdminHeader extends React.Component {
                   <div className='row walp'>
                   </div>
                 </li>
-                <li><Link to='/profile'>Profile</Link></li>
+                <li><Link to={ `/profile/${userDetails.id}` }>Profile</Link></li>
                 <li className='no-padding'>
                   <ul className='collapsible collapsible-accordion'>
                     <li>

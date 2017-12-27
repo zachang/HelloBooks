@@ -194,10 +194,8 @@ export class UpdateBook extends React.Component {
     }
 
     return (
-      <div className='row'>
-        <AdminHeader/>
-        <AdminSidebar/>
-        {bookData && <div className='container mainCon' style={{ marginLeft: '5%' }}>
+      <div>
+        {bookData && <div>
           <div className='row'>
             <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '4%' }}>
 
