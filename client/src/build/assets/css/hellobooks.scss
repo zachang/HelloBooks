@@ -41,11 +41,6 @@ body {
   .mainCon {
     width: 90%;
   }
-
-  .activator {
-    height: 35vh !important;
-  }
-
 }
 
 @media screen and (max-width: 426px) {
@@ -91,10 +86,6 @@ body {
 
 .regContent {
   margin-top: -10%;
-}
-
-.activator {
-  height: 45vh;
 }
 
 .btn, .btn-large, .btn-flat {

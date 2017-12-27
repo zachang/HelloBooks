@@ -87,6 +87,20 @@ const usersController = {
       })
       .catch(() => res.status(400).send({ message: 'Error, nothing to display' }));
   },
+  listOne(req, res) {
+    const { userId } = req.params;
+    User.findById(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(400).send({ message: 'User does not exist' });
+        }
+        return res.status(200).send({
+          message: 'User displayed',
+          user
+        });
+      })
+      .catch(() => res.status(500).send({ message: 'Oops, failed to display books' }));
+  },
   update(req, res) {
     const validation = new Validator(req.body, updateRules);
     const userInfo = {
@@ -114,7 +128,7 @@ const usersController = {
             .then(update => res.status(200).send({ message: 'User updated', update }))
             .catch(() => res.status(400).send({ message: 'Error, No update done' }));
         })
-        .catch(() => res.status(400).send({ message: 'Error, No update done' }));
+        .catch(() => res.status(500).send({ message: 'Oops, failed to update user' }));
     }
     return res.status(400).json({
       message: 'Validation error',

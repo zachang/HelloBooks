@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
+import App from './components/App.jsx';
 import Homepage from './components/Homepage.jsx';
 import User from './components/User.jsx';
 import Admin from './components/Admin.jsx';
@@ -21,20 +22,25 @@ export default (
     <Route path='/register' component={auth.RegisterPage}/>
     <Route path='/login' component={auth.LoginPage}/>
     <Route component={auth.Authenticate}>
-      <Route path='/user' component={User}/>
-      <Route path='/profile' component={Profile}/>
       <Route path='/read/:id' component={ReadBook}/>
-      <Route path='/returned' component={Returned}/>
-      <Route path='/borrowed' component={Borrowed}/>
     </Route>
-    <Route component={auth.AdminAuth}>
-      <Route path='/admin' component={Admin}/>
-      <Route path='/users' component={UserList}/>
-      <Route path='/borrow' component={BorrowList}/>
-      <Route path='/return' component={ReturnedList}/>
-      <Route path='/books' component={AddBook}/>
-      <Route path='/books/:id' component={UpdateBook}/>
-      <Route path='/category' component={AddCategory}/>
+    <Route component={App}>
+      <Route component={auth.Authenticate}>
+        <Route path='/user' component={User}/>
+        <Route path='/profile/:id' component={Profile}/>
+        <Route path='/read/:id' component={ReadBook}/>
+        <Route path='/returned' component={Returned}/>
+        <Route path='/borrowed' component={Borrowed}/>
+      </Route>
+      <Route component={auth.AdminAuth}>
+        <Route path='/admin' component={Admin}/>
+        <Route path='/users' component={UserList}/>
+        <Route path='/borrow' component={BorrowList}/>
+        <Route path='/return' component={ReturnedList}/>
+        <Route path='/books' component={AddBook}/>
+        <Route path='/books/:id' component={UpdateBook}/>
+        <Route path='/category' component={AddCategory}/>
+      </Route>
     </Route>
   </Router>
 );

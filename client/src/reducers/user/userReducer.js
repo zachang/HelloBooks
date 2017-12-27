@@ -5,6 +5,7 @@ const initialState = {
   errors: null,
   fails: null,
   users: [],
+  user: [],
   pageCount: null,
 };
 const userReducer = (state = initialState, action) => {
@@ -24,6 +25,43 @@ const userReducer = (state = initialState, action) => {
         success: false,
         errors: action.payload,
         users: null
+      };
+      break;
+    case actionTypes.GETONEUSER_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null,
+        user: action.payload
+      };
+      break;
+    case actionTypes.GETONEUSER_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload,
+        user: null
+      };
+      break;
+    case actionTypes.UPDATEUSER_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null
+      };
+      break;
+    case actionTypes.UPDATEUSER_VALIDATION_ERROR:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload
+      };
+      break;
+    case actionTypes.UPDATEUSER_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        fails: action.payload
       };
       break;
     default:

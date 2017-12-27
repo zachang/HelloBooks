@@ -32,10 +32,6 @@ export class Returned extends React.Component {
 
   render() {
     return (
-      <div className='row'>
-        <UserHeader/>
-        <UserSidebar/>
-        <div className='container mainCon' style={{marginLeft: '5%'}}>
           <div className='row'>
             <div className='section'>
               <h4 style={{marginTop: '7%'}}>Returned Books</h4>
@@ -54,9 +50,6 @@ export class Returned extends React.Component {
 
             <Paginate/>
           </div>
-        </div>
-      </div>
-
     );
   }
 }

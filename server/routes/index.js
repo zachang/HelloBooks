@@ -105,7 +105,8 @@ const routes = (router) => {
   router.route('/users')
     .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, usersController.list);
 
-  router.route('/:userId/users')
+  router.route('/users/:userId')
+    .get(authMiddleware.verifyToken, usersController.listOne)
     .put(authMiddleware.verifyToken, usersController.update);
 
   router.route('/books')

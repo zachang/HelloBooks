@@ -201,10 +201,7 @@ export class AddBook extends React.Component {
     }
 
     return (
-      <div className='row'>
-        <AdminHeader/>
-        <AdminSidebar/>
-        <div className='container mainCon' style={{ marginLeft: '5%' }}>
+        <div>
           <div className='row'>
             <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '4%' }}>
 
@@ -471,7 +468,6 @@ export class AddBook extends React.Component {
             {$imagePreview}
           </div>
         </div>
-      </div>
 
     );
   }
