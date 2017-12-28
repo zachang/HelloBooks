@@ -64,6 +64,27 @@ const userReducer = (state = initialState, action) => {
         fails: action.payload
       };
       break;
+    case actionTypes.CHANGE_PASSWORD_SUCCESSFUL:
+      state = {
+        ...state,
+        success: true,
+        errors: null
+      };
+      break;
+    case actionTypes.CHANGE_PASSWORD_VALIDATION_ERROR:
+      state = {
+        ...state,
+        success: false,
+        errors: action.payload
+      };
+      break;
+    case actionTypes.CHANGE_PASSWORD_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        fails: action.payload
+      };
+      break;
     default:
       return state;
   }

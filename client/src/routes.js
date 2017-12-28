@@ -13,6 +13,7 @@ import ReturnedList from './components/ReturnedList.jsx';
 import AddBook from './components/AddBook.jsx';
 import AddCategory from './components/AddCategory.jsx';
 import ReadBook from './components/ReadBook.jsx';
+import ChangePassword from './components/ChangePassword.jsx';
 import UpdateBook from './components/UpdateBook.jsx';
 import auth from './components/auth';
 
@@ -28,6 +29,7 @@ export default (
       <Route component={auth.Authenticate}>
         <Route path='/user' component={User}/>
         <Route path='/profile/:id' component={Profile}/>
+        <Route path='/users/:id/change' component={ChangePassword}/>
         <Route path='/read/:id' component={ReadBook}/>
         <Route path='/returned' component={Returned}/>
         <Route path='/borrowed' component={Borrowed}/>

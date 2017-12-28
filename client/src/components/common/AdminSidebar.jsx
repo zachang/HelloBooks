@@ -37,7 +37,7 @@ export default class AdminSidebar extends React.Component {
       <div className='side col m2 l2 hide-on-small-and-down nav-pan'>
         <div className='col m2 l2 grey darken-4 addPad nav-pan-child'>
           <div className='row walp'>
-            <div className=''>
+            <div className='circle'>
               <img src={(this.props.profileImage) ? (this.props.profileImage)
                 : '../../../imgs/avatar.png'
               }
@@ -79,6 +79,7 @@ export default class AdminSidebar extends React.Component {
                   </li>
                 </ul>
               </li>
+              <li><Link to={`users/${userDetails.id}/change`}>Change Password</Link></li>
               <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
             </ul>
           </div>

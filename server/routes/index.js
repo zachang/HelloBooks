@@ -109,6 +109,9 @@ const routes = (router) => {
     .get(authMiddleware.verifyToken, usersController.listOne)
     .put(authMiddleware.verifyToken, usersController.update);
 
+  router.route('/users/:userId/change-password')
+    .put(authMiddleware.verifyToken, usersController.changePassword);
+
   router.route('/books')
     .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
     .get(authMiddleware.verifyToken, booksController.list);
