@@ -4,12 +4,12 @@ const initialState = {
   success: false,
   passes: null,
   errors: null,
-  fails: null,
   books: [],
   book: null,
   borrows: null,
   allBorrows: null,
   borrowers: [],
+
   returned: null,
   returnings: null,
   returners: [],

@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
         user.generateHash(user.password);
       },
       beforeUpdate: (user) => {
-        if (user.new_password) {
+        if (user.newPassword) {
           user.generateHash(user.password);
         }
       }

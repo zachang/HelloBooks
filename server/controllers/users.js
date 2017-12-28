@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Validator from 'validatorjs';
+import bcrypt from 'bcrypt-nodejs';
 import { generatePaginationMeta } from '../utils/helpers';
 import db from '../models';
 
@@ -36,6 +37,12 @@ const updateRules = {
   username: 'required|string|min:6',
   email: 'required|email',
   phone_no: 'required|string|min:11|max:11',
+};
+
+const changePasswordRules = {
+  oldPassword: 'required',
+  newPassword: 'required|min:6|confirmed',
+  newPassword_confirmation: 'required',
 };
 
 const usersController = {
@@ -135,5 +142,41 @@ const usersController = {
       errors: validation.errors.all()
     });
   },
+  changePassword(req, res) {
+    const { oldPassword, newPassword } = req.body;
+    const validation = new Validator(req.body, changePasswordRules);
+    if (validation.passes()) {
+      const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8), null);
+      return User.
+      findById(req.decoded.id)
+        .then(user => {
+          if (!user) {
+            return res.status(404).send({message: 'user not found'});
+          }
+          if (!bcrypt.compareSync(oldPassword, user.password)) {
+            return res.status(400).send({
+              message: 'Incorrect old password'
+            });
+          }
+
+          user.update({
+            password: hashPassword
+          }).then(updated => res.status(200).send({
+            message: 'Password changed',
+            updated
+          }))
+            .catch(() => res.status(400).send({
+              message: 'Password not changed'
+            }));
+        })
+        .catch(() => {
+          res.status(500).send({ message: 'Something went wrong' });
+        });
+    }
+    return res.status(400).json({
+      message: 'Validation error',
+      errors: validation.errors.all()
+    });
+  }
 };
 export default usersController;

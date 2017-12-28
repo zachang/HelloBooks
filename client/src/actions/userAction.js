@@ -150,8 +150,37 @@ const updateUserAction = (userData, id) => (dispatch) => {
   }
 };
 
+const changePasswordAction = (changePasswordData, id) => (dispatch) => {
+  axios.put(`/api/v1/users/${id}/change-password`, changePasswordData,
+    { headers: { 'x-access-token': window.sessionStorage.token } })
+    .then((res) => {
+      return dispatch({
+        type: actionTypes.CHANGE_PASSWORD_SUCCESSFUL,
+        payload: res.data.message
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else if (err.response.data.message === 'Validation error') {
+        return dispatch({
+          type: actionTypes.CHANGE_PASSWORD_VALIDATION_ERROR,
+          payload: err.response.data.errors
+        });
+      } else {
+        return dispatch({
+          type: actionTypes.CHANGE_PASSWORD_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+};
+
 export {
   getUserAction,
   getOneUserAction,
-  updateUserAction
+  updateUserAction,
+  changePasswordAction
 };
