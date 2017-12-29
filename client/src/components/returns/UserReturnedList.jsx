@@ -4,11 +4,11 @@ import { Link } from 'react-router';
 
 const UserReturnedList = props => (
   <tr>
-    <td>{ props.returner.Book.book_name }</td>
+    <td>{ props.returner.Book.bookName }</td>
     <td>{ props.returner.User.fullname}</td>
-    <td>{ new Date(props.returner.borrow_date).toLocaleString()}</td>
-    <td>{ (props.returner.expected_return === null) ? 'None' : new Date(props.returner.expected_return).toLocaleString() }</td>
-    <td>{ new Date(props.returner.actual_return).toLocaleString() }</td>
+    <td>{ new Date(props.returner.borrowDate).toLocaleString()}</td>
+    <td>{ (props.returner.expectedReturn === null) ? 'None' : new Date(props.returner.expectedReturn).toLocaleString() }</td>
+    <td>{ new Date(props.returner.actualReturn).toLocaleString() }</td>
     <td>No</td>
     <td>
       { (props.returner.returned === 'true' || (props.clickedReturnedBorrowList.indexOf(props.returner.id) > -1)) ? 'Confirmed' :

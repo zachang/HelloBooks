@@ -26,7 +26,7 @@ export class Admin extends React.Component {
     this.state = {
       errors: '',
       categories: [],
-      category_id: '',
+      categoryId: '',
       pageCount: null,
       limit: 3,
       showToast: false,
@@ -41,7 +41,7 @@ export class Admin extends React.Component {
    * @return {void} void
    */
   componentWillMount() {
-    this.props.getBookAction(this.state.limit, 0, this.state.category_id);
+    this.props.getBookAction(this.state.limit, 0, this.state.categoryId);
     this.props.getCategoryAction();
   }
 
@@ -75,7 +75,7 @@ export class Admin extends React.Component {
   componentDidUpdate() {
     $('.tooltipped').tooltip({ delay: 50 });
     $('select').material_select();
-    $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.bookCategoryChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.bookCategoryChange.bind(this));
   }
 
   /**
@@ -85,7 +85,7 @@ export class Admin extends React.Component {
    * @param {object} event - event
    */
   bookCategoryChange(event) {
-    this.setState({ category_id: event.target.value });
+    this.setState({ categoryId: event.target.value });
     this.props.getBookAction(this.state.limit, 0, event.target.value);
   }
 
@@ -143,14 +143,14 @@ export class Admin extends React.Component {
             <div className='row'>
               <div className='input-field col s6 l4  m4'>
                 <select
-                  name = 'category_id'
-                  value = {this.state.category_id}
-                  ref = 'category_id'
+                  name = 'categoryId'
+                  value = {this.state.categoryId}
+                  ref = 'categoryId'
                   onChange= {this.bookCategoryChange}
                 >
                   <option value=''>Select Category</option>
                   { this.state.categories.map((category, i) =>
-                    <option key={i} value={category.id}>{category.category_name}</option>
+                    <option key={i} value={category.id}>{category.categoryName}</option>
                   )}
                 </select>
               </div>
@@ -175,7 +175,7 @@ export class Admin extends React.Component {
                       items={this.state.pageCount}
                       onSelect={(page) => {
                         const offset = (page - 1) * this.state.limit;
-                        this.props.getBookAction(this.state.limit, offset, this.state.category_id);
+                        this.props.getBookAction(this.state.limit, offset, this.state.categoryId);
                       }
                       } /> : '')
                 }

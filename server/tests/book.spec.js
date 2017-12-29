@@ -109,7 +109,7 @@ describe('TEST BOOK ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             createdBookId = res.body.book.id;
-            createdCategoryId = res.body.book.category_id;
+            createdCategoryId = res.body.book.categoryId;
             assert.equal(res.body.message, 'Book created');
             done();
           });
@@ -129,7 +129,7 @@ describe('TEST BOOK ROUTES', () => {
             done();
           });
       });
-      it('should return status code 400 when book_name input missing', (done) => {
+      it('should return status code 400 when bookName input missing', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -141,7 +141,7 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.book_name[0], 'The book name field is required.');
+            assert.equal(res.body.errors.bookName[0], 'The book name field is required.');
             done();
           });
       });
@@ -161,7 +161,7 @@ describe('TEST BOOK ROUTES', () => {
             done();
           });
       });
-      it('should return status code 400 when category_id input missing', (done) => {
+      it('should return status code 400 when categoryId input missing', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -173,11 +173,11 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.category_id[0], 'The category id field is required.');
+            assert.equal(res.body.errors.categoryId[0], 'The category id field is required.');
             done();
           });
       });
-      it('should return status code 400 when book_count input missing', (done) => {
+      it('should return status code 400 when bookCount input missing', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -189,14 +189,14 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.book_count[0], 'The book count field is required.');
+            assert.equal(res.body.errors.bookCount[0], 'The book count field is required.');
             done();
           });
       });
     });
 
     describe('test for typeof and required length of some book details', () => {
-      it('should return status code 400 if book_name length < 2', (done) => {
+      it('should return status code 400 if bookName length < 2', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -208,11 +208,11 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.book_name[0], 'The book name must be at least 2 characters.');
+            assert.equal(res.body.errors.bookName[0], 'The book name must be at least 2 characters.');
             done();
           });
       });
-      it('should return status code 400 if book_name input not string', (done) => {
+      it('should return status code 400 if bookName input not string', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -224,7 +224,7 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.book_name[0], 'The book name must be a string.');
+            assert.equal(res.body.errors.bookName[0], 'The book name must be a string.');
             done();
           });
       });

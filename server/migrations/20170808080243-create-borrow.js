@@ -7,30 +7,30 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      book_id: {
+      bookId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      borrow_date: {
+      borrowDate: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      borrow_status: {
+      borrowStatus: {
         type: Sequelize.STRING,
       },
-      collection_date: {
+      collectionDate: {
         type: Sequelize.DATE,
         defaultValue: null
       },
-      expected_return: {
+      expectedReturn: {
         type: Sequelize.DATE,
         defaultValue: null
       },
-      actual_return: {
+      actualReturn: {
         type: Sequelize.DATE,
         defaultValue: null
       },

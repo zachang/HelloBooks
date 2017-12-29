@@ -8,12 +8,12 @@ const seeder = {
       .then(() => done())
       .catch(err => done(err));
   },
-  setData(fullname, username, email, phone_no, password, confirmPassword) {
+  setData(fullname, username, email, phoneNo, password, confirmPassword) {
     return {
       fullname,
       username,
       email,
-      phone_no,
+      phoneNo,
       password,
       password_confirmation: confirmPassword
     };
@@ -26,7 +26,7 @@ const seeder = {
       fullname: 'Eben Dawuda',
       username: 'ebenezer',
       email: 'eben@gmail.com',
-      phone_no: '08075568940',
+      phoneNo: '08075568940',
       password: 'password',
       level: 'silver' })
       .then(() => done())
@@ -37,9 +37,9 @@ const seeder = {
       fullname: 'Ebene Dawuda',
       username: 'ebenez',
       email: 'ebenz@gmail.com',
-      phone_no: '08075568980',
+      phoneNo: '08075568980',
       password: 'password',
-      is_admin: true,
+      isAdmin: true,
       level: 'silver' })
       .then(() => done())
       .catch(err => done(err));

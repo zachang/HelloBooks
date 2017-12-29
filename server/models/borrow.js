@@ -6,30 +6,30 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    book_id: {
+    bookId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    borrow_date: {
+    borrowDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    borrow_status: {
+    borrowStatus: {
       type: DataTypes.STRING,
     },
-    collection_date: {
+    collectionDate: {
       type: DataTypes.DATE,
       defaultValue: null
     },
-    expected_return: {
+    expectedReturn: {
       type: DataTypes.DATE,
       defaultValue: null
     },
-    actual_return: {
+    actualReturn: {
       type: DataTypes.DATE,
       defaultValue: null
     },
@@ -49,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Borrow.belongsTo(models.Book, { foreignKey: 'book_id' });
-        Borrow.belongsTo(models.User, { foreignKey: 'user_id' });
+        Borrow.belongsTo(models.Book, { foreignKey: 'bookId' });
+        Borrow.belongsTo(models.User, { foreignKey: 'userId' });
       }
     }
   });

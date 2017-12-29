@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     queryInterface.addColumn(
       'Borrows',
-      'borrow_status',
+      'borrowStatus',
       Sequelize.STRING
     );
   },
@@ -12,7 +12,7 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     queryInterface.removeColumn(
       'Borrows',
-      'borrow_status'
+      'borrowStatus'
     );
   }
 };

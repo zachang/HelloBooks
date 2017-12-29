@@ -34,7 +34,7 @@ const routes = (router) => {
    *         in: formData
    *         required: true
    *         type: string
-   *       - name: phone_no
+   *       - name: phoneNo
    *         description: User's phone number
    *         in: formData
    *         required: true

@@ -6,7 +6,7 @@ const UserRow = props => (
   <tr>
     <td>{ props.user.fullname }</td>
     <td>{ props.user.username }</td>
-    <td>{ props.user.phone_no }</td>
+    <td>{ props.user.phoneNo }</td>
     <td>{ props.user.email }</td>
     <td><Link className='waves-effect waves-light btn btn-small teal'>View</Link ></td>
   </tr>

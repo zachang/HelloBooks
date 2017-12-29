@@ -23,19 +23,19 @@ export class UpdateBook extends React.Component {
     super(props);
     this.state = {
       bookData: {
-        book_name: '',
+        bookName: '',
         author: '',
-        book_count: '',
-        category_id: '',
-        publish_year: '',
+        bookCount: '',
+        categoryId: '',
+        publishYear: '',
         isbn: '',
         pages: '',
         description: '',
-        is_available: '',
-        book_image: '',
-        book_image_text: '',
-        book_content: '',
-        book_content_text: ''
+        isAvailable: '',
+        bookImage: '',
+        bookImage_text: '',
+        bookContent: '',
+        bookContent_text: ''
       },
       errors: null,
       categories: [],
@@ -64,8 +64,8 @@ export class UpdateBook extends React.Component {
   componentDidMount() {
     $('select').material_select();
     $('.datepicker').pickadate();
-    $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
-    $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.handleChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.publishYear)).on('change', this.handleChange.bind(this));
   }
 
   /**
@@ -111,8 +111,8 @@ export class UpdateBook extends React.Component {
   componentDidUpdate() {
     $('select').material_select();
     $('.datepicker').pickadate();
-    $(ReactDOM.findDOMNode(this.refs.category_id)).on('change', this.handleChange.bind(this));
-    $(ReactDOM.findDOMNode(this.refs.publish_year)).on('change', this.handleChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.handleChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.publishYear)).on('change', this.handleChange.bind(this));
   }
 
 
@@ -124,8 +124,8 @@ export class UpdateBook extends React.Component {
    */
   handleFileChange(event) {
     const bookData = this.state.bookData;
-    bookData.book_content_text = event.target.value;
-    bookData.book_content = event.target.files[0];
+    bookData.bookContent_text = event.target.value;
+    bookData.bookContent = event.target.files[0];
     this.setState({ bookData });
   }
 
@@ -139,8 +139,8 @@ export class UpdateBook extends React.Component {
     const reader = new FileReader();
     const bookData = this.state.bookData;
     const file = event.target.files[0];
-    bookData.book_image = file;
-    bookData.book_image_text = file.name;
+    bookData.bookImage = file;
+    bookData.bookImage_text = file.name;
 
     reader.onloadend = () => {
       this.setState({
@@ -149,7 +149,7 @@ export class UpdateBook extends React.Component {
       });
     };
 
-    reader.readAsDataURL(bookData.book_image);
+    reader.readAsDataURL(bookData.bookImage);
   }
 
   /**
@@ -204,22 +204,22 @@ export class UpdateBook extends React.Component {
                   <div className='row'>
                     <div className='input-field col s10'>
                       <input
-                        id='book_name'
-                        name='book_name'
+                        id='bookName'
+                        name='bookName'
                         type='text'
                         className={classnames({
-                          invalid: (this.state.errors && !!this.state.errors.book_name) ?
-                            !!this.state.errors.book_name : false
+                          invalid: (this.state.errors && !!this.state.errors.bookName) ?
+                            !!this.state.errors.bookName : false
                         })}
-                        value={bookData.book_name || ''}
+                        value={bookData.bookName || ''}
                         onChange={this.handleChange}
                       />
                       <label
-                        htmlFor='book_name'
-                        className={((this.state.errors && !!this.state.errors.book_name)
-                          || bookData.book_name.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors.book_name) ?
-                          this.state.errors.book_name : ''}
+                        htmlFor='bookName'
+                        className={((this.state.errors && !!this.state.errors.bookName)
+                          || bookData.bookName.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
+                        data-error={(this.state.errors && !!this.state.errors.bookName) ?
+                          this.state.errors.bookName : ''}
                       >
                         Book Name
                       </label>
@@ -252,22 +252,22 @@ export class UpdateBook extends React.Component {
                   <div className='row'>
                     <div className='input-field col s10'>
                       <input
-                        id='publish_year'
-                        name='publish_year'
-                        ref='publish_year'
+                        id='publishYear'
+                        name='publishYear'
+                        ref='publishYear'
                         type='text'
                         className={classnames('datepicker', {
-                          invalid: (this.state.errors && !!this.state.errors.publish_year) ?
-                            !!this.state.errors.publish_year : false
+                          invalid: (this.state.errors && !!this.state.errors.publishYear) ?
+                            !!this.state.errors.publishYear : false
                         })}
-                        value={new Date(bookData.publish_year).getFullYear()}
+                        value={new Date(bookData.publishYear).getFullYear()}
                       />
                       <label
-                        htmlFor='publish_year'
-                        className={((this.state.errors && !!this.state.errors.publish_year)
-                          || bookData.publish_year.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors.publish_year) ?
-                          this.state.errors.publish_year : ''}
+                        htmlFor='publishYear'
+                        className={((this.state.errors && !!this.state.errors.publishYear)
+                          || bookData.publishYear.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
+                        data-error={(this.state.errors && !!this.state.errors.publishYear) ?
+                          this.state.errors.publishYear : ''}
                       >
                         Publish Year
                       </label>
@@ -347,26 +347,26 @@ export class UpdateBook extends React.Component {
                   <div className='row'>
                     <div className='input-field col s10'>
                       <select
-                        id='category_id'
-                        name='category_id'
-                        ref='category_id'
-                        value={bookData.category_id}
+                        id='categoryId'
+                        name='categoryId'
+                        ref='categoryId'
+                        value={bookData.categoryId}
                         className={classnames({
-                          invalid: (this.state.errors && !!this.state.errors.category_id) ?
-                            !!this.state.errors.category_id : false
+                          invalid: (this.state.errors && !!this.state.errors.categoryId) ?
+                            !!this.state.errors.categoryId : false
                         })}
                       >
                         <option value='' disabled>Select</option>
                         {this.state.categories.map((category, i) =>
-                          <option key={i} value={category.id}>{ category.category_name }</option>
+                          <option key={i} value={category.id}>{ category.categoryName }</option>
                         )}
                       </select>
                       <label
-                        htmlFor='category_id'
-                        className={((this.state.errors && !!this.state.errors.category_id)
-                          || bookData.category_id.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors.category_id) ?
-                          this.state.errors.category_id : ''}
+                        htmlFor='categoryId'
+                        className={((this.state.errors && !!this.state.errors.categoryId)
+                          || bookData.categoryId.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
+                        data-error={(this.state.errors && !!this.state.errors.categoryId) ?
+                          this.state.errors.categoryId : ''}
                       >
                         Choose Category
                       </label>
@@ -375,22 +375,22 @@ export class UpdateBook extends React.Component {
                   <div className='row'>
                     <div className='input-field col s10'>
                       <input
-                        id='book_count'
-                        name='book_count'
+                        id='bookCount'
+                        name='bookCount'
                         type='number'
                         className={classnames({
-                          invalid: (this.state.errors && !!this.state.errors.book_count) ?
-                            !!this.state.errors.book_count : false
+                          invalid: (this.state.errors && !!this.state.errors.bookCount) ?
+                            !!this.state.errors.bookCount : false
                         })}
-                        value={bookData.book_count}
+                        value={bookData.bookCount}
                         onChange={this.handleChange}
                       />
                       <label
-                        htmlFor='book_count'
-                        className={((this.state.errors && !!this.state.errors.book_count)
-                          || bookData.book_count.toString().length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={ (this.state.errors && !!this.state.errors.book_count) ?
-                          this.state.errors.book_count : ''}
+                        htmlFor='bookCount'
+                        className={((this.state.errors && !!this.state.errors.bookCount)
+                          || bookData.bookCount.toString().length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
+                        data-error={ (this.state.errors && !!this.state.errors.bookCount) ?
+                          this.state.errors.bookCount : ''}
                       >
                         Add Count
                       </label>
@@ -399,22 +399,22 @@ export class UpdateBook extends React.Component {
                   <div className='row'>
                     <div className='input-field col s10'>
                       <input
-                        id='is_available'
-                        name='is_available'
+                        id='isAvailable'
+                        name='isAvailable'
                         type='text'
                         className={classnames({
-                          invalid: (this.state.errors && !!this.state.errors.is_available) ?
-                            !!this.state.errors.is_available : false
+                          invalid: (this.state.errors && !!this.state.errors.isAvailable) ?
+                            !!this.state.errors.isAvailable : false
                         })}
-                        value={bookData.is_available}
+                        value={bookData.isAvailable}
                         onChange={this.handleChange}
                       />
                       <label
                         htmlFor='isbn'
-                        className={((this.state.errors && !!this.state.errors.is_available)
+                        className={((this.state.errors && !!this.state.errors.isAvailable)
                           || bookData.isbn.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors.is_available) ?
-                          this.state.errors.is_available : ''}
+                        data-error={(this.state.errors && !!this.state.errors.isAvailable) ?
+                          this.state.errors.isAvailable : ''}
                       >
                         Is_Available
                       </label>
@@ -425,8 +425,8 @@ export class UpdateBook extends React.Component {
                       <div className='btn'>
                         <span>Add Image</span>
                         <input type='file'
-                          id='book_image'
-                          name='book_image'
+                          id='bookImage'
+                          name='bookImage'
                           accept='image/*'
                           onChange={this.handleImageChange}
                         />
@@ -434,10 +434,10 @@ export class UpdateBook extends React.Component {
                       <div className='file-path-wrapper'>
                         <input
                           type='text'
-                          name='book_image_txt'
+                          name='bookImage_txt'
                           className={classnames('file-path', {
-                            invalid: (this.state.errors && !!this.state.errors.book_image_text) ?
-                              !!this.state.errors.book_image_text : false
+                            invalid: (this.state.errors && !!this.state.errors.bookImage_text) ?
+                              !!this.state.errors.bookImage_text : false
                           })}
                         />
                       </div>
@@ -450,9 +450,9 @@ export class UpdateBook extends React.Component {
                         <input
                           type='file'
                           accept='application/pdf'
-                          id='book_content'
-                          name='book_content'
-                          value={bookData.book_content_text}
+                          id='bookContent'
+                          name='bookContent'
+                          value={bookData.bookContent_text}
                           onChange={this.handleFileChange}
                         />
                       </div>
@@ -461,8 +461,8 @@ export class UpdateBook extends React.Component {
                           type='text'
                           name='book_file_text'
                           className={classnames('file-path', {
-                            invalid: (this.state.errors && !!this.state.errors.book_content_text) ?
-                              !!this.state.errors.book_content_text : false
+                            invalid: (this.state.errors && !!this.state.errors.bookContent_text) ?
+                              !!this.state.errors.bookContent_text : false
                           })}
                         />
                       </div>

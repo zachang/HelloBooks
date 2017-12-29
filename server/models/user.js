@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       isEmail: true,
       allowNull: false,
     },
-    phone_no: {
+    phoneNo: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
@@ -29,12 +29,12 @@ module.exports = (sequelize, DataTypes) => {
         len: [11, 11],
       },
     },
-    user_image: {
+    userImage: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: true,
     },
-    is_admin: {
+    isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     classMethods: {
       associate: (models) => {
-        User.hasMany(models.Borrow, { foreignKey: 'user_id' });
+        User.hasMany(models.Borrow, { foreignKey: 'userId' });
       }
     },
     instanceMethods: {

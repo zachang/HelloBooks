@@ -22,9 +22,9 @@ export class Profile extends React.Component {
         fullname: '',
         username: '',
         email: '',
-        phone_no: '',
-        user_image: '',
-        user_image_txt: ''
+        phoneNo: '',
+        userImage: '',
+        userImage_txt: ''
       },
       errors: null,
       showToast: false,
@@ -88,8 +88,8 @@ export class Profile extends React.Component {
     const reader = new FileReader();
     const userData = this.state.userData;
     const file = event.target.files[0];
-    userData.user_image = file;
-    userData.user_image_text = file.name;
+    userData.userImage = file;
+    userData.userImage_text = file.name;
 
     reader.onloadend = () => {
       this.setState({
@@ -98,7 +98,7 @@ export class Profile extends React.Component {
       });
     };
 
-    reader.readAsDataURL(userData.user_image);
+    reader.readAsDataURL(userData.userImage);
   }
 
   /**
@@ -155,8 +155,8 @@ export class Profile extends React.Component {
                             :
                           <img
                           className='activator image-display circle'
-                          src={(userData.user_image !== null)
-                          ? userData.user_image : '../../imgs/avatar.png'}
+                          src={(userData.userImage !== null)
+                          ? userData.userImage : '../../imgs/avatar.png'}
                         />}
                       </div>
 
@@ -235,22 +235,22 @@ export class Profile extends React.Component {
                         </div>
                         <div className='input-field col s6'>
                           <input
-                            id='phone_no'
-                            name='phone_no'
+                            id='phoneNo'
+                            name='phoneNo'
                             type='text'
                             className={classnames({
-                              invalid: (this.state.errors && !!this.state.errors.phone_no) ?
-                                !!this.state.errors.phone_no : false
+                              invalid: (this.state.errors && !!this.state.errors.phoneNo) ?
+                                !!this.state.errors.phoneNo : false
                             })}
-                            value={userData.phone_no || ''}
+                            value={userData.phoneNo || ''}
                             onChange={this.handleChange}
                           />
                           <label
                             htmlFor='phone number'
-                            className={((this.state.errors && !!this.state.errors.phone_no)
-                              || userData.phone_no.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                            data-error={(this.state.errors && !!this.state.errors.phone_no) ?
-                              this.state.errors.phone_no : ''}
+                            className={((this.state.errors && !!this.state.errors.phoneNo)
+                              || userData.phoneNo.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
+                            data-error={(this.state.errors && !!this.state.errors.phoneNo) ?
+                              this.state.errors.phoneNo : ''}
                           >
                             Phone Number
                           </label>
@@ -263,8 +263,8 @@ export class Profile extends React.Component {
                             <span>Add Image</span>
                             <input
                               type='file'
-                              id='user_image'
-                              name='user_image'
+                              id='userImage'
+                              name='userImage'
                               accept='image/*'
                               onChange={this.handleImageChange}
                             />
@@ -272,10 +272,10 @@ export class Profile extends React.Component {
                           <div className='file-path-wrapper'>
                             <input
                               type='text'
-                              name='user_image_txt'
+                              name='userImage_txt'
                               className={classnames('file-path', {
-                                invalid: (this.state.errors && !!this.state.errors.user_image_txt) ?
-                                  !!this.state.errors.user_image_txt : false
+                                invalid: (this.state.errors && !!this.state.errors.userImage_txt) ?
+                                  !!this.state.errors.userImage_txt : false
                               })}
                             />
                           </div>

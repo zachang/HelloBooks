@@ -14,9 +14,9 @@ const userDetails = (user) => {
     fullname: user.fullname,
     username: user.username,
     email: user.email,
-    phone_no: user.phone_no,
-    user_image: user.user_image,
-    is_admin: user.is_admin,
+    phoneNo: user.phoneNo,
+    userImage: user.userImage,
+    isAdmin: user.isAdmin,
     level: user.level,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
@@ -29,14 +29,14 @@ const signUpRules = {
   email: 'required|email',
   password: 'required|min:6|confirmed',
   password_confirmation: 'required',
-  phone_no: 'required|string|min:11|max:11',
+  phoneNo: 'required|string|min:11|max:11',
 };
 
 const updateRules = {
   fullname: 'required|string|min:2',
   username: 'required|string|min:6',
   email: 'required|email',
-  phone_no: 'required|string|min:11|max:11',
+  phoneNo: 'required|string|min:11|max:11',
 };
 
 const changePasswordRules = {
@@ -114,11 +114,11 @@ const usersController = {
       fullname: req.body.fullname,
       username: req.body.username,
       email: req.body.email,
-      phone_no: req.body.phone_no
+      phoneNo: req.body.phoneNo
     };
 
-    if (req.body.user_image) {
-      userInfo.user_image = req.body.user_image;
+    if (req.body.userImage) {
+      userInfo.userImage = req.body.userImage;
     }
 
     if (validation.passes()) {
