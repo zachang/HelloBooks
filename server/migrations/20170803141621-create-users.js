@@ -21,17 +21,17 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      phone_no: {
+      phoneNo: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
       },
-      user_image: {
+      userImage: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: true,
       },
-      is_admin: {
+      isAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },

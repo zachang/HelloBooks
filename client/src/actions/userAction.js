@@ -56,32 +56,7 @@ const getOneUserAction = id => (dispatch) => {
 };
 
 const updateUserAction = (userData, id) => (dispatch) => {
-   // axios.put(`/api/v1/users/${id}`, userData,
-   //    { headers: { 'x-access-token': window.sessionStorage.token } })
-   //    .then((res) => {
-   //      return dispatch({
-   //        type: actionTypes.UPDATEUSER_SUCCESSFUL,
-   //        payload: res.data.message
-   //      });
-   //    })
-   //    .catch((err) => {
-   //      if (err.response.status === 401) {
-   //        tokenValidate('invalid');
-   //      } else if (err.response.status === 403) {
-   //        tokenValidate('unauthorized');
-   //      } else if (err.response.data.message === 'Validation error') {
-   //        return dispatch({
-   //          type: actionTypes.UPDATEUSER_VALIDATION_ERROR,
-   //          payload: err.response.data.errors
-   //        });
-   //      } else {
-   //        return dispatch({
-   //          type: actionTypes.UPDATEUSER_SUCCESSFUL,
-   //          payload: err.response.data.message
-   //        });
-   //      }
-   //    });
-  if ((typeof userData.user_image !== 'object' || userData.user_image === null)) {
+  if ((typeof userData.userImage !== 'object' || userData.userImage === null)) {
     axios.put(`/api/v1/users/${id}`, userData,
       { headers: { 'x-access-token': window.sessionStorage.token } })
       .then((res) => {
@@ -108,13 +83,13 @@ const updateUserAction = (userData, id) => (dispatch) => {
         }
       });
   } else {
-    if (typeof userData.user_image  === 'object' && userData.user_image !== null) {
-      return uploader(userData.user_image, 'image').then((res) => {
+    if (typeof userData.userImage  === 'object' && userData.userImage !== null) {
+      return uploader(userData.userImage, 'image').then((res) => {
         dispatch({
           type: 'UPLOAD_IMAGE_SUCCESSFUL',
           payLoad: res.response.body.url
         });
-        userData.user_image = res.response.body.url;
+        userData.userImage = res.response.body.url;
         axios.put(`/api/v1/users/${id}`, userData,
           { headers: { 'x-access-token': window.sessionStorage.token } })
           .then((res) => {

@@ -13,7 +13,7 @@ export class AddCategory extends React.Component {
     super(props);
     this.state = {
       categoryData: {
-        category_name: '',
+        categoryName: '',
       },
       errors: null,
     };
@@ -49,20 +49,20 @@ export class AddCategory extends React.Component {
                   <div className='row'>
                     <div className='input-field col s12'>
                       <input
-                        id='category_name'
-                        name='category_name'
+                        id='categoryName'
+                        name='categoryName'
                         type='text'
                         className={ classnames({
-                          'invalid': (this.state.errors && !!this.state.errors['category_name'])? !!this.state.errors['category_name'] : false
+                          'invalid': (this.state.errors && !!this.state.errors['categoryName'])? !!this.state.errors['categoryName'] : false
                         }) }
-                        value={categoryData.category_name}
+                        value={categoryData.categoryName}
                         onChange={ this.handleChange }
                       />
                       <label
                         htmlFor='category'
-                        className={(this.state.errors && !!this.state.errors['category_name'] || categoryData.category_name.length > 0) ?
+                        className={(this.state.errors && !!this.state.errors['categoryName'] || categoryData.categoryName.length > 0) ?
                           'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors['category_name']) ? this.state.errors['category_name'] : ''}
+                        data-error={(this.state.errors && !!this.state.errors['categoryName']) ? this.state.errors['categoryName'] : ''}
                       >
                         Category
                       </label>

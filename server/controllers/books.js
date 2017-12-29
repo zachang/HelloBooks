@@ -6,46 +6,46 @@ const Book = db.Book;
 const Category = db.Category;
 
 const addBookRules = {
-  book_name: 'required|string|min:2',
+  bookName: 'required|string|min:2',
   author: 'required|string|min:2',
-  category_id: 'required|min:1',
-  book_count: 'required|min:1',
-  book_content: 'required',
-  publish_year: 'required',
+  categoryId: 'required|min:1',
+  bookCount: 'required|min:1',
+  bookContent: 'required',
+  publishYear: 'required',
   isbn: 'required',
   pages: 'required',
   description: 'required|string|min:15'
 };
 
 const updateBookRules = {
-  book_name: 'required|string|min:2',
+  bookName: 'required|string|min:2',
   author: 'required|string|min:2',
-  category_id: 'required|min:1',
-  publish_year: 'required',
-  book_content: 'required',
+  categoryId: 'required|min:1',
+  publishYear: 'required',
+  bookContent: 'required',
   isbn: 'required',
   pages: 'required',
-  book_count: 'required|min:1',
+  bookCount: 'required|min:1',
   description: 'required|string|min:15',
-  is_available: 'required',
+  isAvailable: 'required',
 };
 
 const booksController = {
   create(req, res) {
     const validation = new Validator(req.body, addBookRules);
     const bookDetails = {
-      book_name: req.body.book_name,
+      bookName: req.body.bookName,
       author: req.body.author,
-      book_count: req.body.book_count,
-      book_content: req.body.book_content,
-      category_id: req.body.category_id,
-      publish_year: req.body.publish_year,
+      bookCount: req.body.bookCount,
+      bookContent: req.body.bookContent,
+      categoryId: req.body.categoryId,
+      publishYear: req.body.publishYear,
       isbn: req.body.isbn,
       pages: req.body.pages,
       description: req.body.description
     };
-    if (req.body.book_image) {
-      bookDetails.book_image = req.body.book_image;
+    if (req.body.bookImage) {
+      bookDetails.bookImage = req.body.bookImage;
     }
     if (validation.passes()) {
       return Book.create(bookDetails)
@@ -70,10 +70,10 @@ const booksController = {
       ? [['createdAt', 'DESC']] : [['createdAt', 'ASC']];
 
     let whereClause = {
-      where: { is_available: true },
+      where: { isAvailable: true },
       include: [{
         model: Category,
-        attributes: ['category_name']
+        attributes: ['categoryName']
       }],
       limit,
       offset,
@@ -81,10 +81,10 @@ const booksController = {
     };
     if (req.query.category) {
       whereClause = {
-        where: { is_available: true, category_id: req.query.category },
+        where: { isAvailable: true, categoryId: req.query.category },
         include: [{
           model: Category,
-          attributes: ['category_name']
+          attributes: ['categoryName']
         }],
         limit,
         offset,
@@ -118,21 +118,21 @@ const booksController = {
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);
     const bookUpdateDetails = {
-      book_name: req.body.book_name,
+      bookName: req.body.bookName,
       author: req.body.author,
-      book_count: req.body.book_count,
-      category_id: req.body.category_id,
-      publish_year: req.body.publish_year,
+      bookCount: req.body.bookCount,
+      categoryId: req.body.categoryId,
+      publishYear: req.body.publishYear,
       isbn: req.body.isbn,
       pages: req.body.pages,
       description: req.body.description,
-      is_available: req.body.is_available
+      isAvailable: req.body.isAvailable
     };
-    if (req.body.book_image) {
-      bookUpdateDetails.book_image = req.body.book_image;
+    if (req.body.bookImage) {
+      bookUpdateDetails.bookImage = req.body.bookImage;
     }
-    if (req.body.book_content) {
-      bookUpdateDetails.book_content = req.body.book_content;
+    if (req.body.bookContent) {
+      bookUpdateDetails.bookContent = req.body.bookContent;
     }
     if (validation.passes()) {
       return Book
@@ -156,7 +156,7 @@ const booksController = {
     });
   },
   destroy(req, res) {
-    const update = { is_available: false };
+    const update = { isAvailable: false };
     return Book
       .findById(req.params.bookId)
       .then((book) => {

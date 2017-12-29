@@ -8,50 +8,50 @@ const bookseeder = {
       .then(() => done())
       .catch(err => done(err));
   },
-  setBookData(book_name, author, category_id,
-    publish_year, isbn, pages, book_count,
-    book_content, book_image, description) {
+  setBookData(bookName, author, categoryId,
+    publishYear, isbn, pages, bookCount,
+    bookContent, bookImage, description) {
     return {
-      book_name,
+      bookName,
       author,
-      category_id,
-      publish_year,
+      categoryId,
+      publishYear,
       isbn,
       pages,
-      book_count,
-      book_content,
-      book_image,
+      bookCount,
+      bookContent,
+      bookImage,
       description
     };
   },
-  setUpdateBookData(book_name, author, category_id,
-    publish_year, isbn, pages, book_count,
-    book_content, book_image, description, is_available) {
+  setUpdateBookData(bookName, author, categoryId,
+    publishYear, isbn, pages, bookCount,
+    bookContent, bookImage, description, isAvailable) {
     return {
-      book_name,
+      bookName,
       author,
-      category_id,
-      publish_year,
+      categoryId,
+      publishYear,
       isbn,
       pages,
-      book_count,
-      book_content,
-      book_image,
+      bookCount,
+      bookContent,
+      bookImage,
       description,
-      is_available
+      isAvailable
     };
   },
   addBookToDb(done) {
     Book.create({
-      book_name: 'Brave Heart',
+      bookName: 'Brave Heart',
       author: 'Townsend Jnr',
-      category_id: 1,
-      publish_year: new Date('1991/08/06'),
+      categoryId: 1,
+      publishYear: new Date('1991/08/06'),
       isbn: 'ISBN43333334',
       pages: 506,
-      book_count: 2,
-      book_content: 'read.pdf',
-      book_image: 'brave.jpg',
+      bookCount: 2,
+      bookContent: 'read.pdf',
+      bookImage: 'brave.jpg',
       description: 'Inspiring story of a young scottish barbarian'
     })
       .then(() => done())

@@ -19,7 +19,7 @@ export default class PageNotFound extends React.Component {
     return (
       <div>
         <div className='pageNotFound'>
-          {(userRoles.is_admin) ? <Link to={`admin`}><button className='back'>Home</button></Link>
+          {(userRoles.isAdmin) ? <Link to={`admin`}><button className='back'>Home</button></Link>
               :
             <Link to={`user`}><button className='back'>Home</button></Link>
           }

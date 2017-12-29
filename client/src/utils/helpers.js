@@ -7,7 +7,7 @@ const decodeToken = (token) => {
 
 const redirectIfLoggedIn = (token) => {
   const decodedToken = jwt_decode(token);
-  if (!decodedToken.is_admin) {
+  if (!decodedToken.isAdmin) {
     browserHistory.push('/user');
   } else {
     browserHistory.push('/admin');

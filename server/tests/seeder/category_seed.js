@@ -8,25 +8,25 @@ const categoryseeder = {
       .then(() => done())
       .catch(err => done(err));
   },
-  setCatData(category_name) {
+  setCatData(categoryName) {
     return {
-      category_name,
+      categoryName,
     };
   },
-  setUpdateCatData(category_name) {
+  setUpdateCatData(categoryName) {
     return {
-      category_name,
+      categoryName,
     };
   },
   addCategoryToDb(done) {
     const categories = [
       {
         id: 1,
-        category_name: 'Politics'
+        categoryName: 'Politics'
       },
       {
         id: 2,
-        category_name: 'Health'
+        categoryName: 'Health'
       }
     ];
     Category.bulkCreate(categories, { returning: true })

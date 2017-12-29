@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      book_name: {
+      bookName: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
@@ -16,24 +16,24 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      book_content: {
+      bookContent: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
       },
-      book_image: {
+      bookImage: {
         type: Sequelize.STRING,
         unique: true,
       },
-      book_count: {
+      bookCount: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      category_id: {
+      categoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      publish_year: {
+      publishYear: {
         allowNull: false,
         type: Sequelize.DATE
       },
@@ -49,11 +49,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      count_borrow: {
+      countBorrow: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      is_available: {
+      isAvailable: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },

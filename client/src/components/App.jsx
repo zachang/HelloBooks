@@ -30,14 +30,14 @@ export  class App extends React.Component {
 
     return (
       <div className='row'>
-        {(userRoles.is_admin) ?
+        {(userRoles.isAdmin) ?
           <AdminHeader profileUsername={this.props.userState.user.username}/>
             :
           <UserHeader profileUsername={this.props.userState.user.username}/>}
-        {(userRoles.is_admin) ?
-          <AdminSidebar profileImage={this.props.userState.user.user_image}/>
+        {(userRoles.isAdmin) ?
+          <AdminSidebar profileImage={this.props.userState.user.userImage}/>
             :
-          <UserSidebar profileImage={this.props.userState.user.user_image}/>}
+          <UserSidebar profileImage={this.props.userState.user.userImage}/>}
         <div className='container mainCon' style={{ marginLeft: '5%' }}>
           {this.props.children}
         </div>>

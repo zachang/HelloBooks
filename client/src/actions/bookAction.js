@@ -4,19 +4,19 @@ import { tokenValidate } from '../utils/helpers';
 import uploader from '../utils/uploader';
 
 const addBookAction = bookContents => (dispatch) => {
-  uploader(bookContents.book_image, 'image')
+  uploader(bookContents.bookImage, 'image')
     .then((res) => {
       dispatch({
         type: 'UPLOAD_IMAGE_SUCCESSFUL',
         payLoad: res.response.body.url
       });
-      bookContents.book_image = res.response.body.url;
-      uploader(bookContents.book_content, 'pdf').then((res) => {
+      bookContents.bookImage = res.response.body.url;
+      uploader(bookContents.bookContent, 'pdf').then((res) => {
         dispatch({
           type: 'UPLOAD_PDF_SUCCESSFUL',
           payLoad: res.response.body.url
         });
-        bookContents.book_content = res.response.body.url;
+        bookContents.bookContent = res.response.body.url;
         axios.post('/api/v1/books', bookContents,
           { headers: { 'x-access-token': window.sessionStorage.token } })
           .then((res) => {
@@ -62,8 +62,8 @@ const addBookAction = bookContents => (dispatch) => {
 };
 
 const updateBookAction = (bookContents, id) => (dispatch) => {
-  if ((typeof bookContents.book_image !== 'object' || bookContents.book_image === null) &&
-    (typeof bookContents.book_content !== 'object' || bookContents.book_content === null)) {
+  if ((typeof bookContents.bookImage !== 'object' || bookContents.bookImage === null) &&
+    (typeof bookContents.bookContent !== 'object' || bookContents.bookContent === null)) {
     axios.put(`/api/v1/books/${id}`, bookContents,
       { headers: { 'x-access-token': window.sessionStorage.token } })
       .then((res) => {
@@ -90,13 +90,13 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
         }
       });
   } else {
-    if (typeof bookContents.book_image === 'object' && bookContents.book_image !== null) {
-      return uploader(bookContents.book_image, 'image').then((res) => {
+    if (typeof bookContents.bookImage === 'object' && bookContents.bookImage !== null) {
+      return uploader(bookContents.bookImage, 'image').then((res) => {
         dispatch({
           type: 'UPLOAD_IMAGE_SUCCESSFUL',
           payLoad: res.response.body.url
         });
-        bookContents.book_image = res.response.body.url;
+        bookContents.bookImage = res.response.body.url;
         axios.put(`/api/v1/books/${id}`, bookContents,
           { headers: { 'x-access-token': window.sessionStorage.token } })
           .then((res) => {
@@ -133,13 +133,13 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
         });
     }
 
-    if (typeof bookContents.book_content === 'object' && bookContents.book_content !== null) {
-      uploader(bookContents.book_content, 'pdf').then((res) => {
+    if (typeof bookContents.bookContent === 'object' && bookContents.bookContent !== null) {
+      uploader(bookContents.bookContent, 'pdf').then((res) => {
         dispatch({
           type: 'UPLOAD_PDF_SUCCESSFUL',
           payLoad: res.response.body.url
         });
-        bookContents.book_content = res.response.body.url;
+        bookContents.bookContent = res.response.body.url;
         axios.put(`/api/v1/books/${id}`, bookContents,
           { headers: { 'x-access-token': window.sessionStorage.token } })
           .then((res) => {
@@ -262,7 +262,7 @@ const deleteBookAction = id => (dispatch) => {
 };
 
 const borrowBookAction = (userId, bookId) => (dispatch) => {
-  axios.post(`/api/v1/users/${userId}/books`, { book_id: bookId },
+  axios.post(`/api/v1/users/${userId}/books`, { bookId: bookId },
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -287,7 +287,7 @@ const borrowBookAction = (userId, bookId) => (dispatch) => {
 };
 
 const returnBookAction = (userId, bookId)=> (dispatch) => {
-  axios.put(`/api/v1/users/${userId}/books`, { 'book_id': bookId },
+  axios.put(`/api/v1/users/${userId}/books`, { 'bookId': bookId },
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })

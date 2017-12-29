@@ -15,7 +15,7 @@ export class RegForm extends React.Component {
         fullname: '',
         username: '',
         email: '',
-        phone_no: '',
+        phoneNo: '',
         password: '',
         password_confirmation: ''
       },
@@ -128,19 +128,19 @@ export class RegForm extends React.Component {
           <div className='input-field col s12'>
             <input
               id='phone'
-              name='phone_no'
+              name='phoneNo'
               type='number'
               className={ classnames({
-                'invalid': !!(this.state.errors['phone_no'])
+                'invalid': !!(this.state.errors['phoneNo'])
               }) }
-              value={regCredentials.phone_no}
+              value={regCredentials.phoneNo}
               onChange={ this.handleChange }
             />
             <label
-              htmlFor='phone_no'
-              className={!!(this.state.errors['phone_no'] || regCredentials.phone_no.length > 0) ?
+              htmlFor='phoneNo'
+              className={!!(this.state.errors['phoneNo'] || regCredentials.phoneNo.length > 0) ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={ !!(this.state.errors['phone_no']) ? this.state.errors['phone_no'] : '' }
+              data-error={ !!(this.state.errors['phoneNo']) ? this.state.errors['phoneNo'] : '' }
             >
               Phone Number
             </label>

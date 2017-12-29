@@ -30,7 +30,7 @@ class ReadBook extends Component {
     return (
       <div>
         {(book !== null) && <PDFReader
-            file={book.book_content}
+            file={book.bookContent}
             renderType='canvas'
           />
         }

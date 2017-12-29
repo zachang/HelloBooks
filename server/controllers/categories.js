@@ -4,11 +4,11 @@ import db from '../models';
 const Category = db.Category;
 
 const addCatRules = {
-  category_name: 'required|string|min:2',
+  categoryName: 'required|string|min:2',
 };
 
 const updateCatRules = {
-  category_name: 'required|string|min:2',
+  categoryName: 'required|string|min:2',
 };
 
 const categoryController = {
@@ -16,7 +16,7 @@ const categoryController = {
     const validation = new Validator(req.body, addCatRules);
     if (validation.passes()) {
       return Category.create({
-        category_name: req.body.category_name,
+        categoryName: req.body.categoryName,
       })
         .then(category => res.status(201).send({ message: 'Category created', category }))
         .catch(() => {
@@ -47,7 +47,7 @@ const categoryController = {
           }
           return category
             .update({
-              category_name: req.body.category_name,
+              categoryName: req.body.categoryName,
             })
             .then(update => res.status(200).send({ message: 'Category updated', update }))
             .catch(() => res.status(400).send({ message: 'Error, No update done' }));

@@ -138,47 +138,47 @@ describe('POST api/v1/users/signup', () => {
   });
 
   describe('test for phone number inputs', () => {
-    it('should return status code 400 and a message when phone_no is empty', (done) => {
+    it('should return status code 400 and a message when phoneNo is empty', (done) => {
       request(app)
         .post('/api/v1/users/signup')
         .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '', 'password', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          assert.equal(res.body.errors.phone_no[0], 'The phone no field is required.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phone no field is required.');
           done();
         });
     });
-    it('should return status code 400 and a message when phone_no is less than 11 characters', (done) => {
+    it('should return status code 400 and a message when phoneNo is less than 11 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
         .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08088992', 'password', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          assert.equal(res.body.errors.phone_no[0], 'The phone no must be at least 11 characters.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phone no must be at least 11 characters.');
           done();
         });
     });
-    it('should return status code 400 and a message when phone_no is greater than 11 characters', (done) => {
+    it('should return status code 400 and a message when phoneNo is greater than 11 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
         .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08000000000000000', 'password', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          assert.equal(res.body.errors.phone_no[0], 'The phone no may not be greater than 11 characters.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phone no may not be greater than 11 characters.');
           done();
         });
     });
-    it('should return status code 400 and a message when phone_no is not a string', (done) => {
+    it('should return status code 400 and a message when phoneNo is not a string', (done) => {
       request(app)
         .post('/api/v1/users/signup')
         .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', 99, 'password', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          assert.equal(res.body.errors.phone_no[0], 'The phone no must be a string.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phone no must be a string.');
           done();
         });
     });
