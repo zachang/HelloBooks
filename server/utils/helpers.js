@@ -17,5 +17,28 @@ const generatePaginationMeta = (dbResult, limit, offset) => {
   return paginationMeta;
 };
 
-export { handleError, generatePaginationMeta } ;
+/**
+ * Determines the expected return date for users based on their level
+ *@function determineUserReturnDate
+ * @param {string} level
+ * @return {date} newDate
+ */
+const determineUserReturnDate = (level) => {
+  let newDate;
+  if (level === 'silver') {
+    newDate = new Date(Date.now() + (3 * 24 * 60 * 60 * 1000));
+    return newDate;
+  }
+  if (level === 'gold') {
+    newDate = new Date(Date.now() + (6 * 24 * 60 * 60 * 1000));
+    return newDate;
+  }
+  if (level === 'platinum') {
+    newDate = new Date(Date.now() + (9 * 24 * 60 * 60 * 1000));
+    return newDate;
+  }
+};
+
+export { handleError, generatePaginationMeta, determineUserReturnDate } ;
+
 

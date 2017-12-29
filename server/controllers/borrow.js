@@ -1,5 +1,5 @@
 import db from '../models';
-import { handleError, generatePaginationMeta } from '../utils/helpers';
+import { handleError, generatePaginationMeta, determineUserReturnDate } from '../utils/helpers';
 
 const Borrow = db.Borrow;
 const Book = db.Book;
@@ -199,12 +199,23 @@ const borrowController = {
   },
   acceptBorrows(req, res) {
     const params = req.params;
-    return Borrow.findOne({ where: { id: params.borrowId, collection_date: null } })
+    return Borrow.findOne({
+      where: { id: params.borrowId, collection_date: null },
+      include: [
+        {
+          model: User,
+          attributes: ['level']
+        }],
+    })
       .then((borrowed) => {
+        // res.status(200).send({ borrowed: borrowed.User.level });
         if (!borrowed) {
           return res.status(404).send({ message: 'Borrow not found' });
         }
-        return borrowed.update({ borrow_status: 'true', collection_date: new Date(), expected_return: new Date(Date.now() + (5 * 24 * 60 * 60 * 1000)) })
+        return borrowed.update({
+          borrow_status: 'true', collection_date: new Date(),
+          expected_return: determineUserReturnDate(borrowed.User.level)
+        })
           .then(() => res.status(200).send({ message: 'Borrow confirmed' }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
