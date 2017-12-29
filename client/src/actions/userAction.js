@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 import uploader from '../utils/uploader';
@@ -43,6 +44,8 @@ const getOneUserAction = id => (dispatch) => {
         tokenValidate('invalid');
       } else if (err.response.status === 403) {
         tokenValidate('unauthorized');
+      } else if (err.response.status === 404) {
+        tokenValidate('page not found');
       } else {
         return dispatch({
           type: actionTypes.GETONEUSER_SUCCESSFUL,

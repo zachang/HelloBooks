@@ -19,8 +19,9 @@ const tokenValidate = (type) => {
     window.sessionStorage.removeItem('token');
     browserHistory.push('/');
   } else if (type === 'unauthorized') {
-    // unauthorize component
-    browserHistory.push('/');
+    browserHistory.push('/unauthorized');
+  } else if (type === 'page not found') {
+    browserHistory.push('/pageNotFound');
   }
 };
 
