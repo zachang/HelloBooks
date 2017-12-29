@@ -14,7 +14,9 @@ import AddBook from './components/AddBook.jsx';
 import AddCategory from './components/AddCategory.jsx';
 import ReadBook from './components/ReadBook.jsx';
 import ChangePassword from './components/ChangePassword.jsx';
+import Unauthorized from './components/Unauthorized.jsx';
 import UpdateBook from './components/UpdateBook.jsx';
+import PageNotFound from './components/PageNotFound.jsx';
 import auth from './components/auth';
 
 export default (
@@ -24,6 +26,8 @@ export default (
     <Route path='/login' component={auth.LoginPage}/>
     <Route component={auth.Authenticate}>
       <Route path='/read/:id' component={ReadBook}/>
+      <Route path='/unauthorized' component={Unauthorized}/>
+      <Route path='/pageNotFound' component={PageNotFound}/>
     </Route>
     <Route component={App}>
       <Route component={auth.Authenticate}>
