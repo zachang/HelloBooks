@@ -32,6 +32,11 @@ const signUpRules = {
   phoneNo: 'required|string|min:11|max:11',
 };
 
+const loginRules = {
+  username: 'required',
+  password: 'required',
+};
+
 const updateRules = {
   fullname: 'required|string|min:2',
   username: 'required|string|min:6',
@@ -64,18 +69,25 @@ const usersController = {
     });
   },
   login(req, res) {
-    return User.findOne({ where: { username: req.body.username } })
-      .then((user) => {
-        if (user && user.validPassword(req.body.password)) {
-          const token = jwt.sign(userDetails(user),
-            secret, { expiresIn: '10h' });
-          return res.status(200).send({ message: 'User Logged in', token });
-        }
-        return res.status(404).json({ message: 'Invalid credentials' });
-      })
-      .catch(() => {
-        res.status(400).send({ message: 'Invalid credentials' });
-      });
+    const validation = new Validator(req.body, loginRules);
+    if (validation.passes()) {
+      return User.findOne({where: {username: req.body.username}})
+        .then((user) => {
+          if (user && user.validPassword(req.body.password)) {
+            const token = jwt.sign(userDetails(user),
+              secret, {expiresIn: '10h'});
+            return res.status(200).send({message: 'User Logged in', token});
+          }
+          return res.status(404).json({message: 'Invalid credentials'});
+        })
+        .catch(() => {
+          res.status(400).send({message: 'Invalid credentials'});
+        });
+    }
+    return res.status(400).json({
+      message: 'Validation error',
+      errors: validation.errors.all()
+    });
   },
   list(req, res) {
     const limit = req.query.limit || 2;
@@ -85,9 +97,6 @@ const usersController = {
     return User
       .findAndCountAll({ limit, offset, order })
       .then((users) => {
-        if (users.length === 0) {
-          return res.status(200).send({ message: 'No user to display', users: [] });
-        }
         return res.status(200).send({
         paginationMeta: generatePaginationMeta(users, limit, offset),
         users: users.rows});
@@ -147,19 +156,15 @@ const usersController = {
     const validation = new Validator(req.body, changePasswordRules);
     if (validation.passes()) {
       const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8), null);
-      return User.
-      findById(req.decoded.id)
+      return User.findById(req.decoded.id)
         .then(user => {
-          if (!user) {
-            return res.status(404).send({message: 'user not found'});
-          }
           if (!bcrypt.compareSync(oldPassword, user.password)) {
             return res.status(400).send({
               message: 'Incorrect old password'
             });
           }
 
-          user.update({
+          return user.update({
             password: hashPassword
           }).then(updated => res.status(200).send({
             message: 'Password changed',

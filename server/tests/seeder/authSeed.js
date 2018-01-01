@@ -27,8 +27,19 @@ const seeder = {
       username: 'ebenezer',
       email: 'eben@gmail.com',
       phoneNo: '08075568940',
-      password: 'password',
+      password: 'twinkle',
       level: 'silver' })
+      .then(() => done())
+      .catch(err => done(err));
+  },
+  addUserToDb2(done) {
+    User.create({
+      fullname: 'Eben Dawuda',
+      username: 'ebenezeri',
+      email: 'eborne@gmail.com',
+      phoneNo: '08075568440',
+      password: 'twinkle',
+      level: 'gold' })
       .then(() => done())
       .catch(err => done(err));
   },
@@ -38,9 +49,9 @@ const seeder = {
       username: 'ebenez',
       email: 'ebenz@gmail.com',
       phoneNo: '08075568980',
-      password: 'password',
+      password: 'twinkle',
       isAdmin: true,
-      level: 'silver' })
+      level: 'platinum' })
       .then(() => done())
       .catch(err => done(err));
   }

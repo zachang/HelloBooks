@@ -20,7 +20,7 @@ const categoryController = {
       })
         .then(category => res.status(201).send({ message: 'Category created', category }))
         .catch(() => {
-          res.status(400).send({ message: 'Error, Category not created' });
+          res.status(500).send({ message: 'Error, Category not created' });
         });
     }
     return res.status(400).json({
@@ -32,7 +32,7 @@ const categoryController = {
     return Category
       .findAll()
       .then(category => res.status(200).send({ message: 'All categories displayed', category }))
-      .catch(() => res.status(400).send({ message: 'Error, no category to display' }));
+      .catch(() => res.status(500).send({ message: 'Error, no category to display' }));
   },
   update(req, res) {
     const validation = new Validator(req.body, updateCatRules);
@@ -52,7 +52,7 @@ const categoryController = {
             .then(update => res.status(200).send({ message: 'Category updated', update }))
             .catch(() => res.status(400).send({ message: 'Error, No update done' }));
         })
-        .catch(() => res.status(400).send({ message: 'Error, No update done' }));
+        .catch(() => res.status(500).send({ message: 'Oops... update failed' }));
     }
     return res.status(400).json({
       message: 'Validation error',
@@ -73,7 +73,7 @@ const categoryController = {
           .then(() => res.status(200).send({ message: 'Category deleted' }))
           .catch(() => res.status(400).send({ message: 'Error, No deletion occurred' }));
       })
-      .catch(error => res.status(400).send(error));
+      .catch(() => res.status(500).send({ message: 'Oops... deletion failed' }));
   },
 };
 export default categoryController;

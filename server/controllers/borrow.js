@@ -10,7 +10,7 @@ const borrowController = {
   create(req, res) {
     const obj = req.body;
     const params = req.params;
-    Borrow.findAll({ where: { userId: params.userId, returned: { $or: ['pending', 'false'] } } })
+    Borrow.findAll({ where: { userId: params.userId, returned: 'pending' } })
       .then((found) => {
         if (found.length) return Promise.reject({ code: 400, message: 'You have not returned the previous book you borrowed' });
         return Book.findById(obj.bookId);
@@ -49,7 +49,7 @@ const borrowController = {
     const userId = req.params.userId;
     return Book.findById(bookId)
       .then((found) => {
-        if (!found) return Promise.reject({ code: 400, message: 'Book not found' });
+        if (!found) return Promise.reject({ code: 404, message: 'Book not found' });
         return Borrow.findOne({ where: { userId: userId, bookId: bookId, returned: 'false' } });
       })
       .then((borrowed) => {
@@ -104,7 +104,7 @@ const borrowController = {
     } else if (req.query.owe === 'true') {
       whereClause.where = { userId: userId, returned: 'true' };
     }
-    Borrow.findAndCountAll(whereClause)
+    return Borrow.findAndCountAll(whereClause)
       .then((borrows) => {
         return res.status(200).send({
           borrowed: borrows.rows,
@@ -134,13 +134,13 @@ const borrowController = {
         },
         {
           model: User,
-          attributes: ['fullname', 'level', 'email']
+          attributes: ['fullname', 'level', 'email', 'id']
         }],
       limit,
       offset,
       order
     };
-    Borrow.findAndCountAll(whereClause)
+    return Borrow.findAndCountAll(whereClause)
       .then((borrower) => {
         return res.status(200).send({
           paginationMeta: generatePaginationMeta(borrower, limit, offset),
@@ -176,7 +176,7 @@ const borrowController = {
       offset,
       order
     };
-    Borrow.findAndCountAll(whereClause)
+    return Borrow.findAndCountAll(whereClause)
       .then((returner) => {
         return res.status(200).send({
           paginationMeta: generatePaginationMeta(returner, limit, offset),
@@ -193,7 +193,7 @@ const borrowController = {
           return res.status(404).send({ message: 'Borrow not found' });
         }
         return borrowed.update({ returned: 'true', actualReturn: new Date() })
-          .then(() => res.status(200).send({ message: 'Return confirmed' }));
+          .then((acceptReturn) => res.status(200).send({ message: 'Return confirmed', acceptReturn }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   },
@@ -208,7 +208,6 @@ const borrowController = {
         }],
     })
       .then((borrowed) => {
-        // res.status(200).send({ borrowed: borrowed.User.level });
         if (!borrowed) {
           return res.status(404).send({ message: 'Borrow not found' });
         }
@@ -216,7 +215,7 @@ const borrowController = {
           borrowStatus: 'true', collectionDate: new Date(),
           expectedReturn: determineUserReturnDate(borrowed.User.level)
         })
-          .then(() => res.status(200).send({ message: 'Borrow confirmed' }));
+          .then((acceptBorrow) => res.status(200).send({ message: 'Borrow confirmed', acceptBorrow }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   }

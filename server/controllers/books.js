@@ -64,7 +64,7 @@ const booksController = {
     });
   },
   list(req, res) {
-    const limit = req.query.limit || 2;
+    const limit = req.query.limit || 3;
     const offset = req.query.offset || 0;
     const order = (req.query.order && req.query.order.toLowerCase() === 'desc')
       ? [['createdAt', 'DESC']] : [['createdAt', 'ASC']];
@@ -94,15 +94,12 @@ const booksController = {
     return Book
       .findAndCountAll(whereClause)
       .then((books) => {
-        if (books.length === 0) {
-          return res.status(200).send({ message: 'Nothing to display', books: [] });
-        }
         return res.status(200).send({
           message: 'All books displayed',
           paginationMeta: generatePaginationMeta(books, limit, offset),
           books: books.rows });
       })
-      .catch(() => res.status(400).send({ message: 'Oops, failed to display books' }));
+      .catch(() => res.status(500).send({ message: 'Oops, failed to display books' }));
   },
   listOne(req, res) {
     return Book
@@ -113,7 +110,7 @@ const booksController = {
         }
         return res.status(200).send({ message: 'Book displayed', book });
       })
-      .catch(() => res.status(400).send({ message: 'Book display failed' }));
+      .catch(() => res.status(500).send({ message: 'Book display failed' }));
   },
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);
@@ -126,7 +123,8 @@ const booksController = {
       isbn: req.body.isbn,
       pages: req.body.pages,
       description: req.body.description,
-      isAvailable: req.body.isAvailable
+      isAvailable: req.body.isAvailable,
+      countBorrow: req.body.countBorrow
     };
     if (req.body.bookImage) {
       bookUpdateDetails.bookImage = req.body.bookImage;
@@ -170,7 +168,7 @@ const booksController = {
           .then(() => res.status(200).send({ message: 'Book deleted' }))
           .catch(() => res.status(400).send({ message: 'Error, No deletion occurred' }));
       })
-      .catch(error => res.status(400).send(error));
+      .catch(() => res.status(500).send({ message: 'Oops... deletion failed' }));
   }
 };
 export default booksController;

@@ -1,6 +1,7 @@
 # HelloBooks
-[![Coverage Status](https://coveralls.io/repos/github/zachang/HelloBooks/badge.svg?branch=server)](https://coveralls.io/github/zachang/HelloBooks?branch=server)
-[![Build Status](https://travis-ci.org/zachang/HelloBooks.svg?branch=server)](https://travis-ci.org/zachang/HelloBooks?branch=server)
+[![Coverage Status](https://coveralls.io/repos/github/zachang/HelloBooks/badge.svg?branch=devmain)](https://coveralls.io/github/zachang/HelloBooks?branch=devmain)
+[![Build Status](https://travis-ci.org/zachang/HelloBooks.svg?branch=devmain)](https://travis-ci.org/zachang/HelloBooks?branch=devmain)
+<a href="https://codeclimate.com/github/zachang/HelloBooks/maintainability"><img src="https://api.codeclimate.com/v1/badges/43a7311972462488133e/maintainability" /></a>
 
 **HelloBooks** is an Andela app that leverages on modern technology and aims to ease the way libraries and its members interact. In terms of member registration, borrowing, returning etc.
 

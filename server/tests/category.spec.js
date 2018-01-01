@@ -1,15 +1,15 @@
 import request from 'supertest';
 import chai from 'chai';
 import app from './../app';
-import seeder from './seeder/auth_seed';
-import categoryseeder from './seeder/category_seed';
+import seeder from './seeder/authSeed';
+import categoryseeder from './seeder/categorySeed';
 
 
 const assert = chai.assert;
 
 require('dotenv').config();
 
-// Test for Catgory POST route
+// Test for Catgory routes
 describe('TEST CATEGORY ROUTES', () => {
   let createdCategoryId;
   before(seeder.emptyUserTable);
@@ -21,7 +21,7 @@ describe('TEST CATEGORY ROUTES', () => {
   before((done) => {
     request(app)
       .post('/api/v1/users/signin')
-      .send(seeder.setLoginData('ebenezer', 'password'))
+      .send(seeder.setLoginData('ebenezer', 'twinkle'))
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -34,7 +34,7 @@ describe('TEST CATEGORY ROUTES', () => {
   before((done) => {
     request(app)
       .post('/api/v1/users/signin')
-      .send(seeder.setLoginData('ebenez', 'password'))
+      .send(seeder.setLoginData('ebenez', 'twinkle'))
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -91,6 +91,7 @@ describe('TEST CATEGORY ROUTES', () => {
             if (err) return done(err);
             createdCategoryId = res.body.category.id;
             assert.equal(res.body.message, 'Category created');
+            assert.equal(res.body.category.categoryName, 'Adventure');
             done();
           });
       });
@@ -103,6 +104,20 @@ describe('TEST CATEGORY ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Validation error');
+            assert.equal(res.body.errors.categoryName[0], 'The categoryName field is required.');
+            done();
+          });
+      });
+      it('should return status code 400 if categoryName input not string', (done) => {
+        request(app)
+          .post('/api/v1/categories')
+          .set({ 'x-access-token': adminToken })
+          .send(categoryseeder.setCatData(99))
+          .expect(400)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Validation error');
+            assert.equal(res.body.errors.categoryName[0], 'The categoryName must be a string.');
             done();
           });
       });
@@ -139,6 +154,7 @@ describe('TEST CATEGORY ROUTES', () => {
         .expect(200)
         .end((err, res) => {
           if (err) return done(err);
+          assert.equal(res.body.category[0].categoryName, 'Adventure');
           assert.equal(res.body.message, 'All categories displayed');
           assert.exists(res.body.category);
           assert.isArray(res.body.category);
@@ -186,7 +202,7 @@ describe('TEST CATEGORY ROUTES', () => {
     });
     it('should return status code 404  when categoryId is not found', (done) => {
       request(app)
-        .put('/api/v1/categories/10000000')
+        .put('/api/v1/categories/0')
         .set({ 'x-access-token': adminToken })
         .send(categoryseeder.setUpdateCatData('Sport'))
         .expect(404)
@@ -205,6 +221,19 @@ describe('TEST CATEGORY ROUTES', () => {
         .end((err, res) => {
           if (err) return done(err);
           assert.equal(res.body.message, 'Validation error');
+          assert.equal(res.body.errors.categoryName[0], 'The categoryName field is required.');
+          done();
+        });
+    });
+    it('should return status code 404 and not update category when categoryId is wrong', (done) => {
+      request(app)
+        .put(`/api/v1/categories/0`)
+        .set({ 'x-access-token': adminToken })
+        .send(categoryseeder.setUpdateCatData('Sport'))
+        .expect(404)
+        .end((err, res) => {
+          if (err) return done(err);
+          assert.equal(res.body.message, 'Category Not Found');
           done();
         });
     });
@@ -217,6 +246,7 @@ describe('TEST CATEGORY ROUTES', () => {
         .end((err, res) => {
           if (err) return done(err);
           assert.equal(res.body.message, 'Category updated');
+          assert.equal(res.body.update.categoryName, 'Sport');
           done();
         });
     });
@@ -258,7 +288,7 @@ describe('TEST CATEGORY ROUTES', () => {
     });
     it('should return status code 404  when categoryId is not found', (done) => {
       request(app)
-        .delete('/api/v1/categories/10000000')
+        .delete('/api/v1/categories/0')
         .set({ 'x-access-token': adminToken })
         .expect(404)
         .end((err, res) => {

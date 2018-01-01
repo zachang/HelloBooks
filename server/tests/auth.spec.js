@@ -2,7 +2,7 @@ import request from 'supertest';
 import jwtDecode from 'jwt-decode';
 import chai from 'chai';
 import app from './../app';
-import seeder from './seeder/auth_seed';
+import seeder from './seeder/authSeed';
 
 const assert = chai.assert;
 
@@ -14,18 +14,6 @@ describe('POST api/v1/users/signup', () => {
   before(seeder.addUserToDb);// Add to DB
 
   describe('test for fullname inputs', () => {
-    it('should return status code 400 and a message when fullname input is empty', (done) => {
-      request(app)
-        .post('/api/v1/users/signup')
-        .send(seeder.setData('', 'jordan99', 'zachangdawuda@gmail.com', '08153191512', 'password', 'password'))
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.errors.fullname[0], 'The fullname field is required.');
-          done();
-        });
-    });
-
     it('should return status code 400 and a message when fullname is not a string', (done) => {
       request(app)
         .post('/api/v1/users/signup')
@@ -40,18 +28,6 @@ describe('POST api/v1/users/signup', () => {
   });
 
   describe('test for username inputs', () => {
-    it('should return status code 400 and a message when username input is empty', (done) => {
-      request(app)
-        .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', '', 'zachangdawuda@gmail.com', '08153191512', 'password', 'password'))
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.errors.username[0], 'The username field is required.');
-          done();
-        });
-    });
-
     it('should return status code 400 and a message when username less than 6 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
@@ -66,17 +42,6 @@ describe('POST api/v1/users/signup', () => {
   });
 
   describe('test for email inputs', () => {
-    it('should return status code 400 and a message when email input is empty', (done) => {
-      request(app)
-        .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'jacob09', '', '08153191512', 'password', 'password'))
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.errors.email[0], 'The email field is required.');
-          done();
-        });
-    });
     it('should return status code 400 and a message when email format is invalid', (done) => {
       request(app)
         .post('/api/v1/users/signup')
@@ -91,17 +56,6 @@ describe('POST api/v1/users/signup', () => {
   });
 
   describe('test for password inputs', () => {
-    it('should return status code 400 and a message when password is empty', (done) => {
-      request(app)
-        .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08153191512', '', 'password'))
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.errors.password[0], 'The password field is required.');
-          done();
-        });
-    });
     it('should return status code 400 and a message when password less than 6 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
@@ -124,31 +78,9 @@ describe('POST api/v1/users/signup', () => {
           done();
         });
     });
-    it('should return status code 400 and a message when password_confimation is empty', (done) => {
-      request(app)
-        .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08153191512', 'password', ''))
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.errors.password_confirmation[0], 'The password confirmation field is required.');
-          done();
-        });
-    });
   });
 
   describe('test for phone number inputs', () => {
-    it('should return status code 400 and a message when phoneNo is empty', (done) => {
-      request(app)
-        .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '', 'password', 'password'))
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.errors.phoneNo[0], 'The phone no field is required.');
-          done();
-        });
-    });
     it('should return status code 400 and a message when phoneNo is less than 11 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
@@ -156,7 +88,7 @@ describe('POST api/v1/users/signup', () => {
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          assert.equal(res.body.errors.phoneNo[0], 'The phone no must be at least 11 characters.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phoneNo must be at least 11 characters.');
           done();
         });
     });
@@ -167,7 +99,7 @@ describe('POST api/v1/users/signup', () => {
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          assert.equal(res.body.errors.phoneNo[0], 'The phone no may not be greater than 11 characters.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phoneNo may not be greater than 11 characters.');
           done();
         });
     });
@@ -178,7 +110,7 @@ describe('POST api/v1/users/signup', () => {
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
-          assert.equal(res.body.errors.phoneNo[0], 'The phone no must be a string.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phoneNo must be a string.');
           done();
         });
     });
@@ -201,11 +133,17 @@ describe('POST api/v1/users/signup', () => {
     it('should not create a new user account when all inputs are incomplete and return status code 400 without token', (done) => {
       request(app)
         .post('/api/v1/users/signup')
-        .send(seeder.setData('', '', '', '', '', '', ''))
+        .send(seeder.setData('', '', '', '', '', ''))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
           assert.equal(res.body.message, 'Validation error');
+          assert.equal(res.body.errors.fullname[0], 'The fullname field is required.');
+          assert.equal(res.body.errors.username[0], 'The username field is required.');
+          assert.equal(res.body.errors.email[0], 'The email field is required.');
+          assert.equal(res.body.errors.password[0], 'The password field is required.');
+          assert.equal(res.body.errors.password_confirmation[0], 'The password confirmation field is required.');
+          assert.equal(res.body.errors.phoneNo[0], 'The phoneNo field is required.');
           done();
         });
     });
@@ -217,10 +155,10 @@ describe('POST api/users/v1/signin', () => {
   before(seeder.emptyUserTable);// Empty DB
   before(seeder.addUserToDb);// add to DB
 
-  it('should return status code 404 and a message if username or password incorrect', (done) => {
+  it('should return status code 404 and a message if username incorrect', (done) => {
     request(app)
       .post('/api/v1/users/signin')
-      .send(seeder.setLoginData('ebeneasd', 'password'))
+      .send(seeder.setLoginData('ebeneasd', 'twinkle'))
       .expect(404)
       .end((err, res) => {
         if (err) return done(err);
@@ -228,10 +166,37 @@ describe('POST api/users/v1/signin', () => {
         done();
       });
   });
+  it('should return status code 404 and a message if password incorrect', (done) => {
+    request(app)
+      .post('/api/v1/users/signin')
+      .send(seeder.setLoginData('ebenezer', 'twinkly'))
+      .expect(404)
+      .end((err, res) => {
+        if (err) return done(err);
+        assert.equal(res.body.message, 'Invalid credentials');
+        done();
+      });
+  });
+  it('should return status code 400 when any or all user input is missing', (done) => {
+    request(app)
+      .post('/api/v1/users/signin')
+      .send({
+        username: '',
+        password: '',
+      })
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+        assert.equal(res.body.message, 'Validation error');
+        assert.equal(res.body.errors.username[0], 'The username field is required.');
+        assert.equal(res.body.errors.password[0], 'The password field is required.');
+        done();
+      });
+  });
   it('should return 200 and give the user token if credentials are correct.', (done) => {
     request(app)
       .post('/api/v1/users/signin')
-      .send(seeder.setLoginData('ebenezer', 'password'))
+      .send(seeder.setLoginData('ebenezer', 'twinkle'))
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
