@@ -134,7 +134,7 @@ export class Profile extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const { userData, imagePreviewUrl  } = this.state;
+    const { userData, imagePreviewUrl } = this.state;
 
     return (
       <div>
@@ -142,7 +142,7 @@ export class Profile extends React.Component {
           <div className='row'>
             <div className='row'>
               <div className='col s10 m8 l6 profile_marg' style={{ marginLeft: '23%', marginTop: '7%' }}>
-                <div className='card' style={{boxShadow: '2px 1px 7px #000'}}>
+                <div className='card' style={{ boxShadow: '2px 1px 7px #000' }}>
                   <form method='post' className='col s12' onSubmit={this.handleSubmit}>
                     <div className='card-content white-text'
                       style={{ height: '200px', background: 'rgba(77, 182, 172, 0.9)' }}
@@ -152,12 +152,12 @@ export class Profile extends React.Component {
                         {(imagePreviewUrl) ? <img
                           className='activator image-display circle'
                           src={imagePreviewUrl}/>
-                            :
+                          :
                           <img
-                          className='activator image-display circle'
-                          src={(userData.userImage !== null)
-                          ? userData.userImage : '../../imgs/avatar.png'}
-                        />}
+                            className='activator image-display circle'
+                            src={(userData.userImage !== null)
+                              ? userData.userImage : '../../imgs/avatar.png'}
+                          />}
                       </div>
 
                     </div>
@@ -284,7 +284,7 @@ export class Profile extends React.Component {
 
                       <button
                         className='waves-effect waves-light btn profile-btn'
-                        style={{marginLeft: '35%'}}
+                        style={{ marginLeft: '35%' }}
                         type='submit'
                       >
                         Update

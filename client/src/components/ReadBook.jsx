@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'react-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PDFReader from 'react-pdf-reader';
@@ -12,7 +13,6 @@ import { getOneBookAction } from '../actions/bookAction';
  * @extends {React.Component}
  */
 class ReadBook extends Component {
-
   /**
    * @return {void}
    */
@@ -30,19 +30,20 @@ class ReadBook extends Component {
     return (
       <div>
         {(book !== null) && <PDFReader
-            file={book.bookContent}
-            renderType='canvas'
-          />
+          file={book.bookContent}
+          renderType='canvas'
+        />
         }
       </div>
     );
   }
 }
 
-/**
- * @param {object} state
- * @return {object} props
- */
+ReadBook.propTypes = {
+  book: PropTypes.object,
+  params: PropTypes.object,
+  getOneBookAction: PropTypes.func
+};
 const mapStateToProps = state => ({
   book: state.bookReducer.book
 });

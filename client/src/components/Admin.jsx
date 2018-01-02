@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
 import swal from 'sweetalert2';
 import { getBookAction, deleteBookAction } from '../actions/bookAction';
-import AdminHeader from './common/AdminHeader.jsx';
-import AdminSidebar from './common/AdminSidebar.jsx';
 import BookCard from './book/BookCard.jsx';
 import { getCategoryAction } from '../actions/categoryAction';
 
@@ -133,57 +131,57 @@ export class Admin extends React.Component {
    */
   render() {
     return (
-        <div>
-          <div className='row'>
-            <div className='section'>
-              <h4 style={{ marginTop: '7%' }}>All Books</h4>
-            </div>
-            <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
-
-            <div className='row'>
-              <div className='input-field col s6 l4  m4'>
-                <select
-                  name = 'categoryId'
-                  value = {this.state.categoryId}
-                  ref = 'categoryId'
-                  onChange= {this.bookCategoryChange}
-                >
-                  <option value=''>Select Category</option>
-                  { this.state.categories.map((category, i) =>
-                    <option key={i} value={category.id}>{category.categoryName}</option>
-                  )}
-                </select>
-              </div>
-            </div>
-
-            <div className='row'>
-              <div className='row'>
-                { this.props.bookState.books.map((book, i) =>
-                  <BookCard
-                    key={i}
-                    book={book}
-                    deleteBook={this.deleteBook}
-                    editBook={this.editBook}
-                  />
-                )}
-              </div>
-
-              <div className='row'>
-                {
-                  ((this.state.pageCount) ?
-                    <Pagination
-                      items={this.state.pageCount}
-                      onSelect={(page) => {
-                        const offset = (page - 1) * this.state.limit;
-                        this.props.getBookAction(this.state.limit, offset, this.state.categoryId);
-                      }
-                      } /> : '')
-                }
-              </div>
-            </div>
-
+      <div>
+        <div className='row'>
+          <div className='section'>
+            <h4 style={{ marginTop: '7%' }}>All Books</h4>
           </div>
+          <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
+
+          <div className='row'>
+            <div className='input-field col s6 l4  m4'>
+              <select
+                name = 'categoryId'
+                value = {this.state.categoryId}
+                ref = 'categoryId'
+                onChange= {this.bookCategoryChange}
+              >
+                <option value=''>Select Category</option>
+                { this.state.categories.map((category, i) =>
+                  <option key={i} value={category.id}>{category.categoryName}</option>
+                )}
+              </select>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='row'>
+              { this.props.bookState.books.map((book, i) =>
+                <BookCard
+                  key={i}
+                  book={book}
+                  deleteBook={this.deleteBook}
+                  editBook={this.editBook}
+                />
+              )}
+            </div>
+
+            <div className='row'>
+              {
+                ((this.state.pageCount) ?
+                  <Pagination
+                    items={this.state.pageCount}
+                    onSelect={(page) => {
+                      const offset = (page - 1) * this.state.limit;
+                      this.props.getBookAction(this.state.limit, offset, this.state.categoryId);
+                    }
+                    } /> : '')
+              }
+            </div>
+          </div>
+
         </div>
+      </div>
     );
   }
 }

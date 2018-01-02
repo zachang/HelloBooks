@@ -5,8 +5,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
 import { viewAllReturnedAction, confirmReturnAction } from '../actions/bookAction';
-import AdminHeader from './common/AdminHeader.jsx';
-import AdminSidebar from './common/AdminSidebar.jsx';
 import UserReturnedList from './returns/UserReturnedList.jsx';
 
 /**

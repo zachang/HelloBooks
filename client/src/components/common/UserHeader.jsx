@@ -1,36 +1,65 @@
 import React from 'react';
-import {Link, browserHistory} from 'react-router';
+import { Link, browserHistory } from 'react-router';
+import PropTypes from 'react-proptypes';
 import jwt_decode from 'jwt-decode';
 import logo from '../../build/imgs/hello.png';
 
+/**
+ * UserHeader class declaration
+ * @class UserHeader
+ * @extends {React.Component}
+ */
 export default class UserHeader extends React.Component {
+  /**
+   * class constructor
+   */
   constructor() {
     super();
     this.logOut = this.logOut.bind(this);
   }
 
-  logOut() {
-    window.sessionStorage.removeItem('token');
-    browserHistory.push('/');
-  }
-
+  /**
+   * @method componentDidMount
+   * @return {void} void
+   */
   componentDidMount() {
     $('.collapsible').collapsible();
     $('.dropdown-button').dropdown();
   }
 
+  /**
+   * Handles user logout
+   * @method logOut
+   * @return {void} void
+   */
+  logOut() {
+    window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
+  }
 
+  /**
+   * Renders AdminHeader component
+   * @return {XML} JSX
+   */
   render() {
     const userDetails = jwt_decode(window.sessionStorage.token);
     return (
-      <div className='col m10 l10 s12 right' style={{padding: '0px'}}>
+      <div className='col m10 l10 s12 right' style={{ padding: '0px' }}>
         <div className='navbar-fixed'>
           <nav className='mainNav black col m10 l10' role='navigation'>
-            <div className='nav-wrapper container'><Link id='logo-container' to='/user' className='brand-logo mainLogo'><img
-              src={logo} alt='hellobooks'/></Link>
+            <div className='nav-wrapper container'>
+              <Link id='logo-container' to='/user' className='brand-logo mainLogo'>
+                <img src={logo} alt='hellobooks'/></Link>
               <ul className='user hide-on-small-and-down show-on-medium-and-up'>
-                <Link className='dropdown-button btn black btn-prof' to='' data-activates='dropdown1'>
-                  <i className='material-icons mat-icon right' style={{margin: '0% 0% 0% 1%'}}>arrow_drop_down</i>
+                <Link
+                  className='dropdown-button btn black btn-prof'
+                  to='' data-activates='dropdown1'>
+                  <i
+                    className='material-icons mat-icon right'
+                    style={{ margin: '0% 0% 0% 1%' }}
+                  >
+                    arrow_drop_down
+                  </i>
                   {this.props.profileUsername}
                 </Link>
               </ul>
@@ -52,11 +81,14 @@ export default class UserHeader extends React.Component {
                   <div className='row walp'>
                   </div>
                 </li>
-                <li><Link to={ `/profile/${userDetails.id}` }>Profile</Link></li>
+                <li><Link to={`/profile/${userDetails.id}`}>Profile</Link></li>
                 <li className='no-padding'>
                   <ul className='collapsible collapsible-accordion'>
                     <li>
-                      <Link className='collapsible-header'>Books Shelf<i className='material-icons mat-icon'>arrow_drop_down</i></Link>
+                      <Link className='collapsible-header'>
+                        Books Shelf
+                        <i className='material-icons mat-icon'>arrow_drop_down</i>
+                      </Link>
                       <div className='collapsible-body'>
                         <ul>
                           <li><Link to='/user'>All Books</Link></li>
@@ -70,8 +102,11 @@ export default class UserHeader extends React.Component {
                 <li><Link to={`users/change`}>Change Password</Link></li>
                 <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
               </ul>
-              <Link href='#' data-activates='nav-mobile' className='button-collapse menu-icon-link'><i
-                className='material-icons hide-on-med-and-up'>menu</i></Link>
+              <Link href='#'
+                data-activates='nav-mobile'
+                className='button-collapse menu-icon-link'>
+                <i className='material-icons hide-on-med-and-up'>menu</i>
+              </Link>
             </div>
           </nav>
         </div>
@@ -80,3 +115,7 @@ export default class UserHeader extends React.Component {
   }
 }
 
+UserHeader.propTypes = {
+  profileImage: PropTypes.string,
+  profileUsername: PropTypes.string
+};

@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { Link } from 'react-router';
 
+/**
+ * @function UserRow
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const UserRow = props => (
   <tr>
     <td>{ props.user.fullname }</td>
