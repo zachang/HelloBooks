@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
 
+/**
+ * @function UserReturn
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const UserReturn = props => (
   <div className='col l4 s10 m6 cardsm'>
     <div className='card large sticky-action'>
       <div className='card-image waves-effect waves-block waves-light'>
         <img className='activator'
-             src={(props.returning.Book.bookImage !== null) ? props.returning.Book.bookImage : '../../imgs/default.jpg'}/>
+          src={(props.returning.Book.bookImage !== null) ?
+            props.returning.Book.bookImage : '../../imgs/default.jpg'}
+        />
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>

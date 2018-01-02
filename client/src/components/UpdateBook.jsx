@@ -4,8 +4,6 @@ import classnames from 'classnames';
 import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import AdminHeader from './common/AdminHeader.jsx';
-import AdminSidebar from './common/AdminSidebar.jsx';
 import { updateBookAction, getOneBookAction } from '../actions/bookAction';
 import { getCategoryAction } from '../actions/categoryAction';
 
@@ -389,7 +387,7 @@ export class UpdateBook extends React.Component {
                         htmlFor='bookCount'
                         className={((this.state.errors && !!this.state.errors.bookCount)
                           || bookData.bookCount.toString().length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={ (this.state.errors && !!this.state.errors.bookCount) ?
+                        data-error={(this.state.errors && !!this.state.errors.bookCount) ?
                           this.state.errors.bookCount : ''}
                       >
                         Add Count

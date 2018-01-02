@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { Link } from 'react-router';
 
+/**
+ * @function UserReturnedList
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const UserReturnedList = props => (
   <tr>
     <td>{ props.returner.Book.bookName }</td>
