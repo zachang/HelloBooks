@@ -128,8 +128,8 @@ const updateUserAction = (userData, id) => (dispatch) => {
   }
 };
 
-const changePasswordAction = (changePasswordData, id) => (dispatch) => {
-  axios.put(`/api/v1/users/${id}/change-password`, changePasswordData,
+const changePasswordAction = (changePasswordData) => (dispatch) => {
+  axios.post(`/api/v1/users/change-password`, changePasswordData,
     { headers: { 'x-access-token': window.sessionStorage.token } })
     .then((res) => {
       return dispatch({
