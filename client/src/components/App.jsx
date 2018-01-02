@@ -25,6 +25,14 @@ export  class App extends React.Component {
     this.props.getOneUserAction(userId.id);
   }
 
+  /**
+   * @method componentDidMount
+   * @return {void} void
+   */
+  componentDidMount() {
+    $('.button-collapse').sideNav();
+  }
+
   render() {
     const userRoles = decodeToken(window.sessionStorage.token);
 
