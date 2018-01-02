@@ -108,7 +108,7 @@ export class ChangePassword extends React.Component {
       imagePreviewUrl: '',
       errors: null
     });
-    this.props.changePasswordAction(this.state.changePasswordData, this.props.params.id);
+    this.props.changePasswordAction(this.state.changePasswordData);
   }
 
   /**

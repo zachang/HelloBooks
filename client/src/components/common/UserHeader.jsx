@@ -42,7 +42,7 @@ export default class UserHeader extends React.Component {
                 <li className='divider'></li>
                 <li><Link to='/borrowed'>Borrowed Books</Link></li>
                 <li className='divider'></li>
-                <li><Link to={`users/${userDetails.id}/change`}>Change Password</Link></li>
+                <li><Link to={`users/change`}>Change Password</Link></li>
                 <li className='divider'></li>
                 <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
               </ul>
@@ -67,7 +67,7 @@ export default class UserHeader extends React.Component {
                     </li>
                   </ul>
                 </li>
-                <li><Link to={`users/${userDetails.id}/change`}>Change Password</Link></li>
+                <li><Link to={`users/change`}>Change Password</Link></li>
                 <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
               </ul>
               <Link href='#' data-activates='nav-mobile' className='button-collapse menu-icon-link'><i

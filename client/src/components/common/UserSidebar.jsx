@@ -69,7 +69,7 @@ export default class UserSidebar extends React.Component {
                   </li>
                 </ul>
               </li>
-              <li><Link to={`users/${userDetails.id}/change`}>Change Password</Link></li>
+              <li><Link to={`users/change`}>Change Password</Link></li>
               <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
             </ul>
           </div>
