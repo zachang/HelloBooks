@@ -9,7 +9,16 @@ import BookCardUser from './book/BookCardUser.jsx';
 import { decodeToken } from '../utils/helpers';
 import { getCategoryAction } from '../actions/categoryAction';
 
+/**
+ * User class declaration
+ * @class User
+ * @extends {React.Component}
+ */
 export class User extends React.Component {
+  /**
+   * class constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -17,18 +26,27 @@ export class User extends React.Component {
       categories: [],
       categoryId: '',
       pageCount: null,
-      limit:3,
+      limit: 3,
       showToast: false,
     };
     this.borrowBook = this.borrowBook.bind(this);
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
   }
 
+  /**
+   * @method componentWillMount
+   * @return {void} void
+   */
   componentWillMount() {
     this.props.getBookAction(this.state.limit, 0, this.state.categoryId);
     this.props.getCategoryAction();
   }
 
+  /**
+   * @method componentWillReceiveProps
+   * @param {object} nextProps - nextProps
+   * @return {object} nextProps
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
@@ -66,74 +84,92 @@ export class User extends React.Component {
     }
   }
 
+  /**
+   * @method componentDidUpdate
+   * @return {void} void
+   */
   componentDidUpdate() {
     $('select').material_select();
     $('.tooltipped').tooltip({ delay: 50 });
     $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.bookCategoryChange.bind(this));
   }
 
+  /**
+   * @method bookCategoryChange
+   * @return {void}
+   * @param {object} event - event
+   */
   bookCategoryChange(event) {
     this.setState({ categoryId: event.target.value });
     this.props.getBookAction(this.state.limit, 0, event.target.value);
   }
 
-  borrowBook(token, bookId){
+  /**
+   * Handles book borrow
+   * @method borrowBook
+   * @param {string} token
+   * @param {int} bookId
+   * @return {void} void
+   */
+  borrowBook(token, bookId) {
     const userId = decodeToken(token).id;
     this.props.borrowBookAction(userId, bookId);
     this.setState({ showToast: true });
   }
 
+  /**
+   * Renders User component
+   * @return {XML} JSX
+   */
   render() {
     return (
-          <div className='row'>
-            <div className='section'>
-              <h4 style={{ marginTop: '7%' }}>All Books</h4>
-            </div>
-            <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
+      <div className='row'>
+        <div className='section'>
+          <h4 style={{ marginTop: '7%' }}>All Books</h4>
+        </div>
+        <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
 
-            <div className='row'>
-              <div className='input-field col s6 l4  m4'>
-                <select
-                  name = 'categoryId'
-                  value = {this.state.categoryId}
-                  ref = 'categoryId'
-                  onChange= {this.bookCategoryChange}
-                >
-                  <option value=''>Select Category</option>
-                  { this.state.categories.map((category, i) =>
-                    <option key={i} value={category.id}>{category.categoryName}</option>
-                  )}
-                </select>
-              </div>
-            </div>
-
-            <div className='row'>
-              <div className='row'>
-                { this.props.bookState.books.map((book, i) =>
-                  <BookCardUser
-                    key={i}
-                    book={ book }
-                    borrowBook = { this.borrowBook }
-                  />
-                )}
-              </div>
-
-              <div className='row'>
-                {
-                  ((this.state.pageCount) ?
-                    <Pagination
-                      items={this.state.pageCount}
-                      onSelect={(page) => {
-                        const offset = (page - 1) * this.state.limit;
-                        this.props.getBookAction(this.state.limit, offset, this.state.categoryId);
-                      }
-                      } /> : '')
-                }
-              </div>
-
-            </div>
-
+        <div className='row'>
+          <div className='input-field col s6 l4  m4'>
+            <select
+              name = 'categoryId'
+              value = {this.state.categoryId}
+              ref = 'categoryId'
+              onChange= {this.bookCategoryChange}
+            >
+              <option value=''>Select Category</option>
+              { this.state.categories.map((category, i) =>
+                <option key={i} value={category.id}>{category.categoryName}</option>)}
+            </select>
           </div>
+        </div>
+
+        <div className='row'>
+          <div className='row'>
+            { this.props.bookState.books.map((book, i) =>
+              <BookCardUser
+                key={i}
+                book={book}
+                borrowBook = {this.borrowBook}
+              />)}
+          </div>
+
+          <div className='row'>
+            {
+              ((this.state.pageCount) ?
+                <Pagination
+                  items={this.state.pageCount}
+                  onSelect={(page) => {
+                    const offset = (page - 1) * this.state.limit;
+                    this.props.getBookAction(this.state.limit, offset, this.state.categoryId);
+                  }
+                  } /> : '')
+            }
+          </div>
+
+        </div>
+
+      </div>
     );
   }
 }

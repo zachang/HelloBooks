@@ -50,15 +50,15 @@ describe('TEST USER ROUTES', () => {
     it(`should return status code 401 when a user 
         wants to view the list of all users with no token`,
       (done) => {
-      request(app)
-        .get('/api/v1/users')
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'No authorization token provided');
-          done();
-        });
-    });
+        request(app)
+          .get('/api/v1/users')
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'No authorization token provided');
+            done();
+          });
+      });
     it(`should return status code 401 when a user wants to view the
         list of all users with invalid token`,
       (done) => {
@@ -228,26 +228,26 @@ describe('TEST USER ROUTES', () => {
     });
     it('should return status code 400 when any or all user input is missing',
       (done) => {
-      request(app)
-        .put(`/api/v1/users/${userId}`)
-        .set({ 'x-access-token': userToken })
-        .send({
-          fullname: '',
-          username: '',
-          email: '',
-          phoneNo: ''
-        })
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Validation error');
-          assert.equal(res.body.errors.fullname[0], 'The fullname field is required.');
-          assert.equal(res.body.errors.username[0], 'The username field is required.');
-          assert.equal(res.body.errors.email[0], 'The email field is required.');
-          assert.equal(res.body.errors.phoneNo[0], 'The phoneNo field is required.');
-          done();
-        });
-    });
+        request(app)
+          .put(`/api/v1/users/${userId}`)
+          .set({ 'x-access-token': userToken })
+          .send({
+            fullname: '',
+            username: '',
+            email: '',
+            phoneNo: ''
+          })
+          .expect(400)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Validation error');
+            assert.equal(res.body.errors.fullname[0], 'The fullname field is required.');
+            assert.equal(res.body.errors.username[0], 'The username field is required.');
+            assert.equal(res.body.errors.email[0], 'The email field is required.');
+            assert.equal(res.body.errors.phoneNo[0], 'The phoneNo field is required.');
+            done();
+          });
+      });
     it('should return status code 400 if fullname input not string',
       (done) => {
         request(app)
@@ -454,5 +454,5 @@ describe('TEST USER ROUTES', () => {
             done();
           });
       });
-  });
+    });
 });

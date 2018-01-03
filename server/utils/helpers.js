@@ -39,6 +39,4 @@ const determineUserReturnDate = (level) => {
   }
 };
 
-export { handleError, generatePaginationMeta, determineUserReturnDate } ;
-
-
+export { handleError, generatePaginationMeta, determineUserReturnDate };

@@ -9,7 +9,6 @@ const initialState = {
   borrows: null,
   allBorrows: null,
   borrowers: [],
-
   returned: null,
   returnings: null,
   returners: [],

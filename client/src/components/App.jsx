@@ -14,8 +14,7 @@ import { decodeToken } from '../utils/helpers';
  * @class App
  * @extends {React.Component}
  */
-export  class App extends React.Component {
-
+export class App extends React.Component {
   /**
    * @method componentWillMount
    * @return {void} void
@@ -33,6 +32,10 @@ export  class App extends React.Component {
     $('.button-collapse').sideNav();
   }
 
+  /**
+   * Renders App component
+   * @return {XML} JSX
+   */
   render() {
     const userRoles = decodeToken(window.sessionStorage.token);
 
@@ -40,17 +43,17 @@ export  class App extends React.Component {
       <div className='row'>
         {(userRoles.isAdmin) ?
           <AdminHeader profileUsername={this.props.userState.user.username}/>
-            :
+          :
           <UserHeader profileUsername={this.props.userState.user.username}/>}
         {(userRoles.isAdmin) ?
           <AdminSidebar profileImage={this.props.userState.user.userImage}/>
-            :
+          :
           <UserSidebar profileImage={this.props.userState.user.userImage}/>}
         <div className='container mainCon' style={{ marginLeft: '5%' }}>
           {this.props.children}
-        </div>>
+        </div>
       </div>
-    )
+    );
   }
 }
 
