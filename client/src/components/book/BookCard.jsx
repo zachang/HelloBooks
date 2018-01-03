@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { Link } from 'react-router';
 
+/**
+ * @function BookCard
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const BookCard = props => (
 
   <div className='col l4 s10 m6 cardsm'>
@@ -93,6 +98,8 @@ const BookCard = props => (
 
 BookCard.propTypes = {
   book: PropTypes.object.isRequired,
+  editBook: PropTypes.func,
+  deleteBook: PropTypes.func
 
 };
 export default BookCard;

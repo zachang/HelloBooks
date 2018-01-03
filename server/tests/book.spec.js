@@ -69,7 +69,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 401 when invalid token is provided', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': 'bajjlkall'})
+          .set({ 'x-access-token': 'bajjlkall' })
           .send(bookseeder.setBookData(
             'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png'
@@ -84,7 +84,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 403 when token valid but unauthorised', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': userToken})
+          .set({ 'x-access-token': userToken })
           .send(bookseeder.setBookData(
             'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png'
@@ -99,7 +99,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 201 and create book when token valid and authorised', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setBookData(
             'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png',
@@ -129,7 +129,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 400 when token valid and authorised but with no book inputs', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setBookData('', '', '', '', '', '', '', '', '', ''))
           .expect(400)
           .end((err, res) => {
@@ -153,7 +153,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 400 if bookName length < 2', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setBookData(
             'Y', 'Michel Pat', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 5, 'foo.pdf', 'koon.png',
@@ -169,7 +169,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 400 if bookName input not string', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setBookData(
             756, 'Michel Pat', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 5, 'foo.pdf', 'koon.png',
@@ -185,7 +185,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 400 if author length < 2', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setBookData(
             'Yi Moon', 'M', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 5, 'koon.png',
@@ -201,7 +201,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 400 if author input not string', (done) => {
         request(app)
           .post('/api/v1/books')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setBookData(
             'Yi Mon', 98, 3, new Date('1991/08/06'),
             'ISBN88889999', 679, 5, 'koon.png',
@@ -222,7 +222,7 @@ describe('TEST BOOK ROUTES', () => {
     it('should return status code 401 when user wants to view all books with invalid token', (done) => {
       request(app)
         .get('/api/v1/books')
-        .set({'x-access-token': 'xxddghj'})
+        .set({ 'x-access-token': 'xxddghj' })
         .expect(401)
         .end((err, res) => {
           if (err) return done(err);
@@ -243,7 +243,7 @@ describe('TEST BOOK ROUTES', () => {
     it('should return status code 200 when user wants to view all books with valid token', (done) => {
       request(app)
         .get('/api/v1/books')
-        .set({'x-access-token': userToken || adminToken})
+        .set({ 'x-access-token': userToken || adminToken })
         .expect(200)
         .end((err, res) => {
           if (err) return done(err);
@@ -283,7 +283,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 401 when invalid token is provided', (done) => {
         request(app)
           .put(`/api/v1/books/${createdBookId}`)
-          .set({'x-access-token': 'bajjlkall'})
+          .set({ 'x-access-token': 'bajjlkall' })
           .send(bookseeder.setUpdateBookData(
             'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png', true
@@ -298,7 +298,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 404 when bookId is not found', (done) => {
         request(app)
           .put('/api/v1/books/0')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setUpdateBookData(
             'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png',
@@ -314,7 +314,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 404 when bookId is not provided', (done) => {
         request(app)
           .put('/api/v1/books/')
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setUpdateBookData(
             'Harry Mac', 'Michel Patt', 1,
             new Date('1991/08/06'), 'ISBN88889999',
@@ -330,7 +330,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 401 when token valid but user unauthorised', (done) => {
         request(app)
           .put(`/api/v1/books/${createdBookId}`)
-          .set({'x-access-token': userToken})
+          .set({ 'x-access-token': userToken })
           .send(bookseeder.setUpdateBookData(
             'Harry Mac', 'Michel Patt', 1,
             new Date('1991/08/06'), 'ISBN88889999',
@@ -346,7 +346,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 200 when token valid, bookId found and user authorised then update book', (done) => {
         request(app)
           .put(`/api/v1/books/${createdBookId}`)
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setUpdateBookData(
             'Harry Mack', 'Michel Patts', 1, new Date('1991/08/06'),
             'ISBN88889999', 679, 3, 'foo.pdf', 'koons.png',
@@ -374,7 +374,7 @@ describe('TEST BOOK ROUTES', () => {
       it('should return status code 400 when all book update inputs missing', (done) => {
         request(app)
           .put(`/api/v1/books/${createdBookId}`)
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .send(bookseeder.setBookData('', '', '', '', '', '', '', '', '', '', ''))
           .expect(400)
           .end((err, res) => {
@@ -416,7 +416,7 @@ describe('TEST BOOK ROUTES', () => {
       (done) => {
         request(app)
           .get(`/api/v1/books/${createdBookId}`)
-          .set({'x-access-token': 'xxddghj'})
+          .set({ 'x-access-token': 'xxddghj' })
           .expect(401)
           .end((err, res) => {
             if (err) return done(err);
@@ -429,7 +429,7 @@ describe('TEST BOOK ROUTES', () => {
       (done) => {
         request(app)
           .get(`/api/v1/books/0`)
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .expect(404)
           .end((err, res) => {
             if (err) return done(err);
@@ -442,7 +442,7 @@ describe('TEST BOOK ROUTES', () => {
       (done) => {
         request(app)
           .get(`/api/v1/books/${createdBookId}`)
-          .set({'x-access-token': adminToken})
+          .set({ 'x-access-token': adminToken })
           .expect(200)
           .end((err, res) => {
             if (err) return done(err);
@@ -528,6 +528,4 @@ describe('TEST BOOK ROUTES', () => {
       });
   });
 });
-
-
 

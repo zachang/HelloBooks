@@ -106,7 +106,7 @@ const booksController = {
       .findById(req.params.bookId)
       .then((book) => {
         if (!book) {
-          return res.status(404).send({message: 'Book not found'});
+          return res.status(404).send({ message: 'Book not found' });
         }
         return res.status(200).send({ message: 'Book displayed', book });
       })

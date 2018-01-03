@@ -39,6 +39,7 @@
     "global-require": 1,
     "max-len": 1,
     "import/no-unresolved": [2, { "commonjs": true }],
+    "import/no-named-as-default": 0,
     "no-shadow": [2, { "allow": ["req", "res", "err"] }],
     "linebreak-style": 0,
     "camelcase":0,

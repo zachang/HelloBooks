@@ -3,11 +3,20 @@ import PropTypes from 'react-proptypes';
 import classnames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import signinAction from '../../actions/signinAction.js';
-import loginValidate from '../../utils/loginValidate.js';
+import signinAction from '../../actions/signinAction';
+import loginValidate from '../../utils/loginValidate';
 import { redirectIfLoggedIn } from '../../utils/helpers';
 
+/**
+ * LoginForm class declaration
+ * @class LoginForm
+ * @extends {React.Component}
+ */
 export class LoginForm extends React.Component {
+  /**
+   * class constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -21,19 +30,32 @@ export class LoginForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  /**
+   * @method componentWillMount
+   * @return {void} void
+   */
   componentWillMount() {
     if (window.sessionStorage.token) {
       redirectIfLoggedIn(window.sessionStorage.token);
     }
   }
 
-
-  handleChange(e) {
+  /**
+   * Handles user login details
+   * @method handleChange
+   * @return {void} void
+   * @param {object} event - event
+   */
+  handleChange(event) {
     const loginCredentials = this.state.loginCredentials;
-    loginCredentials[e.target.name] = e.target.value;
-    this.setState({ loginCredentials })
+    loginCredentials[event.target.name] = event.target.value;
+    this.setState({ loginCredentials });
   }
 
+  /**
+   * @method isValid
+   * @return {boolean} isValid
+   */
   isValid() {
     const { errors, isValid } = loginValidate(this.state.loginCredentials);
     if (!isValid) {
@@ -42,14 +64,24 @@ export class LoginForm extends React.Component {
     return isValid;
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    if(this.isValid()) {
+  /**
+   * Handles login
+   * @method handleSubmit
+   * @return {void}
+   * @param {object} event - event
+   */
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.isValid()) {
       this.setState({ errors: {} });
       this.props.signinAction(this.state.loginCredentials);
     }
   }
 
+  /**
+   * Renders LoginForm component
+   * @return {XML} JSX
+   */
   render() {
     const { loginCredentials } = this.state;
     return (
@@ -60,17 +92,18 @@ export class LoginForm extends React.Component {
               id='username'
               name='username'
               type='text'
-              className={ classnames({
-                'invalid': !!this.state.errors.username
+              className={classnames({
+                invalid: !!this.state.errors.username
               })}
               value={loginCredentials.username}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
             <label
               htmlFor='username'
-              className={(!!(this.state.errors['username']) || (loginCredentials.username.length > 0)) ?
-                'custom-active custom-validate' : 'custom-validate'}
-              data-error={ !!(this.state.errors['username']) ? this.state.errors['username'] : '' }
+              className={
+                (!!(this.state.errors.username) || (loginCredentials.username.length > 0)) ?
+                  'custom-active custom-validate' : 'custom-validate'}
+              data-error={this.state.errors.username ? this.state.errors.username : ''}
             >
               Username
             </label>
@@ -83,18 +116,18 @@ export class LoginForm extends React.Component {
               id='password'
               name='password'
               type='password'
-              className={ classnames( {
-                'invalid': !!this.state.errors.password
+              className={classnames({
+                invalid: !!this.state.errors.password
               })}
               value={loginCredentials.password}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
             <label
               htmlFor='password'
-              className={ classnames( 'custom-validate', {
+              className={classnames('custom-validate', {
                 'custom-active': (!!this.state.errors.password || (loginCredentials.password.length > 0))
               })}
-              data-error={ !!(this.state.errors['password']) ? this.state.errors['password'] : '' }
+              data-error={this.state.errors.password ? this.state.errors.password : ''}
             >
               Password
             </label>
@@ -116,7 +149,7 @@ export class LoginForm extends React.Component {
               type='submit' name='action'>Login
             </button>
 
-            <div style={{ color:'red', float:'right' }}>{this.props.signinState.fails}</div>
+            <div style={{ color: 'red', float: 'right' }}>{this.props.signinState.fails}</div>
           </div>
         </div>
       </form>
