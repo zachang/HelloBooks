@@ -6,13 +6,11 @@ import React from 'react';
  * @extends {React.Component}
  */
 export default class Unauthorized extends React.Component {
-
   /**
    * Renders Unauthorized component
    * @return {XML} JSX
    */
   render() {
-
     return (
       <div>
         <div className='unauthorized'>

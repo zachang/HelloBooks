@@ -50,14 +50,14 @@ const borrowController = {
     return Book.findById(bookId)
       .then((found) => {
         if (!found) return Promise.reject({ code: 404, message: 'Book not found' });
-        return Borrow.findOne({ where: { userId: userId, bookId: bookId, returned: 'false' } });
+        return Borrow.findOne({ where: { userId, bookId, returned: 'false' } });
       })
       .then((borrowed) => {
         if (!borrowed) {
           return Promise.reject({ code: 400, message: 'Book already returned' });
         }
         const update = { returned: 'pending' };
-        return Borrow.update(update, { where: { userId: userId, bookId: bookId, returned: 'false' } });
+        return Borrow.update(update, { where: { userId, bookId, returned: 'false' } });
       })
       .then((updatedCount) => {
         if (updatedCount[0] > 0) {
@@ -100,9 +100,9 @@ const borrowController = {
       order
     };
     if (req.query.owe === 'false') {
-      whereClause.where = { userId: userId, borrowStatus: { $or: ['pending', 'true'] } };
+      whereClause.where = { userId, borrowStatus: { $or: ['pending', 'true'] } };
     } else if (req.query.owe === 'true') {
-      whereClause.where = { userId: userId, returned: 'true' };
+      whereClause.where = { userId, returned: 'true' };
     }
     return Borrow.findAndCountAll(whereClause)
       .then((borrows) => {
@@ -193,7 +193,7 @@ const borrowController = {
           return res.status(404).send({ message: 'Borrow not found' });
         }
         return borrowed.update({ returned: 'true', actualReturn: new Date() })
-          .then((acceptReturn) => res.status(200).send({ message: 'Return confirmed', acceptReturn }));
+          .then(acceptReturn => res.status(200).send({ message: 'Return confirmed', acceptReturn }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   },
@@ -212,10 +212,11 @@ const borrowController = {
           return res.status(404).send({ message: 'Borrow not found' });
         }
         return borrowed.update({
-          borrowStatus: 'true', collectionDate: new Date(),
+          borrowStatus: 'true',
+          collectionDate: new Date(),
           expectedReturn: determineUserReturnDate(borrowed.User.level)
         })
-          .then((acceptBorrow) => res.status(200).send({ message: 'Borrow confirmed', acceptBorrow }));
+          .then(acceptBorrow => res.status(200).send({ message: 'Borrow confirmed', acceptBorrow }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   }

@@ -1,15 +1,28 @@
 import React from 'react';
-import HomepageHeader from './common/HomepageHeader';
-import HomepageStatement from './HomepageStatement';
+import HomepageHeader from './common/HomepageHeader.jsx';
+import HomepageStatement from './HomepageStatement.jsx';
 
+/**
+ * Homepage class declaration
+ * @class Homepage
+ * @extends {React.Component}
+ */
 export default class Homepage extends React.Component {
-  constructor(props){
+  /**
+   * class constructor
+   * @param {object} props
+   */
+  constructor(props) {
     super(props);
     this.state = {
       showLoginText: false
     };
   }
 
+  /**
+   * Renders Homepage component
+   * @return {XML} JSX
+   */
   render() {
     return (
       <div className='row main-row main-div'>

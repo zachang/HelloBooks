@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { Link } from 'react-router';
 
+/**
+ * @function UserBorrow
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const userBorrowList = props => (
   <tr>
     <td>{ props.borrower.Book.bookName }</td>
@@ -24,6 +29,7 @@ const userBorrowList = props => (
 
 userBorrowList.propTypes = {
   borrower: PropTypes.object.isRequired,
-
+  confirmBorrow: PropTypes.func.isRequired,
+  clickedBorrowList: PropTypes.array.isRequired
 };
 export default userBorrowList;

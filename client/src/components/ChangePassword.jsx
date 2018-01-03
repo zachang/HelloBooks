@@ -63,8 +63,7 @@ export class ChangePassword extends React.Component {
       this.setState({
         errors: nextProps.userState.errors
       });
-    }
-    else if (!nextProps.userState.success && nextProps.userState.fails === 'Something went wrong') {
+    } else if (!nextProps.userState.success && nextProps.userState.fails === 'Something went wrong') {
       if (this.state.showToast) {
         Materialize.toast('Try again... password not changed !', 4000);
         this.setState({ showToast: false });
@@ -181,19 +180,22 @@ export class ChangePassword extends React.Component {
                         name='newPassword_confirmation'
                         type='password'
                         className={classnames({
-                          invalid: (this.state.errors && !!this.state.errors.newPassword_confirmation) ?
-                            !!this.state.errors.newPassword_confirmation : false
+                          invalid:
+                            (this.state.errors && !!this.state.errors.newPassword_confirmation)
+                              ? !!this.state.errors.newPassword_confirmation : false
                         })}
                         value={changePasswordData.newPassword_confirmation}
                         onChange={this.handleChange}
                       />
                       <label
                         htmlFor='Confirm New Password'
-                        className={((this.state.errors && !!this.state.errors.newPassword_confirmation)
+                        className={
+                          ((this.state.errors && !!this.state.errors.newPassword_confirmation)
                           || changePasswordData.newPassword_confirmation.length > 0) ?
                             'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors.newPassword_confirmation) ?
-                          this.state.errors.newPassword_confirmation : ''}
+                        data-error={
+                          (this.state.errors && !!this.state.errors.newPassword_confirmation) ?
+                            this.state.errors.newPassword_confirmation : ''}
                       >
                         Confirm New Password
                       </label>

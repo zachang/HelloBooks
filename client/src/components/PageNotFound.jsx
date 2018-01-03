@@ -1,6 +1,6 @@
 import React from 'react';
-import { decodeToken } from '../utils/helpers';
 import { Link } from 'react-router';
+import { decodeToken } from '../utils/helpers';
 
 /**
  * PageNotFound class declaration
@@ -8,7 +8,6 @@ import { Link } from 'react-router';
  * @extends {React.Component}
  */
 export default class PageNotFound extends React.Component {
-
   /**
    * Renders PageNotFound component
    * @return {XML} JSX
@@ -20,7 +19,7 @@ export default class PageNotFound extends React.Component {
       <div>
         <div className='pageNotFound'>
           {(userRoles.isAdmin) ? <Link to={`admin`}><button className='back'>Home</button></Link>
-              :
+            :
             <Link to={`user`}><button className='back'>Home</button></Link>
           }
         </div>

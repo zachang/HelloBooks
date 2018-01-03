@@ -31,6 +31,5 @@ const uploader = (data, uploadType) => {
       return resolve({ response, uploadType });
     });
   });
-
 };
 export default uploader;

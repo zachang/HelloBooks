@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'react-proptypes';
 import { Link } from 'react-router';
 
+/**
+ * @function BookCardUser
+ * @param {object} props
+ * @return {XML} JSX
+ */
 const BookCardUser = props => (
 
   <div className='col l4 s10 m6 cardsm'>
     <div className='card large sticky-action'>
       <div className='card-image waves-effect waves-block waves-light'>
-        <img className='activator' src={ (props.book.bookImage !== null) ? props.book.bookImage : '../../imgs/default.jpg' }/>
+        <img className='activator' src={(props.book.bookImage !== null) ? props.book.bookImage : '../../imgs/default.jpg'}/>
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>
@@ -42,13 +47,13 @@ const BookCardUser = props => (
           target='blank'
           to={`read/${props.book.id}`}
           className='white tooltipped'
-          data-position="bottom"
-          data-delay="50"
-          data-tooltip="Read book"
+          data-position='bottom'
+          data-delay='50'
+          data-tooltip='Read book'
         >
           <i
-            className="small material-icons"
-            style={{ color: 'teal', cursor: 'pointer'  }}
+            className='small material-icons'
+            style={{ color: 'teal', cursor: 'pointer' }}
           >
             remove_red_eye
           </i>
@@ -56,13 +61,13 @@ const BookCardUser = props => (
 
         <Link
           className='white tooltipped'
-          data-position="bottom"
-          data-delay="50"
-          data-tooltip="Borrow book"
+          data-position='bottom'
+          data-delay='50'
+          data-tooltip='Borrow book'
         >
           <i
-            className="small material-icons"
-            onClick={ () => (props.borrowBook(window.sessionStorage.token,  props.book.id )) }
+            className='small material-icons'
+            onClick={() => (props.borrowBook(window.sessionStorage.token, props.book.id))}
             style={{ color: 'teal', cursor: 'pointer' }}
           >
             dlibrary_books
@@ -75,6 +80,7 @@ const BookCardUser = props => (
 
 BookCardUser.propTypes = {
   book: PropTypes.object.isRequired,
-
+  borrowBook: PropTypes.func
 };
+
 export default BookCardUser;

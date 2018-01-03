@@ -4,7 +4,7 @@ const Borrow = db.Borrow;
 
 const borrowSeeder = {
   emptyBorrowTable(done) {
-    Borrow.destroy({truncate: true})
+    Borrow.destroy({ truncate: true })
       .then(() => done())
       .catch(err => done(err));
   },
