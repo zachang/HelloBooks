@@ -75,7 +75,8 @@ const usersController = {
         .then((user) => {
           if (user && user.validPassword(req.body.password)) {
             const token = jwt.sign(userDetails(user),
-              secret, { expiresIn: '10h' });
+              secret, { expiresIn: '10h' }
+            );
             return res.status(200).send({ message: 'User Logged in', token });
           }
           return res.status(404).json({ message: 'Invalid credentials' });
@@ -99,7 +100,8 @@ const usersController = {
       .then((users) => {
         return res.status(200).send({
           paginationMeta: generatePaginationMeta(users, limit, offset),
-          users: users.rows });
+          users: users.rows
+        });
       })
       .catch(() => res.status(400).send({ message: 'Error, nothing to display' }));
   },

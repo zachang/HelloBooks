@@ -294,9 +294,11 @@ describe('TEST BORROW ROUTES', () => {
         .expect(200)
         .end((err, res) => {
           if (err) return done(err);
-          const collectionDate = res.body.acceptBorrow.collectionDate;
-          const expectedReturn = res.body.acceptBorrow.expectedReturn;
-          const borrowStatus = res.body.acceptBorrow.borrowStatus;
+          const {
+            collectionDate,
+            expectedReturn,
+            borrowStatus
+          } = res.body.acceptBorrow;
           assert.equal(res.body.message, 'Borrow confirmed');
           assert.equal(res.body.acceptBorrow.collectionDate, collectionDate);
           assert.equal(res.body.acceptBorrow.borrowStatus, borrowStatus);
@@ -422,8 +424,12 @@ describe('TEST BORROW ROUTES', () => {
         .expect(200)
         .end((err, res) => {
           if (err) return done(err);
-          const actualReturn = res.body.acceptReturn.actualReturn;
-          const returned = res.body.acceptReturn.returned;
+          const {
+            actualReturn,
+            returned
+          } = res.body.acceptReturn;
+          // const actualReturn = res.body.acceptReturn.actualReturn;
+          // const returned = res.body.acceptReturn.returned;
           assert.equal(res.body.message, 'Return confirmed');
           assert.equal(res.body.acceptReturn.actualReturn, actualReturn);
           assert.equal(res.body.acceptReturn.returned, returned);

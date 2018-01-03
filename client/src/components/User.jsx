@@ -139,8 +139,7 @@ export class User extends React.Component {
             >
               <option value=''>Select Category</option>
               { this.state.categories.map((category, i) =>
-                <option key={i} value={category.id}>{category.categoryName}</option>
-              )}
+                <option key={i} value={category.id}>{category.categoryName}</option>)}
             </select>
           </div>
         </div>
@@ -152,8 +151,7 @@ export class User extends React.Component {
                 key={i}
                 book={book}
                 borrowBook = {this.borrowBook}
-              />
-            )}
+              />)}
           </div>
 
           <div className='row'>

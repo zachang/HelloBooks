@@ -63,8 +63,7 @@ export class Returned extends React.Component {
               <UserReturn
                 key={i}
                 returning={returning}
-              />
-            ) : null }
+              />) : null }
 
         </div>
 
