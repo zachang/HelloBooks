@@ -59,7 +59,7 @@ describe('TEST BORROW ROUTES', () => {
   before((done) => {
     request(app)
       .post('/api/v1/books')
-      .set({'x-access-token': adminToken})
+      .set({ 'x-access-token': adminToken })
       .send({
         bookName: 'Brave Heartles',
         author: 'Towns Jnr',
@@ -84,7 +84,7 @@ describe('TEST BORROW ROUTES', () => {
   before((done) => {
     request(app)
       .put(`/api/v1/books/${createdBookId1}`)
-      .set({'x-access-token': adminToken})
+      .set({ 'x-access-token': adminToken })
       .send({
         bookName: 'Brave Heartles',
         author: 'Towns Jnr',
@@ -113,7 +113,7 @@ describe('TEST BORROW ROUTES', () => {
   before((done) => {
     request(app)
       .get('/api/v1/books')
-      .set({'x-access-token': userToken || adminToken})
+      .set({ 'x-access-token': userToken || adminToken })
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -129,7 +129,7 @@ describe('TEST BORROW ROUTES', () => {
   before((done) => {
     request(app)
       .get('/api/v1/users')
-      .set({'x-access-token': adminToken })
+      .set({ 'x-access-token': adminToken })
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -157,7 +157,7 @@ describe('TEST BORROW ROUTES', () => {
   before((done) => {
     request(app)
       .get('/api/v1/users/books/borrows')
-      .set({'x-access-token': adminToken })
+      .set({ 'x-access-token': adminToken })
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -295,8 +295,8 @@ describe('TEST BORROW ROUTES', () => {
         .end((err, res) => {
           if (err) return done(err);
           const collectionDate = res.body.acceptBorrow.collectionDate;
-          const expectedReturn =  res.body.acceptBorrow.expectedReturn;
-          const borrowStatus =  res.body.acceptBorrow.borrowStatus;
+          const expectedReturn = res.body.acceptBorrow.expectedReturn;
+          const borrowStatus = res.body.acceptBorrow.borrowStatus;
           assert.equal(res.body.message, 'Borrow confirmed');
           assert.equal(res.body.acceptBorrow.collectionDate, collectionDate);
           assert.equal(res.body.acceptBorrow.borrowStatus, borrowStatus);
@@ -423,7 +423,7 @@ describe('TEST BORROW ROUTES', () => {
         .end((err, res) => {
           if (err) return done(err);
           const actualReturn = res.body.acceptReturn.actualReturn;
-          const returned =  res.body.acceptReturn.returned;
+          const returned = res.body.acceptReturn.returned;
           assert.equal(res.body.message, 'Return confirmed');
           assert.equal(res.body.acceptReturn.actualReturn, actualReturn);
           assert.equal(res.body.acceptReturn.returned, returned);
@@ -457,16 +457,16 @@ describe('TEST BORROW ROUTES', () => {
     });
     it(`should return status code 200 when books borrowed a user is got successfully`,
       (done) => {
-      request(app)
-        .get(`/api/v1/users/${userId}/books?owe='false'`)
-        .set({ 'x-access-token': userToken })
-        .expect(200)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.borrowed[1].userId, userId);
-          done();
-        });
-    });
+        request(app)
+          .get(`/api/v1/users/${userId}/books?owe='false'`)
+          .set({ 'x-access-token': userToken })
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.borrowed[1].userId, userId);
+            done();
+          });
+      });
   });
 
   // Test to get borrows made on app
@@ -506,17 +506,17 @@ describe('TEST BORROW ROUTES', () => {
       });
     it(`should return status code 200 when all borrows made is gotten successful`,
       (done) => {
-      request(app)
-        .get(`/api/v1/users/books/borrows`)
-        .set({ 'x-access-token': adminToken })
-        .expect(200)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.borrowers[0].userId, userId2);
-          assert.equal(res.body.borrowers[1].userId, userId);
-          done();
-        });
-    });
+        request(app)
+          .get(`/api/v1/users/books/borrows`)
+          .set({ 'x-access-token': adminToken })
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.borrowers[0].userId, userId2);
+            assert.equal(res.body.borrowers[1].userId, userId);
+            done();
+          });
+      });
   });
 
 
@@ -557,15 +557,15 @@ describe('TEST BORROW ROUTES', () => {
       });
     it(`should return status code 200 when all books returned made is gotten successful`,
       (done) => {
-      request(app)
-        .get(`/api/v1/users/books/returned`)
-        .set({'x-access-token': adminToken})
-        .expect(200)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.returners[0].userId, userId2);
-          done();
-        });
-    });
+        request(app)
+          .get(`/api/v1/users/books/returned`)
+          .set({ 'x-access-token': adminToken })
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.returners[0].userId, userId2);
+            done();
+          });
+      });
   });
 });

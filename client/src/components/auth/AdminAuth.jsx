@@ -14,10 +14,9 @@ class AdminAuth extends React.Component {
   componentWillMount() {
     if (!window.sessionStorage.token) {
       browserHistory.push('/');
-    }
-    else{
+    } else {
       const userDetails = decodeToken(window.sessionStorage.token);
-      if(userDetails.isAdmin === false){
+      if (userDetails.isAdmin === false) {
         browserHistory.push('/user');
       }
     }

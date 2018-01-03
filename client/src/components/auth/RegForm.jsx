@@ -4,10 +4,19 @@ import classnames from 'classnames';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import signupAction from '../../actions/signupAction.js';
+import signupAction from '../../actions/signupAction';
 import { redirectIfLoggedIn } from '../../utils/helpers';
 
+/**
+ * RegForm class declaration
+ * @class RegForm
+ * @extends {React.Component}
+ */
 export class RegForm extends React.Component {
+  /**
+   * class constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -25,23 +34,22 @@ export class RegForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+
+  /**
+   * @method componentWillMount
+   * @return {void} void
+   */
   componentWillMount() {
     if (window.sessionStorage.token) {
       redirectIfLoggedIn(window.sessionStorage.token);
     }
   }
 
-  handleChange(e) {
-    const regCredentials = this.state.regCredentials;
-    regCredentials[e.target.name] = e.target.value;
-    this.setState({ regCredentials });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.signupAction(this.state.regCredentials);
-  }
-
+  /**
+   * @method componentWillReceiveProps
+   * @param {object} nextProps - nextProps
+   * @return {object} nextProps
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({ errors: nextProps.signupState.errors });
     if (nextProps.signupState.success) {
@@ -49,8 +57,35 @@ export class RegForm extends React.Component {
     }
   }
 
+  /**
+   * Handles user registration details
+   * @method handleChange
+   * @return {void} void
+   * @param {object} event - event
+   */
+  handleChange(event) {
+    const regCredentials = this.state.regCredentials;
+    regCredentials[event.target.name] = event.target.value;
+    this.setState({ regCredentials });
+  }
+
+  /**
+   * Handles registration
+   * @method handleSubmit
+   * @return {void}
+   * @param {object} event - event
+   */
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.signupAction(this.state.regCredentials);
+  }
+
+  /**
+   * Renders RegForm component
+   * @return {XML} JSX
+   */
   render() {
-    const {regCredentials} = this.state;
+    const { regCredentials } = this.state;
     return (
       <form className='col s12' onSubmit={this.handleSubmit}>
         <div className='row'>
@@ -59,18 +94,18 @@ export class RegForm extends React.Component {
               id='fullname'
               name='fullname'
               type='text'
-              className={ classnames({
-                'invalid': !!(this.state.errors['fullname'])
-              }) }
+              className={classnames({
+                invalid: !!(this.state.errors.fullname)
+              })}
               value={regCredentials.fullname}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
 
             <label
               htmlFor='fullname'
-              className={ !!(this.state.errors['fullname'] || regCredentials.fullname.length > 0) ?
-                'custom-active custom-validate' : 'custom-validate' }
-              data-error={ !!(this.state.errors['fullname']) ? this.state.errors['fullname'] : '' }
+              className={this.state.errors.fullname || regCredentials.fullname.length > 0 ?
+                'custom-active custom-validate' : 'custom-validate'}
+              data-error={this.state.errors.fullname ? this.state.errors.fullname : ''}
             >
               Full Name
             </label>
@@ -84,17 +119,17 @@ export class RegForm extends React.Component {
               id='username'
               name='username'
               type='text'
-              className={ classnames({
-                'invalid': !!(this.state.errors['username'])
-              }) }
+              className={classnames({
+                invalid: !!(this.state.errors.username)
+              })}
               value={regCredentials.username}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
             <label
               htmlFor='username'
-              className={!!(this.state.errors['username'] || regCredentials.username.length > 0) ?
+              className={this.state.errors.username || regCredentials.username.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={ !!(this.state.errors['username']) ? this.state.errors['username'] : '' }
+              data-error={this.state.errors.username ? this.state.errors.username : ''}
             >
               Username
             </label>
@@ -107,17 +142,17 @@ export class RegForm extends React.Component {
               id='email'
               name='email'
               type='text'
-              className={ classnames({
-                'invalid': !!(this.state.errors['email'])
-              }) }
+              className={classnames({
+                invalid: !!(this.state.errors.email)
+              })}
               value={regCredentials.email}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
             <label
               htmlFor='email'
-              className={!!(this.state.errors['email'] || regCredentials.email.length > 0) ?
+              className={this.state.errors.email || regCredentials.email.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={ !!(this.state.errors['email']) ? this.state.errors['email'] : '' }
+              data-error={this.state.errors.email ? this.state.errors.email : ''}
             >
               Email
             </label>
@@ -130,17 +165,17 @@ export class RegForm extends React.Component {
               id='phone'
               name='phoneNo'
               type='number'
-              className={ classnames({
-                'invalid': !!(this.state.errors['phoneNo'])
-              }) }
+              className={classnames({
+                invalid: !!(this.state.errors.phoneNo)
+              })}
               value={regCredentials.phoneNo}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
             <label
               htmlFor='phoneNo'
-              className={!!(this.state.errors['phoneNo'] || regCredentials.phoneNo.length > 0) ?
+              className={this.state.errors.phoneNo || regCredentials.phoneNo.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={ !!(this.state.errors['phoneNo']) ? this.state.errors['phoneNo'] : '' }
+              data-error={this.state.errors.phoneNo ? this.state.errors.phoneNo : ''}
             >
               Phone Number
             </label>
@@ -153,17 +188,17 @@ export class RegForm extends React.Component {
               id='pass'
               name='password'
               type='password'
-              className={ classnames({
-                'invalid': !!(this.state.errors['password'])
-              }) }
+              className={classnames({
+                invalid: !!(this.state.errors.password)
+              })}
               value={regCredentials.password}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
             <label
               htmlFor='password'
-              className={!!(this.state.errors['password'] || regCredentials.password.length > 0) ?
+              className={this.state.errors.password || regCredentials.password.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={ !!(this.state.errors['password']) ? this.state.errors['password'] : '' }
+              data-error={this.state.errors.password ? this.state.errors.password : ''}
             >
               Password
             </label>
@@ -177,17 +212,19 @@ export class RegForm extends React.Component {
               name='password_confirmation'
               type='password'
               data-error='field required'
-              className={ classnames({
-                'invalid': !!(this.state.errors['password_confirmation'])
-              }) }
+              className={classnames({
+                invalid: !!(this.state.errors.password_confirmation)
+              })}
               value={regCredentials.password_confirmation}
-              onChange={ this.handleChange }
+              onChange={this.handleChange}
             />
             <label
               htmlFor='password_confirmation'
-              className={!!(this.state.errors['password_confirmation'] || regCredentials.password_confirmation.length > 0) ?
+              className={this.state.errors.password_confirmation ||
+              regCredentials.password_confirmation.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={ !!(this.state.errors['password_confirmation']) ? this.state.errors['password_confirmation'] : '' }
+              data-error={this.state.errors.password_confirmation ?
+                this.state.errors.password_confirmation : ''}
             >
               Confirmation Password
             </label>
@@ -220,6 +257,6 @@ const mapStateToProps = state => ({
   signupState: state.signupReducer
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({signupAction}, dispatch);
+  bindActionCreators({ signupAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegForm);

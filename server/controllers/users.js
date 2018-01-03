@@ -71,17 +71,17 @@ const usersController = {
   login(req, res) {
     const validation = new Validator(req.body, loginRules);
     if (validation.passes()) {
-      return User.findOne({where: {username: req.body.username}})
+      return User.findOne({ where: { username: req.body.username } })
         .then((user) => {
           if (user && user.validPassword(req.body.password)) {
             const token = jwt.sign(userDetails(user),
-              secret, {expiresIn: '10h'});
-            return res.status(200).send({message: 'User Logged in', token});
+              secret, { expiresIn: '10h' });
+            return res.status(200).send({ message: 'User Logged in', token });
           }
-          return res.status(404).json({message: 'Invalid credentials'});
+          return res.status(404).json({ message: 'Invalid credentials' });
         })
         .catch(() => {
-          res.status(400).send({message: 'Invalid credentials'});
+          res.status(400).send({ message: 'Invalid credentials' });
         });
     }
     return res.status(400).json({
@@ -98,8 +98,8 @@ const usersController = {
       .findAndCountAll({ limit, offset, order })
       .then((users) => {
         return res.status(200).send({
-        paginationMeta: generatePaginationMeta(users, limit, offset),
-        users: users.rows});
+          paginationMeta: generatePaginationMeta(users, limit, offset),
+          users: users.rows });
       })
       .catch(() => res.status(400).send({ message: 'Error, nothing to display' }));
   },
@@ -157,7 +157,7 @@ const usersController = {
     if (validation.passes()) {
       const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8), null);
       return User.findById(req.decoded.id)
-        .then(user => {
+        .then((user) => {
           if (!bcrypt.compareSync(oldPassword, user.password)) {
             return res.status(400).send({
               message: 'Incorrect old password'
