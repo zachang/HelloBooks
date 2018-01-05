@@ -39,4 +39,18 @@ const determineUserReturnDate = (level) => {
   }
 };
 
-export { handleError, generatePaginationMeta, determineUserReturnDate };
+const randomCreate = (arg) => {
+  let input = "";
+  for (let i in arg) {
+    i = Math.floor(Math.random() * arg.length);
+    input += arg.charAt(i);
+  }
+  return input;
+};
+
+export {
+  handleError,
+  generatePaginationMeta,
+  determineUserReturnDate,
+  randomCreate
+};

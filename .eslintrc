@@ -60,6 +60,8 @@
     "class-methods-use-this": "off",
     "no-console": 1,
     "no-debugger": 1,
+    "guard-for-in": 0,
+    "no-restricted-syntax": 0,
     "no-var": 1,
     "semi": [1, "always"],
     "no-trailing-spaces": 0,

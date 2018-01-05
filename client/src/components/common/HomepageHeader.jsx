@@ -50,9 +50,6 @@ export default class HomepageHeader extends React.Component {
             </ul>
 
             <ul id='nav-mobile' className='side-nav hide-on-med-and-up'>
-              <li><Link to='/'>Contact us</Link></li>
-              <li><Link to='/'>Contact us</Link></li>
-              <li><Link to='/'>Contact us</Link></li>
               <li><Link to='/login'>Login</Link></li>
               <li>
                 <Link to='/register' id='join'
@@ -76,5 +73,5 @@ export default class HomepageHeader extends React.Component {
 }
 
 HomepageHeader.propTypes = {
-  btnText: PropTypes.object
+  btnText: PropTypes.bool
 };

@@ -151,7 +151,7 @@ describe('POST api/v1/users/signup', () => {
 });// end of signup describe()
 
 // Test for Signin route
-describe('POST api/users/v1/signin', () => {
+describe('POST api/v1/users/signin', () => {
   before(seeder.emptyUserTable);// Empty DB
   before(seeder.addUserToDb);// add to DB
 
@@ -206,4 +206,31 @@ describe('POST api/users/v1/signin', () => {
         done();
       });
   });
-});// end of signin describe()
+});// end of signin describe
+
+
+// Test for google Signin route
+describe('POST api/v1/users/signin', () => {
+  it('should return 201 and give the user token when google login successful.', (done) => {
+    request(app)
+      .post('/api/v1/users/social')
+      .send({
+        fullname: 'Martial Dayz',
+        username: 'Martial',
+        email: 'hellobookzy@gmail.com',
+        phoneNo: '09055555555',
+        isSocial: true,
+        regType: 'gmail',
+        password: 'password'
+      })
+      .expect(201)
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log(res.body.gmailUser);
+        const decodedToken = jwtDecode(res.body.token);
+        assert.equal(res.body.gmailUser.username, decodedToken.username);
+        assert.equal(res.body.gmailUser.email, decodedToken.email);
+        done();
+      });
+  });
+});

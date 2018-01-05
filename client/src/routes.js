@@ -25,7 +25,6 @@ export default (
     <Route path='/register' component={auth.RegisterPage}/>
     <Route path='/login' component={auth.LoginPage}/>
     <Route component={auth.Authenticate}>
-      <Route path='/read/:id' component={ReadBook}/>
       <Route path='/unauthorized' component={Unauthorized}/>
       <Route path='/pageNotFound' component={PageNotFound}/>
     </Route>

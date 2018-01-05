@@ -9,10 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
-      validate: {
-        is: /^[a-z0-9_-]+$/i,
-      },
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -23,20 +20,24 @@ module.exports = (sequelize, DataTypes) => {
     phoneNo: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
-      validate: {
-        isNumeric: true,
-        len: [11, 11],
-      },
+      allowNull: true,
     },
     userImage: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: true,
+      allowNull: true
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    isSocial: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    regType: {
+      type: DataTypes.STRING,
+      defaultValue: 'regular'
     },
     level: {
       type: DataTypes.STRING,

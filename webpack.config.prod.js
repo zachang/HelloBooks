@@ -33,7 +33,7 @@ const common = {
       }
     })
   ],
-  devtool: 'eval-source-map',
+  devtool: 'none',
   module: {
     loaders: [
       // Set up jsx. This accepts js too thanks to RegExp

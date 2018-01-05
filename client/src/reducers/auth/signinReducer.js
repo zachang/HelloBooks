@@ -20,6 +20,20 @@ const signinReducer = (state = initialState, action) => {
         fails: action.payload
       };
       break;
+    case actionTypes.GOOGLE_SIGNIN_SUCCESSFUL:
+      state = {
+        ...state,
+        success: !!window.sessionStorage.token,
+        fails: null
+      };
+      break;
+    case actionTypes.GOOGLE_SIGNIN_UNSUCCESSFUL:
+      state = {
+        ...state,
+        success: false,
+        fails: action.payload
+      };
+      break;
     default:
       return state;
   }
