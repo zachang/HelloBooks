@@ -89,6 +89,60 @@ const routes = (router) => {
 
   /**
    * @swagger
+   * /api/v1/users/social:
+   *   post:
+   *     tags:
+   *       - User
+   *     description: login user
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: fullname
+   *         description: User's fullname.
+   *         in: formData
+   *         required: true
+   *         type: string
+   *       - name: username
+   *         description: User's username.
+   *         in: formData
+   *         required: true
+   *         type: string
+   *       - name: email
+   *         description: User's email
+   *         in: formData
+   *         required: true
+   *         type: string
+   *       - name: phoneNo
+   *         description: User's phone number
+   *         in: formData
+   *         required: false
+   *         type: string
+   *       - name:  isSocial
+   *         description: check gmail login
+   *         in: formData
+   *         required: false
+   *         type: boolean
+   *       - name: regType
+   *         description: User's registration type
+   *         in: formData
+   *         required: false
+   *         type: string
+   *       - name: password
+   *         description: User's password
+   *         in: formData
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *        description: Successful login
+   *       400:
+   *        description: Gmail login unsuccessful
+   */
+  router.route('/users/social')
+    .post(usersController.googleLogin);
+
+  /**
+   * @swagger
    * /api/v1//users:
    *   get:
    *     tags:

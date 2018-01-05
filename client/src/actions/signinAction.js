@@ -11,8 +11,30 @@ const signinAction = userCredentials => (dispatch) => {
       return dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL });
     })
     .catch((err) => {
-      dispatch({ type: actionTypes.SIGNIN_UNSUCCESSFUL, payload: 'Invalid Credentials' });
+      dispatch({
+        type: actionTypes.SIGNIN_UNSUCCESSFUL,
+        payload: 'Invalid Credentials'
+      });
     });
 };
 
-export default signinAction;
+const googleSigninAction = googleCredentials => (dispatch) => {
+  axios.post('/api/v1/users/social', googleCredentials)
+    .then((res) => {
+      const token = res.data.token; // get the token
+      window.sessionStorage.setItem('token', token);
+      redirectIfLoggedIn(token);
+      return dispatch({ type: actionTypes.GOOGLE_SIGNIN_SUCCESSFUL });
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.GOOGLE_SIGNIN_UNSUCCESSFUL,
+        payload: 'Invalid Credentials'
+      });
+    });
+};
+
+export {
+  signinAction,
+  googleSigninAction
+};

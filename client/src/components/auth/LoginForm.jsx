@@ -3,7 +3,9 @@ import PropTypes from 'react-proptypes';
 import classnames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import signinAction from '../../actions/signinAction';
+import { GoogleLogin } from 'react-google-login';
+import { SocialIcon } from 'react-social-icons';
+import { signinAction, googleSigninAction } from '../../actions/signinAction';
 import loginValidate from '../../utils/loginValidate';
 import { redirectIfLoggedIn } from '../../utils/helpers';
 
@@ -24,10 +26,15 @@ export class LoginForm extends React.Component {
         username: '',
         password: ''
       },
+      googleCredentials: {
+        fullname: '',
+        email: ''
+      },
       errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
   }
 
   /**
@@ -50,6 +57,23 @@ export class LoginForm extends React.Component {
     const loginCredentials = this.state.loginCredentials;
     loginCredentials[event.target.name] = event.target.value;
     this.setState({ loginCredentials });
+  }
+
+  /**
+   * @method responseGoogle
+   * @param {object} response - response
+   * @return {void}
+   */
+  responseGoogle(response) {
+    const { email, familyName, givenName } = response.profileObj;
+    this.setState({
+      googleCredentials: {
+        fullname: `${familyName} ${givenName}`,
+        email
+      }
+    });
+    this.props.googleSigninAction(this.state.googleCredentials);
+    Materialize.toast('A message has been sent to your mail!', 4000);
   }
 
   /**
@@ -145,9 +169,26 @@ export class LoginForm extends React.Component {
 
         <div className='row'>
           <div className='col m12 s12'>
-            <button className='col m12 s12 btn btn-large waves-effect waves-light orange log-in'
-              type='submit' name='action'>Login
-            </button>
+            <div className='row'>
+              <button
+                className='col m12 s12 btn btn-large waves-effect waves-light orange log-in'
+                type='submit' name='action'>
+              Login
+              </button>
+            </div>
+
+            <div className='row'>
+              <GoogleLogin
+                className='col m12 s12 btn btn-large waves-effect waves-light log-in'
+                clientId='1035049909244-1n166b04v2498de70j43avr6c2ls24p9.apps.googleusercontent.com'
+                buttonText='Google'
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+              >
+                <SocialIcon network='google' className='google' color='white'/>
+                <span> Login</span>
+              </GoogleLogin>
+            </div>
 
             <div style={{ color: 'red', float: 'right' }}>{this.props.signinState.fails}</div>
           </div>
@@ -159,12 +200,13 @@ export class LoginForm extends React.Component {
 
 LoginForm.propTypes = {
   signinState: PropTypes.object.isRequired,
-  signinAction: PropTypes.func.isRequired
+  signinAction: PropTypes.func.isRequired,
+  googleSigninAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   signinState: state.signinReducer
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ signinAction }, dispatch);
+  bindActionCreators({ signinAction, googleSigninAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

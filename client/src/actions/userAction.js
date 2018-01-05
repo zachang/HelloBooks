@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
 import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 import uploader from '../utils/uploader';

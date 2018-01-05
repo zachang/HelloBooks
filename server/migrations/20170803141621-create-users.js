@@ -24,7 +24,7 @@ module.exports = {
       phoneNo: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false,
+        allowNull: true,
       },
       userImage: {
         type: Sequelize.STRING,
@@ -34,6 +34,14 @@ module.exports = {
       isAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
+      },
+      isSocial: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      regType: {
+        type: Sequelize.STRING,
+        defaultValue: 'regular'
       },
       level: {
         type: Sequelize.STRING,
