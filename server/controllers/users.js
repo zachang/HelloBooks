@@ -73,20 +73,34 @@ const changePasswordRules = {
 const usersController = {
   create(req, res) {
     const validation = new Validator(req.body, signUpRules);
-    if (validation.passes()) {
-      return User.create(req.body)
-        .then((newUser) => {
-          const token = jwt.sign(userDetails(newUser), secret, { expiresIn: '10h' });
-          res.status(201).send({ message: 'User successfully created', token });
-        })
-        .catch(() => {
-          res.status(400).send({ message: 'User not created' });
+    return User.findOne({
+      where: { email: req.body.email }
+    })
+      .then((user) => {
+        if (user) {
+          return res.status(409).send({ message: 'Email already exist' });
+        }
+        if (validation.passes()) {
+          return User.create(req.body)
+            .then((newUser) => {
+              const token = jwt.sign(userDetails(newUser), secret, { expiresIn: '10h' });
+              res.status(201).send({
+                message: 'User successfully created',
+                token
+              });
+            })
+            .catch(() => {
+              res.status(400).send({ message: 'User not created' });
+            });
+        }
+        return res.status(400).json({
+          message: 'Validation error',
+          errors: validation.errors.all()
         });
-    }
-    return res.status(400).json({
-      message: 'Validation error',
-      errors: validation.errors.all()
-    });
+      })
+      .catch(() => {
+        res.status(500).send({ message: 'Request not processed' });
+      });
   },
   login(req, res) {
     const validation = new Validator(req.body, loginRules);
@@ -114,55 +128,76 @@ const usersController = {
     const gmailPass = randomCreate('abcd99?)#@*rt98');
     const username = randomCreate('abcdefgi');
     const googleData = req.body;
-    User.create({
-      fullname: googleData.fullname,
-      username,
-      email: googleData.email,
-      phoneNo: 'Update',
-      isSocial: true,
-      regType: 'gmail',
-      password: gmailPass
+    return User.findOne({
+      where: { email: googleData.email }
     })
-      .then((gmailUser) => {
-        const token = jwt.sign(gmailDetails(gmailUser), secret, { expiresIn: '10h' });
-        res.status(201).send({
-          message: 'Gmail login successful',
-          token,
-          gmailUser
-        });
-        return User.findOne({ where: { email: gmailUser.email } });
-      })
-      .then((mailMessage) => {
-        const message = 'It is advised you update your default details below;';
-        const sentUsername = mailMessage.username;
-        const sentPassword = gmailPass;
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          secure: true,
-          port: 25,
-          auth: {
-            user: process.env.USER_EMAIL,
-            pass: process.env.USER_PASSWORD,
-          },
-          tls: {
-            rejectUnauthorized: false,
-          },
-        });
-        const mailOptions = {
-          from: '\'hellobookz\' Admin <zachangdawuda@gmail.com>',
-          to: mailMessage.email,
-          subject: 'Gmail Notification from hello-books',
-          html: `<p>${message}</p><p><b>Username:</b>${sentUsername}</p><p><b>Password:</b>${sentPassword}</p>`
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            return (false);
-          }
-          return (true);
-        });
+      .then((user) => {
+        if (user) {
+          const token = jwt.sign(userDetails(user),
+            secret, { expiresIn: '10h' }
+          );
+          return res.status(200).send({ token });
+        }
+
+        User.create({
+          fullname: googleData.fullname,
+          username,
+          email: googleData.email,
+          phoneNo: 'Update',
+          isSocial: true,
+          regType: 'gmail',
+          password: gmailPass
+        })
+          .then((gmailUser) => {
+            const token = jwt.sign(gmailDetails(gmailUser), secret, { expiresIn: '10h' });
+            res.status(201).send({
+              message: 'Gmail login successful',
+              token,
+              gmailUser
+            });
+            return User.findOne({ where: { email: gmailUser.email } });
+          })
+          .then((mailMessage) => {
+            const message = 'It is advised you update your default details below;';
+            const sentUsername = mailMessage.username;
+            const sentPassword = gmailPass;
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              secure: true,
+              port: 25,
+              auth: {
+                user: process.env.USER_EMAIL,
+                pass: process.env.USER_PASSWORD,
+              },
+              tls: {
+                rejectUnauthorized: false,
+              },
+            });
+            const mailOptions = {
+              from: '\'hellobookz\' Admin <zachangdawuda@gmail.com>',
+              to: mailMessage.email,
+              subject: 'Gmail Notification from hello-books',
+              html: `<p>${message}</p><p><b>Username:</b>${sentUsername}</p><p><b>Password:</b>${sentPassword}</p>`
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return (false);
+              }
+              return (true);
+            });
+          })
+          .catch((error) => {
+            return res.status(500).send({
+              message: 'Gmail login unsuccessful',
+              error
+            });
+          });
       })
       .catch((error) => {
-        return res.status(500).send({ message: 'Gmail login unsuccessful', error });
+        return res.status(500).send({
+          message: 'Request not processed',
+          error
+        });
       });
   },
   list(req, res) {

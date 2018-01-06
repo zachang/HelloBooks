@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
+import { clearGoogleSigninAction } from '../actions/signinAction';
 import { getBookAction, borrowBookAction } from '../actions/bookAction';
 import BookCardUser from './book/BookCardUser.jsx';
 import { decodeToken } from '../utils/helpers';
@@ -81,6 +82,10 @@ export class User extends React.Component {
     }
     if (this.state.pageCount !== nextProps.bookState.pageCount) {
       this.setState({ pageCount: nextProps.bookState.pageCount });
+    }
+    if (nextProps.signinState.googleSigned === 'Gmail login successful') {
+      Materialize.toast('Check email', 4000);
+      this.props.clearGoogleSigninAction();
     }
   }
 
@@ -177,15 +182,23 @@ export class User extends React.Component {
 User.propTypes = {
   bookState: PropTypes.object.isRequired,
   categoryState: PropTypes.object.isRequired,
+  signinState: PropTypes.object.isRequired,
   getBookAction: PropTypes.func.isRequired,
   getCategoryAction: PropTypes.func.isRequired,
+  clearGoogleSigninAction: PropTypes.func.isRequired,
   borrowBookAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   bookState: state.bookReducer,
-  categoryState: state.categoryReducer
+  categoryState: state.categoryReducer,
+  signinState: state.signinReducer
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getBookAction, getCategoryAction, borrowBookAction }, dispatch);
+  bindActionCreators({
+    getBookAction,
+    getCategoryAction,
+    borrowBookAction,
+    clearGoogleSigninAction
+  }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(User);

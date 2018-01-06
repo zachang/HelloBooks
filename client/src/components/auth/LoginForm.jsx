@@ -30,7 +30,8 @@ export class LoginForm extends React.Component {
         fullname: '',
         email: ''
       },
-      errors: {}
+      errors: {},
+      fails: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -48,6 +49,19 @@ export class LoginForm extends React.Component {
   }
 
   /**
+   * @method componentWillReceiveProps
+   * @param {object} nextProps - nextProps
+   * @return {object} nextProps
+   */
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.signinState.success) {
+      this.setState({
+        fails: nextProps.signinState.fails
+      });
+    }
+  }
+
+  /**
    * Handles user login details
    * @method handleChange
    * @return {void} void
@@ -56,7 +70,11 @@ export class LoginForm extends React.Component {
   handleChange(event) {
     const loginCredentials = this.state.loginCredentials;
     loginCredentials[event.target.name] = event.target.value;
-    this.setState({ loginCredentials });
+    this.setState({
+      errors: {},
+      fails: null,
+      loginCredentials
+    });
   }
 
   /**
@@ -73,7 +91,6 @@ export class LoginForm extends React.Component {
       }
     });
     this.props.googleSigninAction(this.state.googleCredentials);
-    Materialize.toast('A message has been sent to your mail!', 4000);
   }
 
   /**
@@ -97,7 +114,10 @@ export class LoginForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.isValid()) {
-      this.setState({ errors: {} });
+      this.setState({
+        errors: {},
+        fails: null
+      });
       this.props.signinAction(this.state.loginCredentials);
     }
   }
@@ -107,7 +127,7 @@ export class LoginForm extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const { loginCredentials } = this.state;
+    const { loginCredentials, fails } = this.state;
     return (
       <form className='col s12' onSubmit={this.handleSubmit}>
         <div className='row'>
@@ -190,7 +210,7 @@ export class LoginForm extends React.Component {
               </GoogleLogin>
             </div>
 
-            <div style={{ color: 'red', float: 'right' }}>{this.props.signinState.fails}</div>
+            <div style={{ color: 'red', float: 'right' }}>{fails}</div>
           </div>
         </div>
       </form>
