@@ -28,7 +28,8 @@ export class RegForm extends React.Component {
         password: '',
         password_confirmation: ''
       },
-      errors: {}
+      errors: {},
+      fails: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -51,9 +52,19 @@ export class RegForm extends React.Component {
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ errors: nextProps.signupState.errors });
     if (nextProps.signupState.success) {
       browserHistory.push('/user');
+    }
+
+    if (!nextProps.signupState.success &&
+      nextProps.signupState.fails !== 'Email already exist') {
+      this.setState({
+        errors: nextProps.signupState.errors
+      });
+    } else if (nextProps.signupState.fails === 'Email already exist') {
+      this.setState({
+        fails: nextProps.signupState.fails
+      });
     }
   }
 
@@ -66,7 +77,11 @@ export class RegForm extends React.Component {
   handleChange(event) {
     const regCredentials = this.state.regCredentials;
     regCredentials[event.target.name] = event.target.value;
-    this.setState({ regCredentials });
+    this.setState({
+      regCredentials,
+      errors: {},
+      fails: null
+    });
   }
 
   /**
@@ -85,7 +100,7 @@ export class RegForm extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const { regCredentials } = this.state;
+    const { regCredentials, fails } = this.state;
     return (
       <form className='col s12' onSubmit={this.handleSubmit}>
         <div className='row'>
@@ -243,6 +258,8 @@ export class RegForm extends React.Component {
               </a>
             </p>
           </div>
+
+          <div style={{ color: 'red', float: 'right' }}>{fails}</div>
         </div>
       </form>
     );

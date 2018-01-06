@@ -226,7 +226,6 @@ describe('POST api/v1/users/signin', () => {
       .expect(201)
       .end((err, res) => {
         if (err) return done(err);
-        console.log(res.body.gmailUser);
         const decodedToken = jwtDecode(res.body.token);
         assert.equal(res.body.gmailUser.username, decodedToken.username);
         assert.equal(res.body.gmailUser.email, decodedToken.email);

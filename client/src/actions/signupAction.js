@@ -10,11 +10,14 @@ const signupAction = userCredentials => (dispatch) => {
     })
     .catch((err) => {
       if (err.response.data.message === 'Validation error') {
-        return dispatch({ type: actionTypes.SIGNUP_VALIDATION_ERROR,
+        return dispatch({
+          type: actionTypes.SIGNUP_VALIDATION_ERROR,
           payload: err.response.data.errors });
       }
-      return dispatch({ type: actionTypes.SIGNUP_UNSUCCESSFUL,
-        payload: 'Registration fail' });
+      return dispatch({
+        type: actionTypes.SIGNUP_UNSUCCESSFUL,
+        payload: err.response.data.message
+      });
     });
 };
 

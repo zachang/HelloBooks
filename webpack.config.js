@@ -29,8 +29,7 @@ module.exports = {
       jquery: 'jquery'
     })
   ],
-  devtool: 'none',
-
+  devtool: 'eval-source-map',
   module: {
     loaders: [
       {
