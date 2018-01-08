@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import PropTypes from 'react-proptypes';
-import jwt_decode from 'jwt-decode';
 
 
 /**
@@ -42,7 +41,6 @@ export default class AdminSidebar extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const userDetails = jwt_decode(window.sessionStorage.token);
     return (
       <div className='side col m2 l2 hide-on-small-and-down nav-pan'>
         <div className='col m2 l2 grey darken-4 addPad nav-pan-child'>
@@ -65,7 +63,7 @@ export default class AdminSidebar extends React.Component {
 
           <div className='row rowcollap'>
             <ul>
-              <li><Link to={`/profile/${userDetails.id}`}>Profile</Link></li>
+              <li><Link to={'/profile'}>Profile</Link></li>
               <li className='no-padding'>
                 <ul className='collapsible collapsible-accordion'>
                   <li>

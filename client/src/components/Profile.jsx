@@ -4,6 +4,7 @@ import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getOneUserAction, updateUserAction } from '../actions/userAction';
+import { decodeToken } from '../utils/helpers';
 
 /**
  * Profile class declaration
@@ -36,11 +37,12 @@ export class Profile extends React.Component {
   }
 
   /**
-   * @method componentDidMount
+   * @method componentWillMount
    * @return {void} void
    */
-  componentDidMount() {
-    this.props.getOneUserAction(this.props.params.id);
+  componentWillMount() {
+    const userId = decodeToken(window.sessionStorage.token);
+    this.props.getOneUserAction(userId.id);
   }
 
   /**
@@ -307,7 +309,8 @@ export class Profile extends React.Component {
 Profile.propTypes = {
   userState: PropTypes.object.isRequired,
   getOneUserAction: PropTypes.func.isRequired,
-  updateUserAction: PropTypes.func.isRequired
+  updateUserAction: PropTypes.func.isRequired,
+  params: PropTypes.object
 };
 const mapStateToProps = state => ({
   userState: state.userReducer,

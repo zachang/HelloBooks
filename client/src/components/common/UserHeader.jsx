@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import PropTypes from 'react-proptypes';
-import jwt_decode from 'jwt-decode';
 import logo from '../../build/imgs/hello.png';
 
 /**
@@ -42,7 +41,6 @@ export default class UserHeader extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const userDetails = jwt_decode(window.sessionStorage.token);
     return (
       <div className='col m10 l10 s12 right' style={{ padding: '0px' }}>
         <div className='navbar-fixed'>
@@ -65,7 +63,7 @@ export default class UserHeader extends React.Component {
               </ul>
 
               <ul id='dropdown1' className='dropdown-content hide-on-small-and-down'>
-                <li><Link to={ `/profile/${userDetails.id}` }>Profile</Link></li>
+                <li><Link to={ '/profile' }>Profile</Link></li>
                 <li className='divider'></li>
                 <li><Link to='/returned'>Returned Books</Link></li>
                 <li className='divider'></li>
@@ -81,7 +79,7 @@ export default class UserHeader extends React.Component {
                   <div className='row walp'>
                   </div>
                 </li>
-                <li><Link to={`/profile/${userDetails.id}`}>Profile</Link></li>
+                <li><Link to={'/profile'}>Profile</Link></li>
                 <li className='no-padding'>
                   <ul className='collapsible collapsible-accordion'>
                     <li>

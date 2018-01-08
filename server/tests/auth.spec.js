@@ -59,7 +59,7 @@ describe('POST api/v1/users/signup', () => {
     it('should return status code 400 and a message when password less than 6 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08153191512', 'asas', 'password'))
+        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer100', 'zachangdawuda1@gmail.com', '08153191510', 'asas', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
@@ -70,7 +70,7 @@ describe('POST api/v1/users/signup', () => {
     it('should return status code 400 and a message when password not matched', (done) => {
       request(app)
         .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08153191512', 'asasvvvv', 'password'))
+        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer101', 'zachangdawuda2@gmail.com', '08153191511', 'asasvvvv', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
@@ -84,7 +84,7 @@ describe('POST api/v1/users/signup', () => {
     it('should return status code 400 and a message when phoneNo is less than 11 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08088992', 'password', 'password'))
+        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer102', 'zachangdawuda3@gmail.com', '08088992', 'password', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
@@ -95,22 +95,11 @@ describe('POST api/v1/users/signup', () => {
     it('should return status code 400 and a message when phoneNo is greater than 11 characters', (done) => {
       request(app)
         .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', '08000000000000000', 'password', 'password'))
+        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer103', 'zachangdawuda4@gmail.com', '08000000000000000', 'password', 'password'))
         .expect(400)
         .end((err, res) => {
           if (err) return done(err);
           assert.equal(res.body.errors.phoneNo[0], 'The phoneNo may not be greater than 11 characters.');
-          done();
-        });
-    });
-    it('should return status code 400 and a message when phoneNo is not a string', (done) => {
-      request(app)
-        .post('/api/v1/users/signup')
-        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer', 'zachangdawuda@gmail.com', 99, 'password', 'password'))
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.errors.phoneNo[0], 'The phoneNo must be a string.');
           done();
         });
     });
@@ -127,6 +116,17 @@ describe('POST api/v1/users/signup', () => {
           const decodedToken = jwtDecode(res.body.token);
           assert.equal(decodedToken.email, 'zachangdawuda@gmail.com');
           assert.equal(decodedToken.username, 'ebenezer13');
+          done();
+        });
+    });
+    it('should not create a new user account when email already exist', (done) => {
+      request(app)
+        .post('/api/v1/users/signup')
+        .send(seeder.setData('Dawuda Ebenezer', 'ebenezer14', 'zachangdawuda@gmail.com', '08153191512', 'password', 'password'))
+        .expect(409)
+        .end((err, res) => {
+          if (err) return done(err);
+          assert.equal(res.body.message, 'User already exist');
           done();
         });
     });
@@ -226,6 +226,7 @@ describe('POST api/v1/users/signin', () => {
       .expect(201)
       .end((err, res) => {
         if (err) return done(err);
+
         const decodedToken = jwtDecode(res.body.token);
         assert.equal(res.body.gmailUser.username, decodedToken.username);
         assert.equal(res.body.gmailUser.email, decodedToken.email);

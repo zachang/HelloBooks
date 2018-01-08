@@ -25,10 +25,10 @@ export class App extends React.Component {
   }
 
   /**
-   * @method componentDidMount
+   * @method componentDidUpdate
    * @return {void} void
    */
-  componentDidMount() {
+  componentDidUpdate() {
     $('.button-collapse').sideNav();
   }
 

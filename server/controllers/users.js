@@ -73,12 +73,17 @@ const changePasswordRules = {
 const usersController = {
   create(req, res) {
     const validation = new Validator(req.body, signUpRules);
+    const body = req.body;
     return User.findOne({
-      where: { email: req.body.email }
+      where: { $or: {
+        email: body.email,
+        username: body.username,
+        phoneNo: body.phoneNo
+      } }
     })
       .then((user) => {
         if (user) {
-          return res.status(409).send({ message: 'Email already exist' });
+          return res.status(409).send({ message: 'User already exist' });
         }
         if (validation.passes()) {
           return User.create(req.body)
@@ -227,7 +232,7 @@ const usersController = {
           user
         });
       })
-      .catch(() => res.status(500).send({ message: 'Oops, failed to display books' }));
+      .catch(() => res.status(500).send({ message: 'Oops, failed to display users' }));
   },
   update(req, res) {
     const validation = new Validator(req.body, updateRules);
