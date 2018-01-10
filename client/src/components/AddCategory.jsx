@@ -22,6 +22,7 @@ export class AddCategory extends React.Component {
         categoryName: '',
       },
       errors: null,
+      showToast: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +34,24 @@ export class AddCategory extends React.Component {
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ errors: nextProps.categoryState.errors });
+    if (nextProps.categoryState.success) {
+      if (this.state.showToast) {
+        Materialize.toast('Category added!', 4000);
+        this.setState({
+          showToast: false
+        });
+      }
+    } else if (!nextProps.categoryState.success) {
+      if (this.state.showToast) {
+        Materialize.toast('Category not added!', 4000);
+        this.setState({
+          showToast: false
+        });
+      }
+      this.setState({
+        errors: nextProps.categoryState.errors
+      });
+    }
   }
 
   /**
@@ -56,6 +74,13 @@ export class AddCategory extends React.Component {
    */
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({
+      categoryData: {
+        categoryName: '',
+      },
+      showToast: true,
+      errors: null
+    });
     this.props.addCategoryAction(this.state.categoryData);
   }
 

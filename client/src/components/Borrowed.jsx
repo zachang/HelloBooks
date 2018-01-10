@@ -23,7 +23,7 @@ export class Borrowed extends React.Component {
       errors: null,
       books: [],
       pageCount: null,
-      limit: 1,
+      limit: 15,
       showToast: false,
     };
     this.returnBook = this.returnBook.bind(this);
@@ -126,8 +126,7 @@ export class Borrowed extends React.Component {
                 onSelect={(page) => {
                   const offset = (page - 1) * this.state.limit;
                   this.props.viewUserBorrowAction(userId.id, this.state.limit, offset);
-                }
-                } /> : '')
+                }} /> : '')
           }
         </div>
       </div>

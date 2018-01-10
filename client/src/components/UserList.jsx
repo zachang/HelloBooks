@@ -21,7 +21,7 @@ export class UserList extends React.Component {
     this.state = {
       errors: null,
       pageCount: null,
-      limit: 1
+      limit: 15
     };
   }
 

@@ -4,6 +4,7 @@ const initialState = {
   success: false,
   passes: null,
   errors: null,
+  fails: null,
   books: [],
   book: null,
   borrows: null,
@@ -187,7 +188,8 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: true,
         errors: null,
-        returnings: action.payload
+        returnings: action.payload.returnings,
+        pageCount: action.payload.pageCount
       };
       break;
     case actionTypes.GET_USER_RETURNED_UNSUCCESSFUL:

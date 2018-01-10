@@ -129,7 +129,8 @@ export class Profile extends React.Component {
     this.setState({
       showToast: true
     });
-    this.props.updateUserAction(this.state.userData, this.props.params.id);
+    const usersId = decodeToken(window.sessionStorage.token);
+    this.props.updateUserAction(this.state.userData, usersId.id);
   }
   /**
    * Renders Profile component

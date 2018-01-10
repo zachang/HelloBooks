@@ -27,7 +27,7 @@ export class User extends React.Component {
       categories: [],
       categoryId: '',
       pageCount: null,
-      limit: 3,
+      limit: 15,
       showToast: false,
     };
     this.borrowBook = this.borrowBook.bind(this);

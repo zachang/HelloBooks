@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
-import jwt_decode from 'jwt-decode';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Pagination } from 'react-materialize';
 import { viewUserReturnAction } from '../actions/bookAction';
-import Paginate from './common/Paginate.jsx';
 import UserReturn from './return/UserReturn.jsx';
+import { decodeToken } from '../utils/helpers';
 
 /**
  * Returned class declaration
@@ -21,7 +21,9 @@ export class Returned extends React.Component {
     super(props);
     this.state = {
       errors: null,
-      books: []
+      books: [],
+      pageCount: null,
+      limit: 15,
     };
   }
 
@@ -30,8 +32,8 @@ export class Returned extends React.Component {
    * @return {void} void
    */
   componentWillMount() {
-    const userDetails = jwt_decode(window.sessionStorage.token);
-    this.props.viewUserReturnAction(userDetails.id);
+    const userDetails = decodeToken(window.sessionStorage.token);
+    this.props.viewUserReturnAction(userDetails.id, this.state.limit, 0);
   }
 
   /**
@@ -43,6 +45,9 @@ export class Returned extends React.Component {
     if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
     }
+    if (this.state.pageCount !== nextProps.bookState.pageCount) {
+      this.setState({ pageCount: nextProps.bookState.pageCount });
+    }
   }
 
   /**
@@ -50,6 +55,7 @@ export class Returned extends React.Component {
    * @return {XML} JSX
    */
   render() {
+    const userId = decodeToken(window.sessionStorage.token);
     return (
       <div className='row'>
         <div className='section'>
@@ -64,10 +70,19 @@ export class Returned extends React.Component {
                 key={i}
                 returning={returning}
               />) : null }
-
         </div>
 
-        <Paginate/>
+        <div className='row'>
+          {
+            ((this.state.pageCount) ?
+              <Pagination
+                items={this.state.pageCount}
+                onSelect={(page) => {
+                  const offset = (page - 1) * this.state.limit;
+                  this.props.viewUserReturnAction(userId.id, this.state.limit, offset);
+                }} /> : '')
+          }
+        </div>
       </div>
     );
   }
