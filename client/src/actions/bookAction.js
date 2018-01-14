@@ -4,7 +4,7 @@ import { tokenValidate } from '../utils/helpers';
 import uploader from '../utils/uploader';
 
 const addBookAction = bookContents => (dispatch) => {
-  uploader(bookContents.bookImage, 'image')
+  return uploader(bookContents.bookImage, 'image')
     .then((res) => {
       dispatch({
         type: 'UPLOAD_IMAGE_SUCCESSFUL',
@@ -20,7 +20,7 @@ const addBookAction = bookContents => (dispatch) => {
         axios.post('/api/v1/books', bookContents,
           { headers: { 'x-access-token': window.sessionStorage.token } })
           .then((res) => {
-            return dispatch({
+            dispatch({
               type: actionTypes.ADDBOOK_SUCCESSFUL,
               payload: res.data.message
             });
@@ -183,13 +183,13 @@ const getBookAction = (limit, offset, categoryId) => (dispatch) => {
   if (categoryId !== '') {
     url = `${url}&category=${categoryId}`;
   }
-  axios.get(
+  return axios.get(
     url,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
-      return dispatch({
+      dispatch({
         type: actionTypes.GETBOOKS_SUCCESSFUL,
         books: res.data.books,
         pageCount: res.data.paginationMeta.pageCount
@@ -210,7 +210,7 @@ const getBookAction = (limit, offset, categoryId) => (dispatch) => {
 };
 
 const getOneBookAction = id => (dispatch) => {
-  axios.get(`/api/v1/books/${id}`,
+  return axios.get(`/api/v1/books/${id}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -236,7 +236,7 @@ const getOneBookAction = id => (dispatch) => {
 
 
 const deleteBookAction = id => (dispatch) => {
-  axios.delete(`/api/v1/books/${id}`,
+  return axios.delete(`/api/v1/books/${id}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -261,7 +261,7 @@ const deleteBookAction = id => (dispatch) => {
 };
 
 const borrowBookAction = (userId, bookId) => (dispatch) => {
-  axios.post(`/api/v1/users/${userId}/books`, { bookId },
+  return axios.post(`/api/v1/users/${userId}/books`, { bookId },
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -286,7 +286,7 @@ const borrowBookAction = (userId, bookId) => (dispatch) => {
 };
 
 const returnBookAction = (userId, bookId) => (dispatch) => {
-  axios.put(`/api/v1/users/${userId}/books`, { bookId },
+  return axios.put(`/api/v1/users/${userId}/books`, { bookId },
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -311,7 +311,7 @@ const returnBookAction = (userId, bookId) => (dispatch) => {
 };
 
 const viewUserBorrowAction = (userId, limit, offset) => (dispatch) => {
-  axios.get(`/api/v1/users/${userId}/books?owe=false&limit=${limit}&offset=${offset}`,
+  return axios.get(`/api/v1/users/${userId}/books?owe=false&limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -339,7 +339,7 @@ const viewUserBorrowAction = (userId, limit, offset) => (dispatch) => {
 };
 
 const viewUserReturnAction = (userId, limit, offset) => (dispatch) => {
-  axios.get(`/api/v1/users/${userId}/books?owe=true&limit=${limit}&offset=${offset}`,
+  return axios.get(`/api/v1/users/${userId}/books?owe=true&limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -367,7 +367,7 @@ const viewUserReturnAction = (userId, limit, offset) => (dispatch) => {
 };
 
 const viewAllBorrowAction = (limit, offset) => (dispatch) => {
-  axios.get(`/api/v1/users/books/borrows?limit=${limit}&offset=${offset}`,
+  return axios.get(`/api/v1/users/books/borrows?limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -395,7 +395,7 @@ const viewAllBorrowAction = (limit, offset) => (dispatch) => {
 };
 
 const viewAllReturnedAction = (limit, offset) => (dispatch) => {
-  axios.get(`/api/v1/users/books/returned?limit=${limit}&offset=${offset}`,
+  return axios.get(`/api/v1/users/books/returned?limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -423,7 +423,7 @@ const viewAllReturnedAction = (limit, offset) => (dispatch) => {
 };
 
 const confirmReturnAction = borrowId => (dispatch) => {
-  axios.put(`/api/v1/borrows/${borrowId}/confirm`, {},
+  return axios.put(`/api/v1/borrows/${borrowId}/confirm`, {},
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -447,7 +447,7 @@ const confirmReturnAction = borrowId => (dispatch) => {
     });
 };
 const confirmBorrowAction = borrowId => (dispatch) => {
-  axios.patch(`/api/v1/borrows/${borrowId}/confirm`, {},
+  return axios.patch(`/api/v1/borrows/${borrowId}/confirm`, {},
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })

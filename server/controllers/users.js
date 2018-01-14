@@ -192,8 +192,8 @@ const usersController = {
             });
           })
           .catch((error) => {
-            return res.status(500).send({
-              message: 'Gmail login unsuccessful',
+            return res.status(400).send({
+              message: 'Invalid Credentials',
               error
             });
           });

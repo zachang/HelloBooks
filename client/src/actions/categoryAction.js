@@ -3,7 +3,7 @@ import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 
 const addCategoryAction = categoryContents => (dispatch) => {
-  axios.post('/api/v1/categories', categoryContents,
+  return axios.post('/api/v1/categories', categoryContents,
     { headers: { 'x-access-token': window.sessionStorage.token } })
     .then((res) => {
       return dispatch({ type: actionTypes.ADDCATEGORY_SUCCESSFUL,
@@ -29,7 +29,7 @@ const addCategoryAction = categoryContents => (dispatch) => {
 };
 
 const getCategoryAction = () => (dispatch) => {
-  axios.get('/api/v1/categories',
+  return axios.get('/api/v1/categories',
     { headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {

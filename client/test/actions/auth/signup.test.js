@@ -32,9 +32,9 @@ describe('THUNK FUNCTIONS', () => {
   });
 
 
-  /** ********************************** */
-  /** *** AUTHENTICATION ACTIONS ******* */
-  /** ****************************** */
+  /** ***************************************** */
+  /** *** SIGNUP AUTHENTICATION ACTIONS ******* */
+  /** **************************************** */
   it('should SIGN_UP_SUCCESFULLY when a user signs up', async (done) => {
     const signupResponse = mockData.signupAction;
     moxios.stubRequest(apiEndPoints.signupAction, {
@@ -56,18 +56,18 @@ describe('THUNK FUNCTIONS', () => {
 
   it('should SIGNUP_VALIDATION_ERROR when a user signs up', async (done) => {
     const signupResponse = mockData.signupActionValidationError;
-    const signupValidationErrorResponse = mockData.signupValidationErrorResponse;
+    const validationErrorResponse = mockData.validationErrorResponse;
     moxios.stubRequest(apiEndPoints.signupAction, {
       status: 400,
       response: {
         message: 'Validation error',
-        errors: signupValidationErrorResponse.errors
+        errors: validationErrorResponse.errors
       }
     });
 
     const expectedAction = {
       type: actionTypes.SIGNUP_VALIDATION_ERROR,
-      payload: signupValidationErrorResponse.errors
+      payload: validationErrorResponse.errors
     };
 
     // Dispatch
@@ -89,14 +89,14 @@ describe('THUNK FUNCTIONS', () => {
 
     const expectedAction = {
       type: actionTypes.SIGNUP_UNSUCCESSFUL,
-      payload: signupErrorResponse
+      payload: signupErrorResponse.message
     };
 
     // Dispatch
     await store.dispatch(signupAction(signupResponse)).then(() => {
       const actions = store.getActions();
       expect(actions[2].type).to.equal(expectedAction.type);
-      expect(actions[2].payload).to.equal(expectedAction.payload.message);
+      expect(actions[2].payload).to.equal(expectedAction.payload);
     });
     done();
   });

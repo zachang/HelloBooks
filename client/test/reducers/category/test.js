@@ -1,4 +1,4 @@
-import * as mockData from '../../mockData';
+import * as mockData from '../../mockDataReducer';
 import actionTypes from '../../../src/actions/actionTypes';
 import categoryReducer from '../../../src/reducers/category/categoryReducer';
 

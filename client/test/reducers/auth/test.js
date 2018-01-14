@@ -1,4 +1,4 @@
-import * as mockData from '../../mockData';
+import * as mockData from '../../mockDataReducer';
 import actionTypes from '../../../src/actions/actionTypes';
 import signupReducer from '../../../src/reducers/auth/signupReducer';
 import signinReducer from '../../../src/reducers/auth/signinReducer';

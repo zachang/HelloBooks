@@ -4,7 +4,7 @@ export default {
   setItem(key, value) {
     return {
       ...sessionStorage,
-      key: value
+      [key]: value
     };
   },
   getItem(key) {

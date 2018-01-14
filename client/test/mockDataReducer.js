@@ -384,4 +384,4 @@ export {
   returnByUserInitialState,
   confirmBorrowInitialState,
   confirmReturnInitialState
-}
+};
