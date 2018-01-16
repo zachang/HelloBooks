@@ -25,14 +25,6 @@ export class App extends React.Component {
   }
 
   /**
-   * @method componentDidUpdate
-   * @return {void} void
-   */
-  componentDidUpdate() {
-    $('.button-collapse').sideNav();
-  }
-
-  /**
    * Renders App component
    * @return {XML} JSX
    */

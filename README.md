@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/zachang/HelloBooks.svg?branch=devmain)](https://travis-ci.org/zachang/HelloBooks?branch=devmain)
 [![Maintainability](https://api.codeclimate.com/v1/badges/43a7311972462488133e/maintainability)](https://codeclimate.com/github/zachang/HelloBooks/maintainability)
 
-**HelloBooks** is an Andela app that leverages on modern technology and aims to ease the way libraries and its members interact. In terms of member registration, borrowing, returning etc.
+**HelloBooks** is a web app that leverages on modern technology and aims to ease, manage and automate the way libraries and its members interact. In terms of member registration, borrowing, returning etc.
 
 ## What Users can do on the app
 

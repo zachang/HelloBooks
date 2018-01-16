@@ -19,14 +19,6 @@ export default class AdminSidebar extends React.Component {
   }
 
   /**
-   * @method componentDidMount
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('.collapsible').collapsible();
-  }
-
-  /**
    * Handles user logout
    * @method logOut
    * @return {void} void

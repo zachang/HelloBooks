@@ -71,6 +71,8 @@ export class Admin extends React.Component {
    * @return {void} void
    */
   componentDidUpdate() {
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
     $('.tooltipped').tooltip({ delay: 50 });
     $('select').material_select();
     $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.bookCategoryChange.bind(this));

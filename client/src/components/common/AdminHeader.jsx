@@ -28,15 +28,6 @@ export default class AdminHeader extends React.Component {
   }
 
   /**
-   * @method componentDidMount
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('.collapsible').collapsible();
-    $('.dropdown-button').dropdown();
-  }
-
-  /**
    * Renders AdminHeader component
    * @return {XML} JSX
    */

@@ -29,7 +29,7 @@ export default class HomepageStatement extends React.Component {
           <Link to='/register' className='btn-large waves-effect waves-light orange'>
             Join us
           </Link>
-          <Link to='/login' className='btn-large waves-effect waves-light orange Login'>
+          <Link to='/login' className='btn-large waves-effect waves-light orange'>
             Login
           </Link>
         </div>

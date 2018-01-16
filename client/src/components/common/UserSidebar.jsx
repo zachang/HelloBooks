@@ -27,14 +27,6 @@ export default class UserSidebar extends React.Component {
   }
 
   /**
-   * @method componentDidMount
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('.collapsible').collapsible();
-  }
-
-  /**
    * Renders UserSidebar component
    * @return {XML} JSX
    */

@@ -9,3 +9,7 @@ server/uploads/books/
 client/src/build/imgs/
 production
 .DS_Store
+package-lock.json
+reports/CHROME_63.0.3239.132_Mac OS X_test.xml
+reports/config.xml
+reports/test.xml

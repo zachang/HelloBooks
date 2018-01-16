@@ -17,14 +17,6 @@ export default class UserHeader extends React.Component {
     this.logOut = this.logOut.bind(this);
   }
 
-  /**
-   * @method componentDidMount
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('.collapsible').collapsible();
-    $('.dropdown-button').dropdown();
-  }
 
   /**
    * Handles user logout
@@ -71,7 +63,7 @@ export default class UserHeader extends React.Component {
                 <li className='divider'></li>
                 <li><Link to={`users/change`}>Change Password</Link></li>
                 <li className='divider'></li>
-                <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
+                <li><Link to='#' onClick={this.logOut} id='logout'>Logout</Link></li>
               </ul>
 
               <ul id='nav-mobile' className='side-nav grey darken-4 hide-on-med-and-up'>

@@ -95,6 +95,8 @@ export class User extends React.Component {
    */
   componentDidUpdate() {
     $('select').material_select();
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
     $('.tooltipped').tooltip({ delay: 50 });
     $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.bookCategoryChange.bind(this));
   }

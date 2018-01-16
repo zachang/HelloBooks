@@ -7,3 +7,5 @@ client/test/e2e
 tools/
 webpack.config.js
 webpack.config.prod.js
+selenium-debug.log
+report/
