@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for actions/actionTypes.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">actions</a> actionTypes.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/0</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import keymirror from 'keymirror';
+&nbsp;
+export default keymirror({
+  SIGNUP_SUCCESSFUL: null,
+  SIGNUP_UNSUCCESSFUL: null,
+  SIGNUP_VALIDATION_ERROR: null,
+  SIGNIN_SUCCESSFUL: null,
+  SIGNIN_UNSUCCESSFUL: null,
+  SOCIAL_SIGNIN_SUCCESSFUL: null,
+  SOCIAL_SIGNIN_UNSUCCESSFUL: null,
+  CLEAR_SOCIAL_STATE: null,
+  ADDBOOK_SUCCESSFUL: null,
+  ADDBOOK_UNSUCCESSFUL: null,
+  ADDBOOK_VALIDATION_ERROR: null,
+  UPDATEBOOK_SUCCESSFUL: null,
+  UPDATEBOOK_UNSUCCESSFUL: null,
+  UPDATEBOOK_VALIDATION_ERROR: null,
+  DELETE_BOOK_SUCCESSFUL: null,
+  DELETE_BOOK_UNSUCCESSFUL: null,
+  ADDCATEGORY_SUCCESSFUL: null,
+  ADDCATEGORY_UNSUCCESSFUL: null,
+  ADDCATEGORY_VALIDATION_ERROR: null,
+  GETCATEGORY_SUCCESSFUL: null,
+  GETCATEGORY_UNSUCCESSFUL: null,
+  GETBOOKS_SUCCESSFUL: null,
+  GETBOOKS_UNSUCCESSFUL: null,
+  GETONEBOOK_SUCCESSFUL: null,
+  GETONEBOOK_UNSUCCESSFUL: null,
+  BORROW_BOOK_SUCCESSFUL: null,
+  BORROW_BOOK_UNSUCCESSFUL: null,
+  RETURNED_BOOK_SUCCESSFUL: null,
+  RETURNED_BOOK_UNSUCCESSFUL: null,
+  GETUSERS_SUCCESSFUL: null,
+  GETUSERS_UNSUCCESSFUL: null,
+  GETONEUSER_SUCCESSFUL: null,
+  GETONEUSER_UNSUCCESSFUL: null,
+  UPDATEUSER_SUCCESSFUL: null,
+  UPDATEUSER_UNSUCCESSFUL: null,
+  UPDATEUSER_VALIDATION_ERROR: null,
+  CHANGE_PASSWORD_SUCCESSFUL: null,
+  CHANGE_PASSWORD_UNSUCCESSFUL: null,
+  CHANGE_PASSWORD_VALIDATION_ERROR: null,
+  GET_USER_BORROW_SUCCESSFUL: null,
+  GET_USER_BORROW_UNSUCCESSFUL: null,
+  GET_USER_RETURNED_SUCCESSFUL: null,
+  GET_USER_RETURNED_UNSUCCESSFUL: null,
+  GET_ALL_BORROW_SUCCESSFUL: null,
+  GET_ALL_BORROW_UNSUCCESSFUL: null,
+  GET_ALL_RETURNED_SUCCESSFUL: null,
+  GET_ALL_RETURNED_UNSUCCESSFUL: null,
+  INVALID_TOKEN: null,
+  UNAUTHORIZED_TOKEN: null,
+  CONFIRM_RETURNED_SUCCESSFUL: null,
+  CONFIRM_RETURNED_UNSUCCESSFUL: null,
+  CONFIRM_BORROW_SUCCESSFUL: null,
+  CONFIRM_BORROW_UNSUCCESSFUL: null
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 19 2018 11:36:30 GMT+0100 (WAT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

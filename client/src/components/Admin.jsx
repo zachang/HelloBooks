@@ -32,6 +32,7 @@ export class Admin extends React.Component {
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
     this.editBook = this.editBook.bind(this);
+    this.readBook = this.readBook.bind(this);
   }
 
   /**
@@ -119,11 +120,20 @@ export class Admin extends React.Component {
   }
 
   /**
-   * Handles edit book
+   * Handles edit book tooltip removal when clicked
    * @method editBook
    * @return {void}
    */
   editBook() {
+    $('.tooltipped').tooltip('remove');
+  }
+
+  /**
+   * Handles read book tooltip removal when clicked
+   * @method readBook
+   * @return {void}
+   */
+  readBook() {
     $('.tooltipped').tooltip('remove');
   }
 
@@ -164,6 +174,7 @@ export class Admin extends React.Component {
                   book={book}
                   deleteBook={this.deleteBook}
                   editBook={this.editBook}
+                  readBook={this.readBook}
                 />
               )}
             </div>

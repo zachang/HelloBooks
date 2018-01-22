@@ -1,55 +1,55 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
-import { Router, browserHistory } from 'react-router';
-import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
-import storeConfiguration from '../../src/store/store';
-import connectedApp, { App } from '../../src/components/App.jsx';
 
-describe('<App/>', () => {
-  const middleware = [thunk];
-  const getOneUserAction = sinon.spy();
-  sinon.spy(App.prototype, 'componentWillMount');
+import BookCard from '../../../src/components/book/BookCard.jsx';
+
+describe('<BookCard/>', () => {
+  let wrapper;
 
   const props = {
-    userState: {
-      user: {
-        userImage: 'ada.jpg',
-        username: 'Onoja Monday'
+    book: {
+      bookImage: 'ggv.jpg',
+      id: 1,
+      bookName: 'Harry Potter',
+      publishYear: new Date(),
+      bookCount: 5,
+      description: 'nice read',
+      pages: 700,
+      Category: {
+        categoryName: 'Arts'
       }
     },
-    chiildren: {},
-    getOneUserAction
+    editBook: jest.fn(),
+    deleteBook: jest.fn(),
+    readBook: jest.fn()
   };
 
-  const mockStore = configureMockStore(middleware);
-  let mountedComponent;
-  let store;
-  let wrapper;
-  let shallowComponent;
+  const wrapperMount = mount(<BookCard {...props} />);
+  const shallowWrapper = shallow(<BookCard {...props}/>);
+  const tree = toJson(shallowWrapper);
 
-  beforeEach(() => {
-    store = mockStore(storeConfiguration);
-    mountedComponent = mount(<App {...props}/>);
-    shallowComponent = shallow(
-      <Router history={browserHistory}>
-        <App {...props}/>
-      </Router>
-    );
-    wrapper = mount(<Provider store={storeConfiguration}><App /></Provider>);
+
+  it('renders <BookCard/> component', () => {
+    expect(tree).toMatchSnapshot();
   });
 
-  // it('renders <App/> component', () => {
-  //   const tree = toJson(shallowComponent);
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('calls onClick', () => {
+    wrapper = shallow(<BookCard {...props} />);
+    wrapper.find('.readBook').simulate('click');
+    expect(wrapperMount.find('.readBook').at(0).text()).toBe('remove_red_eye');
+  });
 
-  it('Should check that number of form fields is equal to 6', () => {
-    console.log(mountedComponent.find('.row'));
-    // expect(wrapper.find('FormField').length).toBe(6);
+  it('calls onClick', () => {
+    wrapper = shallow(<BookCard {...props} />);
+    wrapper.find('.editBook').simulate('click');
+    expect(wrapperMount.find('.editBook').at(0).text()).toBe('edit');
+  });
+
+  it('calls onClick', () => {
+    wrapper = shallow(<BookCard {...props} />);
+    wrapper.find('.deleteBook').simulate('click');
+    expect(wrapperMount.find('.deleteBook').at(0).text()).toBe('delete');
   });
 });
 

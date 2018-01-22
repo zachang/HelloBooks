@@ -12,19 +12,44 @@
     "start:build": "webpack",
     "build:dev": "webpack-dev-server",
     "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
-    "start": "node tools/buildTools/publicServer.js",
+    "start": "node ./tools/buildTools/publicServer.js",
     "test": "cross-env-shell NODE_ENV=test sequelize db:migrate:undo:all && sequelize db:migrate && nyc --reporter=html --reporter=text mocha server/tests/*.spec.js --reporter spec --compilers js:babel-register",
     "testdev": "cross-env-shell NODE_ENV=test mocha server/tests/auth.spec.js --compilers js:babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean-production": "npm install && npm run remove-production && mkdir production",
     "remove-production": "rimraf ./production",
-    "build:html": "node tools/buildTools/buildHtml.js",
+    "build:html": "node ./tools/buildTools/buildHtml.js",
     "heroku-prebuild": "npm install",
     "heroku-postbuild": "NODE_ENV=production webpack -p --config ./webpack.config.prod.js --progress",
-    "jest": "jest ./client/test/* --coverage"
+    "jest": "jest ./client/__tests__/* --coverage"
   },
   "engines": {
     "node": "8.9.4"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./client/__tests__/setup.js",
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "testPathIgnorePatterns": [
+      "./client/styles/*",
+      "node_modules",
+      "client/__tests__/__mock__",
+      "client/__tests__/mockDataActions.js",
+      "client/__tests__/setup.js",
+      "client/__tests__/mockDataStorage.js",
+      "client/__tests__/mockDataReducer.js",
+      "client/__tests__/apiEndPoints.js"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(css|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy",
+      "\\.worker.js": "identity-obj-proxy"
+    },
+    "unmockedModulePathPatterns": [
+      "node_modules/react/",
+      "node_modules/enzyme/"
+    ]
   },
   "repository": {
     "type": "git",
@@ -58,13 +83,17 @@
     "cors": "^2.8.4",
     "css-loader": "^0.28.5",
     "dotenv": "^4.0.0",
+    "dotenv-webpack": "^1.5.4",
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-to-json": "^3.3.0",
     "express": "^4.15.3",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^22.0.3",
+    "jest-localstorage-mock": "^2.2.0",
     "jquery": "^3.2.1",
     "jquery-slimscroll": "^1.3.8",
     "js-logger": "^1.3.0",
@@ -72,6 +101,7 @@
     "jwt-decode": "^2.2.0",
     "keymirror": "^0.1.1",
     "lodash": "^4.17.4",
+    "mockery": "^2.1.0",
     "morgan": "^1.8.2",
     "moxios": "^0.4.0",
     "multer": "^1.3.0",
@@ -80,9 +110,9 @@
     "open": "0.0.5",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
-    "react": "^15.6.1",
+    "react": "^15.6.2",
     "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^15.6.1",
+    "react-dom": "^15.6.2",
     "react-google-login": "^3.0.4",
     "react-materialize": "^1.0.18",
     "react-moment": "^0.6.4",
@@ -106,6 +136,7 @@
     "sequelize-cli": "^2.8.0",
     "serve-favicon": "^2.4.3",
     "sha1": "^1.1.1",
+    "sinon": "^4.1.6",
     "style-loader": "^0.18.2",
     "superagent": "^3.6.3",
     "swagger": "^0.7.5",

@@ -27,17 +27,19 @@ export default (
     <Route component={auth.Authenticate}>
       <Route path='/unauthorized' component={Unauthorized}/>
       <Route path='/pageNotFound' component={PageNotFound}/>
-      <Route path='/read/:id' component={ReadBook}/>
     </Route>
-    <Route component={App}>
-      <Route component={auth.Authenticate}>
+    <Route component={auth.Authenticate}>
+      <Route component={App}>
         <Route path='/user' component={User}/>
         <Route path='/profile' component={Profile}/>
         <Route path='/users/change' component={ChangePassword}/>
         <Route path='/returned' component={Returned}/>
         <Route path='/borrowed' component={Borrowed}/>
+        <Route path='/read/:id' component={ReadBook}/>
       </Route>
-      <Route component={auth.AdminAuth}>
+    </Route>
+    <Route component={auth.AdminAuth}>
+      <Route component={App}>
         <Route path='/admin' component={Admin}/>
         <Route path='/users' component={UserList}/>
         <Route path='/borrow' component={BorrowList}/>

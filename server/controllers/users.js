@@ -148,7 +148,7 @@ const usersController = {
           fullname: googleData.fullname,
           username,
           email: googleData.email,
-          phoneNo: 'Update',
+          phoneNo: '00000000000',
           isSocial: true,
           regType: 'gmail',
           password: gmailPass

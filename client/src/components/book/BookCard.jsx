@@ -25,7 +25,11 @@ const BookCard = props => (
         </span>
       </div>
       <div className='card-reveal'
-        style={{ wordWrap: 'break-word', backgroundColor: 'rgba(0,0,0,1)', color: '#FFF' }}
+        style={{
+          wordWrap: 'break-word',
+          backgroundColor: 'rgba(0,0,0,1)',
+          color: '#FFF'
+        }}
       >
         <span
           className='card-title grey-text text-darken-4'
@@ -45,7 +49,6 @@ const BookCard = props => (
       <div className='card-action home-card'>
 
         <Link
-          target='blank'
           to={`read/${props.book.id}`}
           className='white tooltipped hidetooltip'
           data-position='bottom'
@@ -53,7 +56,8 @@ const BookCard = props => (
           data-tooltip='Read book'
         >
           <i
-            className='small material-icons'
+            className='small material-icons readBook'
+            onClick={() => (props.readBook())}
             style={{ color: 'teal', cursor: 'pointer' }}
           >
             remove_red_eye
@@ -68,7 +72,7 @@ const BookCard = props => (
           data-tooltip='Edit book'
         >
           <i
-            className='small material-icons'
+            className='small material-icons editBook'
             style={{ color: 'teal' }}
             onClick={() => (props.editBook())}
           >
@@ -83,7 +87,7 @@ const BookCard = props => (
           data-tooltip='Delete book'
         >
           <i
-            className='small material-icons'
+            className='small material-icons deleteBook'
             onClick={() => (props.deleteBook(props.book.id))}
             style={{ color: 'red', cursor: 'pointer' }}
           >
@@ -99,7 +103,8 @@ const BookCard = props => (
 BookCard.propTypes = {
   book: PropTypes.object.isRequired,
   editBook: PropTypes.func,
-  deleteBook: PropTypes.func
+  deleteBook: PropTypes.func,
+  readBook: PropTypes.func
 
 };
 export default BookCard;

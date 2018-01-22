@@ -32,6 +32,7 @@ export class User extends React.Component {
     };
     this.borrowBook = this.borrowBook.bind(this);
     this.bookCategoryChange = this.bookCategoryChange.bind(this);
+    this.readBook = this.readBook.bind(this);
   }
 
   /**
@@ -125,6 +126,15 @@ export class User extends React.Component {
   }
 
   /**
+   * Handles read book tooltip removal when clicked
+   * @method readBook
+   * @return {void}
+   */
+  readBook() {
+    $('.tooltipped').tooltip('remove');
+  }
+
+  /**
    * Renders User component
    * @return {XML} JSX
    */
@@ -157,7 +167,8 @@ export class User extends React.Component {
               <BookCardUser
                 key={i}
                 book={book}
-                borrowBook = {this.borrowBook}
+                borrowBook={this.borrowBook}
+                readBook={this.readBook}
               />)}
           </div>
 

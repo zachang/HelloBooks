@@ -8,6 +8,7 @@ describe('<UserReturn/>', () => {
   const props = {
     returning: {
       Book: {
+        bookImage: '../../imgs/default.jpg' || null,
         bookName: 'Science',
         bookCount: 4,
         pages: 600,
@@ -17,9 +18,6 @@ describe('<UserReturn/>', () => {
         Category: {
           categoryName: 'Arts'
         }
-      },
-      User: {
-        fullname: 'Tito Navo'
       }
     }
   };

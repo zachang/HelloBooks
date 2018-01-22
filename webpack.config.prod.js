@@ -31,6 +31,9 @@ const common = {
         NODE_ENV: JSON.stringify('production'),
         API_HOST: JSON.stringify('https://zachang-hellobooks.herokuapp.com')
       }
+    }),
+    new webpack.EnvironmentPlugin({
+      CLIENT_ID: JSON.stringify(process.env.CLIENT_ID)
     })
   ],
   devtool: 'source-map',

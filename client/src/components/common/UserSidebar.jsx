@@ -23,7 +23,6 @@ export default class UserSidebar extends React.Component {
    */
   logOut() {
     window.sessionStorage.removeItem('token');
-    browserHistory.push('/');
   }
 
   /**
@@ -72,7 +71,11 @@ export default class UserSidebar extends React.Component {
                 </ul>
               </li>
               <li><Link to={`users/change`}>Change Password</Link></li>
-              <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
+              <li>
+                <Link to='#' className='logOut' onClick={this.logOut}>
+                  Logout
+                </Link>
+              </li>
             </ul>
           </div>
 

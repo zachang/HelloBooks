@@ -151,8 +151,7 @@ AddCategory.propTypes = {
   addCategoryAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  categoryState: state.categoryReducer,
-  tokenState: state.tokenReducer
+  categoryState: state.categoryReducer
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ addCategoryAction }, dispatch);
