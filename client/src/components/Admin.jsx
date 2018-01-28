@@ -73,6 +73,7 @@ export class Admin extends React.Component {
    */
   componentDidUpdate() {
     $('.collapsible').collapsible();
+    $('.button-collapse').sideNav();
     $('.dropdown-button').dropdown();
     $('.tooltipped').tooltip({ delay: 50 });
     $('select').material_select();

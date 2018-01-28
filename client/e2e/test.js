@@ -1,5 +1,5 @@
-import config from './config';
 import path from 'path';
+import config from './config';
 
 module.exports = {
   'Demo test User': function (browser) {
@@ -208,6 +208,6 @@ module.exports = {
       .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[5]/a', 1000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[5]/a')
       .pause(1000)
-      .end()
+      .end();
   }
 };

@@ -4,7 +4,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
 import swal from 'sweetalert2';
-import { viewAllBorrowAction, confirmBorrowAction } from '../actions/bookAction';
+import {
+  viewAllBorrowAction,
+  confirmBorrowAction
+} from '../actions/bookAction';
 import UserBorrowList from './borrow/UserBorrowList.jsx';
 
 /**
@@ -42,7 +45,10 @@ export class BorrowList extends React.Component {
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ clickedBorrowList: nextProps.bookState.clickedBorrowList });
+    this.setState({
+      clickedBorrowList:
+      nextProps.bookState.clickedBorrowList
+    });
     if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
     }
@@ -90,7 +96,10 @@ export class BorrowList extends React.Component {
         <div className='section'>
           <h4 style={{ marginTop: '7%' }}>Borrowed Books</h4>
         </div>
-        <div className='divider' style={{ width: '100%', marginTop: '-2.5%', marginBottom: '3.5%' }}></div>
+        <div className='divider' style={{
+          width: '100%', marginTop: '-2.5%', marginBottom: '3.5%'
+        }}>
+        </div>
 
         <div className='row'>
           <table className='bordered highlight'>

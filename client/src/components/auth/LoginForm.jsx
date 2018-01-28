@@ -91,6 +91,9 @@ export class LoginForm extends React.Component {
       }
     });
     this.props.googleSigninAction(this.state.googleCredentials);
+    if (!window.sessionStorage.token) {
+      return;
+    }
     redirectIfLoggedIn(window.sessionStorage.token);
   }
 

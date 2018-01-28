@@ -58,11 +58,11 @@ export class AddCategory extends React.Component {
    * Handles category file input
    * @method handleChange
    * @return {void} void
-   * @param {object} e
+   * @param {object} event
    */
-  handleChange(e) {
+  handleChange(event) {
     const categoryData = this.state.categoryData;
-    categoryData[e.target.name] = e.target.value;
+    categoryData[event.target.name] = event.target.value;
     this.setState({ categoryData });
   }
 
@@ -70,10 +70,10 @@ export class AddCategory extends React.Component {
    * Handles category submit
    * @method handleSubmit
    * @return {void} void
-   * @param {object} e
+   * @param {object} event
    */
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     this.setState({
       categoryData: {
         categoryName: '',

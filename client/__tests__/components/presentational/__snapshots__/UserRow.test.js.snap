@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserRow/> renders <UserRow/> component 1`] = `
+<tr>
+  <td>
+    Nana Stack
+  </td>
+  <td>
+    Nandy09
+  </td>
+  <td>
+    09077777777
+  </td>
+  <td>
+    Nandy09@gmail.com
+  </td>
+</tr>
+`;

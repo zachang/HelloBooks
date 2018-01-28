@@ -223,7 +223,8 @@ const bookReducer = (state = initialState, action) => {
         success: true,
         errors: null,
         confirmReturn: action.payload.message,
-        clickedReturnedBorrowList: [...state.clickedReturnedBorrowList, action.payload.borrowId]
+        clickedReturnedBorrowList: [...state.clickedReturnedBorrowList,
+          action.payload.borrowId]
       };
       break;
     case actionTypes.CONFIRM_RETURNED_UNSUCCESSFUL:
@@ -239,7 +240,8 @@ const bookReducer = (state = initialState, action) => {
         success: true,
         errors: null,
         confirmBorrow: action.payload.message,
-        clickedBorrowList: [...state.clickedBorrowList, action.payload.borrowId]
+        clickedBorrowList: [...state.clickedBorrowList,
+          action.payload.borrowId]
       };
       break;
     case actionTypes.CONFIRM_BORROW_UNSUCCESSFUL:

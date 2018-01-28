@@ -37,7 +37,7 @@
     "curly": [1, "multi-line"],
     "prefer-const": "error",
     "global-require": 1,
-    "max-len": 1,
+    "max-len": [2, 80, 4, {"ignoreUrls": true}],
     "import/no-unresolved": [2, { "commonjs": true }],
     "import/no-named-as-default": 0,
     "no-shadow": [2, { "allow": ["req", "res", "err"] }],
@@ -57,6 +57,7 @@
       }
     }],
     "quotes": 0,
+    "no-multi-str": 0,
     "class-methods-use-this": "off",
     "no-console": 1,
     "no-debugger": 1,

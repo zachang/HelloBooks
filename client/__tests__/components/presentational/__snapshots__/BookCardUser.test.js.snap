@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BookCardUser/> renders <BookCardUser/> component 1`] = `
+<div
+  className="col l4 s10 m6 cardsm"
+>
+  <div
+    className="card large sticky-action"
+  >
+    <div
+      className="card-image waves-effect waves-block waves-light"
+    >
+      <img
+        className="activator"
+        src="ggv.jpg"
+      />
+    </div>
+    <div
+      className="card-content"
+    >
+      <span
+        className="card-title activator grey-text text-darken-4"
+      >
+        <small>
+          Harry Potter
+        </small>
+        <i
+          className="material-icons right"
+        >
+          more_vert
+        </i>
+      </span>
+    </div>
+    <div
+      className="card-reveal"
+      style={
+        Object {
+          "backgroundColor": "rgba(0,0,0,1)",
+          "color": "#FFF",
+          "wordWrap": "break-word",
+        }
+      }
+    >
+      <span
+        className="card-title grey-text text-darken-4"
+      >
+        <small>
+          Harry Potter
+        </small>
+        <i
+          className="material-icons right"
+        >
+          close
+        </i>
+      </span>
+      <p>
+        Author: 
+      </p>
+      <p>
+        Category: 
+        Arts
+      </p>
+      <p>
+        Published: 
+        2018
+      </p>
+      <p>
+        Pages: 
+        700
+      </p>
+      <p>
+        Stock: 
+        5
+      </p>
+      <p>
+        Description: 
+        nice read
+      </p>
+    </div>
+    <div
+      className="card-action home-card"
+    >
+      <Link
+        className="white tooltipped"
+        data-delay="50"
+        data-position="bottom"
+        data-tooltip="Read book"
+        onlyActiveOnIndex={false}
+        style={Object {}}
+        to="read/1"
+      >
+        <i
+          className="small material-icons readBook"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "teal",
+              "cursor": "pointer",
+            }
+          }
+        >
+          remove_red_eye
+        </i>
+      </Link>
+      <Link
+        className="white tooltipped"
+        data-delay="50"
+        data-position="bottom"
+        data-tooltip="Borrow book"
+        onlyActiveOnIndex={false}
+        style={Object {}}
+      >
+        <i
+          className="small material-icons borrowBook"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "teal",
+              "cursor": "pointer",
+            }
+          }
+        >
+          dlibrary_books
+        </i>
+      </Link>
+    </div>
+  </div>
+</div>
+`;

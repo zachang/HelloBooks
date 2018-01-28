@@ -43,7 +43,10 @@ export class ReturnedList extends React.Component {
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ clickedReturnedBorrowList: nextProps.bookState.clickedReturnedBorrowList });
+    this.setState({
+      clickedReturnedBorrowList:
+      nextProps.bookState.clickedReturnedBorrowList
+    });
     if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
     }
@@ -90,7 +93,12 @@ export class ReturnedList extends React.Component {
         <div className='section'>
           <h4 style={{ marginTop: '7%' }}>Returned Books</h4>
         </div>
-        <div className='divider' style={{ width: '100%', marginTop: '-2.5%', marginBottom: '3.5%' }}></div>
+        <div className='divider' style={{
+          width: '100%',
+          marginTop: '-2.5%',
+          marginBottom: '3.5%' }}
+        >
+        </div>
 
         <div className='row'>
           <table className='bordered highlight'>
@@ -111,7 +119,9 @@ export class ReturnedList extends React.Component {
                 <UserReturnedList
                   key={i}
                   returner={returner}
-                  clickedReturnedBorrowList={this.state.clickedReturnedBorrowList}
+                  clickedReturnedBorrowList={
+                    this.state.clickedReturnedBorrowList
+                  }
                   confirmReturn={this.confirmReturn}
                 />
               )}
@@ -126,7 +136,8 @@ export class ReturnedList extends React.Component {
                 items={this.state.pageCount}
                 onSelect={(page) => {
                   const offset = (page - 1) * this.state.limit;
-                  this.props.viewAllReturnedAction(this.state.limit, offset);
+                  this.props.viewAllReturnedAction(this.state.limit,
+                    offset);
                 }} /> : '')
           }
         </div>

@@ -14,6 +14,17 @@ import { getOneBookAction } from '../actions/bookAction';
  */
 class ReadBook extends Component {
   /**
+   * class constructor
+   * @param {object} props
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      book: null
+    };
+  }
+
+  /**
    * @return {void}
    */
   componentWillMount() {
@@ -21,11 +32,24 @@ class ReadBook extends Component {
   }
 
   /**
+   * @method componentWillReceiveProps
+   * @param {object} nextProps - nextProps
+   * @return {object} nextProps
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.book.success === true) {
+      this.setState({
+        book: nextProps.book.book
+      });
+    }
+  }
+
+  /**
    * Renders ReadBook component
    * @return {XML} JSX
    */
   render() {
-    const { book } = this.props;
+    const { book } = this.state;
 
     return (
       <div>
@@ -45,7 +69,7 @@ ReadBook.propTypes = {
   getOneBookAction: PropTypes.func
 };
 const mapStateToProps = state => ({
-  book: state.bookReducer.book
+  book: state.bookReducer
 });
 
 const mapDispatchToProps = dispatch =>

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Unauthorized/> renders <Unauthorized/> component 1`] = `
+<div>
+  <div
+    className="unauthorized"
+  />
+</div>
+`;

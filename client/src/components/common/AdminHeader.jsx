@@ -18,7 +18,7 @@ export default class AdminHeader extends React.Component {
   }
 
   /**
-   * @method componentDidUpdate
+   * @method componentDidMount
    * @return {void} void
    */
   componentDidMount() {

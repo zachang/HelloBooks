@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegForm/> renders <RegForm /> component 1`] = `
+<form
+  className="col s12"
+  onSubmit={[Function]}
+>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <input
+        className=""
+        id="fullname"
+        name="fullname"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <label
+        className="custom-validate"
+        data-error=""
+        htmlFor="fullname"
+      >
+        Full Name
+      </label>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <input
+        className=""
+        id="username"
+        name="username"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <label
+        className="custom-validate"
+        data-error=""
+        htmlFor="username"
+      >
+        Username
+      </label>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <input
+        className=""
+        id="email"
+        name="email"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <label
+        className="custom-validate"
+        data-error=""
+        htmlFor="email"
+      >
+        Email
+      </label>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <input
+        className=""
+        id="phone"
+        name="phoneNo"
+        onChange={[Function]}
+        type="number"
+        value=""
+      />
+      <label
+        className="custom-validate"
+        data-error=""
+        htmlFor="phoneNo"
+      >
+        Phone Number
+      </label>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <input
+        className=""
+        id="pass"
+        name="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <label
+        className="custom-validate"
+        data-error=""
+        htmlFor="password"
+      >
+        Password
+      </label>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <input
+        className=""
+        data-error="field required"
+        id="password_confirmation"
+        name="password_confirmation"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <label
+        className="custom-validate"
+        data-error=""
+        htmlFor="password_confirmation"
+      >
+        Confirmation Password
+      </label>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col s12"
+    >
+      <p
+        className="right-align"
+      >
+        <a
+          href="#"
+        >
+          <button
+            className="col s12 btn btn-large waves-effect waves-light orange"
+            name="action"
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </a>
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "color": "red",
+          "float": "right",
+        }
+      }
+    />
+  </div>
+</form>
+`;

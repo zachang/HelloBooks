@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserList/> renders <UserList /> component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="section"
+  >
+    <h4
+      style={
+        Object {
+          "marginTop": "7%",
+        }
+      }
+    >
+      Borrowed Books
+    </h4>
+  </div>
+  <div
+    className="divider"
+    style={
+      Object {
+        "marginBottom": "3.5%",
+        "marginTop": "-2.5%",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="row"
+  >
+    <table
+      className="bordered highlight"
+    >
+      <thead
+        className="black white-text"
+      >
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Username
+          </th>
+          <th>
+            Phone
+          </th>
+          <th>
+            email
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <UserRow
+          key="0"
+          user="mmmmmmm"
+        />
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="row"
+  >
+    <Pagination
+      activePage={1}
+      items={1}
+      onSelect={[Function]}
+    />
+  </div>
+</div>
+`;

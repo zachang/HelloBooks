@@ -56,24 +56,26 @@ export class User extends React.Component {
 
     if (nextProps.bookState.borrows === 'Borrow completed') {
       if (this.state.showToast) {
-        Materialize.toast('Book borrowed, collect within 24hrs to prevent reversal!', 10000);
+        Materialize.toast(
+          'Book borrowed, collect within 24hrs to prevent reversal!', 10000
+        );
         this.setState({ showToast: false });
       }
     }
 
-    if (nextProps.bookState.fails === 'You have not returned the previous book you borrowed') {
+    if (nextProps.bookState.fails
+      === 'You have not returned the previous book you borrowed') {
       if (this.state.showToast) {
-        Materialize.toast('Please, return the previous book you borrowed', 5000);
+        Materialize.toast(
+          'Please, return the previous book you borrowed', 5000
+        );
         this.setState({ showToast: false });
       }
     } else if (nextProps.bookState.fails === 'All books have been borrowed') {
       if (this.state.showToast) {
-        Materialize.toast('All copies have been borrowed, try again later!', 5000);
-        this.setState({ showToast: false });
-      }
-    } else if (nextProps.bookState.fails === 'Process failed') {
-      if (this.state.showToast) {
-        Materialize.toast('Borrow failed, try again!', 5000);
+        Materialize.toast(
+          'All copies have been borrowed, try again later!', 5000
+        );
         this.setState({ showToast: false });
       }
     }
@@ -99,7 +101,8 @@ export class User extends React.Component {
     $('.collapsible').collapsible();
     $('.dropdown-button').dropdown();
     $('.tooltipped').tooltip({ delay: 50 });
-    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.bookCategoryChange.bind(this));
+    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change',
+      this.bookCategoryChange.bind(this));
   }
 
   /**
@@ -144,7 +147,10 @@ export class User extends React.Component {
         <div className='section'>
           <h4 style={{ marginTop: '7%' }}>All Books</h4>
         </div>
-        <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
+        <div className='divider' style={{
+          marginTop: '-2%', marginBottom: '3%'
+        }}>
+        </div>
 
         <div className='row'>
           <div className='input-field col s6 l4  m4'>
@@ -156,7 +162,9 @@ export class User extends React.Component {
             >
               <option value=''>Select Category</option>
               { this.state.categories.map((category, i) =>
-                <option key={i} value={category.id}>{category.categoryName}</option>)}
+                <option key={i} value={category.id}>
+                  {category.categoryName}
+                </option>)}
             </select>
           </div>
         </div>
@@ -179,7 +187,9 @@ export class User extends React.Component {
                   items={this.state.pageCount}
                   onSelect={(page) => {
                     const offset = (page - 1) * this.state.limit;
-                    this.props.getBookAction(this.state.limit, offset, this.state.categoryId);
+                    this.props.getBookAction(
+                      this.state.limit, offset, this.state.categoryId
+                    );
                   }
                   } /> : '')
             }

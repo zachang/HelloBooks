@@ -52,6 +52,7 @@ describe('<LoginForm/>', () => {
     googleSigninAction,
   };
 
+  const token = 'bbjsbjjsjhjnshugbjkgjg';
   const middleware = [thunk];
   const mockStore = configureMockStore(middleware);
   let store;
@@ -59,6 +60,7 @@ describe('<LoginForm/>', () => {
   beforeEach(() => {
     store = mockStore(storeConfiguration);
     shallowComponent = shallow(<LoginForm {...props} />);
+    sessionStorage.setItem('token', token);
   });
 
   it('renders <LoginForm /> component', () => {

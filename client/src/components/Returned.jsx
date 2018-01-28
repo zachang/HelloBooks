@@ -32,7 +32,7 @@ export class Returned extends React.Component {
    * @return {void} void
    */
   componentWillMount() {
-    const userDetails = decodeToken(window.sessionStorage.token);
+    const userDetails = decodeToken(window.sessionStorage.getItem('token'));
     this.props.viewUserReturnAction(userDetails.id, this.state.limit, 0);
   }
 
@@ -55,13 +55,16 @@ export class Returned extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const userId = decodeToken(window.sessionStorage.token);
+    const userId = decodeToken(window.sessionStorage.getItem('token'));
     return (
       <div className='row'>
         <div className='section'>
           <h4 style={{ marginTop: '7%' }}>Returned Books</h4>
         </div>
-        <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
+        <div className='divider'
+          style={{ marginTop: '-2%', marginBottom: '3%' }}
+        >
+        </div>
 
         <div className='row'>
           { (this.props.bookState.returnings) ?
@@ -79,7 +82,8 @@ export class Returned extends React.Component {
                 items={this.state.pageCount}
                 onSelect={(page) => {
                   const offset = (page - 1) * this.state.limit;
-                  this.props.viewUserReturnAction(userId.id, this.state.limit, offset);
+                  this.props.viewUserReturnAction(userId.id, this.state.limit,
+                    offset);
                 }} /> : '')
           }
         </div>

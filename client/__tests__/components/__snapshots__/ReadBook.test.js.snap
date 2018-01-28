@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReadBook/> renders <ReadBook/> component 1`] = `
+<Provider
+  book={
+    Object {
+      "book": null,
+      "success": true,
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(ReadBook)
+    book={
+      Object {
+        "book": null,
+        "success": true,
+      }
+    }
+    params={
+      Object {
+        "id": 1,
+      }
+    }
+  >
+    <ReadBook
+      getOneBookAction={[Function]}
+      params={
+        Object {
+          "id": 1,
+        }
+      }
+    >
+      <div />
+    </ReadBook>
+  </Connect(ReadBook)>
+</Provider>
+`;

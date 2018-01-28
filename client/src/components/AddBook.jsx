@@ -54,17 +54,6 @@ export class AddBook extends React.Component {
   }
 
   /**
-   * @method componentDidMount
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('select').material_select();
-    $('.datepicker').pickadate();
-    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.handleChange.bind(this));
-    $(ReactDOM.findDOMNode(this.refs.publishYear)).on('change', this.handleChange.bind(this));
-  }
-
-  /**
    * @method componentWillReceiveProps
    * @param {object} nextProps - nextProps
    * @return {object} nextProps
@@ -139,7 +128,6 @@ export class AddBook extends React.Component {
         imagePreviewUrl: reader.result
       });
     };
-
     reader.readAsDataURL(bookData.bookImage);
   }
 
@@ -316,7 +304,8 @@ export class AddBook extends React.Component {
                     />
                     <label
                       htmlFor='pages'
-                      className={((this.state.errors && !!this.state.errors.pages) ||
+                      className={((this.state.errors
+                        && !!this.state.errors.pages) ||
                           bookData.pages.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
                       data-error={(this.state.errors && !!this.state.errors.pages) ?
                         this.state.errors.pages : ''}
