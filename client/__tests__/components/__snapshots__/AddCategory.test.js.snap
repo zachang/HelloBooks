@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddCategory/> renders <AddCategory /> component 1`] = `
+<div>
+  <div
+    className="row"
+  >
+    <div
+      className="col s10 m8 l6 bookcat"
+      style={
+        Object {
+          "marginLeft": "35%",
+          "marginTop": "20%",
+        }
+      }
+    >
+      <div
+        className="row"
+      >
+        <form
+          className="col s10"
+          onSubmit={[Function]}
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s12"
+            >
+              <input
+                className=""
+                id="categoryName"
+                name="categoryName"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="category"
+              >
+                Category
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="col m12 s12"
+            >
+              <button
+                className="col s12 btn btn-large waves-effect waves-light"
+                name="action"
+                type="submit"
+              >
+                 Add Category
+              </button>
+              <div
+                style={
+                  Object {
+                    "color": "red",
+                    "float": "right",
+                  }
+                }
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

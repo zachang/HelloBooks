@@ -4,6 +4,7 @@ const initialState = {
   success: false,
   passes: null,
   errors: null,
+  fails: null,
   books: [],
   book: null,
   borrows: null,
@@ -187,7 +188,8 @@ const bookReducer = (state = initialState, action) => {
         ...state,
         success: true,
         errors: null,
-        returnings: action.payload
+        returnings: action.payload.returnings,
+        pageCount: action.payload.pageCount
       };
       break;
     case actionTypes.GET_USER_RETURNED_UNSUCCESSFUL:
@@ -221,7 +223,8 @@ const bookReducer = (state = initialState, action) => {
         success: true,
         errors: null,
         confirmReturn: action.payload.message,
-        clickedReturnedBorrowList: [...state.clickedReturnedBorrowList, action.payload.borrowId]
+        clickedReturnedBorrowList: [...state.clickedReturnedBorrowList,
+          action.payload.borrowId]
       };
       break;
     case actionTypes.CONFIRM_RETURNED_UNSUCCESSFUL:
@@ -237,7 +240,8 @@ const bookReducer = (state = initialState, action) => {
         success: true,
         errors: null,
         confirmBorrow: action.payload.message,
-        clickedBorrowList: [...state.clickedBorrowList, action.payload.borrowId]
+        clickedBorrowList: [...state.clickedBorrowList,
+          action.payload.borrowId]
       };
       break;
     case actionTypes.CONFIRM_BORROW_UNSUCCESSFUL:

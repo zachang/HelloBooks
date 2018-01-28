@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddBook/> renders <AddBook /> component 1`] = `
+<div>
+  <div
+    className="row"
+  >
+    <div
+      className="col s10 m8 l6 bookadd"
+      style={
+        Object {
+          "marginLeft": "35%",
+          "marginTop": "4%",
+        }
+      }
+    >
+      <div
+        className="row"
+      >
+        <form
+          className="col s10"
+          onSubmit={[Function]}
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <input
+                className=""
+                id="bookName"
+                name="bookName"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="bookName"
+              >
+                Book Name
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <input
+                className=""
+                id="author"
+                name="author"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="author"
+              >
+                Author
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <input
+                className="datepicker"
+                id="publishYear"
+                name="publishYear"
+                type="text"
+                value=""
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="publishYear"
+              >
+                Publish Year
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <input
+                className=""
+                id="isbn"
+                name="isbn"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="isbn"
+              >
+                ISBN
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <input
+                className=""
+                id="pages"
+                name="pages"
+                onChange={[Function]}
+                type="number"
+                value=""
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="pages"
+              >
+                Pages
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <textarea
+                className="materialize-textarea"
+                id="description"
+                name="description"
+                onChange={[Function]}
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="description"
+              >
+                Description
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <select
+                className=""
+                id="categoryId"
+                name="categoryId"
+                value=""
+              >
+                <option
+                  value=""
+                >
+                  Select
+                </option>
+              </select>
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="categoryId"
+              >
+                Choose Category
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="input-field col s10"
+            >
+              <input
+                className=""
+                id="bookCount"
+                name="bookCount"
+                onChange={[Function]}
+                type="number"
+                value=""
+              />
+              <label
+                className="custom-validate"
+                data-error=""
+                htmlFor="bookCount"
+              >
+                Add Count
+              </label>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="file-field input-field col s10"
+            >
+              <div
+                className="btn"
+              >
+                <span>
+                  Add Image
+                </span>
+                <input
+                  accept="image/*"
+                  id="bookImage"
+                  name="bookImage"
+                  onChange={[Function]}
+                  type="file"
+                />
+              </div>
+              <div
+                className="file-path-wrapper"
+              >
+                <input
+                  className="file-path"
+                  name="bookImage_text"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="file-field input-field col s10"
+            >
+              <div
+                className="btn"
+              >
+                <span>
+                  Add PDF
+                </span>
+                <input
+                  accept="application/pdf"
+                  id="bookContent"
+                  name="bookContent"
+                  onChange={[Function]}
+                  type="file"
+                  value=""
+                />
+              </div>
+              <div
+                className="file-path-wrapper"
+              >
+                <input
+                  className="file-path"
+                  name="book_file_text"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            className="col s10 btn btn-large waves-effect waves-light"
+            name="action"
+            type="submit"
+          >
+            Add Book
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row imagePreview"
+  />
+</div>
+`;

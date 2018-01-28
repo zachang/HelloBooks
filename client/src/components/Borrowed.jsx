@@ -23,7 +23,7 @@ export class Borrowed extends React.Component {
       errors: null,
       books: [],
       pageCount: null,
-      limit: 1,
+      limit: 15,
       showToast: false,
     };
     this.returnBook = this.returnBook.bind(this);
@@ -34,7 +34,7 @@ export class Borrowed extends React.Component {
    * @return {void} void
    */
   componentWillMount() {
-    const userDetails = decodeToken(window.sessionStorage.token);
+    const userDetails = decodeToken(window.sessionStorage.getItem('token'));
     this.props.viewUserBorrowAction(userDetails.id, this.state.limit, 0);
   }
 
@@ -50,9 +50,11 @@ export class Borrowed extends React.Component {
     if (this.state.pageCount !== nextProps.bookState.pageCount) {
       this.setState({ pageCount: nextProps.bookState.pageCount });
     }
-    if (nextProps.bookState.success === true && nextProps.bookState.returned === 'return completed') {
+    if (nextProps.bookState.success === true &&
+      nextProps.bookState.returned === 'return completed') {
       if (this.state.showToast) {
-        Materialize.toast('Book returned successfully, visit library for confirmation!', 4000);
+        Materialize.toast('Book returned successfully,' +
+          ' visit library for confirmation!', 4000);
         this.setState({ showToast: false });
       }
     }
@@ -89,7 +91,7 @@ export class Borrowed extends React.Component {
    * @param {integer} bookId - bookId
    */
   returnBook(bookId) {
-    const userDetails = decodeToken(window.sessionStorage.token);
+    const userDetails = decodeToken(window.sessionStorage.getItem('token'));
     this.props.returnBookAction(userDetails.id, bookId);
     this.setState({ showToast: true });
   }
@@ -99,22 +101,28 @@ export class Borrowed extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const userId = decodeToken(window.sessionStorage.token);
+    const userId = decodeToken(window.sessionStorage.getItem('token'));
     return (
       <div className='row'>
         <div className='section'>
           <h4 style={{ marginTop: '7%' }}>Borrowed Books</h4>
         </div>
-        <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
+        <div className='divider'
+          style={{
+            marginTop: '-2%',
+            marginBottom: '3%'
+          }}>
+        </div>
 
         <div className='row'>
-          { (this.props.bookState.allBorrows) ? this.props.bookState.allBorrows.map((borrow, i) =>
-            <UserBorrow
-              key={i}
-              borrow={borrow}
-              returnBook ={this.returnBook}
-            />
-          ) : null }
+          { (this.props.bookState.allBorrows) ?
+            this.props.bookState.allBorrows.map((borrow, i) =>
+              <UserBorrow
+                key={i}
+                borrow={borrow}
+                returnBook ={this.returnBook}
+              />
+            ) : null }
 
         </div>
 
@@ -125,9 +133,9 @@ export class Borrowed extends React.Component {
                 items={this.state.pageCount}
                 onSelect={(page) => {
                   const offset = (page - 1) * this.state.limit;
-                  this.props.viewUserBorrowAction(userId.id, this.state.limit, offset);
-                }
-                } /> : '')
+                  this.props.viewUserBorrowAction(userId.id,
+                    this.state.limit, offset);
+                }} /> : '')
           }
         </div>
       </div>

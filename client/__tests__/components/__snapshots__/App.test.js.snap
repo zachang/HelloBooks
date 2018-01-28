@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App/> renders <App /> component 1`] = `
+<div
+  className="row"
+>
+  <AdminHeader
+    profileUsername="mmmmm"
+  />
+  <AdminSidebar />
+  <div
+    className="container mainCon"
+    style={
+      Object {
+        "marginLeft": "5%",
+      }
+    }
+  />
+</div>
+`;

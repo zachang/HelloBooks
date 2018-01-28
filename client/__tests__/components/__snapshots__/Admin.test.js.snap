@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Admin/> renders <Admin /> component 1`] = `
+<div>
+  <div
+    className="row"
+  >
+    <div
+      className="section"
+    >
+      <h4
+        style={
+          Object {
+            "marginTop": "7%",
+          }
+        }
+      >
+        All Books
+      </h4>
+    </div>
+    <div
+      className="divider"
+      style={
+        Object {
+          "marginBottom": "3%",
+          "marginTop": "-2%",
+        }
+      }
+    />
+    <div
+      className="row"
+    >
+      <div
+        className="input-field col s6 l4  m4"
+      >
+        <select
+          name="categoryId"
+          onChange={[Function]}
+          value=""
+        >
+          <option
+            value=""
+          >
+            Select Category
+          </option>
+          <option
+            key="0"
+          />
+          <option
+            key="1"
+          />
+        </select>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="row"
+      >
+        <BookCard
+          book="nnnnn"
+          deleteBook={[Function]}
+          editBook={[Function]}
+          key="0"
+          readBook={[Function]}
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <Pagination
+          activePage={1}
+          items={1}
+          onSelect={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

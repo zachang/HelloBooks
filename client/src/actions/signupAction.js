@@ -2,7 +2,7 @@ import axios from 'axios';
 import actionTypes from './actionTypes';
 
 const signupAction = userCredentials => (dispatch) => {
-  axios.post('/api/v1/users/signup', userCredentials)
+  return axios.post('/api/v1/users/signup', userCredentials)
     .then((res) => {
       const token = res.data.token; // get the token
       window.sessionStorage.setItem('token', token);

@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegisterPage/> renders <RegisterPage /> component 1`] = `
+<div
+  className="row main-row main-div"
+>
+  <HomepageHeader
+    btnText={true}
+  />
+  <div
+    className="section no-pad-bot"
+    id="index-banner"
+  >
+    <div
+      className="container textContent"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col s8 offset-s2 regsmContent"
+        >
+          <Connect(RegForm) />
+          <h6
+            className="infoText"
+          >
+            Already have an account...?
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/login"
+            >
+              Login
+            </Link>
+          </h6>
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

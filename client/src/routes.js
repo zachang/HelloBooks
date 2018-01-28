@@ -26,16 +26,15 @@ export default (
     <Route path='/login' component={auth.LoginPage}/>
     <Route component={auth.Authenticate}>
       <Route path='/unauthorized' component={Unauthorized}/>
-      <Route path='/pageNotFound' component={PageNotFound}/>
     </Route>
     <Route component={App}>
       <Route component={auth.Authenticate}>
         <Route path='/user' component={User}/>
         <Route path='/profile' component={Profile}/>
         <Route path='/users/change' component={ChangePassword}/>
-        <Route path='/read/:id' component={ReadBook}/>
         <Route path='/returned' component={Returned}/>
         <Route path='/borrowed' component={Borrowed}/>
+        <Route path='/read/:id' component={ReadBook}/>
       </Route>
       <Route component={auth.AdminAuth}>
         <Route path='/admin' component={Admin}/>
@@ -46,6 +45,7 @@ export default (
         <Route path='/books/:id' component={UpdateBook}/>
         <Route path='/category' component={AddCategory}/>
       </Route>
+      <Route path='*' component={PageNotFound}/>
     </Route>
   </Router>
 );

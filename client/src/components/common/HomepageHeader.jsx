@@ -42,7 +42,9 @@ export default class HomepageHeader extends React.Component {
                       Join Us
                     </Link>
                     :
-                    <Link to='/login' className='btn-large waves-effect waves-light orange join-us'>
+                    <Link
+                      to='/login'
+                      className='btn-large waves-effect waves-light orange join-us'>
                       Login
                     </Link>
                 )}

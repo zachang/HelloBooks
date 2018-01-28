@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PATHS = {
   app: path.join(__dirname, 'client/src'),
   build: path.join(__dirname, 'production'),
-  styles: path.join(__dirname, 'client/src/build/static/styles')
+  styles: path.join(__dirname, 'client/src/build/assets/css')
 };
 const common = {
   context: PATHS.app,
@@ -31,12 +31,15 @@ const common = {
         NODE_ENV: JSON.stringify('production'),
         API_HOST: JSON.stringify('https://zachang-hellobooks.herokuapp.com')
       }
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.EnvironmentPlugin({
+      CLIENT_ID: JSON.stringify(process.env.CLIENT_ID)
     })
   ],
-  devtool: 'none',
+  devtool: 'source-map',
   module: {
     loaders: [
-      // Set up jsx. This accepts js too thanks to RegExp
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',

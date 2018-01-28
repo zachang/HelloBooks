@@ -4,11 +4,11 @@ import { tokenValidate } from '../utils/helpers';
 import uploader from '../utils/uploader';
 
 const getUserAction = (limit, offset) => (dispatch) => {
-  axios.get(`/api/v1/users?limit=${limit}&offset=${offset}`,
+  return axios.get(`/api/v1/users?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
-      return dispatch({ type: actionTypes.GETUSERS_SUCCESSFUL,
+      dispatch({ type: actionTypes.GETUSERS_SUCCESSFUL,
         payload: {
           users: res.data.users,
           pageCount: res.data.paginationMeta.pageCount
@@ -29,11 +29,11 @@ const getUserAction = (limit, offset) => (dispatch) => {
 };
 
 const getOneUserAction = id => (dispatch) => {
-  axios.get(`/api/v1/users/${id}`,
+  return axios.get(`/api/v1/users/${id}`,
     { headers: { 'x-access-token': window.sessionStorage.token }
     })
     .then((res) => {
-      return dispatch({
+      dispatch({
         type: actionTypes.GETONEUSER_SUCCESSFUL,
         payload: res.data.user
       });
@@ -47,7 +47,7 @@ const getOneUserAction = id => (dispatch) => {
         tokenValidate('page not found');
       } else {
         return dispatch({
-          type: actionTypes.GETONEUSER_SUCCESSFUL,
+          type: actionTypes.GETONEUSER_UNSUCCESSFUL,
           payload: err.response.data.message
         });
       }
@@ -56,7 +56,7 @@ const getOneUserAction = id => (dispatch) => {
 
 const updateUserAction = (userData, id) => (dispatch) => {
   if ((typeof userData.userImage !== 'object' || userData.userImage === null)) {
-    axios.put(`/api/v1/users/${id}`, userData,
+    return axios.put(`/api/v1/users/${id}`, userData,
       { headers: { 'x-access-token': window.sessionStorage.token } })
       .then((res) => {
         return dispatch({
@@ -126,7 +126,7 @@ const updateUserAction = (userData, id) => (dispatch) => {
 };
 
 const changePasswordAction = changePasswordData => (dispatch) => {
-  axios.post(`/api/v1/users/change-password`, changePasswordData,
+  return axios.post(`/api/v1/users/change-password`, changePasswordData,
     { headers: { 'x-access-token': window.sessionStorage.token } })
     .then((res) => {
       return dispatch({

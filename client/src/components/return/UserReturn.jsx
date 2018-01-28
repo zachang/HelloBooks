@@ -46,6 +46,6 @@ const UserReturn = props => (
 
 UserReturn.propTypes = {
   returning: PropTypes.object.isRequired,
-
 };
+
 export default UserReturn;

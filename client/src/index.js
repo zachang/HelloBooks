@@ -11,4 +11,5 @@ import './build/assets/css/user.scss';
 
 window.jQuery = $;
 
-ReactDOM.render(<Provider store={store}>{routes}</Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}>{routes}</Provider>,
+  document.getElementById('root'));

@@ -21,7 +21,7 @@ const tokenValidate = (type) => {
   } else if (type === 'unauthorized') {
     browserHistory.push('/unauthorized');
   } else if (type === 'page not found') {
-    browserHistory.push('/pageNotFound');
+    browserHistory.push('*');
   }
 };
 

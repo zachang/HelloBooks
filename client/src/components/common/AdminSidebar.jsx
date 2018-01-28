@@ -19,21 +19,12 @@ export default class AdminSidebar extends React.Component {
   }
 
   /**
-   * @method componentDidMount
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('.collapsible').collapsible();
-  }
-
-  /**
    * Handles user logout
    * @method logOut
    * @return {void} void
    */
   logOut() {
     window.sessionStorage.removeItem('token');
-    browserHistory.push('/');
   }
 
   /**
@@ -102,7 +93,7 @@ export default class AdminSidebar extends React.Component {
                 </ul>
               </li>
               <li><Link to={`users/change`}>Change Password</Link></li>
-              <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
+              <li><Link to='#' className='logOut' onClick={this.logOut}>Logout</Link></li>
             </ul>
           </div>
 

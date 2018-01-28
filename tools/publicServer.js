@@ -12,6 +12,7 @@ dotenv.config();
 
 const port = parseInt(process.env.PORT, 10) || 8000;
 const app = express();
+
 // Create winston logger
 const logger = new (winston.Logger)({
   transports: [
@@ -35,7 +36,7 @@ const options = {
   // import swaggerDefinitions
   swaggerDefinition,
   // path to the API docs
-  apis: ['../server/routes/index.js'],
+  apis: [path.join(__dirname,'../server/routes/*.js')],
 };
 
 // initialize swagger-jsdoc
@@ -45,17 +46,18 @@ const router = express.Router();
 
 routes(router);
 
+// serve api doc
+app.get('/api/doc/hellobooks.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
 app.use(morganLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(compression());
-app.use(express.static(path.join(__dirname, '../server/public')));
+app.use('/api/doc', express.static(path.join(__dirname, '../server/public/api-doc')));
 app.use(express.static('production'));
-
-app.get('/swagger.json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
-});
 
 app.use('/api/v1/', router);
 

@@ -20,16 +20,17 @@ export class App extends React.Component {
    * @return {void} void
    */
   componentWillMount() {
-    const userId = decodeToken(window.sessionStorage.token);
+    const userId = decodeToken(window.sessionStorage.getItem('token'));
     this.props.getOneUserAction(userId.id);
   }
 
   /**
-   * @method componentDidUpdate
+   * @method componentDidMount
    * @return {void} void
    */
-  componentDidUpdate() {
+  componentDidMount() {
     $('.button-collapse').sideNav();
+    $('select').material_select();
   }
 
   /**
@@ -37,7 +38,7 @@ export class App extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const userRoles = decodeToken(window.sessionStorage.token);
+    const userRoles = decodeToken(window.sessionStorage.getItem('token'));
 
     return (
       <div className='row'>

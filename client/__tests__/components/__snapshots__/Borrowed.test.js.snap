@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Borrowed/> renders <Borrowed /> component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="section"
+  >
+    <h4
+      style={
+        Object {
+          "marginTop": "7%",
+        }
+      }
+    >
+      Borrowed Books
+    </h4>
+  </div>
+  <div
+    className="divider"
+    style={
+      Object {
+        "marginBottom": "3%",
+        "marginTop": "-2%",
+      }
+    }
+  />
+  <div
+    className="row"
+  >
+    <UserBorrow
+      borrow="mmm"
+      key="0"
+      returnBook={[Function]}
+    />
+  </div>
+  <div
+    className="row"
+  >
+    <Pagination
+      activePage={1}
+      items={1}
+      onSelect={[Function]}
+    />
+  </div>
+</div>
+`;

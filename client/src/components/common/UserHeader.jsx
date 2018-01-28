@@ -22,8 +22,7 @@ export default class UserHeader extends React.Component {
    * @return {void} void
    */
   componentDidMount() {
-    $('.collapsible').collapsible();
-    $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
   }
 
   /**
@@ -33,7 +32,6 @@ export default class UserHeader extends React.Component {
    */
   logOut() {
     window.sessionStorage.removeItem('token');
-    browserHistory.push('/');
   }
 
   /**
@@ -71,7 +69,11 @@ export default class UserHeader extends React.Component {
                 <li className='divider'></li>
                 <li><Link to={`users/change`}>Change Password</Link></li>
                 <li className='divider'></li>
-                <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
+                <li>
+                  <Link to='#' className='logOut' onClick={this.logOut} id='logout'>
+                    Logout
+                  </Link>
+                </li>
               </ul>
 
               <ul id='nav-mobile' className='side-nav grey darken-4 hide-on-med-and-up'>

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
-import { Link } from 'react-router';
 
 /**
  * @function UserRow
@@ -13,7 +12,6 @@ const UserRow = props => (
     <td>{ props.user.username }</td>
     <td>{ props.user.phoneNo }</td>
     <td>{ props.user.email }</td>
-    <td><Link className='waves-effect waves-light btn btn-small teal'>View</Link ></td>
   </tr>
 );
 

@@ -117,18 +117,16 @@ const routes = (router) => {
    *         in: formData
    *         required: true
    *         type: string
-   *       - name:  isSocial
+   *       - name: isSocial
    *         description: check gmail login
    *         in: formData
    *         required: false
    *         type: boolean
-   *         example: false
    *       - name: regType
    *         description: User's registration type
    *         in: formData
    *         required: false
    *         type: string
-   *         example: 'regular'
    *       - name: password
    *         description: User's password
    *         in: formData
@@ -137,10 +135,10 @@ const routes = (router) => {
    *     responses:
    *       200:
    *        description: Successful login
- *        400:
- *          description: Gmail login unsuccessful
- *        409:
- *          description: User already exist
+   *       400:
+   *         description: Gmail login unsuccessful
+   *       409:
+   *         description: User already exist
    */
   router.route('/users/social')
     .post(usersController.googleLogin);

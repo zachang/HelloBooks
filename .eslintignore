@@ -2,7 +2,10 @@ server/migrations
 server/seeders
 node_modules/
 template/
-./client/src/build
+client/src/build
+client/test/e2e
 tools/
 webpack.config.js
 webpack.config.prod.js
+selenium-debug.log
+report/

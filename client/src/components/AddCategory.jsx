@@ -22,6 +22,7 @@ export class AddCategory extends React.Component {
         categoryName: '',
       },
       errors: null,
+      showToast: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -33,18 +34,35 @@ export class AddCategory extends React.Component {
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
-    this.setState({ errors: nextProps.categoryState.errors });
+    if (nextProps.categoryState.success) {
+      if (this.state.showToast) {
+        Materialize.toast('Category added!', 4000);
+        this.setState({
+          showToast: false
+        });
+      }
+    } else if (!nextProps.categoryState.success) {
+      if (this.state.showToast) {
+        Materialize.toast('Category not added!', 4000);
+        this.setState({
+          showToast: false
+        });
+      }
+      this.setState({
+        errors: nextProps.categoryState.errors
+      });
+    }
   }
 
   /**
    * Handles category file input
    * @method handleChange
    * @return {void} void
-   * @param {object} e
+   * @param {object} event
    */
-  handleChange(e) {
+  handleChange(event) {
     const categoryData = this.state.categoryData;
-    categoryData[e.target.name] = e.target.value;
+    categoryData[event.target.name] = event.target.value;
     this.setState({ categoryData });
   }
 
@@ -52,10 +70,17 @@ export class AddCategory extends React.Component {
    * Handles category submit
    * @method handleSubmit
    * @return {void} void
-   * @param {object} e
+   * @param {object} event
    */
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      categoryData: {
+        categoryName: '',
+      },
+      showToast: true,
+      errors: null
+    });
     this.props.addCategoryAction(this.state.categoryData);
   }
 
@@ -126,8 +151,7 @@ AddCategory.propTypes = {
   addCategoryAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  categoryState: state.categoryReducer,
-  tokenState: state.tokenReducer
+  categoryState: state.categoryReducer
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ addCategoryAction }, dispatch);

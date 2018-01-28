@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReturnedList/> renders <ReturnedList /> component 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="section"
+  >
+    <h4
+      style={
+        Object {
+          "marginTop": "7%",
+        }
+      }
+    >
+      Returned Books
+    </h4>
+  </div>
+  <div
+    className="divider"
+    style={
+      Object {
+        "marginBottom": "3.5%",
+        "marginTop": "-2.5%",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    className="row"
+  >
+    <table
+      className="bordered highlight"
+    >
+      <thead
+        className="black white-text"
+      >
+        <tr>
+          <th>
+            Book Name
+          </th>
+          <th>
+            Borrower
+          </th>
+          <th>
+            Borrow_Date
+          </th>
+          <th>
+            Expected_Return_Date
+          </th>
+          <th>
+            Return_Date
+          </th>
+          <th>
+            Overdue
+          </th>
+          <th>
+            Confirm
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <UserReturnedList
+          clickedReturnedBorrowList={Array []}
+          confirmReturn={[Function]}
+          key="0"
+          returner="mmmm"
+        />
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="row"
+  >
+    <Pagination
+      activePage={1}
+      items={1}
+      onSelect={[Function]}
+    />
+  </div>
+</div>
+`;

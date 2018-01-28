@@ -3,12 +3,12 @@ import actionTypes from './actionTypes';
 import { redirectIfLoggedIn } from '../utils/helpers';
 
 const signinAction = userCredentials => (dispatch) => {
-  axios.post('/api/v1/users/signin', userCredentials)
+  return axios.post('/api/v1/users/signin', userCredentials)
     .then((res) => {
       const token = res.data.token; // get the token
       window.sessionStorage.setItem('token', token);
+      dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL });
       redirectIfLoggedIn(token);
-      return dispatch({ type: actionTypes.SIGNIN_SUCCESSFUL });
     })
     .catch((err) => {
       dispatch({
@@ -19,15 +19,15 @@ const signinAction = userCredentials => (dispatch) => {
 };
 
 const googleSigninAction = googleCredentials => (dispatch) => {
-  axios.post('/api/v1/users/social', googleCredentials)
+  return axios.post('/api/v1/users/social', googleCredentials)
     .then((res) => {
       const token = res.data.token; // get the token
       window.sessionStorage.setItem('token', token);
-      redirectIfLoggedIn(token);
-      return dispatch({
+      dispatch({
         type: actionTypes.SOCIAL_SIGNIN_SUCCESSFUL,
         payload: res.data.message
       });
+      redirectIfLoggedIn(token);
     })
     .catch((err) => {
       dispatch({

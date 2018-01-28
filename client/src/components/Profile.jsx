@@ -41,7 +41,7 @@ export class Profile extends React.Component {
    * @return {void} void
    */
   componentWillMount() {
-    const userId = decodeToken(window.sessionStorage.token);
+    const userId = decodeToken(window.sessionStorage.getItem('token'));
     this.props.getOneUserAction(userId.id);
   }
 
@@ -61,7 +61,9 @@ export class Profile extends React.Component {
       this.setState({
         userData: nextProps.userState.user
       });
-    } else if (nextProps.userState.errors === 'Error, No update done') {
+    }
+
+    if (nextProps.userState.errors === 'Error, No update done') {
       if (this.state.showToast) {
         Materialize.toast('User not updated!', 4000);
         this.setState({ showToast: false });
@@ -69,7 +71,10 @@ export class Profile extends React.Component {
       this.setState({
         errors: nextProps.userState.errors
       });
-    } else if (!nextProps.userState.success && nextProps.userState.errors !== 'Error, No update done') {
+    }
+
+    if (!nextProps.userState.success &&
+      nextProps.userState.errors !== 'Error, No update done') {
       if (this.state.showToast) {
         Materialize.toast('Fill the form properly!', 4000);
         this.setState({ showToast: false });
@@ -129,7 +134,8 @@ export class Profile extends React.Component {
     this.setState({
       showToast: true
     });
-    this.props.updateUserAction(this.state.userData, this.props.params.id);
+    const usersId = decodeToken(window.sessionStorage.getItem('token'));
+    this.props.updateUserAction(this.state.userData, usersId.id);
   }
   /**
    * Renders Profile component
@@ -143,11 +149,19 @@ export class Profile extends React.Component {
         {userData && <div>
           <div className='row'>
             <div className='row'>
-              <div className='col s10 m8 l6 profile_marg' style={{ marginLeft: '23%', marginTop: '7%' }}>
+              <div 
+                className='col s10 m8 l6 profile_marg'
+                style={{ marginLeft: '23%', marginTop: '7%'
+                }}
+              >
                 <div className='card' style={{ boxShadow: '2px 1px 7px #000' }}>
-                  <form method='post' className='col s12' onSubmit={this.handleSubmit}>
+                  <form method='post' className='col s12'
+                    onSubmit={this.handleSubmit}
+                  >
                     <div className='card-content white-text'
-                      style={{ height: '200px', background: 'rgba(77, 182, 172, 0.9)' }}
+                      style={{
+                        height: '200px',
+                        background: 'rgba(77, 182, 172, 0.9)' }}
                     >
 
                       <div className='profile-image circle'>
@@ -163,7 +177,9 @@ export class Profile extends React.Component {
                       </div>
 
                     </div>
-                    <div className='card-action' style={{ height: '340px', background: 'rgba(217,217,217,0.7)' }}>
+                    <div className='card-action'
+                      style={{ height: '340px',
+                        background: 'rgba(217,217,217,0.7)' }}>
 
                       <div className='row'>
                         <div className='input-field col s6'>
@@ -172,7 +188,8 @@ export class Profile extends React.Component {
                             name='fullname'
                             type='text'
                             className={classnames({
-                              invalid: (this.state.errors && !!this.state.errors.fullname) ?
+                              invalid: (this.state.errors
+                                && !!this.state.errors.fullname) ?
                                 !!this.state.errors.fullname : false
                             })}
                             value={userData.fullname || ''}
@@ -180,9 +197,13 @@ export class Profile extends React.Component {
                           />
                           <label
                             htmlFor='fullname'
-                            className={((this.state.errors && !!this.state.errors.fullname)
-                              || userData.fullname.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                            data-error={(this.state.errors && !!this.state.errors.fullname) ?
+                            className={((this.state.errors
+                              && !!this.state.errors.fullname)
+                              || userData.fullname.length > 0) ?
+                              'custom-active custom-validate' :
+                              'custom-validate'}
+                            data-error={(this.state.errors &&
+                              !!this.state.errors.fullname) ?
                               this.state.errors.fullname : ''}
                           >
                             Full Name
@@ -194,7 +215,8 @@ export class Profile extends React.Component {
                             name='username'
                             type='text'
                             className={classnames({
-                              invalid: (this.state.errors && !!this.state.errors.username) ?
+                              invalid: (this.state.errors &&
+                                !!this.state.errors.username) ?
                                 !!this.state.errors.username : false
                             })}
                             value={userData.username || ''}
@@ -202,9 +224,13 @@ export class Profile extends React.Component {
                           />
                           <label
                             htmlFor='username'
-                            className={((this.state.errors && !!this.state.errors.username)
-                              || userData.username.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                            data-error={(this.state.errors && !!this.state.errors.username) ?
+                            className={((this.state.errors &&
+                              !!this.state.errors.username)
+                              || userData.username.length > 0) ?
+                              'custom-active custom-validate'
+                              : 'custom-validate'}
+                            data-error={(this.state.errors
+                              && !!this.state.errors.username) ?
                               this.state.errors.username : ''}
                           >
                             Username
@@ -219,7 +245,8 @@ export class Profile extends React.Component {
                             name='email'
                             type='text'
                             className={classnames({
-                              invalid: (this.state.errors && !!this.state.errors.email) ?
+                              invalid: (this.state.errors &&
+                                !!this.state.errors.email) ?
                                 !!this.state.errors.email : false
                             })}
                             value={userData.email || ''}
@@ -227,9 +254,13 @@ export class Profile extends React.Component {
                           />
                           <label
                             htmlFor='email'
-                            className={((this.state.errors && !!this.state.errors.email)
-                              || userData.email.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                            data-error={(this.state.errors && !!this.state.errors.email) ?
+                            className={((this.state.errors &&
+                              !!this.state.errors.email)
+                              || userData.email.length > 0) ?
+                              'custom-active custom-validate'
+                              : 'custom-validate'}
+                            data-error={(this.state.errors &&
+                              !!this.state.errors.email) ?
                               this.state.errors.email : ''}
                           >
                             Email
@@ -241,7 +272,8 @@ export class Profile extends React.Component {
                             name='phoneNo'
                             type='text'
                             className={classnames({
-                              invalid: (this.state.errors && !!this.state.errors.phoneNo) ?
+                              invalid: (this.state.errors &&
+                                !!this.state.errors.phoneNo) ?
                                 !!this.state.errors.phoneNo : false
                             })}
                             value={userData.phoneNo || ''}
@@ -249,9 +281,13 @@ export class Profile extends React.Component {
                           />
                           <label
                             htmlFor='phone number'
-                            className={((this.state.errors && !!this.state.errors.phoneNo)
-                              || userData.phoneNo.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                            data-error={(this.state.errors && !!this.state.errors.phoneNo) ?
+                            className={((this.state.errors &&
+                              !!this.state.errors.phoneNo)
+                              || userData.phoneNo.length > 0) ?
+                              'custom-active custom-validate' :
+                              'custom-validate'}
+                            data-error={(this.state.errors &&
+                              !!this.state.errors.phoneNo) ?
                               this.state.errors.phoneNo : ''}
                           >
                             Phone Number
@@ -276,7 +312,8 @@ export class Profile extends React.Component {
                               type='text'
                               name='userImage_txt'
                               className={classnames('file-path', {
-                                invalid: (this.state.errors && !!this.state.errors.userImage_txt) ?
+                                invalid: (this.state.errors &&
+                                  !!this.state.errors.userImage_txt) ?
                                   !!this.state.errors.userImage_txt : false
                               })}
                             />

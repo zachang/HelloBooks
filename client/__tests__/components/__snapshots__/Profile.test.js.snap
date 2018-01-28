@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profile/> renders <Profile /> component 1`] = `
+<div>
+  <div>
+    <div
+      className="row"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col s10 m8 l6 profile_marg"
+          style={
+            Object {
+              "marginLeft": "23%",
+              "marginTop": "7%",
+            }
+          }
+        >
+          <div
+            className="card"
+            style={
+              Object {
+                "boxShadow": "2px 1px 7px #000",
+              }
+            }
+          >
+            <form
+              className="col s12"
+              method="post"
+              onSubmit={[Function]}
+            >
+              <div
+                className="card-content white-text"
+                style={
+                  Object {
+                    "background": "rgba(77, 182, 172, 0.9)",
+                    "height": "200px",
+                  }
+                }
+              >
+                <div
+                  className="profile-image circle"
+                >
+                  <img
+                    className="activator image-display circle"
+                    src=""
+                  />
+                </div>
+              </div>
+              <div
+                className="card-action"
+                style={
+                  Object {
+                    "background": "rgba(217,217,217,0.7)",
+                    "height": "340px",
+                  }
+                }
+              >
+                <div
+                  className="row"
+                >
+                  <div
+                    className="input-field col s6"
+                  >
+                    <input
+                      className=""
+                      id="fullname"
+                      name="fullname"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                    <label
+                      className="custom-validate"
+                      data-error=""
+                      htmlFor="fullname"
+                    >
+                      Full Name
+                    </label>
+                  </div>
+                  <div
+                    className="input-field col s6"
+                  >
+                    <input
+                      className=""
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                    <label
+                      className="custom-validate"
+                      data-error=""
+                      htmlFor="username"
+                    >
+                      Username
+                    </label>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="input-field col s6"
+                  >
+                    <input
+                      className=""
+                      id="email"
+                      name="email"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                    <label
+                      className="custom-validate"
+                      data-error=""
+                      htmlFor="email"
+                    >
+                      Email
+                    </label>
+                  </div>
+                  <div
+                    className="input-field col s6"
+                  >
+                    <input
+                      className=""
+                      id="phoneNo"
+                      name="phoneNo"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                    <label
+                      className="custom-validate"
+                      data-error=""
+                      htmlFor="phone number"
+                    >
+                      Phone Number
+                    </label>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="file-field input-field col s10"
+                  >
+                    <div
+                      className="btn"
+                    >
+                      <span>
+                        Add Image
+                      </span>
+                      <input
+                        accept="image/*"
+                        id="userImage"
+                        name="userImage"
+                        onChange={[Function]}
+                        type="file"
+                      />
+                    </div>
+                    <div
+                      className="file-path-wrapper"
+                    >
+                      <input
+                        className="file-path"
+                        name="userImage_txt"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button
+                  className="waves-effect waves-light btn profile-btn"
+                  style={
+                    Object {
+                      "marginLeft": "35%",
+                    }
+                  }
+                  type="submit"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

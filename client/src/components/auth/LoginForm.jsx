@@ -91,6 +91,10 @@ export class LoginForm extends React.Component {
       }
     });
     this.props.googleSigninAction(this.state.googleCredentials);
+    if (!window.sessionStorage.token) {
+      return;
+    }
+    redirectIfLoggedIn(window.sessionStorage.token);
   }
 
   /**
@@ -113,13 +117,7 @@ export class LoginForm extends React.Component {
    */
   handleSubmit(event) {
     event.preventDefault();
-    if (this.isValid()) {
-      this.setState({
-        errors: {},
-        fails: null
-      });
-      this.props.signinAction(this.state.loginCredentials);
-    }
+    this.props.signinAction(this.state.loginCredentials);
   }
 
   /**
@@ -145,9 +143,11 @@ export class LoginForm extends React.Component {
             <label
               htmlFor='username'
               className={
-                (!!(this.state.errors.username) || (loginCredentials.username.length > 0)) ?
+                (!!(this.state.errors.username) ||
+                  (loginCredentials.username.length > 0)) ?
                   'custom-active custom-validate' : 'custom-validate'}
-              data-error={this.state.errors.username ? this.state.errors.username : ''}
+              data-error={this.state.errors.username ?
+                this.state.errors.username : ''}
             >
               Username
             </label>
@@ -169,9 +169,11 @@ export class LoginForm extends React.Component {
             <label
               htmlFor='password'
               className={classnames('custom-validate', {
-                'custom-active': (!!this.state.errors.password || (loginCredentials.password.length > 0))
+                'custom-active': (!!this.state.errors.password ||
+                  (loginCredentials.password.length > 0))
               })}
-              data-error={this.state.errors.password ? this.state.errors.password : ''}
+              data-error={this.state.errors.password ?
+                this.state.errors.password : ''}
             >
               Password
             </label>
@@ -200,7 +202,7 @@ export class LoginForm extends React.Component {
             <div className='row'>
               <GoogleLogin
                 className='col m12 s12 btn btn-large waves-effect waves-light log-in'
-                clientId='1035049909244-1n166b04v2498de70j43avr6c2ls24p9.apps.googleusercontent.com'
+                clientId={process.env.CLIENT_ID}
                 buttonText='Google'
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}

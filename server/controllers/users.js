@@ -148,7 +148,7 @@ const usersController = {
           fullname: googleData.fullname,
           username,
           email: googleData.email,
-          phoneNo: 'Update',
+          phoneNo: '00000000000',
           isSocial: true,
           regType: 'gmail',
           password: gmailPass
@@ -172,7 +172,7 @@ const usersController = {
               port: 25,
               auth: {
                 user: process.env.USER_EMAIL,
-                pass: process.env.USER_PASSWORD,
+                pass: process.env.USER_EMAIL_PASSWORD,
               },
               tls: {
                 rejectUnauthorized: false,
@@ -192,8 +192,8 @@ const usersController = {
             });
           })
           .catch((error) => {
-            return res.status(500).send({
-              message: 'Gmail login unsuccessful',
+            return res.status(400).send({
+              message: 'Invalid Credentials',
               error
             });
           });

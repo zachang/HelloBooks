@@ -37,37 +37,17 @@ export class ChangePassword extends React.Component {
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.userState.success === true) {
-      if (this.state.showToast) {
-        Materialize.toast('Password changed!', 4000);
-        this.setState({
-          showToast: false
-        });
-      }
+      Materialize.toast('Password changed!', 4000);
     } else if (nextProps.userState.errors) {
       this.setState({
         errors: nextProps.userState.errors
       });
     } else if (!nextProps.userState.success && nextProps.userState.fails === 'Incorrect old password') {
-      if (this.state.showToast) {
-        Materialize.toast('Incorrect old password!', 4000);
-        this.setState({ showToast: false });
-      }
       this.setState({
         errors: nextProps.userState.errors
       });
     } else if (!nextProps.userState.success && nextProps.userState.fails === 'Password not changed') {
-      if (this.state.showToast) {
-        Materialize.toast('Password not changed!', 4000);
-        this.setState({ showToast: false });
-      }
-      this.setState({
-        errors: nextProps.userState.errors
-      });
-    } else if (!nextProps.userState.success && nextProps.userState.fails === 'Something went wrong') {
-      if (this.state.showToast) {
-        Materialize.toast('Try again... password not changed !', 4000);
-        this.setState({ showToast: false });
-      }
+      Materialize.toast('Password not changed!', 4000);
       this.setState({
         errors: nextProps.userState.errors
       });
