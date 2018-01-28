@@ -1,5 +1,9 @@
 import db from '../models';
-import { handleError, generatePaginationMeta, determineUserReturnDate } from '../utils/helpers';
+import {
+  handleError,
+  generatePaginationMeta,
+  determineUserReturnDate
+} from '../utils/helpers';
 
 const Borrow = db.Borrow;
 const Book = db.Book;
@@ -7,12 +11,28 @@ const User = db.User;
 const Category = db.Category;
 
 const borrowController = {
+  /**
+   * @description Borrow a book
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   create(req, res) {
     const obj = req.body;
     const params = req.params;
-    Borrow.findAll({ where: { userId: params.userId, returned: 'pending' } })
+    Borrow.findAll({ where: {
+      userId: params.userId,
+      returned: 'pending' }
+    })
       .then((found) => {
-        if (found.length) return Promise.reject({ code: 400, message: 'You have not returned the previous book you borrowed' });
+        if (found.length) {
+          return Promise.reject({
+            code: 400,
+            message: 'You have not returned the previous book you borrowed'
+          });
+        }
         return Book.findById(obj.bookId);
       })
       .then((book) => {
@@ -23,7 +43,9 @@ const borrowController = {
           return Promise.reject({ code: 404, message: 'Book not available' });
         }
         if (book.countBorrow >= book.bookCount) {
-          return Promise.reject({ code: 404, message: 'All books have been borrowed' });
+          return Promise.reject({
+            code: 404,
+            message: 'All books have been borrowed' });
         }
 
         return Borrow.create({
@@ -41,23 +63,43 @@ const borrowController = {
         const update = { countBorrow: count + 1 };
         return book.update(update);
       })
-      .then(updated => res.status(200).send({ message: 'Borrow completed', updated }))
+      .then(updated => res.status(200).send({
+        message: 'Borrow completed',
+        updated
+      }))
       .catch(err => handleError(err, res));
   },
+  /**
+   * @description Return a book
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   returnBook(req, res) {
     const bookId = req.body.bookId;
     const userId = req.params.userId;
     return Book.findById(bookId)
       .then((found) => {
-        if (!found) return Promise.reject({ code: 404, message: 'Book not found' });
+        if (!found) {
+          return Promise.reject({
+            code: 404, message: 'Book not found'
+          });
+        }
         return Borrow.findOne({ where: { userId, bookId, returned: 'false' } });
       })
       .then((borrowed) => {
         if (!borrowed) {
-          return Promise.reject({ code: 400, message: 'Book already returned' });
+          return Promise.reject({
+            code: 400,
+            message: 'Book already returned'
+          });
         }
         const update = { returned: 'pending' };
-        return Borrow.update(update, { where: { userId, bookId, returned: 'false' } });
+        return Borrow.update(update,
+          { where: { userId, bookId, returned: 'false' }
+          });
       })
       .then((updatedCount) => {
         if (updatedCount[0] > 0) {
@@ -77,6 +119,14 @@ const borrowController = {
       })
       .catch(err => handleError(err, res));
   },
+  /**
+   * @description find all books borrowed made by users
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   borrowsByUser(req, res) {
     const limit = req.query.limit || 3;
     const offset = req.query.offset || 0;
@@ -100,7 +150,8 @@ const borrowController = {
       order
     };
     if (req.query.owe === 'false') {
-      whereClause.where = { userId, borrowStatus: { $or: ['pending', 'true'] } };
+      whereClause.where = { userId,
+        borrowStatus: { $or: ['pending', 'true'] } };
     } else if (req.query.owe === 'true') {
       whereClause.where = { userId, returned: 'true' };
     }
@@ -113,6 +164,14 @@ const borrowController = {
       })
       .catch(() => res.status(503).send({ message: 'Request not available' }));
   },
+  /**
+   * @description find all books borrowed made by users for admin to view
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   borrowsViewByAdmin(req, res) {
     const limit = req.query.limit || 15;
     const offset = req.query.offset || 0;
@@ -149,6 +208,14 @@ const borrowController = {
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   },
+  /**
+   * @description find all books returned made by users for admin to view
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   returnsViewByAdmin(req, res) {
     const limit = req.query.limit || 15;
     const offset = req.query.offset || 0;
@@ -185,18 +252,40 @@ const borrowController = {
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   },
+
+  /**
+   * @description comfirm books returned
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   acceptReturns(req, res) {
     const parameter = req.params;
-    return Borrow.findOne({ where: { id: parameter.borrowId, returned: 'pending' } })
+    return Borrow.findOne({ where: { id: parameter.borrowId,
+      returned: 'pending' }
+    })
       .then((borrowed) => {
         if (!borrowed) {
           return res.status(404).send({ message: 'Borrow not found' });
         }
         return borrowed.update({ returned: 'true', actualReturn: new Date() })
-          .then(acceptReturn => res.status(200).send({ message: 'Return confirmed', acceptReturn }));
+          .then(acceptReturn => res.status(200).send({
+            message: 'Return confirmed',
+            acceptReturn
+          }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   },
+  /**
+   * @description comfirm books borrowed
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   acceptBorrows(req, res) {
     const params = req.params;
     return Borrow.findOne({
@@ -216,7 +305,10 @@ const borrowController = {
           collectionDate: new Date(),
           expectedReturn: determineUserReturnDate(borrowed.User.level)
         })
-          .then(acceptBorrow => res.status(200).send({ message: 'Borrow confirmed', acceptBorrow }));
+          .then(acceptBorrow => res.status(200).send({
+            message: 'Borrow confirmed',
+            acceptBorrow
+          }));
       })
       .catch(() => res.status(503).send({ message: 'Service not available' }));
   }

@@ -4,12 +4,15 @@ import HomepageStatement from './HomepageStatement.jsx';
 
 /**
  * Homepage class declaration
+ *
  * @class Homepage
+ *
  * @extends {React.Component}
  */
 export default class Homepage extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -21,6 +24,7 @@ export default class Homepage extends React.Component {
 
   /**
    * Renders Homepage component
+   *
    * @return {XML} JSX
    */
   render() {

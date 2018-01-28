@@ -9,12 +9,15 @@ import { redirectIfLoggedIn } from '../../utils/helpers';
 
 /**
  * RegForm class declaration
+ *
  * @class RegForm
+ *
  * @extends {React.Component}
  */
 export class RegForm extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -38,6 +41,7 @@ export class RegForm extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -48,7 +52,9 @@ export class RegForm extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -70,8 +76,11 @@ export class RegForm extends React.Component {
 
   /**
    * Handles user registration details
+   *
    * @method handleChange
+   *
    * @return {void} void
+   *
    * @param {object} event - event
    */
   handleChange(event) {
@@ -86,8 +95,11 @@ export class RegForm extends React.Component {
 
   /**
    * Handles registration
+   *
    * @method handleSubmit
+   *
    * @return {void}
+   *
    * @param {object} event - event
    */
   handleSubmit(event) {
@@ -97,6 +109,7 @@ export class RegForm extends React.Component {
 
   /**
    * Renders RegForm component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -118,9 +131,11 @@ export class RegForm extends React.Component {
 
             <label
               htmlFor='fullname'
-              className={this.state.errors.fullname || regCredentials.fullname.length > 0 ?
+              className={this.state.errors.fullname ||
+              regCredentials.fullname.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={this.state.errors.fullname ? this.state.errors.fullname : ''}
+              data-error={this.state.errors.fullname ?
+                this.state.errors.fullname : ''}
             >
               Full Name
             </label>
@@ -142,9 +157,11 @@ export class RegForm extends React.Component {
             />
             <label
               htmlFor='username'
-              className={this.state.errors.username || regCredentials.username.length > 0 ?
+              className={this.state.errors.username ||
+              regCredentials.username.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={this.state.errors.username ? this.state.errors.username : ''}
+              data-error={this.state.errors.username ?
+                this.state.errors.username : ''}
             >
               Username
             </label>
@@ -165,9 +182,11 @@ export class RegForm extends React.Component {
             />
             <label
               htmlFor='email'
-              className={this.state.errors.email || regCredentials.email.length > 0 ?
+              className={this.state.errors.email ||
+              regCredentials.email.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={this.state.errors.email ? this.state.errors.email : ''}
+              data-error={this.state.errors.email ?
+                this.state.errors.email : ''}
             >
               Email
             </label>
@@ -188,9 +207,11 @@ export class RegForm extends React.Component {
             />
             <label
               htmlFor='phoneNo'
-              className={this.state.errors.phoneNo || regCredentials.phoneNo.length > 0 ?
+              className={this.state.errors.phoneNo ||
+              regCredentials.phoneNo.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={this.state.errors.phoneNo ? this.state.errors.phoneNo : ''}
+              data-error={this.state.errors.phoneNo ?
+                this.state.errors.phoneNo : ''}
             >
               Phone Number
             </label>
@@ -211,9 +232,11 @@ export class RegForm extends React.Component {
             />
             <label
               htmlFor='password'
-              className={this.state.errors.password || regCredentials.password.length > 0 ?
+              className={this.state.errors.password ||
+              regCredentials.password.length > 0 ?
                 'custom-active custom-validate' : 'custom-validate'}
-              data-error={this.state.errors.password ? this.state.errors.password : ''}
+              data-error={this.state.errors.password ?
+                this.state.errors.password : ''}
             >
               Password
             </label>
@@ -251,7 +274,8 @@ export class RegForm extends React.Component {
             <p className='right-align'>
               <a href='#'>
                 <button
-                  className='col s12 btn btn-large waves-effect waves-light orange'
+                  className='col s12 btn btn-large waves-effect
+                  waves-light orange'
                   type='submit'
                   name='action'>Sign Up
                 </button>

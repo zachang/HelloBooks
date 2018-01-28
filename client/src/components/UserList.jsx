@@ -8,12 +8,15 @@ import UserRow from './user/UserRow.jsx';
 
 /**
  * UserList class declaration
+ *
  * @class UserList
+ *
  * @extends {React.Component}
  */
 export class UserList extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -27,6 +30,7 @@ export class UserList extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -35,7 +39,9 @@ export class UserList extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -50,6 +56,7 @@ export class UserList extends React.Component {
 
   /**
    * Renders UserList component
+   *
    * @return {XML} JSX
    */
   render() {

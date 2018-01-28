@@ -11,12 +11,15 @@ import { redirectIfLoggedIn } from '../../utils/helpers';
 
 /**
  * LoginForm class declaration
+ *
  * @class LoginForm
+ *
  * @extends {React.Component}
  */
 export class LoginForm extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -40,6 +43,7 @@ export class LoginForm extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -50,7 +54,9 @@ export class LoginForm extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -63,8 +69,11 @@ export class LoginForm extends React.Component {
 
   /**
    * Handles user login details
+   *
    * @method handleChange
+   *
    * @return {void} void
+   *
    * @param {object} event - event
    */
   handleChange(event) {
@@ -79,7 +88,9 @@ export class LoginForm extends React.Component {
 
   /**
    * @method responseGoogle
+   *
    * @param {object} response - response
+   *
    * @return {void}
    */
   responseGoogle(response) {
@@ -99,6 +110,7 @@ export class LoginForm extends React.Component {
 
   /**
    * @method isValid
+   *
    * @return {boolean} isValid
    */
   isValid() {
@@ -111,8 +123,11 @@ export class LoginForm extends React.Component {
 
   /**
    * Handles login
+   *
    * @method handleSubmit
+   *
    * @return {void}
+   *
    * @param {object} event - event
    */
   handleSubmit(event) {
@@ -122,6 +137,7 @@ export class LoginForm extends React.Component {
 
   /**
    * Renders LoginForm component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -193,7 +209,8 @@ export class LoginForm extends React.Component {
           <div className='col m12 s12'>
             <div className='row'>
               <button
-                className='col m12 s12 btn btn-large waves-effect waves-light orange log-in'
+                className='col m12 s12 btn btn-large waves-effect waves-light
+                 orange log-in'
                 type='submit' name='action'>
               Login
               </button>
@@ -201,7 +218,8 @@ export class LoginForm extends React.Component {
 
             <div className='row'>
               <GoogleLogin
-                className='col m12 s12 btn btn-large waves-effect waves-light log-in'
+                className='col m12 s12 btn btn-large waves-effect
+                waves-light log-in'
                 clientId={process.env.CLIENT_ID}
                 buttonText='Google'
                 onSuccess={this.responseGoogle}

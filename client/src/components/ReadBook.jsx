@@ -9,12 +9,15 @@ import { getOneBookAction } from '../actions/bookAction';
 
 /**
  * ReadBook class declaration
+ *
  * @class ReadBook
+ *
  * @extends {React.Component}
  */
 class ReadBook extends Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -25,7 +28,9 @@ class ReadBook extends Component {
   }
 
   /**
-   * @return {void}
+   * @method componentWillMount
+   *
+   * @return {void} void
    */
   componentWillMount() {
     this.props.getOneBookAction(this.props.params.id);
@@ -33,7 +38,9 @@ class ReadBook extends Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -45,7 +52,20 @@ class ReadBook extends Component {
   }
 
   /**
+   * @method componentDidMount
+   *
+   * @return {void} void
+   */
+  componentDidMount() {
+    $('select').material_select();
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
+  }
+
+  /**
    * Renders ReadBook component
+   *
    * @return {XML} JSX
    */
   render() {

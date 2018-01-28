@@ -73,7 +73,8 @@ describe('THUNK FUNCTIONS', () => {
       const actions = store.getActions();
       expect(actions[0].type).to.equal(expectedAction.type);
       expect(actions[0].books).to.equal(expectedAction.books);
-      expect(actions[0].pageCount).to.equal(expectedAction.paginationMeta.pageCount);
+      expect(actions[0].pageCount).to.equal(
+        expectedAction.paginationMeta.pageCount);
     });
     done();
   });
@@ -304,7 +305,8 @@ describe('THUNK FUNCTIONS', () => {
       const actions = store.getActions();
       expect(actions[10].type).to.equal(expectedAction.type);
       expect(actions[10].payload.borrows).to.equal(expectedAction.borrows);
-      expect(actions[10].payload.pageCount).to.equal(expectedAction.paginationMeta.pageCount);
+      expect(actions[10].payload.pageCount).to.equal(
+        expectedAction.paginationMeta.pageCount);
     });
     done();
   });
@@ -355,8 +357,10 @@ describe('THUNK FUNCTIONS', () => {
     await store.dispatch(viewUserReturnAction(1, 1, 0)).then(() => {
       const actions = store.getActions();
       expect(actions[12].type).to.equal(expectedAction.type);
-      expect(actions[12].payload.returnings).to.equal(expectedAction.returnings);
-      expect(actions[12].payload.pageCount).to.equal(expectedAction.paginationMeta.pageCount);
+      expect(actions[12].payload.returnings).to.equal(
+        expectedAction.returnings);
+      expect(actions[12].payload.pageCount).to.equal(
+        expectedAction.paginationMeta.pageCount);
     });
     done();
   });
@@ -408,7 +412,8 @@ describe('THUNK FUNCTIONS', () => {
       const actions = store.getActions();
       expect(actions[14].type).to.equal(expectedAction.type);
       expect(actions[14].payload.borrowers).to.equal(expectedAction.borrowers);
-      expect(actions[14].payload.pageCount).to.equal(expectedAction.paginationMeta.pageCount);
+      expect(actions[14].payload.pageCount).to.equal(
+        expectedAction.paginationMeta.pageCount);
     });
     done();
   });
@@ -460,7 +465,8 @@ describe('THUNK FUNCTIONS', () => {
       const actions = store.getActions();
       expect(actions[16].type).to.equal(expectedAction.type);
       expect(actions[16].payload.returners).to.equal(expectedAction.returners);
-      expect(actions[16].payload.pageCount).to.equal(expectedAction.paginationMeta.pageCount);
+      expect(actions[16].payload.pageCount).to.equal(
+        expectedAction.paginationMeta.pageCount);
     });
     done();
   });

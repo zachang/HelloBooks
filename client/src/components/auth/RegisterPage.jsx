@@ -5,12 +5,15 @@ import RegForm from './RegForm.jsx';
 
 /**
  * RegisterPage class declaration
+ *
  * @class RegisterPage
+ *
  * @extends {React.Component}
  */
 export default class RegisterPage extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -22,6 +25,7 @@ export default class RegisterPage extends React.Component {
 
   /**
    * Renders RegisterPage component
+   *
    * @return {XML} JSX
    */
   render() {

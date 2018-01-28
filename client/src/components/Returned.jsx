@@ -9,12 +9,15 @@ import { decodeToken } from '../utils/helpers';
 
 /**
  * Returned class declaration
+ *
  * @class Returned
+ *
  * @extends {React.Component}
  */
 export class Returned extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -29,6 +32,7 @@ export class Returned extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -38,7 +42,9 @@ export class Returned extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -52,6 +58,7 @@ export class Returned extends React.Component {
 
   /**
    * Renders Returned component
+   *
    * @return {XML} JSX
    */
   render() {

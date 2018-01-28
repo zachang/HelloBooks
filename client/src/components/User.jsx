@@ -12,12 +12,15 @@ import { getCategoryAction } from '../actions/categoryAction';
 
 /**
  * User class declaration
+ *
  * @class User
+ *
  * @extends {React.Component}
  */
 export class User extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -37,6 +40,7 @@ export class User extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -45,8 +49,25 @@ export class User extends React.Component {
   }
 
   /**
+   * @method componentDidMount
+   *
+   * @return {void} void
+   */
+  componentDidMount() {
+    $('select').material_select();
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
+    $('.tooltipped').tooltip({ delay: 50 });
+    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change',
+      this.bookCategoryChange.bind(this));
+  }
+
+  /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -93,22 +114,11 @@ export class User extends React.Component {
   }
 
   /**
-   * @method componentDidUpdate
-   * @return {void} void
-   */
-  componentDidUpdate() {
-    $('select').material_select();
-    $('.collapsible').collapsible();
-    $('.dropdown-button').dropdown();
-    $('.tooltipped').tooltip({ delay: 50 });
-    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change',
-      this.bookCategoryChange.bind(this));
-  }
-
-  /**
    * @method bookCategoryChange
-   * @return {void}
+   *
    * @param {object} event - event
+   *
+   * @return {void}
    */
   bookCategoryChange(event) {
     this.setState({ categoryId: event.target.value });
@@ -117,9 +127,12 @@ export class User extends React.Component {
 
   /**
    * Handles book borrow
+   *
    * @method borrowBook
+   *
    * @param {string} token
    * @param {int} bookId
+   *
    * @return {void} void
    */
   borrowBook(token, bookId) {
@@ -130,7 +143,9 @@ export class User extends React.Component {
 
   /**
    * Handles read book tooltip removal when clicked
+   *
    * @method readBook
+   *
    * @return {void}
    */
   readBook() {
@@ -139,6 +154,7 @@ export class User extends React.Component {
 
   /**
    * Renders User component
+   *
    * @return {XML} JSX
    */
   render() {

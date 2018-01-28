@@ -5,7 +5,9 @@ import logo from '../../build/imgs/hello.png';
 
 /**
  * AdminHeader class declaration
+ *
  * @class AdminHeader
+ *
  * @extends {React.Component}
  */
 export default class AdminHeader extends React.Component {
@@ -19,15 +21,19 @@ export default class AdminHeader extends React.Component {
 
   /**
    * @method componentDidMount
+   *
    * @return {void} void
    */
   componentDidMount() {
     $('.button-collapse').sideNav();
+    $('.dropdown-button').dropdown();
   }
 
   /**
    * Handles user logout
+   *
    * @method logOut
+   *
    * @return {void} void
    */
   logOut() {
@@ -36,6 +42,7 @@ export default class AdminHeader extends React.Component {
 
   /**
    * Renders AdminHeader component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -44,7 +51,9 @@ export default class AdminHeader extends React.Component {
         <div className='navbar-fixed'>
           <nav className='mainNav black col m10 l10' role='navigation'>
             <div className='nav-wrapper container'>
-              <Link id='logo-container' to='/admin' className='brand-logo mainLogo'>
+              <Link id='logo-container' to='/admin'
+                className='brand-logo mainLogo'
+              >
                 <img src={logo} alt='hellobooks'/>
               </Link>
               <ul className='user hide-on-small-and-down show-on-medium-and-up'>
@@ -62,17 +71,23 @@ export default class AdminHeader extends React.Component {
                 </Link>
               </ul>
 
-              <ul id='dropdown1' className='dropdown-content hide-on-small-and-down'>
+              <ul id='dropdown1'
+                className='dropdown-content hide-on-small-and-down'
+              >
                 <li><Link to={'/profile/'}>Profile</Link></li>
                 <li className='divider'></li>
                 <li><Link to='/users'>View Users</Link></li>
                 <li className='divider'></li>
-                <li><Link to={`users/change`}>Change Password</Link></li>
+                <li><Link to={'/password/change'}>Change Password</Link></li>
                 <li className='divider'></li>
-                <li><Link to='#' className='logOut' onClick={this.logOut}>Logout</Link></li>
+                <li><Link to='#' className='logOut' onClick={this.logOut}>
+                  Logout</Link>
+                </li>
               </ul>
 
-              <ul id='nav-mobile' className='side-nav grey darken-4 hide-on-med-and-up'>
+              <ul id='nav-mobile'
+                className='side-nav grey darken-4 hide-on-med-and-up'
+              >
                 <li>
                   <div className='row walp'></div>
                 </li>
@@ -114,10 +129,12 @@ export default class AdminHeader extends React.Component {
                     </li>
                   </ul>
                 </li>
-                <li><Link to={`users/change`}>Change Password</Link></li>
+                <li><Link to={'/password/change'}>Change Password</Link></li>
                 <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
               </ul>
-              <Link href='#' data-activates='nav-mobile' className='button-collapse menu-icon-link'>
+              <Link href='#' data-activates='nav-mobile'
+                className='button-collapse menu-icon-link'
+              >
                 <i className='material-icons hide-on-med-and-up'>
                   menu
                 </i>

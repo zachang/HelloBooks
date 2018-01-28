@@ -81,7 +81,8 @@ describe('TEST USER ROUTES', () => {
           .expect(403)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.message, 'You must be an admin to perform this operation');
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
             done();
           });
       });
@@ -119,60 +120,61 @@ describe('TEST USER ROUTES', () => {
   });
 
   // Test for list of one user
-  describe('test for GET api/v1/users/:userId when viewing list of one user', () => {
-    it(`should return status code 401 when a user
+  describe('test for GET api/v1/users/:userId when viewing list of one user',
+    () => {
+      it(`should return status code 401 when a user
         wants to view his/her data with no token`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/users/${userId}`)
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'No authorization token provided');
-            done();
-          });
-      });
-    it(`should return status code 401 when a user
+        (done) => {
+          request(app)
+            .get(`/api/v1/users/${userId}`)
+            .expect(401)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'No authorization token provided');
+              done();
+            });
+        });
+      it(`should return status code 401 when a user
         wants to view his/her data with invalid token`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/users/${userId}`)
-          .set({ 'x-access-token': 'xxddghj' })
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Invalid authorization token');
-            done();
-          });
-      });
-    it(`should return status code 404 when a user wants to view
+        (done) => {
+          request(app)
+            .get(`/api/v1/users/${userId}`)
+            .set({ 'x-access-token': 'xxddghj' })
+            .expect(401)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Invalid authorization token');
+              done();
+            });
+        });
+      it(`should return status code 404 when a user wants to view
         his/her data with valid token but wrong user ID`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/users/0`)
-          .set({ 'x-access-token': userToken })
-          .expect(404)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'User does not exist');
-            done();
-          });
-      });
-    it(`should return status code 200 when a user wants to view
+        (done) => {
+          request(app)
+            .get(`/api/v1/users/0`)
+            .set({ 'x-access-token': userToken })
+            .expect(404)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'User does not exist');
+              done();
+            });
+        });
+      it(`should return status code 200 when a user wants to view
         his/her data with valid token`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/users/${userId}`)
-          .set({ 'x-access-token': userToken })
-          .expect(200)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.user.username, 'ebenezer');
-            assert.equal(res.body.message, 'User displayed');
-            done();
-          });
-      });
-  });
+        (done) => {
+          request(app)
+            .get(`/api/v1/users/${userId}`)
+            .set({ 'x-access-token': userToken })
+            .expect(200)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.user.username, 'ebenezer');
+              assert.equal(res.body.message, 'User displayed');
+              done();
+            });
+        });
+    });
 
   // Test for update user
   describe('test for PUT api/v1/users/:userId route for user update', () => {
@@ -192,23 +194,24 @@ describe('TEST USER ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provide', (done) => {
-      request(app)
-        .put(`/api/v1/users/${userId}`)
-        .set({ 'x-access-token': 'bnamma' })
-        .send({
-          fullname: 'Micheal Opkosu',
-          username: 'Shaggy',
-          email: 'mitch@gmail.com',
-          phoneNo: '09077777777'
-        })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
+    it('should return status code 401 when invalid token is provide',
+      (done) => {
+        request(app)
+          .put(`/api/v1/users/${userId}`)
+          .set({ 'x-access-token': 'bnamma' })
+          .send({
+            fullname: 'Micheal Opkosu',
+            username: 'Shaggy',
+            email: 'mitch@gmail.com',
+            phoneNo: '09077777777'
+          })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
     it('should return status code 404 when user ID is not found', (done) => {
       request(app)
         .put(`/api/v1/users/0`)
@@ -241,10 +244,14 @@ describe('TEST USER ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.fullname[0], 'The fullname field is required.');
-            assert.equal(res.body.errors.username[0], 'The username field is required.');
-            assert.equal(res.body.errors.email[0], 'The email field is required.');
-            assert.equal(res.body.errors.phoneNo[0], 'The phoneNo field is required.');
+            assert.equal(res.body.errors.fullname[0],
+              'The fullname field is required.');
+            assert.equal(res.body.errors.username[0],
+              'The username field is required.');
+            assert.equal(res.body.errors.email[0],
+              'The email field is required.');
+            assert.equal(res.body.errors.phoneNo[0],
+              'The phoneNo field is required.');
             done();
           });
       });
@@ -263,7 +270,8 @@ describe('TEST USER ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.fullname[0], 'The fullname must be a string.');
+            assert.equal(res.body.errors.fullname[0],
+              'The fullname must be a string.');
             done();
           });
       });
@@ -282,7 +290,8 @@ describe('TEST USER ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.username[0], 'The username must be a string.');
+            assert.equal(res.body.errors.username[0],
+              'The username must be a string.');
             done();
           });
       });
@@ -301,7 +310,8 @@ describe('TEST USER ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.email[0], 'The email format is invalid.');
+            assert.equal(res.body.errors.email[0],
+              'The email format is invalid.');
             done();
           });
       });
@@ -320,7 +330,8 @@ describe('TEST USER ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.phoneNo[0], 'The phoneNo must be a string.');
+            assert.equal(res.body.errors.phoneNo[0],
+              'The phoneNo must be a string.');
             done();
           });
       });
@@ -348,24 +359,26 @@ describe('TEST USER ROUTES', () => {
   });
 
   // Test for change user password
-  describe('test for PUT /users/:userId/change-password route for password change',
-    () => {
-      it('should return status code 401 when no token is provide', (done) => {
-        request(app)
-          .post('/api/v1/users/change-password')
-          .send({
-            oldPassword: 'password',
-            newPassword: 'password24',
-            newPassword_confirmation: 'password24',
-          })
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'No authorization token provided');
-            done();
-          });
-      });
-      it('should return status code 401 when invalid token is provide', (done) => {
+  describe('test for PUT /users/:userId/change-password ' +
+    'route for password change',
+  () => {
+    it('should return status code 401 when no token is provide', (done) => {
+      request(app)
+        .post('/api/v1/users/change-password')
+        .send({
+          oldPassword: 'password',
+          newPassword: 'password24',
+          newPassword_confirmation: 'password24',
+        })
+        .expect(401)
+        .end((err, res) => {
+          if (err) return done(err);
+          assert.equal(res.body.message, 'No authorization token provided');
+          done();
+        });
+    });
+    it('should return status code 401 when invalid token is provide',
+      (done) => {
         request(app)
           .post('/api/v1/users/change-password')
           .set({ 'x-access-token': 'bnamma' })
@@ -381,7 +394,8 @@ describe('TEST USER ROUTES', () => {
             done();
           });
       });
-      it('should return status code 400  when old password is incorrect', (done) => {
+    it('should return status code 400  when old password is incorrect',
+      (done) => {
         request(app)
           .post('/api/v1/users/change-password')
           .set({ 'x-access-token': userToken })
@@ -397,7 +411,8 @@ describe('TEST USER ROUTES', () => {
             done();
           });
       });
-      it('should return status code 400  when new password is not confirmed', (done) => {
+    it('should return status code 400  when new password is not confirmed',
+      (done) => {
         request(app)
           .post('/api/v1/users/change-password')
           .set({ 'x-access-token': userToken })
@@ -415,7 +430,8 @@ describe('TEST USER ROUTES', () => {
             done();
           });
       });
-      it('should return status code 400 when input fields are empty ', (done) => {
+    it('should return status code 400 when input fields are empty ',
+      (done) => {
         request(app)
           .post('/api/v1/users/change-password')
           .set({ 'x-access-token': userToken })
@@ -437,7 +453,8 @@ describe('TEST USER ROUTES', () => {
             done();
           });
       });
-      it('should return status code 200 password updates successfully', (done) => {
+    it('should return status code 200 password updates successfully',
+      (done) => {
         request(app)
           .post('/api/v1/users/change-password')
           .set({ 'x-access-token': userToken })
@@ -450,9 +467,10 @@ describe('TEST USER ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Password changed');
-            assert.equal(bcrypt.compareSync('twinkle24', res.body.updated.password), true);
+            assert.equal(bcrypt.compareSync('twinkle24',
+              res.body.updated.password), true);
             done();
           });
       });
-    });
+  });
 });

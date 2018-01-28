@@ -12,12 +12,15 @@ import UserBorrowList from './borrow/UserBorrowList.jsx';
 
 /**
  * BorrowList class declaration
+ *
  * @class BorrowList
+ *
  * @extends {React.Component}
  */
 export class BorrowList extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -33,6 +36,7 @@ export class BorrowList extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -41,7 +45,9 @@ export class BorrowList extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -59,9 +65,12 @@ export class BorrowList extends React.Component {
 
   /**
    * Handles  book borrow confirmation
+   *
    * @method confirmBorrow
-   * @return {void}
+   *
    * @param {integer} borrowId - borrowId
+   *
+   * @return {void}
    */
   confirmBorrow(borrowId) {
     swal({
@@ -88,6 +97,7 @@ export class BorrowList extends React.Component {
 
   /**
    * Renders BorrowList component
+   *
    * @return {XML} JSX
    */
   render() {

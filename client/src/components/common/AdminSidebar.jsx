@@ -5,12 +5,15 @@ import PropTypes from 'react-proptypes';
 
 /**
  * AdminSidebar class declaration
+ *
  * @class AdminSidebar
+ *
  * @extends {React.Component}
  */
 export default class AdminSidebar extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -19,8 +22,21 @@ export default class AdminSidebar extends React.Component {
   }
 
   /**
+   * @method componentDidUpdate
+   *
+   * @return {void} void
+   */
+  componentDidUpdate() {
+    $('.collapsible').collapsible();
+    $('.button-collapse').sideNav();
+    $('.dropdown-button').dropdown();
+  }
+
+  /**
    * Handles user logout
+   *
    * @method logOut
+   *
    * @return {void} void
    */
   logOut() {
@@ -29,6 +45,7 @@ export default class AdminSidebar extends React.Component {
 
   /**
    * Renders AdminSidebar component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -40,7 +57,12 @@ export default class AdminSidebar extends React.Component {
               <img src={(this.props.profileImage) ? (this.props.profileImage)
                 : '../../../imgs/avatar.png'
               }
-              style={{ width: '100px', height: '100px', margin: '22% 0% 0% 26%', boxShadow: '2px 1px 20px #000' }}
+              style={{
+                width: '100px',
+                height: '100px',
+                margin: '22% 0% 0% 26%',
+                boxShadow: '2px 1px 20px #000'
+              }}
               alt='' className='circle responsive-img'/>
             </div>
           </div>
@@ -92,8 +114,11 @@ export default class AdminSidebar extends React.Component {
                   </li>
                 </ul>
               </li>
-              <li><Link to={`users/change`}>Change Password</Link></li>
-              <li><Link to='#' className='logOut' onClick={this.logOut}>Logout</Link></li>
+              <li><Link to={'/password/change'}>Change Password</Link></li>
+              <li><Link to='' className='logOut' onClick={this.logOut}>
+                Logout
+              </Link>
+              </li>
             </ul>
           </div>
 

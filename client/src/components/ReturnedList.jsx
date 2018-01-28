@@ -4,12 +4,17 @@ import swal from 'sweetalert2';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
-import { viewAllReturnedAction, confirmReturnAction } from '../actions/bookAction';
+import {
+  viewAllReturnedAction,
+  confirmReturnAction
+} from '../actions/bookAction';
 import UserReturnedList from './returns/UserReturnedList.jsx';
 
 /**
  * ReturnedList class declaration
+ *
  * @class ReturnedList
+ *
  * @extends {React.Component}
  */
 export class ReturnedList extends React.Component {
@@ -31,6 +36,7 @@ export class ReturnedList extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -39,7 +45,9 @@ export class ReturnedList extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -57,9 +65,12 @@ export class ReturnedList extends React.Component {
 
   /**
    * Handles  book return confirmation
+   *
    * @method confirmReturn
-   * @return {void}
+   *
    * @param {integer} borrowId - borrowId
+   *
+   *  @return {void}
    */
   confirmReturn(borrowId) {
     swal({
@@ -85,6 +96,7 @@ export class ReturnedList extends React.Component {
 
   /**
    * Renders AddBook component
+   *
    * @return {XML} JSX
    */
   render() {

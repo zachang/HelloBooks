@@ -23,6 +23,7 @@ class AdminAuth extends React.Component {
   }
   /**
    * renders component
+   *
    * @return {XML} JSX
    */
   render() {

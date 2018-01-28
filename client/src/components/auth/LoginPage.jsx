@@ -5,12 +5,15 @@ import LoginForm from './LoginForm.jsx';
 
 /**
  * LoginPage class declaration
+ *
  * @class LoginPage
+ *
  * @extends {React.Component}
  */
 export default class LoginPage extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -22,6 +25,7 @@ export default class LoginPage extends React.Component {
 
   /**
    * Renders LoginPage component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -36,7 +40,9 @@ export default class LoginPage extends React.Component {
               <div className='col s8 offset-s2 sloginContent'>
                 <br/><br/>
                 <LoginForm/>
-                <h6 className='infoText'>No account yet...?<Link to='/Register'>Register</Link></h6>
+                <h6 className='infoText'>No account yet...?<Link to='/Register'>
+                  Register
+                </Link></h6>
                 <br/><br/>
               </div>
 

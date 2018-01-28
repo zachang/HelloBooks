@@ -4,7 +4,9 @@ import { Link } from 'react-router';
 
 /**
  * @function BookCard
+ *
  * @param {object} props
+ *
  * @return {XML} JSX
  */
 const BookCard = props => (

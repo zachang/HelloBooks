@@ -5,12 +5,15 @@ import logo from '../../build/imgs/hello.png';
 
 /**
  * HomepageHeader class declaration
+ *
  * @class HomepageHeader
+ *
  * @extends {React.Component}
  */
 export default class HomepageHeader extends React.Component {
   /**
   * @method componentDidMount
+   *
   * @return {void} void
   */
   componentDidMount() {
@@ -19,6 +22,7 @@ export default class HomepageHeader extends React.Component {
 
   /**
    * Renders HomepageHeader component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -26,7 +30,9 @@ export default class HomepageHeader extends React.Component {
       <div className='navbar-fixed'>
         <nav className='mainNav transparent' role='navigation'>
           <div className='nav-wrapper container'>
-            <Link to='/' id='logo-container' className='brand-logo mainLogo brand'>
+            <Link to='/' id='logo-container'
+              className='brand-logo mainLogo brand'
+            >
               <img src={logo} alt='hellobooks'/>
             </Link>
             <ul className='right hide-on-small-and-down'>
@@ -37,14 +43,16 @@ export default class HomepageHeader extends React.Component {
                 {(
                   (this.props.btnText === false) ?
                     <Link to='/register'
-                      className='btn-large waves-effect waves-light orange join-us'
+                      className='btn-large waves-effect waves-light orange
+                       join-us'
                     >
                       Join Us
                     </Link>
                     :
                     <Link
                       to='/login'
-                      className='btn-large waves-effect waves-light orange join-us'>
+                      className='btn-large waves-effect waves-light orange
+                      join-us'>
                       Login
                     </Link>
                 )}
@@ -64,7 +72,8 @@ export default class HomepageHeader extends React.Component {
             </ul>
             <a href='#'
               data-activates='nav-mobile'
-              className='button-collapse full top-nav hide-on-med-and-up menu-iconic-link'>
+              className='button-collapse full top-nav
+              hide-on-med-and-up menu-iconic-link'>
               <i className='material-icons'>menu</i>
             </a>
           </div>

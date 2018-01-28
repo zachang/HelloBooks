@@ -3,7 +3,9 @@ import PropTypes from 'react-proptypes';
 
 /**
  * @function UserBorrow
+ *
  * @param {object} props
+ *
  * @return {XML} JSX
  */
 const UserBorrow = props => (
@@ -11,7 +13,8 @@ const UserBorrow = props => (
     <div className='card large sticky-action'>
       <div className='card-image waves-effect waves-block waves-light'>
         <img className='activator'
-          src={(props.borrow.Book.bookImage !== null) ? props.borrow.Book.bookImage : '../../imgs/default.jpg'}/>
+          src={(props.borrow.Book.bookImage !== null) ?
+            props.borrow.Book.bookImage : '../../imgs/default.jpg'}/>
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>
@@ -28,7 +31,9 @@ const UserBorrow = props => (
         </span>
         <p>Author: {props.borrow.Book.author}</p>
         <p>Category: {props.borrow.Book.Category.categoryName}</p>
-        <p>Published: {new Date(props.borrow.Book.publishYear).getFullYear()}</p>
+        <p>Published:
+          {new Date(props.borrow.Book.publishYear).getFullYear()}
+        </p>
         <p>Pages: {props.borrow.Book.pages}</p>
         <p>Stock: {props.borrow.Book.bookCount}</p>
         <p>Description: {(props.borrow.Book.description)}

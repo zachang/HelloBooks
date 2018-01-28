@@ -9,12 +9,15 @@ import { getCategoryAction } from '../actions/categoryAction';
 
 /**
  * UpdateBook class declaration
+ *
  * @class UpdateBook
+ *
  * @extends {React.Component}
  */
 export class UpdateBook extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -48,6 +51,7 @@ export class UpdateBook extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -57,7 +61,9 @@ export class UpdateBook extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -94,6 +100,7 @@ export class UpdateBook extends React.Component {
 
   /**
    * @method componentDidUpdate
+   *
    * @return {void} void
    */
   componentDidUpdate() {
@@ -108,8 +115,11 @@ export class UpdateBook extends React.Component {
 
   /**
    * Handles pdf book file input
+   *
    * @method handleFileChange
+   *
    * @return {void} void
+   *
    * @param {object} event
    */
   handleFileChange(event) {
@@ -121,8 +131,11 @@ export class UpdateBook extends React.Component {
 
   /**
    * Handles book Image file input
+   *
    * @method handleImageChange
+   *
    * @return {void} void
+   *
    * @param {object} event - event
    */
   handleImageChange(event) {
@@ -144,8 +157,11 @@ export class UpdateBook extends React.Component {
 
   /**
    * Handles book update input
+   *
    * @method handleChange
+   *
    * @return {void} void
+   *
    * @param {object} event - event
    */
   handleChange(event) {
@@ -159,8 +175,11 @@ export class UpdateBook extends React.Component {
 
   /**
    * Handles book form update
+   *
    * @method handleSubmit
+   *
    * @return {void}
+   *
    * @param {object} event - event
    */
   handleSubmit(event) {
@@ -174,6 +193,7 @@ export class UpdateBook extends React.Component {
 
   /**
    * Renders UpdateBook component
+   *
    * @return {XML} JSX
    */
   render() {

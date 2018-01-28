@@ -9,12 +9,15 @@ import { decodeToken } from '../utils/helpers';
 
 /**
  * Borrowed class declaration
+ *
  * @class Borrowed
+ *
  * @extends {React.Component}
  */
 export class Borrowed extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -31,6 +34,7 @@ export class Borrowed extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -40,7 +44,9 @@ export class Borrowed extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -78,6 +84,7 @@ export class Borrowed extends React.Component {
 
   /**
    * @method componentDidUpdate
+   *
    * @return {void} void
    */
   componentDidUpdate() {
@@ -86,8 +93,11 @@ export class Borrowed extends React.Component {
 
   /**
    * Handles book return
+   *
    * @method returnBook
+   *
    * @return {void}
+   *
    * @param {integer} bookId - bookId
    */
   returnBook(bookId) {
@@ -98,6 +108,7 @@ export class Borrowed extends React.Component {
 
   /**
    * Renders Borrowed component
+   *
    * @return {XML} JSX
    */
   render() {

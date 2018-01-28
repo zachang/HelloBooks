@@ -31,7 +31,7 @@ export default (
       <Route component={auth.Authenticate}>
         <Route path='/user' component={User}/>
         <Route path='/profile' component={Profile}/>
-        <Route path='/users/change' component={ChangePassword}/>
+        <Route path='/password/change' component={ChangePassword}/>
         <Route path='/returned' component={Returned}/>
         <Route path='/borrowed' component={Borrowed}/>
         <Route path='/read/:id' component={ReadBook}/>

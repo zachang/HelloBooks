@@ -71,6 +71,14 @@ const changePasswordRules = {
 };
 
 const usersController = {
+  /**
+   * @description create users
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   create(req, res) {
     const validation = new Validator(req.body, signUpRules);
     const body = req.body;
@@ -88,7 +96,8 @@ const usersController = {
         if (validation.passes()) {
           return User.create(req.body)
             .then((newUser) => {
-              const token = jwt.sign(userDetails(newUser), secret, { expiresIn: '10h' });
+              const token = jwt.sign(userDetails(newUser), secret,
+                { expiresIn: '10h' });
               res.status(201).send({
                 message: 'User successfully created',
                 token
@@ -107,6 +116,14 @@ const usersController = {
         res.status(500).send({ message: 'Request not processed' });
       });
   },
+  /**
+   * @description login users
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   login(req, res) {
     const validation = new Validator(req.body, loginRules);
     if (validation.passes()) {
@@ -129,6 +146,14 @@ const usersController = {
       errors: validation.errors.all()
     });
   },
+  /**
+   * @description login users with google
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   googleLogin(req, res) {
     const gmailPass = randomCreate('abcd99?)#@*rt98');
     const username = randomCreate('abcdefgi');
@@ -154,7 +179,8 @@ const usersController = {
           password: gmailPass
         })
           .then((gmailUser) => {
-            const token = jwt.sign(gmailDetails(gmailUser), secret, { expiresIn: '10h' });
+            const token = jwt.sign(gmailDetails(gmailUser), secret,
+              { expiresIn: '10h' });
             res.status(201).send({
               message: 'Gmail login successful',
               token,
@@ -163,7 +189,8 @@ const usersController = {
             return User.findOne({ where: { email: gmailUser.email } });
           })
           .then((mailMessage) => {
-            const message = 'It is advised you update your default details below;';
+            const message = 'It is advised you update your' +
+              ' default details below;';
             const sentUsername = mailMessage.username;
             const sentPassword = gmailPass;
             const transporter = nodemailer.createTransport({
@@ -182,7 +209,8 @@ const usersController = {
               from: '\'hellobookz\' Admin <zachangdawuda@gmail.com>',
               to: mailMessage.email,
               subject: 'Gmail Notification from hello-books',
-              html: `<p>${message}</p><p><b>Username:</b>${sentUsername}</p><p><b>Password:</b>${sentPassword}</p>`
+              html: `<p>${message}</p><p><b>Username:</b>${sentUsername}</p>
+                <p><b>Password:</b>${sentPassword}</p>`
             };
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
@@ -205,6 +233,14 @@ const usersController = {
         });
       });
   },
+  /**
+   * @description list all users
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   list(req, res) {
     const limit = req.query.limit || 2;
     const offset = req.query.offset || 0;
@@ -218,8 +254,18 @@ const usersController = {
           users: users.rows
         });
       })
-      .catch(() => res.status(400).send({ message: 'Error, nothing to display' }));
+      .catch(() => res.status(400).send({
+        message: 'Error, nothing to display'
+      }));
   },
+  /**
+   * @description list one user
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   listOne(req, res) {
     const { userId } = req.params;
     User.findById(userId)
@@ -232,8 +278,18 @@ const usersController = {
           user
         });
       })
-      .catch(() => res.status(500).send({ message: 'Oops, failed to display users' }));
+      .catch(() => res.status(500).send({
+        message: 'Oops, failed to display users'
+      }));
   },
+  /**
+   * @description update user details
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   update(req, res) {
     const validation = new Validator(req.body, updateRules);
     const userInfo = {
@@ -258,21 +314,36 @@ const usersController = {
           }
           return user
             .update(userInfo)
-            .then(update => res.status(200).send({ message: 'User updated', update }))
-            .catch(() => res.status(400).send({ message: 'Error, No update done' }));
+            .then(update => res.status(200).send({
+              message: 'User updated', update
+            }))
+            .catch(() => res.status(400).send({
+              message: 'Error, No update done'
+            }));
         })
-        .catch(() => res.status(500).send({ message: 'Oops, failed to update user' }));
+        .catch(() => res.status(500).send({
+          message: 'Oops, failed to update user'
+        }));
     }
     return res.status(400).json({
       message: 'Validation error',
       errors: validation.errors.all()
     });
   },
+  /**
+   * @description change user password
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   changePassword(req, res) {
     const { oldPassword, newPassword } = req.body;
     const validation = new Validator(req.body, changePasswordRules);
     if (validation.passes()) {
-      const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8), null);
+      const hashPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8),
+        null);
       return User.findById(req.decoded.id)
         .then((user) => {
           if (!bcrypt.compareSync(oldPassword, user.password)) {

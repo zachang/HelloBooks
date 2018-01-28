@@ -1,6 +1,13 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
+/**
+ * @description sign-up user
+ *
+ * @param {object} userCredentials
+ *
+ * @return {object} Axios promise
+ */
 const signupAction = userCredentials => (dispatch) => {
   return axios.post('/api/v1/users/signup', userCredentials)
     .then((res) => {

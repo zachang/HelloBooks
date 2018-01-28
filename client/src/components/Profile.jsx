@@ -8,12 +8,15 @@ import { decodeToken } from '../utils/helpers';
 
 /**
  * Profile class declaration
+ *
  * @class Profile
+ *
  * @extends {React.Component}
  */
 export class Profile extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -38,6 +41,7 @@ export class Profile extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -47,7 +51,9 @@ export class Profile extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -86,9 +92,24 @@ export class Profile extends React.Component {
   }
 
   /**
-   * Handles user Image file input
-   * @method handleImageChange
+   * @method componentDidUpdate
+   *
    * @return {void} void
+   */
+  componentDidUpdate() {
+    $('select').material_select();
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
+    $('.button-collapse').sideNav();
+  }
+
+  /**
+   * Handles user Image file input
+   *
+   * @method handleImageChange
+   *
+   * @return {void} void
+   *
    * @param {object} event - event
    */
   handleImageChange(event) {
@@ -110,8 +131,11 @@ export class Profile extends React.Component {
 
   /**
    * Handles user update input
+   *
    * @method handleChange
+   *
    * @return {void} void
+   *
    * @param {object} event - event
    */
   handleChange(event) {
@@ -125,8 +149,11 @@ export class Profile extends React.Component {
 
   /**
    * Handles user form update
+   *
    * @method handleSubmit
+   *
    * @return {void}
+   *
    * @param {object} event - event
    */
   handleSubmit(event) {
@@ -139,6 +166,7 @@ export class Profile extends React.Component {
   }
   /**
    * Renders Profile component
+   *
    * @return {XML} JSX
    */
   render() {

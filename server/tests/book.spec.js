@@ -50,7 +50,8 @@ describe('TEST BOOK ROUTES', () => {
 
   // Test for book creation
   describe('POST api/v1/books when creating books', () => {
-    describe('test for empty, valid and invalid token when creating a book', () => {
+    describe('test for empty, valid and invalid token' +
+      ' when creating a book', () => {
       it('should return status code 401 when no token is provided', (done) => {
         request(app)
           .post('/api/v1/books')
@@ -66,7 +67,8 @@ describe('TEST BOOK ROUTES', () => {
             done();
           });
       });
-      it('should return status code 401 when invalid token is provided', (done) => {
+      it('should return status code 401 when invalid' +
+        ' token is provided', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': 'bajjlkall' })
@@ -81,7 +83,8 @@ describe('TEST BOOK ROUTES', () => {
             done();
           });
       });
-      it('should return status code 403 when token valid but unauthorised', (done) => {
+      it('should return status code 403 when token' +
+        ' valid but unauthorised', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': userToken })
@@ -92,11 +95,13 @@ describe('TEST BOOK ROUTES', () => {
           .expect(403)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.message, 'You must be an admin to perform this operation');
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
             done();
           });
       });
-      it('should return status code 201 and create book when token valid and authorised', (done) => {
+      it('should return status code 201 and create book when' +
+        ' token valid and authorised', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -119,14 +124,16 @@ describe('TEST BOOK ROUTES', () => {
             assert.equal(res.body.book.bookCount, 3);
             assert.equal(res.body.book.bookContent, 'foo.pdf');
             assert.equal(res.body.book.bookImage, 'koo.png');
-            assert.equal(res.body.book.description, 'Inspiring story of a young scottish barbarian');
+            assert.equal(res.body.book.description,
+              'Inspiring story of a young scottish barbarian');
             done();
           });
       });
     });
 
     describe('test for incomplete book details', () => {
-      it('should return status code 400 when token valid and authorised but with no book inputs', (done) => {
+      it('should return status code 400 when token valid ' +
+        'and authorised but with no book inputs', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -135,15 +142,24 @@ describe('TEST BOOK ROUTES', () => {
           .end((err, res) => {
             if (err) return done(err);
             assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.bookName[0], 'The bookName field is required.');
-            assert.equal(res.body.errors.author[0], 'The author field is required.');
-            assert.equal(res.body.errors.categoryId[0], 'The categoryId field is required.');
-            assert.equal(res.body.errors.bookCount[0], 'The bookCount field is required.');
-            assert.equal(res.body.errors.bookContent[0], 'The bookContent field is required.');
-            assert.equal(res.body.errors.publishYear[0], 'The publishYear field is required.');
-            assert.equal(res.body.errors.isbn[0], 'The isbn field is required.');
-            assert.equal(res.body.errors.pages[0], 'The pages field is required.');
-            assert.equal(res.body.errors.description[0], 'The description field is required.');
+            assert.equal(res.body.errors.bookName[0],
+              'The bookName field is required.');
+            assert.equal(res.body.errors.author[0],
+              'The author field is required.');
+            assert.equal(res.body.errors.categoryId[0],
+              'The categoryId field is required.');
+            assert.equal(res.body.errors.bookCount[0],
+              'The bookCount field is required.');
+            assert.equal(res.body.errors.bookContent[0],
+              'The bookContent field is required.');
+            assert.equal(res.body.errors.publishYear[0],
+              'The publishYear field is required.');
+            assert.equal(res.body.errors.isbn[0],
+              'The isbn field is required.');
+            assert.equal(res.body.errors.pages[0],
+              'The pages field is required.');
+            assert.equal(res.body.errors.description[0],
+              'The description field is required.');
             done();
           });
       });
@@ -162,11 +178,13 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.bookName[0], 'The bookName must be at least 2 characters.');
+            assert.equal(res.body.errors.bookName[0],
+              'The bookName must be at least 2 characters.');
             done();
           });
       });
-      it('should return status code 400 if bookName input not string', (done) => {
+      it('should return status code 400 if bookName ' +
+        'input not string', (done) => {
         request(app)
           .post('/api/v1/books')
           .set({ 'x-access-token': adminToken })
@@ -178,7 +196,8 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.bookName[0], 'The bookName must be a string.');
+            assert.equal(res.body.errors.bookName[0],
+              'The bookName must be a string.');
             done();
           });
       });
@@ -194,7 +213,8 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.author[0], 'The author must be at least 2 characters.');
+            assert.equal(res.body.errors.author[0],
+              'The author must be at least 2 characters.');
             done();
           });
       });
@@ -210,7 +230,8 @@ describe('TEST BOOK ROUTES', () => {
           .expect(400)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.errors.author[0], 'The author must be a string.');
+            assert.equal(res.body.errors.author[0],
+              'The author must be a string.');
             done();
           });
       });
@@ -219,7 +240,8 @@ describe('TEST BOOK ROUTES', () => {
 
   // Test for book list
   describe('test for GET api/v1/books when viewing books', () => {
-    it('should return status code 401 when user wants to view all books with invalid token', (done) => {
+    it('should return status code 401 when user wants to view' +
+      ' all books with invalid token', (done) => {
       request(app)
         .get('/api/v1/books')
         .set({ 'x-access-token': 'xxddghj' })
@@ -230,7 +252,8 @@ describe('TEST BOOK ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when user wants to view all books without token', (done) => {
+    it('should return status code 401 when user wants to view ' +
+      'all books without token', (done) => {
       request(app)
         .get('/api/v1/books')
         .expect(401)
@@ -240,7 +263,8 @@ describe('TEST BOOK ROUTES', () => {
           done();
         });
     });
-    it('should return status code 200 when user wants to view all books with valid token', (done) => {
+    it('should return status code 200 when user wants to view' +
+      ' all books with valid token', (done) => {
       request(app)
         .get('/api/v1/books')
         .set({ 'x-access-token': userToken || adminToken })
@@ -256,7 +280,8 @@ describe('TEST BOOK ROUTES', () => {
           assert.equal(res.body.books[0].bookCount, 2);
           assert.equal(res.body.books[0].bookContent, 'read.pdf');
           assert.equal(res.body.books[0].bookImage, 'brave.jpg');
-          assert.equal(res.body.books[0].description, 'Inspiring story of a young scottish barbarian');
+          assert.equal(res.body.books[0].description,
+            'Inspiring story of a young scottish barbarian');
           assert.isArray(res.body.books);
           done();
         });
@@ -265,45 +290,271 @@ describe('TEST BOOK ROUTES', () => {
 
   // Test for book update
   describe('PUT api/v1/books/:bookId when updating books', () => {
-    describe('test for empty, valid and invalid token when updating a book', () => {
-      it('should return status code 401 when no token is provided', (done) => {
-        request(app)
-          .put(`/api/v1/books/${createdBookId}`)
-          .send(bookseeder.setUpdateBookData(
-            'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
-            'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png', false
-          ))
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'No authorization token provided');
-            done();
+    describe('test for empty, valid and invalid token when updating a book',
+      () => {
+        it('should return status code 401 when no token is provided',
+          (done) => {
+            request(app)
+              .put(`/api/v1/books/${createdBookId}`)
+              .send(bookseeder.setUpdateBookData(
+                'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
+                'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png', false
+              ))
+              .expect(401)
+              .end((err, res) => {
+                if (err) return done(err);
+                assert.equal(res.body.message,
+                  'No authorization token provided');
+                done();
+              });
           });
-      });
-      it('should return status code 401 when invalid token is provided', (done) => {
-        request(app)
-          .put(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': 'bajjlkall' })
-          .send(bookseeder.setUpdateBookData(
-            'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
-            'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png', true
-          ))
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Invalid authorization token');
-            done();
+        it('should return status code 401 when invalid token is provided',
+          (done) => {
+            request(app)
+              .put(`/api/v1/books/${createdBookId}`)
+              .set({ 'x-access-token': 'bajjlkall' })
+              .send(bookseeder.setUpdateBookData(
+                'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
+                'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png', true
+              ))
+              .expect(401)
+              .end((err, res) => {
+                if (err) return done(err);
+                assert.equal(res.body.message, 'Invalid authorization token');
+                done();
+              });
           });
+        it('should return status code 404 when bookId is not found', (done) => {
+          request(app)
+            .put('/api/v1/books/0')
+            .set({ 'x-access-token': adminToken })
+            .send(bookseeder.setUpdateBookData(
+              'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
+              'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png',
+              'Inspiring story of a young scottish barbarian', true
+            ))
+            .expect(404)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Book Not Found');
+              done();
+            });
+        });
+        it('should return status code 404 when bookId is not provided',
+          (done) => {
+            request(app)
+              .put('/api/v1/books/')
+              .set({ 'x-access-token': adminToken })
+              .send(bookseeder.setUpdateBookData(
+                'Harry Mac', 'Michel Patt', 1,
+                new Date('1991/08/06'), 'ISBN88889999',
+                679, 3, 'foo.pdf', 'koo.png', true
+              ))
+              .expect(404)
+              .end((err, res) => {
+                if (err) return done(err);
+                assert.equal(res.body.message, undefined);
+                done();
+              });
+          });
+        it('should return status code 401 when token valid' +
+          ' but user unauthorised', (done) => {
+          request(app)
+            .put(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': userToken })
+            .send(bookseeder.setUpdateBookData(
+              'Harry Mac', 'Michel Patt', 1,
+              new Date('1991/08/06'), 'ISBN88889999',
+              679, 3, 'foo.pdf', 'koo.png', true
+            ))
+            .expect(403)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message,
+                'You must be an admin to perform this operation');
+              done();
+            });
+        });
+        it('should return status code 200 when token valid, bookId found and' +
+        ' user authorised then update book', (done) => {
+          request(app)
+            .put(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': adminToken })
+            .send(bookseeder.setUpdateBookData(
+              'Harry Mack', 'Michel Patts', 1, new Date('1991/08/06'),
+              'ISBN88889999', 679, 3, 'foo.pdf', 'koons.png',
+              'Inspiring story of a young scottish barbarian', false
+            ))
+            .expect(200)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Books updated');
+              assert.equal(res.body.update.bookName, 'Harry Mack');
+              assert.equal(res.body.update.author, 'Michel Patts');
+              assert.equal(res.body.update.categoryId, 1);
+              assert.equal(res.body.update.isbn, 'ISBN88889999');
+              assert.equal(res.body.update.pages, 679);
+              assert.equal(res.body.update.bookCount, 3);
+              assert.equal(res.body.update.bookContent, 'foo.pdf');
+              assert.equal(res.body.update.bookImage, 'koons.png');
+              assert.equal(res.body.update.description,
+                'Inspiring story of a young scottish barbarian');
+              assert.equal(res.body.update.isAvailable, false);
+              done();
+            });
+        });
       });
-      it('should return status code 404 when bookId is not found', (done) => {
+    describe('test for incomplete update details', () => {
+      it('should return status code 400 when all book update inputs missing',
+        (done) => {
+          request(app)
+            .put(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': adminToken })
+            .send(bookseeder.setBookData('', '', '', '',
+              '', '', '', '', '', '', ''))
+            .expect(400)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Validation error');
+              assert.equal(res.body.message, 'Validation error');
+              assert.equal(res.body.errors.bookName[0],
+                'The bookName field is required.');
+              assert.equal(res.body.errors.author[0],
+                'The author field is required.');
+              assert.equal(res.body.errors.categoryId[0],
+                'The categoryId field is required.');
+              assert.equal(res.body.errors.bookCount[0],
+                'The bookCount field is required.');
+              assert.equal(res.body.errors.bookContent[0],
+                'The bookContent field is required.');
+              assert.equal(res.body.errors.publishYear[0],
+                'The publishYear field is required.');
+              assert.equal(res.body.errors.isbn[0],
+                'The isbn field is required.');
+              assert.equal(res.body.errors.pages[0],
+                'The pages field is required.');
+              assert.equal(res.body.errors.description[0],
+                'The description field is required.');
+              assert.equal(res.body.errors.isAvailable[0],
+                'The isAvailable field is required.');
+              done();
+            });
+        });
+    });
+  });
+
+  // Test for listing a book
+  describe('test for GET api/v1/books/:bookId when viewing list of one user',
+    () => {
+      it(`should return status code 401 when a user wants to 
+    access to a single book detail without token`,
+        (done) => {
+          request(app)
+            .get(`/api/v1/books/${createdBookId}`)
+            .expect(401)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'No authorization token provided');
+              done();
+            });
+        });
+      it(`should return status code 401 when a user
+        wants to access to a single book detail with invalid token`,
+        (done) => {
+          request(app)
+            .get(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': 'xxddghj' })
+            .expect(401)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Invalid authorization token');
+              done();
+            });
+        });
+      it(`should return status code 404 when a user
+        wants to access to a single book detail with wrong bookId`,
+        (done) => {
+          request(app)
+            .get(`/api/v1/books/0`)
+            .set({ 'x-access-token': adminToken })
+            .expect(404)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Book not found');
+              done();
+            });
+        });
+      it(`should return status code 200 when a user
+        wants to access to a single book detail with valid token`,
+        (done) => {
+          request(app)
+            .get(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': adminToken })
+            .expect(200)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Book displayed');
+              assert.equal(res.body.book.bookName, 'Harry Mack');
+              assert.equal(res.body.book.author, 'Michel Patts');
+              assert.equal(res.body.book.bookContent, 'foo.pdf');
+              assert.equal(res.body.book.bookImage, 'koons.png');
+              assert.equal(res.body.book.bookCount, 3);
+              assert.equal(res.body.book.categoryId, 1);
+              assert.equal(res.body.book.isbn, 'ISBN88889999');
+              assert.equal(res.body.book.pages, '679');
+              assert.equal(res.body.book.description,
+                `Inspiring story of a young scottish barbarian`);
+              done();
+            });
+        });
+    });
+
+  // Test for book delete
+  describe('test for DELETE api/v1/books/:bookId when deleting a book',
+    () => {
+      it(`should return status code 401 when a user wants to 
+    delete a book without token`,
+        (done) => {
+          request(app)
+            .delete(`/api/v1/books/${createdBookId}`)
+            .expect(401)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'No authorization token provided');
+              done();
+            });
+        });
+      it(`should return status code 401 when a user wants to 
+      delete a book with invalid token`,
+        (done) => {
+          request(app)
+            .delete(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': 'xxddghj' })
+            .expect(401)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Invalid authorization token');
+              done();
+            });
+        });
+      it(`should return status code 403 when a user wants to 
+      delete a book with unauthorised token`,
+        (done) => {
+          request(app)
+            .delete(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': userToken })
+            .expect(403)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message,
+                'You must be an admin to perform this operation');
+              done();
+            });
+        });
+      it('should return status code 404  when bookId is not found', (done) => {
         request(app)
-          .put('/api/v1/books/0')
+          .delete('/api/v1/books/0')
           .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setUpdateBookData(
-            'Harry Mac', 'Michel Patt', 1, new Date('1991/08/06'),
-            'ISBN88889999', 679, 3, 'foo.pdf', 'koo.png',
-            'Inspiring story of a young scottish barbarian', true
-          ))
           .expect(404)
           .end((err, res) => {
             if (err) return done(err);
@@ -311,221 +562,19 @@ describe('TEST BOOK ROUTES', () => {
             done();
           });
       });
-      it('should return status code 404 when bookId is not provided', (done) => {
-        request(app)
-          .put('/api/v1/books/')
-          .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setUpdateBookData(
-            'Harry Mac', 'Michel Patt', 1,
-            new Date('1991/08/06'), 'ISBN88889999',
-            679, 3, 'foo.pdf', 'koo.png', true
-          ))
-          .expect(404)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, undefined);
-            done();
-          });
-      });
-      it('should return status code 401 when token valid but user unauthorised', (done) => {
-        request(app)
-          .put(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': userToken })
-          .send(bookseeder.setUpdateBookData(
-            'Harry Mac', 'Michel Patt', 1,
-            new Date('1991/08/06'), 'ISBN88889999',
-            679, 3, 'foo.pdf', 'koo.png', true
-          ))
-          .expect(403)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'You must be an admin to perform this operation');
-            done();
-          });
-      });
-      it('should return status code 200 when token valid, bookId found and user authorised then update book', (done) => {
-        request(app)
-          .put(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setUpdateBookData(
-            'Harry Mack', 'Michel Patts', 1, new Date('1991/08/06'),
-            'ISBN88889999', 679, 3, 'foo.pdf', 'koons.png',
-            'Inspiring story of a young scottish barbarian', false
-          ))
-          .expect(200)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Books updated');
-            assert.equal(res.body.update.bookName, 'Harry Mack');
-            assert.equal(res.body.update.author, 'Michel Patts');
-            assert.equal(res.body.update.categoryId, 1);
-            assert.equal(res.body.update.isbn, 'ISBN88889999');
-            assert.equal(res.body.update.pages, 679);
-            assert.equal(res.body.update.bookCount, 3);
-            assert.equal(res.body.update.bookContent, 'foo.pdf');
-            assert.equal(res.body.update.bookImage, 'koons.png');
-            assert.equal(res.body.update.description, 'Inspiring story of a young scottish barbarian');
-            assert.equal(res.body.update.isAvailable, false);
-            done();
-          });
-      });
-    });
-    describe('test for incomplete update details', () => {
-      it('should return status code 400 when all book update inputs missing', (done) => {
-        request(app)
-          .put(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': adminToken })
-          .send(bookseeder.setBookData('', '', '', '', '', '', '', '', '', '', ''))
-          .expect(400)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.bookName[0], 'The bookName field is required.');
-            assert.equal(res.body.errors.author[0], 'The author field is required.');
-            assert.equal(res.body.errors.categoryId[0], 'The categoryId field is required.');
-            assert.equal(res.body.errors.bookCount[0], 'The bookCount field is required.');
-            assert.equal(res.body.errors.bookContent[0], 'The bookContent field is required.');
-            assert.equal(res.body.errors.publishYear[0], 'The publishYear field is required.');
-            assert.equal(res.body.errors.isbn[0], 'The isbn field is required.');
-            assert.equal(res.body.errors.pages[0], 'The pages field is required.');
-            assert.equal(res.body.errors.description[0], 'The description field is required.');
-            assert.equal(res.body.errors.isAvailable[0], 'The isAvailable field is required.');
-            done();
-          });
-      });
-    });
-  });
-
-  // Test for listing a book
-  describe('test for GET api/v1/books/:bookId when viewing list of one user', () => {
-    it(`should return status code 401 when a user wants to 
-    access to a single book detail without token`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/books/${createdBookId}`)
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'No authorization token provided');
-            done();
-          });
-      });
-    it(`should return status code 401 when a user
-        wants to access to a single book detail with invalid token`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': 'xxddghj' })
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Invalid authorization token');
-            done();
-          });
-      });
-    it(`should return status code 404 when a user
-        wants to access to a single book detail with wrong bookId`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/books/0`)
-          .set({ 'x-access-token': adminToken })
-          .expect(404)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Book not found');
-            done();
-          });
-      });
-    it(`should return status code 200 when a user
-        wants to access to a single book detail with valid token`,
-      (done) => {
-        request(app)
-          .get(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': adminToken })
-          .expect(200)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Book displayed');
-            assert.equal(res.body.book.bookName, 'Harry Mack');
-            assert.equal(res.body.book.author, 'Michel Patts');
-            assert.equal(res.body.book.bookContent, 'foo.pdf');
-            assert.equal(res.body.book.bookImage, 'koons.png');
-            assert.equal(res.body.book.bookCount, 3);
-            assert.equal(res.body.book.categoryId, 1);
-            assert.equal(res.body.book.isbn, 'ISBN88889999');
-            assert.equal(res.body.book.pages, '679');
-            assert.equal(res.body.book.description,
-              `Inspiring story of a young scottish barbarian`);
-            done();
-          });
-      });
-  });
-
-  // Test for book delete
-  describe('test for DELETE api/v1/books/:bookId when deleting a book', () => {
-    it(`should return status code 401 when a user wants to 
-    delete a book without token`,
-      (done) => {
-        request(app)
-          .delete(`/api/v1/books/${createdBookId}`)
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'No authorization token provided');
-            done();
-          });
-      });
-    it(`should return status code 401 when a user wants to 
-      delete a book with invalid token`,
-      (done) => {
-        request(app)
-          .delete(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': 'xxddghj' })
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Invalid authorization token');
-            done();
-          });
-      });
-    it(`should return status code 403 when a user wants to 
+      it(`should return status code 200 when a user wants to 
       delete a book with unauthorised token`,
-      (done) => {
-        request(app)
-          .delete(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': userToken })
-          .expect(403)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'You must be an admin to perform this operation');
-            done();
-          });
-      });
-    it('should return status code 404  when bookId is not found', (done) => {
-      request(app)
-        .delete('/api/v1/books/0')
-        .set({ 'x-access-token': adminToken })
-        .expect(404)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Book Not Found');
-          done();
+        (done) => {
+          request(app)
+            .delete(`/api/v1/books/${createdBookId}`)
+            .set({ 'x-access-token': adminToken })
+            .expect(200)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Book deleted');
+              done();
+            });
         });
     });
-    it(`should return status code 200 when a user wants to 
-      delete a book with unauthorised token`,
-      (done) => {
-        request(app)
-          .delete(`/api/v1/books/${createdBookId}`)
-          .set({ 'x-access-token': adminToken })
-          .expect(200)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Book deleted');
-            done();
-          });
-      });
-  });
 });
 

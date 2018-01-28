@@ -4,7 +4,9 @@ import { Link } from 'react-router';
 
 /**
  * @function UserBorrow
+ * 
  * @param {object} props
+ * 
  * @return {XML} JSX
  */
 const userBorrowList = props => (
@@ -15,7 +17,9 @@ const userBorrowList = props => (
     <td>{ new Date(props.borrower.createdAt).toLocaleString() }</td>
     <td>{ props.borrower.returned}</td>
     <td>
-      { ((props.borrower.borrowStatus === 'true') || (props.clickedBorrowList.indexOf(props.borrower.id) > -1)) ? 'Confirmed' :
+      { ((props.borrower.borrowStatus === 'true') || 
+        (props.clickedBorrowList.indexOf(props.borrower.id) > -1)) ?
+        'Confirmed' :
         <Link
           className='waves-effect waves-light btn btn-small'
           onClick={() => (props.confirmBorrow(props.borrower.id))}

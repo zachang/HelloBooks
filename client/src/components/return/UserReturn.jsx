@@ -3,7 +3,9 @@ import PropTypes from 'react-proptypes';
 
 /**
  * @function UserReturn
+ *
  * @param {object} props
+ *
  * @return {XML} JSX
  */
 const UserReturn = props => (
@@ -30,7 +32,11 @@ const UserReturn = props => (
         </span>
         <p>Author: { props.returning.Book.author }</p>
         <p>Category: { props.returning.Book.Category.categoryName }</p>
-        <p>Published: { new Date(props.returning.Book.publishYear).getFullYear() }</p>
+        <p>
+          Published: {
+            new Date(props.returning.Book.publishYear).getFullYear()
+          }
+        </p>
         <p>Pages: { props.returning.Book.pages }</p>
         <p>Stock: { props.returning.Book.bookCount }</p>
         <p>Description: {

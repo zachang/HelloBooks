@@ -11,12 +11,15 @@ import { decodeToken } from '../utils/helpers';
 
 /**
  * App class declaration
+ *
  * @class App
+ *
  * @extends {React.Component}
  */
 export class App extends React.Component {
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -26,15 +29,18 @@ export class App extends React.Component {
 
   /**
    * @method componentDidMount
+   *
    * @return {void} void
    */
   componentDidMount() {
     $('.button-collapse').sideNav();
     $('select').material_select();
+    $('.dropdown-button').dropdown();
   }
 
   /**
    * Renders App component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -49,7 +55,10 @@ export class App extends React.Component {
         {(userRoles.isAdmin) ?
           <AdminSidebar profileImage={this.props.userState.user.userImage}/>
           :
-          <UserSidebar profileImage={this.props.userState.user.userImage}/>}
+          <UserSidebar
+            profileImage={this.props.userState.user.userImage}
+            userLevel={this.props.userState.user.level}
+          />}
         <div className='container mainCon' style={{ marginLeft: '5%' }}>
           {this.props.children}
         </div>

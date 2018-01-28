@@ -21,8 +21,8 @@ describe('<Admin/>', () => {
   const getCategoryAction = sinon.spy();
   // create a spy function for deleteBookAction
   const deleteBookAction = sinon.spy();
-  // spy on componentDidUpdate of User Page
-  sinon.spy(Admin.prototype, 'componentDidUpdate');
+  // spy on componentDidMount of User Page
+  sinon.spy(Admin.prototype, 'componentDidMount');
   // spy on bookCategoryChange of User Page
   sinon.spy(Admin.prototype, 'bookCategoryChange');
   // spy on readBook of User Page
@@ -74,9 +74,9 @@ describe('<Admin/>', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('calls componentWillReceiveProps book not created', () => {
-    shallowComponent.instance().componentDidUpdate(props);
-    expect(Admin.prototype.componentDidUpdate.called).toEqual(true);
+  it('calls componentDidMount', () => {
+    shallowComponent.instance().componentDidMount(props);
+    expect(Admin.prototype.componentDidMount.called).toEqual(true);
   });
 
   it('should check that readBook is called', () => {
