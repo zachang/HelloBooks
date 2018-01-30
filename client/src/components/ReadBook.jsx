@@ -72,7 +72,7 @@ class ReadBook extends Component {
     const { book } = this.state;
 
     return (
-      <div>
+      <div className='row col m12 col-sm-2'>
         {(book !== null) && <PDFReader
           file={book.bookContent}
           renderType='canvas'

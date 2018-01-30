@@ -42,7 +42,6 @@ const common = {
         API_HOST: JSON.stringify('https://zachang-hellobooks.herokuapp.com')
       }
     }),
-    new webpack.optimize.UglifyJsPlugin(),
     new webpack.EnvironmentPlugin({
       CLIENT_ID: JSON.stringify(process.env.CLIENT_ID)
     })

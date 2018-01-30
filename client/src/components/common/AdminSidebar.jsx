@@ -22,17 +22,6 @@ export default class AdminSidebar extends React.Component {
   }
 
   /**
-   * @method componentDidUpdate
-   *
-   * @return {void} void
-   */
-  componentDidUpdate() {
-    $('.collapsible').collapsible();
-    $('.button-collapse').sideNav();
-    $('.dropdown-button').dropdown();
-  }
-
-  /**
    * Handles user logout
    *
    * @method logOut
@@ -41,6 +30,7 @@ export default class AdminSidebar extends React.Component {
    */
   logOut() {
     window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
   }
 
   /**

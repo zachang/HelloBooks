@@ -165,7 +165,8 @@ const routes = (router) => {
    *         description: No authorization token provided
    */
   router.route('/users')
-    .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin, usersController.list);
+    .get(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      usersController.list);
 
   router.route('/users/:userId')
     /**
@@ -358,7 +359,8 @@ const routes = (router) => {
      *       400:
      *        description: Validation Error
      */
-    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.create)
+    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      booksController.create)
     /**
      * @swagger
      * /api/v1/books:
@@ -463,7 +465,8 @@ const routes = (router) => {
      *       404:
      *        description: Book not found
      */
-    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.update)
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      booksController.update)
     /**
      * @swagger
      * /api/v1/books/{bookId}:
@@ -525,7 +528,8 @@ const routes = (router) => {
      *       401:
      *         description: No authorization token provided
      */
-    .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, booksController.destroy);
+    .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      booksController.destroy);
 
   router.route('/users/:userId/books')
     /**
@@ -582,7 +586,7 @@ const routes = (router) => {
      *         required: true
      *         type: integer
      *         minimum: 1
-     *         description: The ID of the user who wants to retrieve his/her borrow details
+     *         description: The ID of the user for his/her borrow details
      *     description: Display a single book
      *     produces:
      *       - application/json
@@ -710,7 +714,8 @@ const routes = (router) => {
      *       401:
      *         description: No authorization token provided
      */
-    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.create)
+    .post(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      categoryController.create)
     /**
      * @swagger
      * /api/v1/categories:
@@ -771,7 +776,8 @@ const routes = (router) => {
      *       401:
      *         description: No authorization token provided
      */
-    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.update)
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      categoryController.update)
     /**
      * @swagger
      * /api/v1/categories/{categoryId}:
@@ -803,7 +809,8 @@ const routes = (router) => {
      *       401:
      *         description: No authorization token provided
      */
-    .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin, categoryController.destroy);
+    .delete(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      categoryController.destroy);
 
   router.route('/borrows/:borrowId/confirm')
     /**
@@ -834,7 +841,8 @@ const routes = (router) => {
      *       401:
      *         description: No authorization token provided
      */
-    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin, borrowController.acceptReturns)
+    .put(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      borrowController.acceptReturns)
     /**
      * @swagger
      * /api/v1/borrows/{borrowId}/confirm:
@@ -863,7 +871,8 @@ const routes = (router) => {
      *       401:
      *         description: No authorization token provided
      */
-    .patch(authMiddleware.verifyToken, authMiddleware.verifyAdmin, borrowController.acceptBorrows);
+    .patch(authMiddleware.verifyToken, authMiddleware.verifyAdmin,
+      borrowController.acceptBorrows);
 };
 
 export default routes;

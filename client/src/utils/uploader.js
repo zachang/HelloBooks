@@ -27,6 +27,7 @@ const uploader = (data, uploadType) => {
   return new Promise((resolve, reject) => {
     return upload(data).end((error, response) => {
       if (error) {
+        Materialize.toast('No Image or Pdf file provided', 4000);
         return reject({ error, uploadType });
       }
       return resolve({ response, uploadType });

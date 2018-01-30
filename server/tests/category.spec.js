@@ -102,33 +102,16 @@ describe('TEST CATEGORY ROUTES', () => {
               done();
             });
         });
-        it('should return status code 400 when token valid and ' +
-        'authorised but with no category inputs', (done) => {
+        it('should not create a new category' +
+          ' if already exist', (done) => {
           request(app)
             .post('/api/v1/categories')
             .set({ 'x-access-token': adminToken })
-            .send(categoryseeder.setCatData(''))
-            .expect(400)
+            .send(categoryseeder.setCatData('Adventure'))
+            .expect(409)
             .end((err, res) => {
               if (err) return done(err);
-              assert.equal(res.body.message, 'Validation error');
-              assert.equal(res.body.errors.categoryName[0],
-                'The categoryName field is required.');
-              done();
-            });
-        });
-        it('should return status code 400 if categoryName ' +
-        'input not string', (done) => {
-          request(app)
-            .post('/api/v1/categories')
-            .set({ 'x-access-token': adminToken })
-            .send(categoryseeder.setCatData(99))
-            .expect(400)
-            .end((err, res) => {
-              if (err) return done(err);
-              assert.equal(res.body.message, 'Validation error');
-              assert.equal(res.body.errors.categoryName[0],
-                'The categoryName must be a string.');
+              assert.equal(res.body.message, 'Category already exist');
               done();
             });
         });

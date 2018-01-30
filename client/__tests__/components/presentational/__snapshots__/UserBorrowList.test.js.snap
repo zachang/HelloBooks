@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserBorrowList/> renders <UserBorrowList /> component 1`] = `
+<tr>
+  <td />
+  <td>
+    Science
+  </td>
+  <td>
+    Tito Navo
+  </td>
+  <td>
+    Invalid Date
+  </td>
+  <td />
+  <td>
+    <Link
+      className="waves-effect waves-light btn btn-small"
+      onClick={[Function]}
+      onlyActiveOnIndex={false}
+      style={Object {}}
+    >
+      Confirm
+    </Link>
+  </td>
+</tr>
+`;

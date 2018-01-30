@@ -45,18 +45,16 @@ export class Admin extends React.Component {
   }
 
   /**
-   * @method componentDidMount
+   * @method componentDidUpdate
    *
    * @return {void} void
    */
-  componentDidMount() {
-    $('select').material_select();
+  componentDidUpdate() {
     $('.collapsible').collapsible();
-    $('.dropdown-button').dropdown();
     $('.button-collapse').sideNav();
+    $('.dropdown-button').dropdown();
     $('.tooltipped').tooltip({ delay: 50 });
-    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change',
-      this.bookCategoryChange.bind(this));
+    $('select').material_select();
   }
 
   /**
@@ -169,12 +167,12 @@ export class Admin extends React.Component {
           </div>
 
           <div className='row'>
-            <div className='input-field col s6 l4  m4'>
+            <div className='col s6 l4  m4'>
               <select
                 name = 'categoryId'
                 value = {this.state.categoryId}
-                ref = 'categoryId'
                 onChange= {this.bookCategoryChange}
+                className='browser-default'
               >
                 <option value=''>Select Category</option>
                 { this.state.categories.map((category, i) =>
@@ -187,7 +185,7 @@ export class Admin extends React.Component {
           </div>
 
           <div className='row'>
-            <div className='row'>
+            {(this.props.bookState.books.length > 0) ? <div className='row'>
               { this.props.bookState.books.map((book, i) =>
                 <BookCard
                   key={i}
@@ -197,7 +195,11 @@ export class Admin extends React.Component {
                   readBook={this.readBook}
                 />
               )}
-            </div>
+            </div> : <div
+              className='row bookCat'
+            >
+              No book available yet
+            </div>}
 
             <div className='row'>
               {

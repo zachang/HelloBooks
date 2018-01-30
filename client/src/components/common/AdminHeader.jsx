@@ -21,23 +21,20 @@ export default class AdminHeader extends React.Component {
 
   /**
    * @method componentDidMount
-   *
    * @return {void} void
    */
   componentDidMount() {
     $('.button-collapse').sideNav();
-    $('.dropdown-button').dropdown();
   }
 
   /**
    * Handles user logout
-   *
    * @method logOut
-   *
    * @return {void} void
    */
   logOut() {
     window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
   }
 
   /**
@@ -80,62 +77,42 @@ export default class AdminHeader extends React.Component {
                 <li className='divider'></li>
                 <li><Link to={'/password/change'}>Change Password</Link></li>
                 <li className='divider'></li>
-                <li><Link to='#' className='logOut' onClick={this.logOut}>
+                <li><Link to='' className='logOut' onClick={this.logOut}>
                   Logout</Link>
                 </li>
               </ul>
 
-              <ul id='nav-mobile'
+              <ul id='mobile-demo'
                 className='side-nav grey darken-4 hide-on-med-and-up'
               >
                 <li>
                   <div className='row walp'></div>
                 </li>
-                <li><Link to={'/profile'}>Profile</Link></li>
-                <li className='no-padding'>
-                  <ul className='collapsible collapsible-accordion'>
-                    <li>
-                      <Link className='collapsible-header'>
-                        Books Shelf
-                        <i className='material-icons mat-icon'>
-                          arrow_drop_down
-                        </i>
-                      </Link>
-                      <div className='collapsible-body'>
-                        <ul>
-                          <li><Link to='/admin'>All Books</Link></li>
-                          <li><Link to='/borrow'>Borrowed Books</Link></li>
-                          <li><Link to='/return'>Returned Books</Link></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
+                <li className='lists'><Link to={'/profile'}>Profile</Link></li>
+                <li className='lists'><Link to='/admin'>All Books</Link>
                 </li>
-                <li className='no-padding'>
-                  <ul className='collapsible collapsible-accordion'>
-                    <li>
-                      <a className='collapsible-header'>
-                        Permissions
-                        <i className='material-icons mat-icon'>
-                          arrow_drop_down
-                        </i>
-                      </a>
-                      <div className='collapsible-body'>
-                        <ul>
-                          <li><Link to='/books'>Add Books</Link></li>
-                          <li><Link to='/category'>Add Categories</Link></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
+                <li className='lists'>
+                  <Link to='/borrow'>Borrowed Books</Link>
                 </li>
-                <li><Link to={'/password/change'}>Change Password</Link></li>
-                <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
+                <li className='lists'>
+                  <Link to='/return'>Returned Books</Link>
+                </li>
+                <li className='lists'>
+                  <Link to='/books'>Add Books</Link>
+                </li>
+                <li className='lists'>
+                  <Link to='/category'>Add Categories</Link>
+                </li>
+                <li className='lists'>
+                  <Link to={'/password/change'}>Change Password</Link>
+                </li>
+                <li className='lists'>
+                  <Link to='' onClick={this.logOut}>Logout</Link>
+                </li>
               </ul>
-              <Link href='#' data-activates='nav-mobile'
-                className='button-collapse menu-icon-link'
-              >
-                <i className='material-icons hide-on-med-and-up'>
+              <Link to='' data-activates='mobile-demo'
+                className='button-collapse'>
+                <i id='hambuger' className='material-icons'>
                   menu
                 </i>
               </Link>

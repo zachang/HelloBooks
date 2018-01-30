@@ -21,23 +21,20 @@ export default class UserHeader extends React.Component {
 
   /**
    * @method componentDidMount
-   *
    * @return {void} void
    */
   componentDidMount() {
     $('.button-collapse').sideNav();
-    $('.dropdown-button').dropdown();
   }
 
   /**
    * Handles user logout
-   *
    * @method logOut
-   *
    * @return {void} void
    */
   logOut() {
     window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
   }
 
   /**
@@ -81,7 +78,7 @@ export default class UserHeader extends React.Component {
                 <li><Link to={'/password/change'}>Change Password</Link></li>
                 <li className='divider'></li>
                 <li>
-                  <Link to='#' className='logOut'
+                  <Link to='' className='logOut'
                     onClick={this.logOut} id='logout'
                   >
                     Logout
@@ -89,40 +86,35 @@ export default class UserHeader extends React.Component {
                 </li>
               </ul>
 
-              <ul id='nav-mobile'
+              <ul id='mobile-demo'
                 className='side-nav grey darken-4 hide-on-med-and-up'
               >
                 <li>
                   <div className='row walp'>
                   </div>
                 </li>
-                <li><Link to={'/profile'}>Profile</Link></li>
-                <li className='no-padding'>
-                  <ul className='collapsible collapsible-accordion'>
-                    <li>
-                      <Link className='collapsible-header'>
-                        Books Shelf
-                        <i className='material-icons mat-icon'>
-                          arrow_drop_down
-                        </i>
-                      </Link>
-                      <div className='collapsible-body'>
-                        <ul>
-                          <li><Link to='/user'>All Books</Link></li>
-                          <li><Link to='/borrowed'>Borrowed Books</Link></li>
-                          <li><Link to='/returned'>Returned Books</Link></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
+                <li className='lists'><Link to={'/profile'}>Profile</Link></li>
+                <li className='lists'>
+                  <Link to='/user'>All Books</Link>
                 </li>
-                <li><Link to={'/password/change'}>Change Password</Link></li>
-                <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
+                <li className='lists'>
+                  <Link to='/borrowed'>Borrowed Books</Link>
+                </li>
+                <li className='lists'>
+                  <Link to='/returned'>Returned Books</Link>
+                </li>
+                <li className='lists'>
+                  <Link to={'/password/change'}>Change Password</Link>
+                </li>
+                <li className='lists'>
+                  <Link to='' onClick={this.logOut}>Logout</Link>
+                </li>
               </ul>
-              <Link href='#'
-                data-activates='nav-mobile'
-                className='button-collapse menu-icon-link'>
-                <i className='material-icons hide-on-med-and-up'>menu</i>
+              <Link to='' data-activates='mobile-demo'
+                className='button-collapse'>
+                <i id='hambuger' className='material-icons'>
+                  menu
+                </i>
               </Link>
             </div>
           </nav>

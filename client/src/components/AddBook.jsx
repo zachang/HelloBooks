@@ -89,6 +89,7 @@ export class AddBook extends React.Component {
         errors: nextProps.bookState.errors
       });
     }
+
     this.setState({ categories: nextProps.categoryState.categories });
   }
 

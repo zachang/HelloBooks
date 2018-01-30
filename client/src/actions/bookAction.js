@@ -15,15 +15,15 @@ const addBookAction = bookContents => (dispatch) => {
     .then((res) => {
       dispatch({
         type: 'UPLOAD_IMAGE_SUCCESSFUL',
-        payLoad: res.response.body.url
+        payLoad: res.response.body.secure_url
       });
-      bookContents.bookImage = res.response.body.url;
+      bookContents.bookImage = res.response.body.secure_url;
       uploader(bookContents.bookContent, 'pdf').then((res) => {
         dispatch({
           type: 'UPLOAD_PDF_SUCCESSFUL',
-          payLoad: res.response.body.url
+          payLoad: res.response.body.secure_url
         });
-        bookContents.bookContent = res.response.body.url;
+        bookContents.bookContent = res.response.body.secure_url;
         axios.post('/api/v1/books', bookContents,
           { headers: { 'x-access-token': window.sessionStorage.token } })
           .then((res) => {

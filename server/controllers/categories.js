@@ -22,22 +22,35 @@ const categoryController = {
    */
   create(req, res) {
     const validation = new Validator(req.body, addCatRules);
-    if (validation.passes()) {
-      return Category.create({
-        categoryName: req.body.categoryName,
-      })
-        .then(category => res.status(201).send({
-          message: 'Category created',
-          category
-        }))
-        .catch(() => {
-          res.status(500).send({ message: 'Error, Category not created' });
+    return Category.findOne({
+      where: { categoryName: req.body.categoryName }
+    })
+      .then((categoryName) => {
+        if (categoryName) {
+          return res.status(409).send({
+            message: 'Category already exist'
+          });
+        }
+        if (validation.passes()) {
+          return Category.create({
+            categoryName: req.body.categoryName,
+          })
+            .then(category => res.status(201).send({
+              message: 'Category created',
+              category
+            }))
+            .catch(() => {
+              res.status(500).send({ message: 'Error, Category not created' });
+            });
+        }
+        return res.status(400).json({
+          message: 'Validation error',
+          errors: validation.errors.all()
         });
-    }
-    return res.status(400).json({
-      message: 'Validation error',
-      errors: validation.errors.all()
-    });
+      })
+      .catch(() => {
+        res.status(500).send({ message: 'Request not processed' });
+      });
   },
   /**
    * @description find all categories

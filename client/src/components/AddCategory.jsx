@@ -25,6 +25,7 @@ export class AddCategory extends React.Component {
         categoryName: '',
       },
       errors: null,
+      fails: null,
       showToast: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,7 +47,9 @@ export class AddCategory extends React.Component {
           showToast: false
         });
       }
-    } else if (!nextProps.categoryState.success) {
+    }
+
+    if (nextProps.categoryState.errors !== null) {
       if (this.state.showToast) {
         Materialize.toast('Category not added!', 4000);
         this.setState({
@@ -55,6 +58,19 @@ export class AddCategory extends React.Component {
       }
       this.setState({
         errors: nextProps.categoryState.errors
+      });
+    }
+    if (nextProps.categoryState.fails === 'Category already exist'
+      && !nextProps.categoryState.success) {
+      if (this.state.showToast) {
+        Materialize.toast('Category already exist!', 4000);
+        this.setState({
+          showToast: false
+        });
+      }
+      this.setState({
+        fails: nextProps.categoryState.fails,
+        errors: null
       });
     }
   }
@@ -71,7 +87,11 @@ export class AddCategory extends React.Component {
   handleChange(event) {
     const categoryData = this.state.categoryData;
     categoryData[event.target.name] = event.target.value;
-    this.setState({ categoryData });
+    this.setState({
+      errors: null,
+      fails: null,
+      categoryData
+    });
   }
 
   /**
@@ -101,7 +121,7 @@ export class AddCategory extends React.Component {
    * @return {XML} JSX
    */
   render() {
-    const { categoryData } = this.state;
+    const { categoryData, fails } = this.state;
 
     return (
       <div>
@@ -149,10 +169,6 @@ export class AddCategory extends React.Component {
                       type='submit'
                       name='action'> Add Category
                     </button>
-
-                    <div style={{ color: 'red', float: 'right' }}>
-                      {this.props.categoryState.fails}
-                    </div>
                   </div>
                 </div>
               </form>

@@ -208,6 +208,31 @@ div.card-reveal{
   width: 40px !important;
 }
 
-.pdf-reader .pdf-reader-header{
+.pdf-reader .pdf-reader-header {
   display: none;
+}
+
+.pdf-reader.tumbnails-open .pdf-viewer {
+  left: 0 !important;
+}
+
+#sidenav-overlay {
+  z-index: 1;
+}
+
+.navbar-fixed {
+  z-index: 999;
+}
+
+.drag-target{
+  width: 1px !important;
+  left: 0 !important;
+}
+
+.lists{
+  height: 40px;
+}
+
+.bookCat{
+  margin-left: 0.5rem !important;
 }

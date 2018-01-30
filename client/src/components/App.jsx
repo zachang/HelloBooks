@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
+import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getOneUserAction } from '../actions/userAction';
@@ -35,7 +36,6 @@ export class App extends React.Component {
   componentDidMount() {
     $('.button-collapse').sideNav();
     $('select').material_select();
-    $('.dropdown-button').dropdown();
   }
 
   /**

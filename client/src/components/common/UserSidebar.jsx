@@ -12,7 +12,6 @@ import { Link, browserHistory } from 'react-router';
 export default class UserSidebar extends React.Component {
   /**
    * class constructor
-   *
    * @param {object} props
    */
   constructor(props) {
@@ -21,23 +20,12 @@ export default class UserSidebar extends React.Component {
   }
 
   /**
-   * @method componentDidUpdate
-   *
-   * @return {void} void
-   */
-  componentDidUpdate() {
-    $('.collapsible').collapsible();
-    $('.button-collapse').sideNav();
-    $('.dropdown-button').dropdown();
-  }
-
-  /**
    * @method logOut
-   *
    * @return {void} void
    */
   logOut() {
     window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
   }
 
   /**
@@ -90,7 +78,7 @@ export default class UserSidebar extends React.Component {
               </li>
               <li><Link to={'/password/change'}>Change Password</Link></li>
               <li>
-                <Link to='#' className='logOut' onClick={this.logOut}>
+                <Link to='' className='logOut' onClick={this.logOut}>
                   Logout
                 </Link>
               </li>

@@ -49,21 +49,6 @@ export class User extends React.Component {
   }
 
   /**
-   * @method componentDidMount
-   *
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('select').material_select();
-    $('.collapsible').collapsible();
-    $('.dropdown-button').dropdown();
-    $('.button-collapse').sideNav();
-    $('.tooltipped').tooltip({ delay: 50 });
-    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change',
-      this.bookCategoryChange.bind(this));
-  }
-
-  /**
    * @method componentWillReceiveProps
    *
    * @param {object} nextProps - nextProps
@@ -111,6 +96,18 @@ export class User extends React.Component {
       Materialize.toast('Check email', 4000);
       this.props.clearGoogleSigninAction();
     }
+  }
+
+
+  /**
+   * @method componentDidUpdate
+   * @return {void} void
+   */
+  componentDidMount() {
+    $('select').material_select();
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
+    $('.tooltipped').tooltip({ delay: 50 });
   }
 
   /**
@@ -169,12 +166,12 @@ export class User extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='input-field col s6 l4  m4'>
+          <div className='col s6 l4  m4'>
             <select
               name = 'categoryId'
               value = {this.state.categoryId}
-              ref = 'categoryId'
               onChange= {this.bookCategoryChange}
+              className='browser-default'
             >
               <option value=''>Select Category</option>
               { this.state.categories.map((category, i) =>
@@ -186,7 +183,8 @@ export class User extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='row'>
+
+          {(this.props.bookState.books.length > 0) ? <div className='row'>
             { this.props.bookState.books.map((book, i) =>
               <BookCardUser
                 key={i}
@@ -194,7 +192,11 @@ export class User extends React.Component {
                 borrowBook={this.borrowBook}
                 readBook={this.readBook}
               />)}
-          </div>
+          </div> : <div
+            className='row bookCat'
+          >
+            No book available yet
+          </div>}
 
           <div className='row'>
             {
