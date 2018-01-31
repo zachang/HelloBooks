@@ -236,3 +236,27 @@ div.card-reveal{
 .bookCat{
   margin-left: 0.5rem !important;
 }
+
+.homedrop{
+  margin-left: -20px !important;
+  width: 2px !important;
+}
+
+.homedrop-2{
+  width: 2px !important;
+}
+
+.drop-content{
+  top: 0 !important;
+  width: 106% !important;
+  left: -10px !important;
+
+  li > a{
+    color: #2bbbad !important;
+    text-align: center;
+  }
+}
+
+.no-display{
+  margin-left: 4%;
+}

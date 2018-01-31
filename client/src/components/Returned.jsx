@@ -74,12 +74,17 @@ export class Returned extends React.Component {
         </div>
 
         <div className='row'>
-          { (this.props.bookState.returnings) ?
+          { (this.props.bookState.returnings &&
+            Object.keys(this.props.bookState.returnings).length > 0) ?
             this.props.bookState.returnings.map((returning, i) =>
               <UserReturn
                 key={i}
                 returning={returning}
-              />) : null }
+              />) :
+            <h6 className='no-display'>
+              Not returned books!
+            </h6>
+          }
         </div>
 
         <div className='row'>

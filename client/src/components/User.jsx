@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
-import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
@@ -101,13 +100,15 @@ export class User extends React.Component {
 
   /**
    * @method componentDidUpdate
+   *
    * @return {void} void
    */
-  componentDidMount() {
-    $('select').material_select();
+  componentDidUpdate() {
     $('.collapsible').collapsible();
+    $('.button-collapse').sideNav();
     $('.dropdown-button').dropdown();
     $('.tooltipped').tooltip({ delay: 50 });
+    $('select').material_select();
   }
 
   /**

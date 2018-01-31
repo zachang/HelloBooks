@@ -112,7 +112,7 @@ export class BorrowList extends React.Component {
         </div>
 
         <div className='row'>
-          <table className='bordered highlight'>
+          <table className='bordered highlight responsive-table'>
             <thead className='black white-text'>
               <tr>
                 <th>Book Name</th>
@@ -124,7 +124,7 @@ export class BorrowList extends React.Component {
               </tr>
             </thead>
 
-            <tbody>
+            {(this.props.bookState.borrowers.length > 0) ? <tbody>
               { this.props.bookState.borrowers.map((borrower, i) =>
                 <UserBorrowList
                   key={i}
@@ -133,21 +133,24 @@ export class BorrowList extends React.Component {
                   confirmBorrow={this.confirmBorrow}
                 />
               )}
-            </tbody>
+            </tbody> : <tbody>
+              <tr>
+                <td>No books borrowed</td>
+              </tr>
+            </tbody>}
           </table>
+          <div className='row'>
+            {
+              ((this.state.pageCount) ?
+                <Pagination
+                  items={this.state.pageCount}
+                  onSelect={(page) => {
+                    const offset = (page - 1) * this.state.limit;
+                    this.props.viewAllBorrowAction(this.state.limit, offset);
+                  }} /> : '')
+            }
+          </div>
         </div>
-        <div className='row'>
-          {
-            ((this.state.pageCount) ?
-              <Pagination
-                items={this.state.pageCount}
-                onSelect={(page) => {
-                  const offset = (page - 1) * this.state.limit;
-                  this.props.viewAllBorrowAction(this.state.limit, offset);
-                }} /> : '')
-          }
-        </div>
-
       </div>
     );
   }

@@ -63,7 +63,7 @@ export class UserList extends React.Component {
     return (
       <div className='row'>
         <div className='section'>
-          <h4 style={{ marginTop: '7%' }}>Borrowed Books</h4>
+          <h4 style={{ marginTop: '7%' }}>All Users</h4>
         </div>
         <div
           className='divider'
@@ -75,7 +75,7 @@ export class UserList extends React.Component {
         </div>
 
         <div className='row'>
-          <table className='bordered highlight'>
+          <table className='bordered highlight responsive-table'>
             <thead className='black white-text'>
               <tr>
                 <th>Name</th>

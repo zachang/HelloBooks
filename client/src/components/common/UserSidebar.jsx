@@ -77,14 +77,16 @@ export default class UserSidebar extends React.Component {
                 </ul>
               </li>
               <li><Link to={'/password/change'}>Change Password</Link></li>
+              <li className='user-level'>
+                <Link>
+                Level: {this.props.userLevel}
+                </Link>
+              </li>
               <li>
                 <Link to='' className='logOut' onClick={this.logOut}>
                   Logout
                 </Link>
               </li>
-              <li className='user-level'><Link>
-                Level: {this.props.userLevel}
-              </Link></li>
             </ul>
           </div>
 

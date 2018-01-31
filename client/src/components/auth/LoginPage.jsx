@@ -24,6 +24,15 @@ export default class LoginPage extends React.Component {
   }
 
   /**
+   * @method componentDidUpdate
+   *
+   * @return {void} void
+   */
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
+  }
+
+  /**
    * Renders LoginPage component
    *
    * @return {XML} JSX

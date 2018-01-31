@@ -4,10 +4,7 @@ $(document).ready(() => {
     menuWidth:250,
   });
 
-  $('body').click((event) => {
-    $('#mobile-demo').css({"transform": "translateX(-100%)"});
-  });
-  $('#hambuger').click(() => {
-    $('.drag-target').css({'left': '0px'});
+  $('.menu-iconic-link').click(function () {
+    $('body').css({'width': '100%', 'overflow-y': 'auto'});
   });
 });

@@ -126,14 +126,19 @@ export class Borrowed extends React.Component {
         </div>
 
         <div className='row'>
-          { (this.props.bookState.allBorrows) ?
+          { (this.props.bookState.allBorrows &&
+            Object.keys(this.props.bookState.allBorrows).length > 0) ?
             this.props.bookState.allBorrows.map((borrow, i) =>
               <UserBorrow
                 key={i}
                 borrow={borrow}
                 returnBook ={this.returnBook}
               />
-            ) : null }
+            ) :
+            <h6 className='no-display'>
+              Not borrowed books!
+            </h6>
+          }
 
         </div>
 

@@ -34,7 +34,9 @@ export class App extends React.Component {
    * @return {void} void
    */
   componentDidMount() {
+    $('.collapsible').collapsible();
     $('.button-collapse').sideNav();
+    $('.dropdown-button').dropdown();
     $('select').material_select();
   }
 

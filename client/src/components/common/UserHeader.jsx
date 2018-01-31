@@ -24,8 +24,10 @@ export default class UserHeader extends React.Component {
    * @return {void} void
    */
   componentDidMount() {
-    $('.button-collapse').sideNav();
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
   }
+
 
   /**
    * Handles user logout
@@ -86,36 +88,52 @@ export default class UserHeader extends React.Component {
                 </li>
               </ul>
 
-              <ul id='mobile-demo'
-                className='side-nav grey darken-4 hide-on-med-and-up'
-              >
-                <li>
-                  <div className='row walp'>
-                  </div>
-                </li>
-                <li className='lists'><Link to={'/profile'}>Profile</Link></li>
-                <li className='lists'>
-                  <Link to='/user'>All Books</Link>
-                </li>
-                <li className='lists'>
-                  <Link to='/borrowed'>Borrowed Books</Link>
-                </li>
-                <li className='lists'>
-                  <Link to='/returned'>Returned Books</Link>
-                </li>
-                <li className='lists'>
-                  <Link to={'/password/change'}>Change Password</Link>
-                </li>
-                <li className='lists'>
-                  <Link to='' onClick={this.logOut}>Logout</Link>
-                </li>
-              </ul>
-              <Link to='' data-activates='mobile-demo'
-                className='button-collapse'>
-                <i id='hambuger' className='material-icons'>
-                  menu
-                </i>
-              </Link>
+              <div className='row'>
+                <ul className='left hide-on-med-and-up homedrop'>
+                  <Link
+                    className='dropdown-button btn transparent homedrop-2'
+                    to=''
+                    data-activates='dropdown2'>
+                    <i
+                      className='material-icons mat-icon'
+                    >
+                      menu
+                    </i>
+                  </Link>
+                </ul>
+
+                <ul id='dropdown2'
+                  className='dropdown-content black drop-content'
+                >
+                  <li>
+                    <Link to={'/profile'}>Profile</Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li className='lists'>
+                    <Link to='/user'>All Books</Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li><Link to='/returned'>Returned Books</Link></li>
+                  <li className='divider'></li>
+                  <li>
+                    <Link to='/borrowed'>Borrowed Books</Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li>
+                    <Link to={'/password/change'}>
+                        Change Password
+                    </Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li>
+                    <Link to='' className='logOut'
+                      onClick={this.logOut} id='logout'
+                    >
+                     Logout 
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </nav>
         </div>

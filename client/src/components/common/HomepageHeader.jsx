@@ -12,19 +12,6 @@ import logo from '../../build/imgs/hello.png';
  */
 export default class HomepageHeader extends React.Component {
   /**
-   * @method componentDidMount
-   * @return {void} void
-   */
-  componentDidMount() {
-    $('.button-collapse').sideNav({
-      menuWidth: 300,
-      edge: 'left',
-      closeOnClick: true,
-      draggable: true,
-    });
-  }
-
-  /**
    * Renders HomepageHeader component
    *
    * @return {XML} JSX
@@ -40,6 +27,7 @@ export default class HomepageHeader extends React.Component {
               >
                 <img src={logo} alt='hellobooks'/>
               </Link>
+
               <ul className='right hide-on-small-and-down'>
                 <li><Link to='/'>Contact us</Link></li>
                 <li><Link to='/'>About us</Link></li>
@@ -64,23 +52,29 @@ export default class HomepageHeader extends React.Component {
                 </li>
               </ul>
 
-              <ul id='mobile-demo' className='side-nav hide-on-med-and-up'>
-                <li><Link to='/login'>Login</Link></li>
-                <li>
-                  <Link to='/register' id='join'
-                    className='btn-large waves-effect waves-light orange'
-                    style={{ margin: '0px', padding: '0px' }}
-                  >
-                    Join us
+              <div className='row'>
+                <ul className='left hide-on-med-and-up homedrop'>
+                  <Link
+                    className='dropdown-button btn transparent homedrop-2'
+                    to='#'
+                    data-activates='dropdown1'>
+                    <i
+                      className='material-icons mat-icon'
+                    >
+                    menu
+                    </i>
                   </Link>
-                </li>
-              </ul>
-              <Link to='' data-activates='mobile-demo'
-                className='button-collapse'>
-                <i id='hambuger' className='material-icons'>
-                  menu
-                </i>
-              </Link>
+                </ul>
+
+                <ul id='dropdown1'
+                  className='dropdown-content black drop-content'
+                >
+                  <li><Link to='/login'>Login</Link></li>
+                  <li className='divider'></li>
+                  <li><Link to='/register'>Register</Link></li>
+                </ul>
+              </div>
+
             </div>
           </nav>
         </div>

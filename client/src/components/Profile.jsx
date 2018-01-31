@@ -59,7 +59,7 @@ export class Profile extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.userState.success === true) {
       if (this.state.showToast) {
-        Materialize.toast('User updated!', 4000);
+        Materialize.toast('Profile updated!', 4000);
         this.setState({
           showToast: false
         });

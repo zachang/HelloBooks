@@ -113,7 +113,7 @@ export class ReturnedList extends React.Component {
         </div>
 
         <div className='row'>
-          <table className='bordered highlight'>
+          <table className='bordered highlight responsive-table'>
             <thead className='black white-text'>
               <tr>
                 <th>Book Name</th>
@@ -126,7 +126,7 @@ export class ReturnedList extends React.Component {
               </tr>
             </thead>
 
-            <tbody>
+            {(this.props.bookState.returners.length > 0) ? <tbody>
               { this.props.bookState.returners.map((returner, i) =>
                 <UserReturnedList
                   key={i}
@@ -137,7 +137,11 @@ export class ReturnedList extends React.Component {
                   confirmReturn={this.confirmReturn}
                 />
               )}
-            </tbody>
+            </tbody> : <tbody>
+              <tr>
+                <td>No books returned</td>
+              </tr>
+            </tbody>}
           </table>
         </div>
 

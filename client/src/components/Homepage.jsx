@@ -23,6 +23,14 @@ export default class Homepage extends React.Component {
   }
 
   /**
+   * @method componentDidUpdate
+   *
+   * @return {void} void
+   */
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
+  }
+  /**
    * Renders Homepage component
    *
    * @return {XML} JSX

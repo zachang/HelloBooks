@@ -24,6 +24,15 @@ export default class RegisterPage extends React.Component {
   }
 
   /**
+   * @method componentDidUpdate
+   *
+   * @return {void} void
+   */
+  componentDidMount() {
+    $('.dropdown-button').dropdown();
+  }
+
+  /**
    * Renders RegisterPage component
    *
    * @return {XML} JSX
