@@ -30,6 +30,7 @@ export class Borrowed extends React.Component {
       showToast: false,
     };
     this.returnBook = this.returnBook.bind(this);
+    this.readBook = this.readBook.bind(this);
   }
 
   /**
@@ -107,6 +108,17 @@ export class Borrowed extends React.Component {
   }
 
   /**
+   * Handles read book tooltip removal when clicked
+   *
+   * @method readBook
+   *
+   * @return {void}
+   */
+  readBook() {
+    $('.tooltipped').tooltip('remove');
+  }
+
+  /**
    * Renders Borrowed component
    *
    * @return {XML} JSX
@@ -133,10 +145,11 @@ export class Borrowed extends React.Component {
                 key={i}
                 borrow={borrow}
                 returnBook ={this.returnBook}
+                readBook={this.readBook}
               />
             ) :
             <h6 className='no-display'>
-              Not borrowed books!
+              No borrowed books!
             </h6>
           }
 

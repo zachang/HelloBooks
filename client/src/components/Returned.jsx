@@ -28,6 +28,7 @@ export class Returned extends React.Component {
       pageCount: null,
       limit: 15,
     };
+    this.readBook = this.readBook.bind(this);
   }
 
   /**
@@ -57,6 +58,17 @@ export class Returned extends React.Component {
   }
 
   /**
+   * Handles read book tooltip removal when clicked
+   *
+   * @method readBook
+   *
+   * @return {void}
+   */
+  readBook() {
+    $('.tooltipped').tooltip('remove');
+  }
+
+  /**
    * Renders Returned component
    *
    * @return {XML} JSX
@@ -80,6 +92,7 @@ export class Returned extends React.Component {
               <UserReturn
                 key={i}
                 returning={returning}
+                readBook={this.readBook}
               />) :
             <h6 className='no-display'>
               Not returned books!
