@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import PropTypes from 'react-proptypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addBookAction } from '../actions/bookAction';
+import { addBookAction, postBook } from '../actions/bookAction';
 import { getCategoryAction } from '../actions/categoryAction';
 
 /**
@@ -67,12 +67,27 @@ export class AddBook extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.bookState.success === true) {
       this.setState({
+        bookData: {
+          bookName: '',
+          author: '',
+          bookCount: '',
+          categoryId: '',
+          publishYear: '',
+          isbn: '',
+          pages: '',
+          description: '',
+          bookImage: '',
+          bookImage_text: '',
+          bookContent: '',
+          bookContent_text: ''
+        },
         imagePreviewUrl: ''
       });
       if (this.state.showToast) {
         Materialize.toast('Book Created!', 4000);
         this.setState({ showToast: false });
       }
+      this.myFormRef.reset();
     } else if (nextProps.bookState.errors === 'Book not created') {
       if (this.state.showToast) {
         Materialize.toast('Book not Created!', 4000);
@@ -81,10 +96,6 @@ export class AddBook extends React.Component {
       this.setState({ errors: nextProps.bookState.errors });
     } else if (!nextProps.bookState.success &&
       nextProps.bookState.errors !== 'Book not created') {
-      if (this.state.showToast) {
-        Materialize.toast('Fill the form properly!', 4000);
-        this.setState({ showToast: false });
-      }
       this.setState({
         errors: nextProps.bookState.errors
       });
@@ -178,23 +189,22 @@ export class AddBook extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({
-      bookData: {
-        bookName: '',
-        author: '',
-        bookCount: '',
-        categoryId: '',
-        publishYear: '',
-        isbn: '',
-        pages: '',
-        description: '',
-        bookImage: '',
-        bookImage_text: '',
-        bookContent: '',
-        bookContent_text: '',
-      },
-      showToast: true,
-      imagePreviewUrl: ''
+      showToast: true
     });
+    const { bookImage, bookContent } = this.state.bookData;
+    if (!bookImage && !bookContent) {
+      return Materialize.toast('No Image or Pdf file provided', 4000);
+    }
+    if (!bookImage) {
+      return Materialize.toast('No Image file provided', 4000);
+    }
+    if (!bookContent) {
+      return Materialize.toast('No Pdf file provided', 4000);
+    }
+
+    if (typeof (bookImage) !== 'object' && typeof (bookContent) !== 'object') {
+      return this.props.postBook(this.state.bookData);
+    }
     this.props.addBookAction(this.state.bookData);
   }
 
@@ -220,7 +230,10 @@ export class AddBook extends React.Component {
           >
 
             <div className='row'>
-              <form className='col s10' onSubmit={this.handleSubmit}>
+              <form className='col s10'
+                onSubmit={this.handleSubmit}
+                ref={el => this.myFormRef = el}
+              >
                 <div className='row'>
                   <div className='input-field col s10'>
                     <input
@@ -527,13 +540,14 @@ AddBook.propTypes = {
   bookState: PropTypes.object.isRequired,
   categoryState: PropTypes.object.isRequired,
   addBookAction: PropTypes.func.isRequired,
-  getCategoryAction: PropTypes.func.isRequired
+  getCategoryAction: PropTypes.func.isRequired,
+  postBook: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   bookState: state.bookReducer,
   categoryState: state.categoryReducer,
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addBookAction, getCategoryAction }, dispatch);
+  bindActionCreators({ addBookAction, getCategoryAction, postBook }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);

@@ -57,6 +57,7 @@
       }
     }],
     "quotes": 0,
+    "no-return-assign": 0,
     "no-multi-str": 0,
     "class-methods-use-this": "off",
     "no-console": 1,

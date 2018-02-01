@@ -49,7 +49,7 @@ export default class AdminHeader extends React.Component {
         <div className='navbar-fixed'>
           <nav className='mainNav black col m10 l10' role='navigation'>
             <div className='nav-wrapper container'>
-              <Link id='logo-container' to=''
+              <Link id='logo-container' to='/admin'
                 className='brand-logo mainLogo'
               >
                 <img src={logo} alt='hellobooks'/>
