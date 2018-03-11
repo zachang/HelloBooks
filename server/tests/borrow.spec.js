@@ -179,18 +179,19 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provide', (done) => {
-      request(app)
-        .post(`/api/v1/users/${userId}/books`)
-        .set({ 'x-access-token': 'xxddghj' })
-        .send({ bookId: createdBookId2 })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
+    it('should return status code 401 when invalid token is provide',
+      (done) => {
+        request(app)
+          .post(`/api/v1/users/${userId}/books`)
+          .set({ 'x-access-token': 'xxddghj' })
+          .send({ bookId: createdBookId2 })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
     it('should return status code 404 when book ID is not found', (done) => {
       request(app)
         .post(`/api/v1/users/${userId}/books`)
@@ -215,35 +216,38 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 404 when all books have been borrowed', (done) => {
-      request(app)
-        .post(`/api/v1/users/${userId}/books`)
-        .set({ 'x-access-token': userToken })
-        .send({ bookId: createdBookId2 })
-        .expect(404)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'All books have been borrowed');
-          done();
-        });
-    });
-    it('should return status code 200 when a book is borrowed successfully', (done) => {
-      request(app)
-        .post(`/api/v1/users/${userId}/books`)
-        .set({ 'x-access-token': userToken })
-        .send({ bookId: createdBookId3 })
-        .expect(200)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Borrow completed');
-          assert.equal(res.body.updated.id, `${createdBookId3}`);
-          done();
-        });
-    });
+    it('should return status code 404 when all books have been borrowed',
+      (done) => {
+        request(app)
+          .post(`/api/v1/users/${userId}/books`)
+          .set({ 'x-access-token': userToken })
+          .send({ bookId: createdBookId2 })
+          .expect(404)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'All books have been borrowed');
+            done();
+          });
+      });
+    it('should return status code 200 when a book is borrowed successfully',
+      (done) => {
+        request(app)
+          .post(`/api/v1/users/${userId}/books`)
+          .set({ 'x-access-token': userToken })
+          .send({ bookId: createdBookId3 })
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Borrow completed');
+            assert.equal(res.body.updated.id, `${createdBookId3}`);
+            done();
+          });
+      });
   });
 
   // Test for borrow confirmation
-  describe('test for PATCH /borrows/:borrowId/confirm when confirming borrows made', () => {
+  describe('test for PATCH /borrows/:borrowId/confirm when ' +
+    'confirming borrows made', () => {
     it('should return status code 401 when no token is provide', (done) => {
       request(app)
         .patch(`/api/v1/borrows/0/confirm`)
@@ -254,28 +258,31 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provided', (done) => {
-      request(app)
-        .patch(`/api/v1/borrows/0/confirm`)
-        .set({ 'x-access-token': 'mmmjnjkk' })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
-    it('should return status code 403 when token valid but unauthorised', (done) => {
-      request(app)
-        .patch(`/api/v1/borrows/0/confirm`)
-        .set({ 'x-access-token': userToken })
-        .expect(403)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'You must be an admin to perform this operation');
-          done();
-        });
-    });
+    it('should return status code 401 when invalid token is provided',
+      (done) => {
+        request(app)
+          .patch(`/api/v1/borrows/0/confirm`)
+          .set({ 'x-access-token': 'mmmjnjkk' })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
+    it('should return status code 403 when token valid but unauthorised',
+      (done) => {
+        request(app)
+          .patch(`/api/v1/borrows/0/confirm`)
+          .set({ 'x-access-token': userToken })
+          .expect(403)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
+            done();
+          });
+      });
     it('should return status code 404 when borrowId does not exist', (done) => {
       request(app)
         .patch(`/api/v1/borrows/0/confirm`)
@@ -321,18 +328,19 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provide', (done) => {
-      request(app)
-        .put(`/api/v1/users/${userId}/books`)
-        .set({ 'x-access-token': 'xxddghj' })
-        .send({ bookId: createdBookId4 })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
+    it('should return status code 401 when invalid token is provide',
+      (done) => {
+        request(app)
+          .put(`/api/v1/users/${userId}/books`)
+          .set({ 'x-access-token': 'xxddghj' })
+          .send({ bookId: createdBookId4 })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
     it('should return status code 404 when book ID is not found', (done) => {
       request(app)
         .put(`/api/v1/users/${userId}/books`)
@@ -358,22 +366,24 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 400 when book is returned already', (done) => {
-      request(app)
-        .put(`/api/v1/users/${userId2}/books`)
-        .set({ 'x-access-token': userToken })
-        .send({ bookId: createdBookId4 })
-        .expect(400)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Book already returned');
-          done();
-        });
-    });
+    it('should return status code 400 when book is returned already',
+      (done) => {
+        request(app)
+          .put(`/api/v1/users/${userId2}/books`)
+          .set({ 'x-access-token': userToken })
+          .send({ bookId: createdBookId4 })
+          .expect(400)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Book already returned');
+            done();
+          });
+      });
   });
 
   // Test for return confirmation
-  describe('test for PUT /borrows/:borrowId/confirm when confirming borrows made', () => {
+  describe('test for PUT /borrows/:borrowId/confirm ' +
+    'when confirming borrows made', () => {
     it('should return status code 401 when no token is provide', (done) => {
       request(app)
         .put(`/api/v1/borrows/0/confirm`)
@@ -384,28 +394,31 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provided', (done) => {
-      request(app)
-        .put(`/api/v1/borrows/0/confirm`)
-        .set({ 'x-access-token': 'mmmjnjkk' })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
-    it('should return status code 403 when token valid but unauthorised', (done) => {
-      request(app)
-        .put(`/api/v1/borrows/0/confirm`)
-        .set({ 'x-access-token': userToken })
-        .expect(403)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'You must be an admin to perform this operation');
-          done();
-        });
-    });
+    it('should return status code 401 when invalid token is provided',
+      (done) => {
+        request(app)
+          .put(`/api/v1/borrows/0/confirm`)
+          .set({ 'x-access-token': 'mmmjnjkk' })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
+    it('should return status code 403 when token valid but unauthorised',
+      (done) => {
+        request(app)
+          .put(`/api/v1/borrows/0/confirm`)
+          .set({ 'x-access-token': userToken })
+          .expect(403)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
+            done();
+          });
+      });
     it('should return status code 404 when borrowId does not exist', (done) => {
       request(app)
         .put(`/api/v1/borrows/0/confirm`)
@@ -450,18 +463,20 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provide', (done) => {
-      request(app)
-        .get(`/api/v1/users/${userId}/books`)
-        .set({ 'x-access-token': 'xxddghj' })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
-    it(`should return status code 200 when books borrowed a user is got successfully`,
+    it('should return status code 401 when invalid token is provide',
+      (done) => {
+        request(app)
+          .get(`/api/v1/users/${userId}/books`)
+          .set({ 'x-access-token': 'xxddghj' })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
+    it(`should return status code 200 when books
+     borrowed a user is got successfully`,
       (done) => {
         request(app)
           .get(`/api/v1/users/${userId}/books?owe='false'`)
@@ -487,17 +502,18 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provide', (done) => {
-      request(app)
-        .get(`/api/v1/users/books/borrows`)
-        .set({ 'x-access-token': 'xxddghj' })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
+    it('should return status code 401 when invalid token is provide',
+      (done) => {
+        request(app)
+          .get(`/api/v1/users/books/borrows`)
+          .set({ 'x-access-token': 'xxddghj' })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
     it(`should return status code 403 when token valid but unauthorised`,
       (done) => {
         request(app)
@@ -506,11 +522,13 @@ describe('TEST BORROW ROUTES', () => {
           .expect(403)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.message, 'You must be an admin to perform this operation');
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
             done();
           });
       });
-    it(`should return status code 200 when all borrows made is gotten successful`,
+    it(`should return status code 200 when
+     all borrows made is gotten successful`,
       (done) => {
         request(app)
           .get(`/api/v1/users/books/borrows`)
@@ -538,17 +556,18 @@ describe('TEST BORROW ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provide', (done) => {
-      request(app)
-        .get(`/api/v1/users/books/returned`)
-        .set({ 'x-access-token': 'xxddghj' })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
+    it('should return status code 401 when invalid token is provide',
+      (done) => {
+        request(app)
+          .get(`/api/v1/users/books/returned`)
+          .set({ 'x-access-token': 'xxddghj' })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
     it(`should return status code 403 when token valid but unauthorised`,
       (done) => {
         request(app)
@@ -557,11 +576,13 @@ describe('TEST BORROW ROUTES', () => {
           .expect(403)
           .end((err, res) => {
             if (err) return done(err);
-            assert.equal(res.body.message, 'You must be an admin to perform this operation');
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
             done();
           });
       });
-    it(`should return status code 200 when all books returned made is gotten successful`,
+    it(`should return status code 200 when
+     all books returned made is gotten successful`,
       (done) => {
         request(app)
           .get(`/api/v1/users/books/returned`)

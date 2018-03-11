@@ -142,6 +142,10 @@ body {
   box-shadow: none;
 }
 
+.user-level {
+  text-transform: capitalize;
+}
+
 /*--iDs--*/
 #sidenav-overlay {
   height: 0;
@@ -204,6 +208,55 @@ div.card-reveal{
   width: 40px !important;
 }
 
-.pdf-reader .pdf-reader-header{
+.pdf-reader .pdf-reader-header {
   display: none;
+}
+
+.pdf-reader.tumbnails-open .pdf-viewer {
+  left: 0 !important;
+}
+
+#sidenav-overlay {
+  z-index: 1;
+}
+
+.navbar-fixed {
+  z-index: 999;
+}
+
+.drag-target{
+  width: 1px !important;
+  left: 0 !important;
+}
+
+.lists{
+  height: 40px;
+}
+
+.bookCat{
+  margin-left: 0.5rem !important;
+}
+
+.homedrop{
+  margin-left: -20px !important;
+  width: 2px !important;
+}
+
+.homedrop-2{
+  width: 2px !important;
+}
+
+.drop-content{
+  top: 0 !important;
+  width: 106% !important;
+  left: -10px !important;
+
+  li > a{
+    color: #2bbbad !important;
+    text-align: center;
+  }
+}
+
+.no-display{
+  margin-left: 4%;
 }

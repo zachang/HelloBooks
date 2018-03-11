@@ -26,13 +26,22 @@ const common = {
       $: 'jquery',
       jquery: 'jquery'
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false,
+      // Compression specific options
+      compress: {
+        // remove warnings
+        warnings: false,
+        // Drop console statements
+        drop_console: true
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
         API_HOST: JSON.stringify('https://zachang-hellobooks.herokuapp.com')
       }
     }),
-    new webpack.optimize.UglifyJsPlugin(),
     new webpack.EnvironmentPlugin({
       CLIENT_ID: JSON.stringify(process.env.CLIENT_ID)
     })

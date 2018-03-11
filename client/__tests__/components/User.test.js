@@ -22,7 +22,7 @@ describe('<User/>', () => {
   // create a spy function for clearGoogleSigninAction
   const clearGoogleSigninAction = sinon.spy();
   // create a spy function for borrowBookAction
-  const borrowBookAction = sinon.spy();
+  const borrowBookAction  = sinon.spy();
   // spy on componentDidUpdate of User Page
   sinon.spy(User.prototype, 'componentDidUpdate');
   // spy on bookCategoryChange of User Page
@@ -81,7 +81,7 @@ describe('<User/>', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('calls componentWillReceiveProps book not created', () => {
+  it('calls componentDidMount', () => {
     shallowComponent.instance().componentDidUpdate(props);
     expect(User.prototype.componentDidUpdate.called).toEqual(true);
   });

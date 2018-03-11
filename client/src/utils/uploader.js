@@ -27,7 +27,7 @@ const uploader = (data, uploadType) => {
   return new Promise((resolve, reject) => {
     return upload(data).end((error, response) => {
       if (error) {
-        return reject({ error, uploadType });
+        return null;
       }
       return resolve({ response, uploadType });
     });

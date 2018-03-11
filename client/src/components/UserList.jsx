@@ -8,12 +8,15 @@ import UserRow from './user/UserRow.jsx';
 
 /**
  * UserList class declaration
+ *
  * @class UserList
+ *
  * @extends {React.Component}
  */
 export class UserList extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -27,6 +30,7 @@ export class UserList extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -35,7 +39,9 @@ export class UserList extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -50,13 +56,14 @@ export class UserList extends React.Component {
 
   /**
    * Renders UserList component
+   *
    * @return {XML} JSX
    */
   render() {
     return (
       <div className='row'>
         <div className='section'>
-          <h4 style={{ marginTop: '7%' }}>Borrowed Books</h4>
+          <h4 style={{ marginTop: '7%' }}>All Users</h4>
         </div>
         <div
           className='divider'
@@ -68,7 +75,7 @@ export class UserList extends React.Component {
         </div>
 
         <div className='row'>
-          <table className='bordered highlight'>
+          <table className='bordered highlight responsive-table'>
             <thead className='black white-text'>
               <tr>
                 <th>Name</th>

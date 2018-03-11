@@ -3,7 +3,9 @@ import PropTypes from 'react-proptypes';
 
 /**
  * @function UserRow
+ *
  * @param {object} props
+ * 
  * @return {XML} JSX
  */
 const UserRow = props => (

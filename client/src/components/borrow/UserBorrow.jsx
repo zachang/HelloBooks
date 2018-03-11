@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
+import { Link } from 'react-router';
 
 /**
  * @function UserBorrow
+ *
  * @param {object} props
+ *
  * @return {XML} JSX
  */
 const UserBorrow = props => (
@@ -11,7 +14,8 @@ const UserBorrow = props => (
     <div className='card large sticky-action'>
       <div className='card-image waves-effect waves-block waves-light'>
         <img className='activator'
-          src={(props.borrow.Book.bookImage !== null) ? props.borrow.Book.bookImage : '../../imgs/default.jpg'}/>
+          src={(props.borrow.Book.bookImage !== null) ?
+            props.borrow.Book.bookImage : '../../imgs/default.jpg'}/>
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>
@@ -28,7 +32,9 @@ const UserBorrow = props => (
         </span>
         <p>Author: {props.borrow.Book.author}</p>
         <p>Category: {props.borrow.Book.Category.categoryName}</p>
-        <p>Published: {new Date(props.borrow.Book.publishYear).getFullYear()}</p>
+        <p>Published:
+          {new Date(props.borrow.Book.publishYear).getFullYear()}
+        </p>
         <p>Pages: {props.borrow.Book.pages}</p>
         <p>Stock: {props.borrow.Book.bookCount}</p>
         <p>Description: {(props.borrow.Book.description)}
@@ -36,28 +42,62 @@ const UserBorrow = props => (
       </div>
       <div className='card-action home-card'>
         {(props.borrow.borrowStatus === 'pending') ?
-          <button
-            className='waves-effect waves-light btn grey tooltipped'
+          <Link
+            className='white tooltipped'
             data-position='bottom'
             data-delay='50'
             data-tooltip='Wait for borrow confirmation'
           >
-            Return
-          </button> : (props.borrow.returned === 'true') ?
-            <button
-              className='waves-effect waves-light btn grey tooltipped'
+            <i
+              className='small material-icons confirmBorrow'
+              style={{ color: 'grey', cursor: 'pointer' }}
+            >
+              undo
+            </i>
+          </Link> : (props.borrow.returned === 'true') ?
+            <Link
+              className='white tooltipped'
               data-position='bottom'
               data-delay='50'
-              data-tooltip='Book return confirmed'
+              data-tooltip='Return confirmed'
             >
-              Confirmed
-            </button> :
-            <button
-              onClick={() => (props.returnBook(props.borrow.Book.id))}
-              className='waves-effect waves-light btn red'
+              <i
+                className='small material-icons confirmedReturn'
+                style={{ color: 'grey', cursor: 'pointer' }}
+              >
+                done
+              </i>
+            </Link> :
+            <Link
+              className='white tooltipped'
+              data-position='bottom'
+              data-delay='50'
+              data-tooltip='Return book'
             >
-              Return
-            </button>}
+              <i
+                className='small material-icons returnBook'
+                onClick={() => (props.returnBook(props.borrow.Book.id))}
+                style={{ color: 'red', cursor: 'pointer' }}
+              >
+                undo
+              </i>
+            </Link>}
+
+        <Link
+          to={`read/${props.borrow.Book.id}`}
+          className='white tooltipped'
+          data-position='bottom'
+          data-delay='50'
+          data-tooltip='Read book'
+        >
+          <i
+            className='small material-icons readBook'
+            onClick={() => (props.readBook())}
+            style={{ color: 'teal', cursor: 'pointer' }}
+          >
+                remove_red_eye
+          </i>
+        </Link>
       </div>
     </div>
   </div>
@@ -65,7 +105,8 @@ const UserBorrow = props => (
 
 UserBorrow.propTypes = {
   borrow: PropTypes.object.isRequired,
-  returnBook: PropTypes.func.isRequired
+  returnBook: PropTypes.func.isRequired,
+  readBook: PropTypes.func.isRequired
 
 };
 export default UserBorrow;

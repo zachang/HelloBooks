@@ -9,12 +9,15 @@ import { decodeToken } from '../utils/helpers';
 
 /**
  * Borrowed class declaration
+ *
  * @class Borrowed
+ *
  * @extends {React.Component}
  */
 export class Borrowed extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -27,10 +30,12 @@ export class Borrowed extends React.Component {
       showToast: false,
     };
     this.returnBook = this.returnBook.bind(this);
+    this.readBook = this.readBook.bind(this);
   }
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -40,7 +45,9 @@ export class Borrowed extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -78,6 +85,7 @@ export class Borrowed extends React.Component {
 
   /**
    * @method componentDidUpdate
+   *
    * @return {void} void
    */
   componentDidUpdate() {
@@ -86,8 +94,11 @@ export class Borrowed extends React.Component {
 
   /**
    * Handles book return
+   *
    * @method returnBook
+   *
    * @return {void}
+   *
    * @param {integer} bookId - bookId
    */
   returnBook(bookId) {
@@ -97,7 +108,19 @@ export class Borrowed extends React.Component {
   }
 
   /**
+   * Handles read book tooltip removal when clicked
+   *
+   * @method readBook
+   *
+   * @return {void}
+   */
+  readBook() {
+    $('.tooltipped').tooltip('remove');
+  }
+
+  /**
    * Renders Borrowed component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -115,14 +138,20 @@ export class Borrowed extends React.Component {
         </div>
 
         <div className='row'>
-          { (this.props.bookState.allBorrows) ?
+          { (this.props.bookState.allBorrows &&
+            Object.keys(this.props.bookState.allBorrows).length > 0) ?
             this.props.bookState.allBorrows.map((borrow, i) =>
               <UserBorrow
                 key={i}
                 borrow={borrow}
                 returnBook ={this.returnBook}
+                readBook={this.readBook}
               />
-            ) : null }
+            ) :
+            <h6 className='no-display'>
+              No borrowed books!
+            </h6>
+          }
 
         </div>
 

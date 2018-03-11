@@ -62,7 +62,8 @@ describe('THUNK FUNCTIONS', () => {
       const actions = store.getActions();
       expect(actions[0].type).to.equal(expectedAction.type);
       expect(actions[0].payload.users).to.equal(expectedAction.users);
-      expect(actions[0].payload.pageCount).to.equal(expectedAction.paginationMeta.pageCount);
+      expect(actions[0].payload.pageCount).to.equal(
+        expectedAction.paginationMeta.pageCount);
     });
     done();
   });
@@ -222,11 +223,12 @@ describe('THUNK FUNCTIONS', () => {
     };
 
     // Dispatch
-    await store.dispatch(changePasswordAction(changePasswordResponse)).then(() => {
-      const actions = store.getActions();
-      expect(actions[7].type).to.equal(expectedAction.type);
-      expect(actions[7].payload).to.equal(expectedAction.message);
-    });
+    await store.dispatch(changePasswordAction(changePasswordResponse))
+      .then(() => {
+        const actions = store.getActions();
+        expect(actions[7].type).to.equal(expectedAction.type);
+        expect(actions[7].payload).to.equal(expectedAction.message);
+      });
     done();
   });
 
@@ -247,33 +249,35 @@ describe('THUNK FUNCTIONS', () => {
     };
 
     // Dispatch
-    await store.dispatch(changePasswordAction(changePasswordResponse)).then(() => {
-      const actions = store.getActions();
-      expect(actions[8].type).to.equal(expectedAction.type);
-      expect(actions[8].payload).to.equal(expectedAction.payload);
-    });
+    await store.dispatch(changePasswordAction(changePasswordResponse))
+      .then(() => {
+        const actions = store.getActions();
+        expect(actions[8].type).to.equal(expectedAction.type);
+        expect(actions[8].payload).to.equal(expectedAction.payload);
+      });
     done();
   });
 
   it('should not change user password', async (done) => {
     const changePasswordResponse = mockData.changePasswordAction;
-    const changePasswordUserErrorResponse = mockData.changePasswordUserErrorResponse;
+    const changePassUserErrorResponse = mockData.changePassUserErrorResponse;
     moxios.stubRequest(apiEndPoints.changePasswordAction, {
       status: 400,
-      response: changePasswordUserErrorResponse
+      response: changePassUserErrorResponse
     });
 
     const expectedAction = {
       type: actionTypes.CHANGE_PASSWORD_UNSUCCESSFUL,
-      payload: changePasswordUserErrorResponse.message
+      payload: changePassUserErrorResponse.message
     };
 
     // Dispatch
-    await store.dispatch(changePasswordAction(changePasswordResponse)).then(() => {
-      const actions = store.getActions();
-      expect(actions[9].type).to.equal(expectedAction.type);
-      expect(actions[9].payload).to.equal(expectedAction.payload);
-    });
+    await store.dispatch(changePasswordAction(changePasswordResponse))
+      .then(() => {
+        const actions = store.getActions();
+        expect(actions[9].type).to.equal(expectedAction.type);
+        expect(actions[9].payload).to.equal(expectedAction.payload);
+      });
     done();
   });
 

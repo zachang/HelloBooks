@@ -7,12 +7,15 @@ import { addCategoryAction } from '../actions/categoryAction';
 
 /**
  * AddCategory class declaration
+ *
  * @class AddCategory
+ *
  * @extends {React.Component}
  */
 export class AddCategory extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -22,6 +25,7 @@ export class AddCategory extends React.Component {
         categoryName: '',
       },
       errors: null,
+      fails: null,
       showToast: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +34,9 @@ export class AddCategory extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -41,7 +47,9 @@ export class AddCategory extends React.Component {
           showToast: false
         });
       }
-    } else if (!nextProps.categoryState.success) {
+    }
+
+    if (nextProps.categoryState.errors !== null) {
       if (this.state.showToast) {
         Materialize.toast('Category not added!', 4000);
         this.setState({
@@ -52,24 +60,47 @@ export class AddCategory extends React.Component {
         errors: nextProps.categoryState.errors
       });
     }
+    if (nextProps.categoryState.fails === 'Category already exist'
+      && !nextProps.categoryState.success) {
+      if (this.state.showToast) {
+        Materialize.toast('Category already exist!', 4000);
+        this.setState({
+          showToast: false
+        });
+      }
+      this.setState({
+        fails: nextProps.categoryState.fails,
+        errors: null
+      });
+    }
   }
 
   /**
    * Handles category file input
+   *
    * @method handleChange
+   *
    * @return {void} void
+   *
    * @param {object} event
    */
   handleChange(event) {
     const categoryData = this.state.categoryData;
     categoryData[event.target.name] = event.target.value;
-    this.setState({ categoryData });
+    this.setState({
+      errors: null,
+      fails: null,
+      categoryData
+    });
   }
 
   /**
    * Handles category submit
+   *
    * @method handleSubmit
+   *
    * @return {void} void
+   *
    * @param {object} event
    */
   handleSubmit(event) {
@@ -86,15 +117,19 @@ export class AddCategory extends React.Component {
 
   /**
    * Renders AddCategory component
+   *
    * @return {XML} JSX
    */
   render() {
-    const { categoryData } = this.state;
+    const { categoryData, fails } = this.state;
 
     return (
       <div>
         <div className='row'>
-          <div className='col s10 m8 l6 bookcat' style={{ marginLeft: '35%', marginTop: '20%' }}>
+          <div className='col s10 m8 l6 bookcat' style={{
+            marginLeft: '35%',
+            marginTop: '20%'
+          }}>
 
             <div className='row'>
               <form className='col s10' onSubmit={this.handleSubmit}>
@@ -105,7 +140,8 @@ export class AddCategory extends React.Component {
                       name='categoryName'
                       type='text'
                       className={classnames({
-                        invalid: (this.state.errors && !!this.state.errors.categoryName) ?
+                        invalid: (this.state.errors &&
+                          !!this.state.errors.categoryName) ?
                           !!this.state.errors.categoryName : false
                       })}
                       value={categoryData.categoryName}
@@ -113,10 +149,12 @@ export class AddCategory extends React.Component {
                     />
                     <label
                       htmlFor='category'
-                      className={((this.state.errors && !!this.state.errors.categoryName) ||
+                      className={((this.state.errors &&
+                        !!this.state.errors.categoryName) ||
                         categoryData.categoryName.length > 0) ?
                         'custom-active custom-validate' : 'custom-validate'}
-                      data-error={(this.state.errors && !!this.state.errors.categoryName) ?
+                      data-error={(this.state.errors &&
+                        !!this.state.errors.categoryName) ?
                         this.state.errors.categoryName : ''}
                     >
                       Category
@@ -131,8 +169,6 @@ export class AddCategory extends React.Component {
                       type='submit'
                       name='action'> Add Category
                     </button>
-
-                    <div style={{ color: 'red', float: 'right' }}>{this.props.categoryState.fails}</div>
                   </div>
                 </div>
               </form>

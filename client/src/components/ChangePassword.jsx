@@ -7,12 +7,15 @@ import { changePasswordAction } from '../actions/userAction';
 
 /**
  * ChangePassword class declaration
+ *
  * @class ChangePassword
+ *
  * @extends {React.Component}
  */
 export class ChangePassword extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -32,22 +35,41 @@ export class ChangePassword extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.userState.success === true) {
-      Materialize.toast('Password changed!', 4000);
-    } else if (nextProps.userState.errors) {
+      if (this.state.showToast) {
+        Materialize.toast('Password changed!', 4000);
+        this.setState({
+          showToast: false
+        });
+      }
+    }
+    if (nextProps.userState.errors) {
       this.setState({
         errors: nextProps.userState.errors
       });
-    } else if (!nextProps.userState.success && nextProps.userState.fails === 'Incorrect old password') {
+    }
+    if (!nextProps.userState.success &&
+      nextProps.userState.fails === 'Incorrect old password') {
+      if (this.state.showToast) {
+        Materialize.toast('Incorrect old password!', 4000);
+        this.setState({ showToast: false });
+      }
       this.setState({
         errors: nextProps.userState.errors
       });
-    } else if (!nextProps.userState.success && nextProps.userState.fails === 'Password not changed') {
-      Materialize.toast('Password not changed!', 4000);
+    }
+    if (!nextProps.userState.success &&
+      nextProps.userState.fails === 'Password not changed') {
+      if (this.state.showToast) {
+        Materialize.toast('Password not changed!', 4000);
+        this.setState({ showToast: false });
+      }
       this.setState({
         errors: nextProps.userState.errors
       });
@@ -56,8 +78,11 @@ export class ChangePassword extends React.Component {
 
   /**
    * Handles password update input
+   *
    * @method handleChange
+   *
    * @return {void} void
+   *
    * @param {object} event - event
    */
   handleChange(event) {
@@ -71,8 +96,11 @@ export class ChangePassword extends React.Component {
 
   /**
    * Handles password form update
+   *
    * @method handleSubmit
+   *
    * @return {void}
+   *
    * @param {object} event - event
    */
   handleSubmit(event) {
@@ -92,6 +120,7 @@ export class ChangePassword extends React.Component {
 
   /**
    * Renders ChangePassword component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -101,7 +130,9 @@ export class ChangePassword extends React.Component {
       <div>
         {changePasswordData && <div>
           <div className='row'>
-            <div className='col s10 m8 l6 bookadd' style={{ marginLeft: '35%', marginTop: '15%' }}>
+            <div className='col s10 m8 l6 bookadd'
+              style={{ marginLeft: '35%', marginTop: '15%' }}
+            >
 
               <div className='row'>
                 <form className='col s10' onSubmit={this.handleSubmit}>
@@ -112,7 +143,8 @@ export class ChangePassword extends React.Component {
                         name='oldPassword'
                         type='password'
                         className={classnames({
-                          invalid: (this.state.errors && !!this.state.errors.oldPassword) ?
+                          invalid: (this.state.errors &&
+                            !!this.state.errors.oldPassword) ?
                             !!this.state.errors.oldPassword : false
                         })}
                         value={changePasswordData.oldPassword || ''}
@@ -120,9 +152,12 @@ export class ChangePassword extends React.Component {
                       />
                       <label
                         htmlFor='old password'
-                        className={((this.state.errors && !!this.state.errors.oldPassword)
-                          || changePasswordData.oldPassword.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors.oldPassword) ?
+                        className={((this.state.errors &&
+                          !!this.state.errors.oldPassword)
+                          || changePasswordData.oldPassword.length > 0) ?
+                          'custom-active custom-validate' : 'custom-validate'}
+                        data-error={(this.state.errors &&
+                          !!this.state.errors.oldPassword) ?
                           this.state.errors.oldPassword : ''}
                       >
                         Old Password
@@ -136,7 +171,8 @@ export class ChangePassword extends React.Component {
                         name='newPassword'
                         type='password'
                         className={classnames({
-                          invalid: (this.state.errors && !!this.state.errors.newPassword) ?
+                          invalid: (this.state.errors &&
+                            !!this.state.errors.newPassword) ?
                             !!this.state.errors.newPassword : false
                         })}
                         value={changePasswordData.newPassword}
@@ -144,9 +180,12 @@ export class ChangePassword extends React.Component {
                       />
                       <label
                         htmlFor='new password'
-                        className={((this.state.errors && !!this.state.errors.newPassword)
-                          || changePasswordData.newPassword.length > 0) ? 'custom-active custom-validate' : 'custom-validate'}
-                        data-error={(this.state.errors && !!this.state.errors.newPassword) ?
+                        className={((this.state.errors &&
+                          !!this.state.errors.newPassword)
+                          || changePasswordData.newPassword.length > 0) ?
+                          'custom-active custom-validate' : 'custom-validate'}
+                        data-error={(this.state.errors &&
+                          !!this.state.errors.newPassword) ?
                           this.state.errors.newPassword : ''}
                       >
                         New Password
@@ -161,8 +200,10 @@ export class ChangePassword extends React.Component {
                         type='password'
                         className={classnames({
                           invalid:
-                            (this.state.errors && !!this.state.errors.newPassword_confirmation)
-                              ? !!this.state.errors.newPassword_confirmation : false
+                            (this.state.errors &&
+                              !!this.state.errors.newPassword_confirmation)
+                              ? !!this.state.errors.newPassword_confirmation
+                              : false
                         })}
                         value={changePasswordData.newPassword_confirmation}
                         onChange={this.handleChange}
@@ -170,11 +211,14 @@ export class ChangePassword extends React.Component {
                       <label
                         htmlFor='Confirm New Password'
                         className={
-                          ((this.state.errors && !!this.state.errors.newPassword_confirmation)
-                          || changePasswordData.newPassword_confirmation.length > 0) ?
+                          ((this.state.errors &&
+                            !!this.state.errors.newPassword_confirmation) ||
+                            changePasswordData.newPassword_confirmation.length >
+                            0) ?
                             'custom-active custom-validate' : 'custom-validate'}
                         data-error={
-                          (this.state.errors && !!this.state.errors.newPassword_confirmation) ?
+                          (this.state.errors &&
+                            !!this.state.errors.newPassword_confirmation) ?
                             this.state.errors.newPassword_confirmation : ''}
                       >
                         Confirm New Password

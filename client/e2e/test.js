@@ -40,14 +40,20 @@ module.exports = {
       .click('#logout')
       .pause(1000)
       .useXpath()
-      .waitForElementVisible('//*[@id="index-banner"]/div/div/div/div[2]/a[2]', 1000)
-      .assert.containsText('//*[@id="index-banner"]/div/div/div/div[2]/a[2]', 'LOGIN')
+      .waitForElementVisible('//*[@id="index-banner"]/div/div/div/div[2]/a[2]',
+        1000)
+      .assert.containsText('//*[@id="index-banner"]/div/div/div/div[2]/a[2]',
+        'LOGIN')
       .click('//*[@id="index-banner"]/div/div/div/div[2]/a[2]')
       .pause(1000)
-      .waitForElementVisible('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button',
+      .waitForElementVisible(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button',
         1000)
-      .assert.containsText('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button', 'LOGIN')
-      .click('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
+      .assert.containsText(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button',
+        'LOGIN')
+      .click(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
       .pause(1000)
       .useCss()
       .setValue('input[name=username]', 'sansarisric')
@@ -55,13 +61,16 @@ module.exports = {
       .setValue('input[name=password]', 'password')
       .pause(1000)
       .useXpath()
-      .click('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
+      .click(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
       .pause(1000)
       .click('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i')
       .waitForElementVisible('//*[@id="dropdown1"]/li[7]/a', 1000)
       .click('//*[@id="dropdown1"]/li[7]/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[3]/div/div/div/div/div/form/button', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[3]/div/div/div/div/div/form/button',
+        1000)
       .click('//*[@id="root"]/div/div[3]/div/div/div/div/div/form/button')
       .pause(1000)
       .useCss()
@@ -74,7 +83,8 @@ module.exports = {
       .useXpath()
       .click('//*[@id="root"]/div/div[3]/div/div/div/div/div/form/button')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i', 1000)
+      .waitForElementVisible('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i',
+        1000)
       .click('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i')
       .pause(1000)
       .waitForElementVisible('//*[@id="logout"]', 1000)
@@ -88,12 +98,16 @@ module.exports = {
       .setValue('input[name=password]', 'passwords')
       .pause(1000)
       .useXpath()
-      .click('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
-      .waitForElementVisible('//*[@id="root"]/div/div[3]/div/div[4]/div[1]/div[2]/div/div[4]/a[2]/i',
+      .click(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[3]/div/div[4]/div[1]/div[2]/div/div[4]/a[2]/i',
         1000)
-      .click('//*[@id="root"]/div/div[3]/div/div[4]/div[1]/div[2]/div/div[4]/a[2]/i')
+      .click(
+        '//*[@id="root"]/div/div[3]/div/div[4]/div[1]/div[2]/div/div[4]/a[2]/i')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i', 1000)
+      .waitForElementVisible('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i',
+        1000)
       .click('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i')
       .pause(5000)
       .waitForElementVisible('//*[@id="logout"]', 1000)
@@ -106,17 +120,22 @@ module.exports = {
       .setValue('input[name=password]', 'password')
       .pause(1000)
       .useXpath()
-      .click('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
+      .click(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a',
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a',
         1000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a',
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a',
         1000)
-      .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a')
+      .click(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[3]/div/div[3]/table/tbody/tr[2]/td[6]/a',
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[3]/div/div[3]/table/tbody/tr[2]/td[6]/a',
         1000)
       .click('//*[@id="root"]/div/div[3]/div/div[3]/table/tbody/tr[2]/td[6]/a')
       .pause(1000)
@@ -126,7 +145,8 @@ module.exports = {
       .waitForElementVisible('/html/body/div[22]/div/div[10]/button[1]', 1000)
       .click('/html/body/div[22]/div/div[10]/button[1]')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i', 1000)
       .click('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i')
       .pause(1000)
       .waitForElementVisible('//*[@id="dropdown1"]/li[7]/a', 1000)
@@ -139,18 +159,25 @@ module.exports = {
       .setValue('input[name=password]', 'passwords')
       .pause(1000)
       .useXpath()
-      .click('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
+      .click(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a', 1000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a', 1000)
-      .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a')
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a',
+        1000)
+      .click(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[2]/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[3]/div/div[3]/div/div/div[4]/button', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[3]/div/div[3]/div/div/div[4]/button', 1000)
       .click('//*[@id="root"]/div/div[3]/div/div[3]/div/div/div[4]/button')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i', 1000)
       .click('//*[@id="root"]/div/div[1]/div/nav/div/ul[1]/a/i')
       .waitForElementVisible('//*[@id="logout"]', 1000)
       .click('//*[@id="logout"]')
@@ -162,15 +189,21 @@ module.exports = {
       .setValue('input[name=password]', 'password')
       .pause(1000)
       .useXpath()
-      .click('//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
+      .click(
+        '//*[@id="index-banner"]/div/div/div/form/div[4]/div/div[1]/button')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a', 1000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[3]/a', 1000)
-      .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[3]/a')
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[3]/a',
+        1000)
+      .click(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/div/ul/li[3]/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[3]/div/div[3]/table/tbody/tr[2]/td[7]/a', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[3]/div/div[3]/table/tbody/tr[2]/td[7]/a', 1000)
       .click('//*[@id="root"]/div/div[3]/div/div[3]/table/tbody/tr[2]/td[7]/a')
       .pause(1000)
       .waitForElementVisible('/html/body/div[32]/div/div[10]/button[1]', 1000)
@@ -179,33 +212,47 @@ module.exports = {
       .waitForElementVisible('/html/body/div[32]/div/div[10]/button[1]', 1000)
       .click('/html/body/div[32]/div/div[10]/button[1]')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[1]/a', 1000)
+      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[1]/a',
+        1000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[1]/a')
       .pause(1000)
       .useCss()
-      .setValue('input[name=userImage]', path.join(__dirname, '../../src/build/imgs/eben2.jpg'))
+      .setValue('input[name=userImage]',
+        path.join(__dirname, '../../src/build/imgs/eben2.jpg'))
       .useXpath()
-      .waitForElementVisible('//*[@id="root"]/div/div[3]/div/div/div/div/div/div/form/div[2]/button', 1000)
-      .click('//*[@id="root"]/div/div[3]/div/div/div/div/div/div/form/div[2]/button')
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[3]/div/div/div/div/div/div/form/div[2]/button',
+        1000)
+      .click(
+        '//*[@id="root"]/div/div[3]/div/div/div/div/div/div/form/div[2]/button')
       .pause(5000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[2]/ul/li/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[3]/ul/li/a', 1000)
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[3]/ul/li/a', 1000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[3]/ul/li/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[3]/ul/li/div/ul/li[2]/a', 1000)
-      .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[3]/ul/li/div/ul/li[2]/a')
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[3]/ul/li/div/ul/li[2]/a',
+        1000)
+      .click(
+        '//*[@id="root"]/div/div[2]/div/div[3]/ul/li[3]/ul/li/div/ul/li[2]/a')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[3]/div/div/div/div/form/div[2]/div/button', 1000)
-      .click('//*[@id="root"]/div/div[3]/div/div/div/div/form/div[2]/div/button')
+      .waitForElementVisible(
+        '//*[@id="root"]/div/div[3]/div/div/div/div/form/div[2]/div/button',
+        1000)
+      .click(
+        '//*[@id="root"]/div/div[3]/div/div/div/div/form/div[2]/div/button')
       .pause(5000)
       .useCss()
       .setValue('input[name=categoryName]', 'Arts')
       .pause(1000)
       .useXpath()
-      .click('//*[@id="root"]/div/div[3]/div/div/div/div/form/div[2]/div/button')
+      .click(
+        '//*[@id="root"]/div/div[3]/div/div/div/div/form/div[2]/div/button')
       .pause(1000)
-      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[5]/a', 1000)
+      .waitForElementVisible('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[5]/a',
+        1000)
       .click('//*[@id="root"]/div/div[2]/div/div[3]/ul/li[5]/a')
       .pause(1000)
       .end();

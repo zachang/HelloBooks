@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
+import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getOneUserAction } from '../actions/userAction';
@@ -11,12 +12,15 @@ import { decodeToken } from '../utils/helpers';
 
 /**
  * App class declaration
+ *
  * @class App
+ *
  * @extends {React.Component}
  */
 export class App extends React.Component {
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -26,15 +30,19 @@ export class App extends React.Component {
 
   /**
    * @method componentDidMount
+   *
    * @return {void} void
    */
   componentDidMount() {
+    $('.collapsible').collapsible();
     $('.button-collapse').sideNav();
+    $('.dropdown-button').dropdown();
     $('select').material_select();
   }
 
   /**
    * Renders App component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -49,7 +57,10 @@ export class App extends React.Component {
         {(userRoles.isAdmin) ?
           <AdminSidebar profileImage={this.props.userState.user.userImage}/>
           :
-          <UserSidebar profileImage={this.props.userState.user.userImage}/>}
+          <UserSidebar
+            profileImage={this.props.userState.user.userImage}
+            userLevel={this.props.userState.user.level}
+          />}
         <div className='container mainCon' style={{ marginLeft: '5%' }}>
           {this.props.children}
         </div>

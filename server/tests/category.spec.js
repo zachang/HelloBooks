@@ -45,88 +45,83 @@ describe('TEST CATEGORY ROUTES', () => {
 
   // Test for categories POST route
   describe('POST api/v1/categories when creating categories', () => {
-    describe('test for empty, valid and invalid token when creating a book', () => {
-      it('should return status code 401 when no token is provided', (done) => {
-        request(app)
-          .post('/api/v1/categories')
-          .send(categoryseeder.setCatData('Epic'))
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'No authorization token provided');
-            done();
+    describe('test for empty, valid and invalid token when creating a book',
+      () => {
+        it('should return status code 401 when no token is provided',
+          (done) => {
+            request(app)
+              .post('/api/v1/categories')
+              .send(categoryseeder.setCatData('Epic'))
+              .expect(401)
+              .end((err, res) => {
+                if (err) return done(err);
+                assert.equal(res.body.message,
+                  'No authorization token provided');
+                done();
+              });
           });
-      });
-      it('should return status code 401 when invalid token is provided', (done) => {
-        request(app)
-          .post('/api/v1/categories')
-          .set({ 'x-access-token': 'bajjlkall' })
-          .send(categoryseeder.setCatData('Epic'))
-          .expect(401)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Invalid authorization token');
-            done();
+        it('should return status code 401 when invalid token is provided',
+          (done) => {
+            request(app)
+              .post('/api/v1/categories')
+              .set({ 'x-access-token': 'bajjlkall' })
+              .send(categoryseeder.setCatData('Epic'))
+              .expect(401)
+              .end((err, res) => {
+                if (err) return done(err);
+                assert.equal(res.body.message, 'Invalid authorization token');
+                done();
+              });
           });
-      });
-      it('should return status code 401 when token valid but unauthorised', (done) => {
-        request(app)
-          .post('/api/v1/categories')
-          .set({ 'x-access-token': userToken })
-          .send(categoryseeder.setCatData('Epic'))
-          .expect(403)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'You must be an admin to perform this operation');
-            done();
+        it('should return status code 401 when token valid but unauthorised',
+          (done) => {
+            request(app)
+              .post('/api/v1/categories')
+              .set({ 'x-access-token': userToken })
+              .send(categoryseeder.setCatData('Epic'))
+              .expect(403)
+              .end((err, res) => {
+                if (err) return done(err);
+                assert.equal(res.body.message,
+                  'You must be an admin to perform this operation');
+                done();
+              });
           });
+        it('should return status code 201 and create category' +
+        ' when token valid and authorised', (done) => {
+          request(app)
+            .post('/api/v1/categories')
+            .set({ 'x-access-token': adminToken })
+            .send(categoryseeder.setCatData('Adventure'))
+            .expect(201)
+            .end((err, res) => {
+              if (err) return done(err);
+              createdCategoryId = res.body.category.id;
+              assert.equal(res.body.message, 'Category created');
+              assert.equal(res.body.category.categoryName, 'Adventure');
+              done();
+            });
+        });
+        it('should not create a new category' +
+          ' if already exist', (done) => {
+          request(app)
+            .post('/api/v1/categories')
+            .set({ 'x-access-token': adminToken })
+            .send(categoryseeder.setCatData('Adventure'))
+            .expect(409)
+            .end((err, res) => {
+              if (err) return done(err);
+              assert.equal(res.body.message, 'Category already exist');
+              done();
+            });
+        });
       });
-      it('should return status code 201 and create category when token valid and authorised', (done) => {
-        request(app)
-          .post('/api/v1/categories')
-          .set({ 'x-access-token': adminToken })
-          .send(categoryseeder.setCatData('Adventure'))
-          .expect(201)
-          .end((err, res) => {
-            if (err) return done(err);
-            createdCategoryId = res.body.category.id;
-            assert.equal(res.body.message, 'Category created');
-            assert.equal(res.body.category.categoryName, 'Adventure');
-            done();
-          });
-      });
-      it('should return status code 400 when token valid and authorised but with no category inputs', (done) => {
-        request(app)
-          .post('/api/v1/categories')
-          .set({ 'x-access-token': adminToken })
-          .send(categoryseeder.setCatData(''))
-          .expect(400)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.categoryName[0], 'The categoryName field is required.');
-            done();
-          });
-      });
-      it('should return status code 400 if categoryName input not string', (done) => {
-        request(app)
-          .post('/api/v1/categories')
-          .set({ 'x-access-token': adminToken })
-          .send(categoryseeder.setCatData(99))
-          .expect(400)
-          .end((err, res) => {
-            if (err) return done(err);
-            assert.equal(res.body.message, 'Validation error');
-            assert.equal(res.body.errors.categoryName[0], 'The categoryName must be a string.');
-            done();
-          });
-      });
-    });
   });
 
   // Test for categories GET route
   describe('test for GET api/v1/categories when viewing all categories', () => {
-    it('should return status code 401 when user wants to view all categories with no token', (done) => {
+    it('should return status code 401 when user wants to view all ' +
+      'categories with no token', (done) => {
       request(app)
         .get('/api/v1/categories')
         .expect(401)
@@ -136,7 +131,8 @@ describe('TEST CATEGORY ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when user wants to view all categories with invalid token', (done) => {
+    it('should return status code 401 when user wants to view all ' +
+      'categories with invalid token', (done) => {
       request(app)
         .get('/api/v1/categories')
         .set({ 'x-access-token': 'xxddghj' })
@@ -147,7 +143,8 @@ describe('TEST CATEGORY ROUTES', () => {
           done();
         });
     });
-    it('should return status code 200 when user wants to view all categories with valid token', (done) => {
+    it('should return status code 200 when user wants to view' +
+      ' all categories with valid token', (done) => {
       request(app)
         .get('/api/v1/categories')
         .set({ 'x-access-token': userToken || adminToken })
@@ -176,43 +173,48 @@ describe('TEST CATEGORY ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provided', (done) => {
-      request(app)
-        .put('/api/v1/categories/1')
-        .set({ 'x-access-token': 'bajjlkall' })
-        .send(categoryseeder.setUpdateCatData('Sport'))
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
-    it('should return status code 401 when token valid but unauthorized', (done) => {
-      request(app)
-        .put('/api/v1/categories/1')
-        .set({ 'x-access-token': userToken })
-        .send(categoryseeder.setUpdateCatData('Sport'))
-        .expect(403)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'You must be an admin to perform this operation');
-          done();
-        });
-    });
-    it('should return status code 404  when categoryId is not found', (done) => {
-      request(app)
-        .put('/api/v1/categories/0')
-        .set({ 'x-access-token': adminToken })
-        .send(categoryseeder.setUpdateCatData('Sport'))
-        .expect(404)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Category Not Found');
-          done();
-        });
-    });
-    it('should return status code 400 when all category update inputs missing', (done) => {
+    it('should return status code 401 when invalid token is provided',
+      (done) => {
+        request(app)
+          .put('/api/v1/categories/1')
+          .set({ 'x-access-token': 'bajjlkall' })
+          .send(categoryseeder.setUpdateCatData('Sport'))
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
+    it('should return status code 401 when token valid but unauthorized',
+      (done) => {
+        request(app)
+          .put('/api/v1/categories/1')
+          .set({ 'x-access-token': userToken })
+          .send(categoryseeder.setUpdateCatData('Sport'))
+          .expect(403)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
+            done();
+          });
+      });
+    it('should return status code 404  when categoryId is not found',
+      (done) => {
+        request(app)
+          .put('/api/v1/categories/0')
+          .set({ 'x-access-token': adminToken })
+          .send(categoryseeder.setUpdateCatData('Sport'))
+          .expect(404)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Category Not Found');
+            done();
+          });
+      });
+    it('should return status code 400 when all category' +
+      ' update inputs missing', (done) => {
       request(app)
         .put(`/api/v1/categories/${createdCategoryId}`)
         .set({ 'x-access-token': adminToken })
@@ -221,11 +223,13 @@ describe('TEST CATEGORY ROUTES', () => {
         .end((err, res) => {
           if (err) return done(err);
           assert.equal(res.body.message, 'Validation error');
-          assert.equal(res.body.errors.categoryName[0], 'The categoryName field is required.');
+          assert.equal(res.body.errors.categoryName[0],
+            'The categoryName field is required.');
           done();
         });
     });
-    it('should return status code 404 and not update category when categoryId is wrong', (done) => {
+    it('should return status code 404 and not update category' +
+      ' when categoryId is wrong', (done) => {
       request(app)
         .put(`/api/v1/categories/0`)
         .set({ 'x-access-token': adminToken })
@@ -237,7 +241,8 @@ describe('TEST CATEGORY ROUTES', () => {
           done();
         });
     });
-    it('should return status code 200 and update category when categoryId is found', (done) => {
+    it('should return status code 200 and update category when' +
+      ' categoryId is found', (done) => {
       request(app)
         .put(`/api/v1/categories/${createdCategoryId}`)
         .set({ 'x-access-token': adminToken })
@@ -264,40 +269,45 @@ describe('TEST CATEGORY ROUTES', () => {
           done();
         });
     });
-    it('should return status code 401 when invalid token is provided', (done) => {
-      request(app)
-        .delete('/api/v1/categories/1')
-        .set({ 'x-access-token': 'bajjlkall' })
-        .expect(401)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Invalid authorization token');
-          done();
-        });
-    });
-    it('should return status code 401 when token valid but unauthorized', (done) => {
-      request(app)
-        .delete('/api/v1/categories/1')
-        .set({ 'x-access-token': userToken })
-        .expect(403)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'You must be an admin to perform this operation');
-          done();
-        });
-    });
-    it('should return status code 404  when categoryId is not found', (done) => {
-      request(app)
-        .delete('/api/v1/categories/0')
-        .set({ 'x-access-token': adminToken })
-        .expect(404)
-        .end((err, res) => {
-          if (err) return done(err);
-          assert.equal(res.body.message, 'Category Not Found');
-          done();
-        });
-    });
-    it('should return status code 200 and delete a category when categoryId is found', (done) => {
+    it('should return status code 401 when invalid token is provided',
+      (done) => {
+        request(app)
+          .delete('/api/v1/categories/1')
+          .set({ 'x-access-token': 'bajjlkall' })
+          .expect(401)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Invalid authorization token');
+            done();
+          });
+      });
+    it('should return status code 401 when token valid but unauthorized',
+      (done) => {
+        request(app)
+          .delete('/api/v1/categories/1')
+          .set({ 'x-access-token': userToken })
+          .expect(403)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message,
+              'You must be an admin to perform this operation');
+            done();
+          });
+      });
+    it('should return status code 404  when categoryId is not found',
+      (done) => {
+        request(app)
+          .delete('/api/v1/categories/0')
+          .set({ 'x-access-token': adminToken })
+          .expect(404)
+          .end((err, res) => {
+            if (err) return done(err);
+            assert.equal(res.body.message, 'Category Not Found');
+            done();
+          });
+      });
+    it('should return status code 200 and delete a category when' +
+      ' categoryId is found', (done) => {
       request(app)
         .delete(`/api/v1/categories/${createdCategoryId}`)
         .set({ 'x-access-token': adminToken })

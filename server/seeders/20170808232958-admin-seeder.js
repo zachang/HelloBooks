@@ -12,13 +12,15 @@ module.exports = {
       email: process.env.ADMIN_EMAIL,
       phoneNo: process.env.ADMIN_PHONE,
       level:process.env.ADMIN_LEVEL,
-      password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(8), null),
+      password: bcrypt.hashSync(process.env.ADMIN_PASSWORD,
+        bcrypt.genSaltSync(8), null),
       isAdmin: process.env.ADMIN_STATUS,
       createdAt: new Date(),
       updatedAt: new Date()
     };
 
-    return queryInterface.bulkInsert('Users', [adminUser], { returning: true });
+    return queryInterface.bulkInsert('Users', [adminUser],
+      { returning: true });
   },
 
   down: function (queryInterface, Sequelize) {

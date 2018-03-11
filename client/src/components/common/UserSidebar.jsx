@@ -4,7 +4,9 @@ import { Link, browserHistory } from 'react-router';
 
 /**
  * UserSidebar class declaration
+ *
  * @class UserSidebar
+ *
  * @extends {React.Component}
  */
 export default class UserSidebar extends React.Component {
@@ -23,10 +25,12 @@ export default class UserSidebar extends React.Component {
    */
   logOut() {
     window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
   }
 
   /**
    * Renders UserSidebar component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -48,7 +52,9 @@ export default class UserSidebar extends React.Component {
             </div>
           </div>
           <div className='row dash'>
-            <span><i className='material-icons' style={{ margin: '10% 0% 10% 0%' }}>dashboard</i>Dashboard</span>
+            <span><i className='material-icons'
+              style={{ margin: '10% 0% 10% 0%' }}
+            >dashboard</i>Dashboard</span>
           </div>
 
           <div className='row rowcollap'>
@@ -70,9 +76,14 @@ export default class UserSidebar extends React.Component {
                   </li>
                 </ul>
               </li>
-              <li><Link to={`users/change`}>Change Password</Link></li>
+              <li><Link to={'/password/change'}>Change Password</Link></li>
+              <li className='user-level'>
+                <Link>
+                Level: {this.props.userLevel}
+                </Link>
+              </li>
               <li>
-                <Link to='#' className='logOut' onClick={this.logOut}>
+                <Link to='' className='logOut' onClick={this.logOut}>
                   Logout
                 </Link>
               </li>
@@ -87,5 +98,6 @@ export default class UserSidebar extends React.Component {
 }
 
 UserSidebar.propTypes = {
-  profileImage: PropTypes.string
+  profileImage: PropTypes.string,
+  userLevel: PropTypes.string
 };

@@ -3,6 +3,14 @@ import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 import uploader from '../utils/uploader';
 
+/**
+ * @description get all user
+ *
+ * @param {number} limit
+ * @param {number} offset
+ *
+ * @return {object} Axios promise
+ */
 const getUserAction = (limit, offset) => (dispatch) => {
   return axios.get(`/api/v1/users?limit=${limit}&offset=${offset}`,
     { headers: { 'x-access-token': window.sessionStorage.token }
@@ -28,6 +36,13 @@ const getUserAction = (limit, offset) => (dispatch) => {
     });
 };
 
+/**
+ * @description get one user
+ *
+ * @param {number} id
+ *
+ * @return {object} Axios promise
+ */
 const getOneUserAction = id => (dispatch) => {
   return axios.get(`/api/v1/users/${id}`,
     { headers: { 'x-access-token': window.sessionStorage.token }
@@ -54,6 +69,14 @@ const getOneUserAction = id => (dispatch) => {
     });
 };
 
+/**
+ * @description update user
+ *
+ * @param {object} userData
+ * @param {number} id
+ *
+ * @return {object} Axios promise
+ */
 const updateUserAction = (userData, id) => (dispatch) => {
   if ((typeof userData.userImage !== 'object' || userData.userImage === null)) {
     return axios.put(`/api/v1/users/${id}`, userData,
@@ -81,7 +104,8 @@ const updateUserAction = (userData, id) => (dispatch) => {
           });
         }
       });
-  } else if (typeof userData.userImage === 'object' && userData.userImage !== null) {
+  } else if (typeof userData.userImage === 'object'
+    && userData.userImage !== null) {
     return uploader(userData.userImage, 'image').then((res) => {
       dispatch({
         type: 'UPLOAD_IMAGE_SUCCESSFUL',
@@ -125,6 +149,13 @@ const updateUserAction = (userData, id) => (dispatch) => {
   }
 };
 
+/**
+ * @description change password
+ *
+ * @param {object} changePasswordData
+ *
+ * @return {object} Axios promise
+ */
 const changePasswordAction = changePasswordData => (dispatch) => {
   return axios.post(`/api/v1/users/change-password`, changePasswordData,
     { headers: { 'x-access-token': window.sessionStorage.token } })

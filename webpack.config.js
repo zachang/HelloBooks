@@ -32,7 +32,9 @@ module.exports = {
     new ExtractTextPlugin('style.css'),
     new webpack.ProvidePlugin({
       $: 'jquery',
-      jquery: 'jquery'
+      jquery: 'jquery',
+      'window.$': 'jquery',
+      'window.jquery': 'jquery'
     }),
     new dotenv({
       path: './.env',

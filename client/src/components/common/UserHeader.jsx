@@ -5,7 +5,9 @@ import logo from '../../build/imgs/hello.png';
 
 /**
  * UserHeader class declaration
+ *
  * @class UserHeader
+ *
  * @extends {React.Component}
  */
 export default class UserHeader extends React.Component {
@@ -22,8 +24,10 @@ export default class UserHeader extends React.Component {
    * @return {void} void
    */
   componentDidMount() {
-    $('.button-collapse').sideNav();
+    $('.collapsible').collapsible();
+    $('.dropdown-button').dropdown();
   }
+
 
   /**
    * Handles user logout
@@ -32,10 +36,12 @@ export default class UserHeader extends React.Component {
    */
   logOut() {
     window.sessionStorage.removeItem('token');
+    browserHistory.push('/');
   }
 
   /**
    * Renders AdminHeader component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -44,7 +50,9 @@ export default class UserHeader extends React.Component {
         <div className='navbar-fixed'>
           <nav className='mainNav black col m10 l10' role='navigation'>
             <div className='nav-wrapper container'>
-              <Link id='logo-container' to='/user' className='brand-logo mainLogo'>
+              <Link id='logo-container' to='/user'
+                className='brand-logo mainLogo'
+              >
                 <img src={logo} alt='hellobooks'/></Link>
               <ul className='user hide-on-small-and-down show-on-medium-and-up'>
                 <Link
@@ -60,53 +68,72 @@ export default class UserHeader extends React.Component {
                 </Link>
               </ul>
 
-              <ul id='dropdown1' className='dropdown-content hide-on-small-and-down'>
-                <li><Link to={ '/profile' }>Profile</Link></li>
+              <ul id='dropdown1'
+                className='dropdown-content hide-on-small-and-down'
+              >
+                <li><Link to={'/profile'}>Profile</Link></li>
                 <li className='divider'></li>
                 <li><Link to='/returned'>Returned Books</Link></li>
                 <li className='divider'></li>
                 <li><Link to='/borrowed'>Borrowed Books</Link></li>
                 <li className='divider'></li>
-                <li><Link to={`users/change`}>Change Password</Link></li>
+                <li><Link to={'/password/change'}>Change Password</Link></li>
                 <li className='divider'></li>
                 <li>
-                  <Link to='#' className='logOut' onClick={this.logOut} id='logout'>
+                  <Link to='' className='logOut'
+                    onClick={this.logOut} id='logout'
+                  >
                     Logout
                   </Link>
                 </li>
               </ul>
 
-              <ul id='nav-mobile' className='side-nav grey darken-4 hide-on-med-and-up'>
-                <li>
-                  <div className='row walp'>
-                  </div>
-                </li>
-                <li><Link to={'/profile'}>Profile</Link></li>
-                <li className='no-padding'>
-                  <ul className='collapsible collapsible-accordion'>
-                    <li>
-                      <Link className='collapsible-header'>
-                        Books Shelf
-                        <i className='material-icons mat-icon'>arrow_drop_down</i>
-                      </Link>
-                      <div className='collapsible-body'>
-                        <ul>
-                          <li><Link to='/user'>All Books</Link></li>
-                          <li><Link to='/borrowed'>Borrowed Books</Link></li>
-                          <li><Link to='/returned'>Returned Books</Link></li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <li><Link to={`users/change`}>Change Password</Link></li>
-                <li><Link to='#' onClick={this.logOut}>Logout</Link></li>
-              </ul>
-              <Link href='#'
-                data-activates='nav-mobile'
-                className='button-collapse menu-icon-link'>
-                <i className='material-icons hide-on-med-and-up'>menu</i>
-              </Link>
+              <div className='row'>
+                <ul className='left hide-on-med-and-up homedrop'>
+                  <Link
+                    className='dropdown-button btn transparent homedrop-2'
+                    to=''
+                    data-activates='dropdown2'>
+                    <i
+                      className='material-icons mat-icon'
+                    >
+                      menu
+                    </i>
+                  </Link>
+                </ul>
+
+                <ul id='dropdown2'
+                  className='dropdown-content black drop-content'
+                >
+                  <li>
+                    <Link to={'/profile'}>Profile</Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li className='lists'>
+                    <Link to='/user'>All Books</Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li><Link to='/returned'>Returned Books</Link></li>
+                  <li className='divider'></li>
+                  <li>
+                    <Link to='/borrowed'>Borrowed Books</Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li>
+                    <Link to={'/password/change'}>
+                        Change Password
+                    </Link>
+                  </li>
+                  <li className='divider'></li>
+                  <li>
+                    <Link to='' className='logOut'
+                      onClick={this.logOut} id='logout'
+                    >
+                     Logout 
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </nav>
         </div>

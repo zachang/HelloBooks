@@ -3,45 +3,55 @@ import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 import uploader from '../utils/uploader';
 
+const postBook = bookContents => (dispatch) => {
+  return axios.post('/api/v1/books', bookContents,
+    { headers: { 'x-access-token': window.sessionStorage.token } })
+    .then((res) => {
+      dispatch({
+        type: actionTypes.ADDBOOK_SUCCESSFUL,
+        payload: res.data.message
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        tokenValidate('invalid');
+      } else if (err.response.status === 403) {
+        tokenValidate('unauthorized');
+      } else if (err.response.data.message === 'Validation error') {
+        return dispatch({
+          type: actionTypes.ADDBOOK_VALIDATION_ERROR,
+          payload: err.response.data.errors
+        });
+      } else {
+        return dispatch({
+          type: actionTypes.ADDBOOK_UNSUCCESSFUL,
+          payload: err.response.data.message
+        });
+      }
+    });
+}
+/**
+ * @description add books
+ *
+ * @param {object} bookContents
+ *
+ * @return {object} Axios promise
+ */
 const addBookAction = bookContents => (dispatch) => {
   return uploader(bookContents.bookImage, 'image')
     .then((res) => {
       dispatch({
         type: 'UPLOAD_IMAGE_SUCCESSFUL',
-        payLoad: res.response.body.url
+        payLoad: res.response.body.secure_url
       });
-      bookContents.bookImage = res.response.body.url;
+      bookContents.bookImage = res.response.body.secure_url;
       uploader(bookContents.bookContent, 'pdf').then((res) => {
         dispatch({
           type: 'UPLOAD_PDF_SUCCESSFUL',
-          payLoad: res.response.body.url
+          payLoad: res.response.body.secure_url
         });
-        bookContents.bookContent = res.response.body.url;
-        axios.post('/api/v1/books', bookContents,
-          { headers: { 'x-access-token': window.sessionStorage.token } })
-          .then((res) => {
-            dispatch({
-              type: actionTypes.ADDBOOK_SUCCESSFUL,
-              payload: res.data.message
-            });
-          })
-          .catch((err) => {
-            if (err.response.status === 401) {
-              tokenValidate('invalid');
-            } else if (err.response.status === 403) {
-              tokenValidate('unauthorized');
-            } else if (err.response.data.message === 'Validation error') {
-              return dispatch({
-                type: actionTypes.ADDBOOK_VALIDATION_ERROR,
-                payload: err.response.data.errors
-              });
-            } else {
-              return dispatch({
-                type: actionTypes.ADDBOOK_UNSUCCESSFUL,
-                payload: err.response.data.message
-              });
-            }
-          });
+        bookContents.bookContent = res.response.body.secure_url;
+        return dispatch(postBook(bookContents));
       })
         .catch((err) => {
           if (err.uploadType && err.uploadType === 'image') {
@@ -62,8 +72,10 @@ const addBookAction = bookContents => (dispatch) => {
 };
 
 const updateBookAction = (bookContents, id) => (dispatch) => {
-  if ((typeof bookContents.bookImage !== 'object' || bookContents.bookImage === null) &&
-    (typeof bookContents.bookContent !== 'object' || bookContents.bookContent === null)) {
+  if ((typeof bookContents.bookImage !== 'object' ||
+      bookContents.bookImage === null) &&
+    (typeof bookContents.bookContent !== 'object' ||
+      bookContents.bookContent === null)) {
     axios.put(`/api/v1/books/${id}`, bookContents,
       { headers: { 'x-access-token': window.sessionStorage.token } })
       .then((res) => {
@@ -90,7 +102,8 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
         }
       });
   } else {
-    if (typeof bookContents.bookImage === 'object' && bookContents.bookImage !== null) {
+    if (typeof bookContents.bookImage === 'object' &&
+      bookContents.bookImage !== null) {
       return uploader(bookContents.bookImage, 'image').then((res) => {
         dispatch({
           type: 'UPLOAD_IMAGE_SUCCESSFUL',
@@ -133,7 +146,8 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
         });
     }
 
-    if (typeof bookContents.bookContent === 'object' && bookContents.bookContent !== null) {
+    if (typeof bookContents.bookContent === 'object'
+      && bookContents.bookContent !== null) {
       uploader(bookContents.bookContent, 'pdf').then((res) => {
         dispatch({
           type: 'UPLOAD_PDF_SUCCESSFUL',
@@ -178,6 +192,15 @@ const updateBookAction = (bookContents, id) => (dispatch) => {
   }
 };
 
+/**
+ * @description get all books
+ *
+ * @param {number} limit
+ * @param {number} offset
+ * @param {number} categoryId
+ *
+ * @return {object} Axios promise
+ */
 const getBookAction = (limit, offset, categoryId) => (dispatch) => {
   let url = `/api/v1/books?limit=${limit}&offset=${offset}`;
   if (categoryId !== '') {
@@ -209,6 +232,13 @@ const getBookAction = (limit, offset, categoryId) => (dispatch) => {
     });
 };
 
+/**
+ * @description get a book
+ *
+ * @param {number} id
+ *
+ * @return {object} Axios promise
+ */
 const getOneBookAction = id => (dispatch) => {
   return axios.get(`/api/v1/books/${id}`,
     {
@@ -234,7 +264,13 @@ const getOneBookAction = id => (dispatch) => {
     });
 };
 
-
+/**
+ * @description delete a book
+ *
+ * @param {number} id
+ *
+ * @return {object} Axios promise
+ */
 const deleteBookAction = id => (dispatch) => {
   return axios.delete(`/api/v1/books/${id}`,
     {
@@ -260,6 +296,14 @@ const deleteBookAction = id => (dispatch) => {
     });
 };
 
+/**
+ * @description borrow a book
+ *
+ * @param {number} userId
+ * @param {number} bookId
+ *
+ * @return {object} Axios promise
+ */
 const borrowBookAction = (userId, bookId) => (dispatch) => {
   return axios.post(`/api/v1/users/${userId}/books`, { bookId },
     {
@@ -285,6 +329,14 @@ const borrowBookAction = (userId, bookId) => (dispatch) => {
     });
 };
 
+/**
+ * @description return a book
+ *
+ * @param {number} userId
+ * @param {number} bookId
+ *
+ * @return {object} Axios promise
+ */
 const returnBookAction = (userId, bookId) => (dispatch) => {
   return axios.put(`/api/v1/users/${userId}/books`, { bookId },
     {
@@ -310,8 +362,18 @@ const returnBookAction = (userId, bookId) => (dispatch) => {
     });
 };
 
+/**
+ * @description get all books borrowed by a user
+ *
+ * @param {number} userId
+ * @param {number} limit
+ * @param {number} offset
+ *
+ * @return {object} Axios promise
+ */
 const viewUserBorrowAction = (userId, limit, offset) => (dispatch) => {
-  return axios.get(`/api/v1/users/${userId}/books?owe=false&limit=${limit}&offset=${offset}`,
+  return axios.get(
+    `/api/v1/users/${userId}/books?owe=false&limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -338,8 +400,18 @@ const viewUserBorrowAction = (userId, limit, offset) => (dispatch) => {
     });
 };
 
+/**
+ * @description get all books returned by a user
+ *
+ * @param {number} userId
+ * @param {number} limit
+ * @param {number} offset
+ *
+ * @return {object} Axios promise
+ */
 const viewUserReturnAction = (userId, limit, offset) => (dispatch) => {
-  return axios.get(`/api/v1/users/${userId}/books?owe=true&limit=${limit}&offset=${offset}`,
+  return axios.get(
+    `/api/v1/users/${userId}/books?owe=true&limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -366,8 +438,17 @@ const viewUserReturnAction = (userId, limit, offset) => (dispatch) => {
     });
 };
 
+/**
+ * @description get all books borrowed
+ *
+ * @param {number} limit
+ * @param {number} offset
+ *
+ * @return {object} Axios promise
+ */
 const viewAllBorrowAction = (limit, offset) => (dispatch) => {
-  return axios.get(`/api/v1/users/books/borrows?limit=${limit}&offset=${offset}`,
+  return axios.get(
+    `/api/v1/users/books/borrows?limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -394,8 +475,17 @@ const viewAllBorrowAction = (limit, offset) => (dispatch) => {
     });
 };
 
+/**
+ * @description get all books returned
+ *
+ * @param {number} limit
+ * @param {number} offset
+ *
+ * @return {object} Axios promise
+ */
 const viewAllReturnedAction = (limit, offset) => (dispatch) => {
-  return axios.get(`/api/v1/users/books/returned?limit=${limit}&offset=${offset}`,
+  return axios.get(
+    `/api/v1/users/books/returned?limit=${limit}&offset=${offset}`,
     {
       headers: { 'x-access-token': window.sessionStorage.token }
     })
@@ -422,6 +512,13 @@ const viewAllReturnedAction = (limit, offset) => (dispatch) => {
     });
 };
 
+/**
+ * @description confirm books returned
+ *
+ * @param {number} borrowId
+ *
+ * @return {object} Axios promise
+ */
 const confirmReturnAction = borrowId => (dispatch) => {
   return axios.put(`/api/v1/borrows/${borrowId}/confirm`, {},
     {
@@ -446,6 +543,14 @@ const confirmReturnAction = borrowId => (dispatch) => {
       }
     });
 };
+
+/**
+ * @description confirm books borrowed
+ *
+ * @param {number} borrowId
+ *
+ * @return {object} Axios promise
+ */
 const confirmBorrowAction = borrowId => (dispatch) => {
   return axios.patch(`/api/v1/borrows/${borrowId}/confirm`, {},
     {
@@ -484,5 +589,6 @@ export {
   viewAllBorrowAction,
   viewAllReturnedAction,
   confirmReturnAction,
-  confirmBorrowAction
+  confirmBorrowAction,
+  postBook
 };

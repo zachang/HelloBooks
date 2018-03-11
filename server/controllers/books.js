@@ -31,6 +31,14 @@ const updateBookRules = {
 };
 
 const booksController = {
+  /**
+   * @description Creates a new book
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   create(req, res) {
     const validation = new Validator(req.body, addBookRules);
     const bookDetails = {
@@ -63,6 +71,14 @@ const booksController = {
       errors: validation.errors.all()
     });
   },
+  /**
+   * @description Find all books
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   list(req, res) {
     const limit = req.query.limit || 3;
     const offset = req.query.offset || 0;
@@ -99,8 +115,18 @@ const booksController = {
           paginationMeta: generatePaginationMeta(books, limit, offset),
           books: books.rows });
       })
-      .catch(() => res.status(500).send({ message: 'Oops, failed to display books' }));
+      .catch(() => res.status(500).send({
+        message: 'Oops, failed to display books'
+      }));
   },
+  /**
+   * @description Find one book
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   listOne(req, res) {
     return Book
       .findById(req.params.bookId)
@@ -112,6 +138,14 @@ const booksController = {
       })
       .catch(() => res.status(500).send({ message: 'Book display failed' }));
   },
+  /**
+   * @description update book
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   update(req, res) {
     const validation = new Validator(req.body, updateBookRules);
     const bookUpdateDetails = {
@@ -143,16 +177,30 @@ const booksController = {
           }
           return book
             .update(bookUpdateDetails)
-            .then(update => res.status(200).send({ message: 'Books updated', update }))
-            .catch(err => res.status(400).send({ message: 'Error updating books', err }));
+            .then(update => res.status(200).send({
+              message: 'Books updated', update
+            }))
+            .catch(err => res.status(400).send({
+              message: 'Error updating books', err
+            }));
         })
-        .catch(() => res.status(500).send({ message: 'Oops... Book not updated. Try again.' }));
+        .catch(() => res.status(500).send({
+          message: 'Oops... Book not updated. Try again.'
+        }));
     }
     return res.status(400).json({
       message: 'Validation error',
       errors: validation.errors.all()
     });
   },
+  /**
+   * @description delete book
+   *
+   * @param {object} req
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   destroy(req, res) {
     const update = { isAvailable: false };
     return Book
@@ -166,9 +214,13 @@ const booksController = {
         return book
           .update(update, { where: { id: book.id } })
           .then(() => res.status(200).send({ message: 'Book deleted' }))
-          .catch(() => res.status(400).send({ message: 'Error, No deletion occurred' }));
+          .catch(() => res.status(400).send({
+            message: 'Error, No deletion occurred'
+          }));
       })
-      .catch(() => res.status(500).send({ message: 'Oops... deletion failed' }));
+      .catch(() => res.status(500).send({
+        message: 'Oops... deletion failed'
+      }));
   }
 };
 export default booksController;

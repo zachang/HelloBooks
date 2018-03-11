@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
-import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
@@ -12,12 +11,15 @@ import { getCategoryAction } from '../actions/categoryAction';
 
 /**
  * User class declaration
+ *
  * @class User
+ *
  * @extends {React.Component}
  */
 export class User extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -37,6 +39,7 @@ export class User extends React.Component {
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -46,7 +49,9 @@ export class User extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -92,23 +97,26 @@ export class User extends React.Component {
     }
   }
 
+
   /**
    * @method componentDidUpdate
+   *
    * @return {void} void
    */
   componentDidUpdate() {
-    $('select').material_select();
     $('.collapsible').collapsible();
+    $('.button-collapse').sideNav();
     $('.dropdown-button').dropdown();
     $('.tooltipped').tooltip({ delay: 50 });
-    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change',
-      this.bookCategoryChange.bind(this));
+    $('select').material_select();
   }
 
   /**
    * @method bookCategoryChange
-   * @return {void}
+   *
    * @param {object} event - event
+   *
+   * @return {void}
    */
   bookCategoryChange(event) {
     this.setState({ categoryId: event.target.value });
@@ -117,9 +125,12 @@ export class User extends React.Component {
 
   /**
    * Handles book borrow
+   *
    * @method borrowBook
+   *
    * @param {string} token
    * @param {int} bookId
+   *
    * @return {void} void
    */
   borrowBook(token, bookId) {
@@ -130,7 +141,9 @@ export class User extends React.Component {
 
   /**
    * Handles read book tooltip removal when clicked
+   *
    * @method readBook
+   *
    * @return {void}
    */
   readBook() {
@@ -139,6 +152,7 @@ export class User extends React.Component {
 
   /**
    * Renders User component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -153,12 +167,12 @@ export class User extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='input-field col s6 l4  m4'>
+          <div className='col s6 l4  m4'>
             <select
               name = 'categoryId'
               value = {this.state.categoryId}
-              ref = 'categoryId'
               onChange= {this.bookCategoryChange}
+              className='browser-default'
             >
               <option value=''>Select Category</option>
               { this.state.categories.map((category, i) =>
@@ -170,7 +184,8 @@ export class User extends React.Component {
         </div>
 
         <div className='row'>
-          <div className='row'>
+
+          {(this.props.bookState.books.length > 0) ? <div className='row'>
             { this.props.bookState.books.map((book, i) =>
               <BookCardUser
                 key={i}
@@ -178,7 +193,11 @@ export class User extends React.Component {
                 borrowBook={this.borrowBook}
                 readBook={this.readBook}
               />)}
-          </div>
+          </div> : <div
+            className='row bookCat'
+          >
+            No book available yet
+          </div>}
 
           <div className='row'>
             {

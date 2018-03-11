@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
-import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Pagination } from 'react-materialize';
@@ -45,6 +44,19 @@ export class Admin extends React.Component {
   }
 
   /**
+   * @method componentDidUpdate
+   *
+   * @return {void} void
+   */
+  componentDidUpdate() {
+    $('.collapsible').collapsible();
+    $('.button-collapse').sideNav();
+    $('.dropdown-button').dropdown();
+    $('.tooltipped').tooltip({ delay: 50 });
+    $('select').material_select();
+  }
+
+  /**
    * @method componentWillReceiveProps
    * @param {object} nextProps - nextProps
    * @return {object} nextProps
@@ -53,7 +65,8 @@ export class Admin extends React.Component {
     if (nextProps.bookState.success === false) {
       this.setState({ errors: nextProps.bookState.errors });
     }
-    if (nextProps.bookState.success === true && nextProps.bookState.fails === null) {
+    if (nextProps.bookState.success === true &&
+      nextProps.bookState.fails === null) {
       if (this.state.showToast) {
         Materialize.toast('Book deleted!', 4000);
         this.setState({ showToast: false });
@@ -68,22 +81,12 @@ export class Admin extends React.Component {
   }
 
   /**
-   * @method componentDidUpdate
-   * @return {void} void
-   */
-  componentDidUpdate() {
-    $('.collapsible').collapsible();
-    $('.button-collapse').sideNav();
-    $('.dropdown-button').dropdown();
-    $('.tooltipped').tooltip({ delay: 50 });
-    $('select').material_select();
-    $(ReactDOM.findDOMNode(this.refs.categoryId)).on('change', this.bookCategoryChange.bind(this));
-  }
-
-  /**
    * Handles book search by category
+   *
    * @method bookCategoryChange
+   *
    * @return {void}
+   *
    * @param {object} event - event
    */
   bookCategoryChange(event) {
@@ -93,8 +96,11 @@ export class Admin extends React.Component {
 
   /**
    * Handles book deletion
+   *
    * @method deleteBook
+   *
    * @return {void}
+   *
    * @param {integer} bookId - bookId
    */
   deleteBook(bookId) {
@@ -122,7 +128,9 @@ export class Admin extends React.Component {
 
   /**
    * Handles edit book tooltip removal when clicked
+   *
    * @method editBook
+   *
    * @return {void}
    */
   editBook() {
@@ -131,7 +139,9 @@ export class Admin extends React.Component {
 
   /**
    * Handles read book tooltip removal when clicked
+   *
    * @method readBook
+   *
    * @return {void}
    */
   readBook() {
@@ -140,6 +150,7 @@ export class Admin extends React.Component {
 
   /**
    * Renders AddBook component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -149,26 +160,31 @@ export class Admin extends React.Component {
           <div className='section'>
             <h4 style={{ marginTop: '7%' }}>All Books</h4>
           </div>
-          <div className='divider' style={{ marginTop: '-2%', marginBottom: '3%' }}></div>
+          <div className='divider' style={{
+            marginTop: '-2%',
+            marginBottom: '3%' }}>
+          </div>
 
           <div className='row'>
-            <div className='input-field col s6 l4  m4'>
+            <div className='col s6 l4  m4'>
               <select
                 name = 'categoryId'
                 value = {this.state.categoryId}
-                ref = 'categoryId'
                 onChange= {this.bookCategoryChange}
+                className='browser-default'
               >
                 <option value=''>Select Category</option>
                 { this.state.categories.map((category, i) =>
-                  <option key={i} value={category.id}>{category.categoryName}</option>
+                  <option key={i} value={category.id}>
+                    {category.categoryName}
+                  </option>
                 )}
               </select>
             </div>
           </div>
 
           <div className='row'>
-            <div className='row'>
+            {(this.props.bookState.books.length > 0) ? <div className='row'>
               { this.props.bookState.books.map((book, i) =>
                 <BookCard
                   key={i}
@@ -178,7 +194,11 @@ export class Admin extends React.Component {
                   readBook={this.readBook}
                 />
               )}
-            </div>
+            </div> : <div
+              className='row bookCat'
+            >
+              No book available yet
+            </div>}
 
             <div className='row'>
               {
@@ -187,7 +207,8 @@ export class Admin extends React.Component {
                     items={this.state.pageCount}
                     onSelect={(page) => {
                       const offset = (page - 1) * this.state.limit;
-                      this.props.getBookAction(this.state.limit, offset, this.state.categoryId);
+                      this.props.getBookAction(this.state.limit, offset,
+                        this.state.categoryId);
                     }
                     } /> : '')
               }
@@ -213,6 +234,9 @@ const mapStateToProps = state => ({
   categoryState: state.categoryReducer,
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getBookAction, getCategoryAction, deleteBookAction }, dispatch);
+  bindActionCreators({
+    getBookAction,
+    getCategoryAction,
+    deleteBookAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);

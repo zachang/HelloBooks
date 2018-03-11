@@ -2,6 +2,13 @@ import axios from 'axios';
 import actionTypes from './actionTypes';
 import { tokenValidate } from '../utils/helpers';
 
+/**
+ * @description add categories
+ *
+ * @param {object} categoryContents
+ *
+ * @return {object} Axios promise
+ */
 const addCategoryAction = categoryContents => (dispatch) => {
   return axios.post('/api/v1/categories', categoryContents,
     { headers: { 'x-access-token': window.sessionStorage.token } })
@@ -28,6 +35,13 @@ const addCategoryAction = categoryContents => (dispatch) => {
     });
 };
 
+/**
+ * @description get a category
+ *
+ * @param {void} void
+ *
+ * @return {object} Axios promise
+ */
 const getCategoryAction = () => (dispatch) => {
   return axios.get('/api/v1/categories',
     { headers: { 'x-access-token': window.sessionStorage.token }

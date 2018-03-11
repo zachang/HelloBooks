@@ -45,7 +45,7 @@ const updateUserErrorResponse = {
   message: 'User not updated'
 };
 
-const changePasswordUserErrorResponse = {
+const changePassUserErrorResponse = {
   message: 'Password not changed'
 };
 
@@ -246,7 +246,7 @@ export {
   updateUserAction,
   updateUserErrorResponse,
   changePasswordAction,
-  changePasswordUserErrorResponse,
+  changePassUserErrorResponse,
   addCategoryAction,
   getCategoryAction,
   addCategoryErrorResponse,

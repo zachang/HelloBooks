@@ -2,6 +2,13 @@ import axios from 'axios';
 import actionTypes from './actionTypes';
 import { redirectIfLoggedIn } from '../utils/helpers';
 
+/**
+ * @description sign-in user
+ *
+ * @param {object} userCredentials
+ *
+ * @return {object} Axios promise
+ */
 const signinAction = userCredentials => (dispatch) => {
   return axios.post('/api/v1/users/signin', userCredentials)
     .then((res) => {
@@ -18,6 +25,13 @@ const signinAction = userCredentials => (dispatch) => {
     });
 };
 
+/**
+ * @description sign-in user with google
+ *
+ * @param {object} googleCredentials
+ *
+ * @return {object} Axios promise
+ */
 const googleSigninAction = googleCredentials => (dispatch) => {
   return axios.post('/api/v1/users/social', googleCredentials)
     .then((res) => {
@@ -37,6 +51,13 @@ const googleSigninAction = googleCredentials => (dispatch) => {
     });
 };
 
+/**
+ * @description clear google sign-in state
+ *
+ * @param {void} void
+ *
+ * @return {object} Axios promise
+ */
 const clearGoogleSigninAction = () => dispatch => dispatch({
   type: actionTypes.CLEAR_SOCIAL_STATE
 });

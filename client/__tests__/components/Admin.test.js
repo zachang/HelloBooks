@@ -74,7 +74,7 @@ describe('<Admin/>', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('calls componentWillReceiveProps book not created', () => {
+  it('calls componentDidMount', () => {
     shallowComponent.instance().componentDidUpdate(props);
     expect(Admin.prototype.componentDidUpdate.called).toEqual(true);
   });

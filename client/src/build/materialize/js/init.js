@@ -1,5 +1,10 @@
-(function($) {
-  $(function() {
-    $('.button-collapse').sideNav();
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
+$(document).ready(() => {
+  $('.button-collapse').sideNav({
+    closeOnclick: true,
+    menuWidth:250,
+  });
+
+  $('.menu-iconic-link').click(function () {
+    $('body').css({'width': '100%', 'overflow-y': 'auto'});
+  });
+});

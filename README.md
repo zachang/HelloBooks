@@ -18,6 +18,8 @@
 * Sequelize ORM
 * Postgres relational database
 * Materialzecss
+* React
+* Redux
 
 ## How to install this project
 
@@ -28,16 +30,27 @@
 -   Create a `.env` file in your root directory and .env sample guide below to create environment variables
 -   Run this command `sequelize db:migrate`to migrate your database
 -   Undo migrations with this command `sequelize db:migrate:undo`.
--   Run `npm start:dev` to start the application
+-   Run `npm start:dev` to start the server
+-   Run `npm build:dev` to start the client
 
 >   .env sample file
-``` SECRET_TOKEN=yourToken
-    DB_NAME=your-databaseName
-    PASSWORD=yourPassword
-    DB_USER=databaseUserName
-    ADMIN_NAME=adminName
-    ADMIN_USERNAME=adminUserName
-    ADMIN_PASSWORD=password 
+``` SECRET_TOKEN
+    DB_NAME
+    PASSWORD
+    TEST_DB_PASSWORD
+    DB_USER
+    ADMIN_NAME
+    ADMIN_USERNAME
+    ADMIN_EMAIL
+    ADMIN_PHONE
+    ADMIN_PASSWORD
+    ADMIN_STATUS
+    ADMIN_LEVEL
+    TEST_DB_NAME
+    API_HOST
+    USER_EMAIL
+    USER_EMAIL_PASSWORD
+    CLIENT_ID
 ```
    
 ## Testing
@@ -58,7 +71,9 @@
   * Invalid routes are rejected
 
   # LINK to API
-  * You can Access API at [https://hellobooksapi.herokuapp.com/api/v1]
+  * You can Access API at [https://zachang-hellobooks.herokuapp.com/api/doc/]
+  # LINK to SITE
+  * You can Access API at [https://zachang-hellobooks.herokuapp.com]
   
   # Want to Contribute?
   * Fork the repository

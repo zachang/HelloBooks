@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'react-proptypes';
+import { Link } from 'react-router';
 
 /**
  * @function UserReturn
+ *
  * @param {object} props
+ *
  * @return {XML} JSX
  */
 const UserReturn = props => (
@@ -30,7 +33,11 @@ const UserReturn = props => (
         </span>
         <p>Author: { props.returning.Book.author }</p>
         <p>Category: { props.returning.Book.Category.categoryName }</p>
-        <p>Published: { new Date(props.returning.Book.publishYear).getFullYear() }</p>
+        <p>
+          Published: {
+            new Date(props.returning.Book.publishYear).getFullYear()
+          }
+        </p>
         <p>Pages: { props.returning.Book.pages }</p>
         <p>Stock: { props.returning.Book.bookCount }</p>
         <p>Description: {
@@ -39,6 +46,21 @@ const UserReturn = props => (
         </p>
       </div>
       <div className='card-action home-card'>
+        <Link
+          to={`read/${props.returning.Book.id}`}
+          className='white tooltipped'
+          data-position='bottom'
+          data-delay='50'
+          data-tooltip='Read book'
+        >
+          <i
+            className='small material-icons readBook'
+            onClick={() => (props.readBook())}
+            style={{ color: 'teal', cursor: 'pointer' }}
+          >
+            remove_red_eye
+          </i>
+        </Link>
       </div>
     </div>
   </div>
@@ -46,6 +68,7 @@ const UserReturn = props => (
 
 UserReturn.propTypes = {
   returning: PropTypes.object.isRequired,
+  readBook: PropTypes.object.isRequired,
 };
 
 export default UserReturn;

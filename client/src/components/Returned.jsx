@@ -9,12 +9,15 @@ import { decodeToken } from '../utils/helpers';
 
 /**
  * Returned class declaration
+ *
  * @class Returned
+ *
  * @extends {React.Component}
  */
 export class Returned extends React.Component {
   /**
    * class constructor
+   *
    * @param {object} props
    */
   constructor(props) {
@@ -25,10 +28,12 @@ export class Returned extends React.Component {
       pageCount: null,
       limit: 15,
     };
+    this.readBook = this.readBook.bind(this);
   }
 
   /**
    * @method componentWillMount
+   *
    * @return {void} void
    */
   componentWillMount() {
@@ -38,7 +43,9 @@ export class Returned extends React.Component {
 
   /**
    * @method componentWillReceiveProps
+   *
    * @param {object} nextProps - nextProps
+   *
    * @return {object} nextProps
    */
   componentWillReceiveProps(nextProps) {
@@ -51,7 +58,19 @@ export class Returned extends React.Component {
   }
 
   /**
+   * Handles read book tooltip removal when clicked
+   *
+   * @method readBook
+   *
+   * @return {void}
+   */
+  readBook() {
+    $('.tooltipped').tooltip('remove');
+  }
+
+  /**
    * Renders Returned component
+   *
    * @return {XML} JSX
    */
   render() {
@@ -67,12 +86,18 @@ export class Returned extends React.Component {
         </div>
 
         <div className='row'>
-          { (this.props.bookState.returnings) ?
+          { (this.props.bookState.returnings &&
+            Object.keys(this.props.bookState.returnings).length > 0) ?
             this.props.bookState.returnings.map((returning, i) =>
               <UserReturn
                 key={i}
                 returning={returning}
-              />) : null }
+                readBook={this.readBook}
+              />) :
+            <h6 className='no-display'>
+              Not returned books!
+            </h6>
+          }
         </div>
 
         <div className='row'>
